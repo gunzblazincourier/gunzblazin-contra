@@ -1,0 +1,89 @@
+[gd_scene load_steps=15 format=3 uid="uid://0hbphmpkfm7w"]
+
+[ext_resource type="Script" uid="uid://d4ba7gqx6186n" path="res://Enemies/running_soldier.gd" id="1_1cjt1"]
+[ext_resource type="Texture2D" uid="uid://3v2dhudn0fee" path="res://Enemies/RunningSoldier_Death.png" id="2_8tqai"]
+[ext_resource type="Texture2D" uid="uid://dlylprwr4vbk8" path="res://Enemies/RunningSoldier_Explode0.png" id="3_gyor0"]
+[ext_resource type="Texture2D" uid="uid://ccxlb5v6ru0vv" path="res://Enemies/RunningSoldier_Jump.png" id="3_iixfa"]
+[ext_resource type="Texture2D" uid="uid://cth1ahjfjootp" path="res://Enemies/RunningSoldier_Explode1.png" id="4_4hcvb"]
+[ext_resource type="Texture2D" uid="uid://d2mqej2kjpcht" path="res://Enemies/RunningSoldier_Run_0.png" id="4_6lvey"]
+[ext_resource type="Texture2D" uid="uid://cw0jlf5vfpibl" path="res://Enemies/RunningSoldier_Explode2.png" id="5_ep4ga"]
+[ext_resource type="Texture2D" uid="uid://c7uwv8pc6mhwe" path="res://Enemies/RunningSoldier_Run_1.png" id="5_gyor0"]
+[ext_resource type="Texture2D" uid="uid://dp8bgf8gw76r4" path="res://Enemies/RunningSoldier_Run_2.png" id="6_4hcvb"]
+[ext_resource type="Texture2D" uid="uid://dplvfoy4x5jut" path="res://Enemies/RunningSoldier_Run_3.png" id="7_ep4ga"]
+[ext_resource type="Texture2D" uid="uid://b4gjluxnh1acb" path="res://Enemies/RunningSoldier_Run_4.png" id="8_ihsuw"]
+[ext_resource type="Texture2D" uid="uid://bqrye7j28441" path="res://Enemies/RunningSoldier_Run_5.png" id="9_r5opi"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_4tgqw"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_8tqai")
+}],
+"loop": true,
+"name": &"death",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_gyor0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_4hcvb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_ep4ga")
+}],
+"loop": false,
+"name": &"explode",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_iixfa")
+}],
+"loop": true,
+"name": &"jump",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_6lvey")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_gyor0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_4hcvb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_ep4ga")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_ihsuw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_r5opi")
+}],
+"loop": true,
+"name": &"run",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ep4ga"]
+size = Vector2(17, 31.5)
+
+[node name="RunningSoldier" type="Area2D" groups=["enemy"]]
+script = ExtResource("1_1cjt1")
+run_direction = 0
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_4tgqw")
+animation = &"run"
+autoplay = "run"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0.5, -0.25)
+shape = SubResource("RectangleShape2D_ep4ga")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]

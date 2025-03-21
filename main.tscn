@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=3 uid="uid://bornr0erfd30j"]
+
+[ext_resource type="PackedScene" uid="uid://doa0vkc0fktkh" path="res://Bill/bill.tscn" id="1_76q5j"]
+[ext_resource type="PackedScene" uid="uid://0hbphmpkfm7w" path="res://Enemies/running_soldier.tscn" id="2_0xm2m"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_1jt4k"]
+
+[node name="Main" type="Node"]
+
+[node name="Bill" parent="." instance=ExtResource("1_76q5j")]
+position = Vector2(-34, 2)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(0, 28)
+shape = SubResource("WorldBoundaryShape2D_1jt4k")
+
+[node name="RunningSoldier" parent="." instance=ExtResource("2_0xm2m")]
+position = Vector2(-171, 11)
+run_direction = 1
+
+[node name="RunningSoldier2" parent="." instance=ExtResource("2_0xm2m")]
+position = Vector2(190, 11)
+run_direction = -1
