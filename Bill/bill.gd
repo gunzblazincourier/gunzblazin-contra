@@ -1,3 +1,6 @@
+# NOTE: Changing of CollisonShape's size currently disabled due to
+# warning reported as error (property is not present on inferred type)
+
 # NOTE: Implementation of bullet limits pending (eg in case of Machinegun)
 # NOTE: Player death is to be written next (currently death upon physical enemy contact)
 
