@@ -12,6 +12,11 @@ extends CharacterBody2D
 @onready var collision_shape_2d_jump: CollisionShape2D = $CollisionShape2D_Jump
 @onready var collision_shape_2d_crouch: CollisionShape2D = $CollisionShape2D_Crouch
 
+# Decleration of Area2D collision shapes
+@onready var collision_shape_2d_default2: CollisionShape2D = $Area2D/CollisionShape2D_Default2
+@onready var collision_shape_2d_jump2: CollisionShape2D = $Area2D/CollisionShape2D_Jump2
+@onready var collision_shape_2d_crouch2: CollisionShape2D = $Area2D/CollisionShape2D_Crouch2
+
 # Initialization of bullet paths and declaration of bullets
 var bullet_r_path: PackedScene = preload("res://Bullet/bullet_r.tscn")
 var bullet_r: Area2D
@@ -88,10 +93,16 @@ func _process(_delta: float) -> void:
 		collision_shape_2d_default.disabled = true
 		collision_shape_2d_jump.disabled = false
 		collision_shape_2d_crouch.disabled = true
+		collision_shape_2d_default2.disabled = true
+		collision_shape_2d_jump2.disabled = false
+		collision_shape_2d_crouch2.disabled = true
 	elif animated_sprite_2d_bill.animation == "crouch":
 		collision_shape_2d_default.disabled = true
 		collision_shape_2d_jump.disabled = true
 		collision_shape_2d_crouch.disabled = false
+		collision_shape_2d_default2.disabled = true
+		collision_shape_2d_jump2.disabled = true
+		collision_shape_2d_crouch2.disabled = false
 	else:
 		#if animated_sprite_2d_bill.flip_h == false:
 			#pass
@@ -100,6 +111,9 @@ func _process(_delta: float) -> void:
 		collision_shape_2d_default.disabled = false
 		collision_shape_2d_jump.disabled = true
 		collision_shape_2d_crouch.disabled = true
+		collision_shape_2d_default2.disabled = false
+		collision_shape_2d_jump2.disabled = true
+		collision_shape_2d_crouch2.disabled = true
 	
 	# Muzzle position and rotation based on look_direction
 	if look_direction.x == 0 and look_direction.y == 0:

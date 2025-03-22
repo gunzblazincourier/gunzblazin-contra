@@ -499,10 +499,12 @@ autoplay = "default"
 centered = false
 
 [node name="CollisionShape2D_Default" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2(0.75, 10)
 shape = SubResource("RectangleShape2D_l3fer")
 
 [node name="CollisionShape2D_Jump" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2(-0.5, 7.5)
 shape = SubResource("RectangleShape2D_igwo4")
 disabled = true
@@ -514,7 +516,6 @@ shape = SubResource("RectangleShape2D_mbb21")
 disabled = true
 
 [node name="Area2D" type="Area2D" parent="."]
-visible = false
 
 [node name="CollisionShape2D_Default2" type="CollisionShape2D" parent="Area2D"]
 position = Vector2(0.75, 10)
