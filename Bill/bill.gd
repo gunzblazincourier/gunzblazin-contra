@@ -3,7 +3,6 @@
 
 extends CharacterBody2D
 
-# Declaration of node paths
 @onready var animated_sprite_2d_bill: AnimatedSprite2D = $AnimatedSprite2D_Bill
 @onready var muzzle: Marker2D = $Muzzle
 @onready var shoot_timer: Timer = $ShootTimer
@@ -12,7 +11,6 @@ extends CharacterBody2D
 @onready var collision_shape_2d_default: CollisionShape2D = $CollisionShape2D_Default
 @onready var collision_shape_2d_jump: CollisionShape2D = $CollisionShape2D_Jump
 @onready var collision_shape_2d_crouch: CollisionShape2D = $CollisionShape2D_Crouch
-
 
 # Initialization of bullet paths and declaration of bullets
 var bullet_r_path: PackedScene = preload("res://Bullet/bullet_r.tscn")
@@ -30,12 +28,10 @@ var bullet_s3: Area2D
 var bullet_s4: Area2D
 var bullet_s5: Area2D
 
-# Declaration of constants
 const RUN_SPEED: int = 100
 const JUMP_SPEED: int = -300
 const GRAVITY: int = 666
 
-# Other variables
 var bullet_id: String
 var is_jumping: bool = false
 
@@ -85,7 +81,9 @@ func _process(_delta: float) -> void:
 		animated_sprite_2d_bill.flip_h = false
 	elif run_direction < 0:
 		animated_sprite_2d_bill.flip_h = true
-
+		
+	# One collision shape is enabled and others are disabled based on state of player
+	# NOTE: Only basic implementation
 	if animated_sprite_2d_bill.animation == "jump":
 		collision_shape_2d_default.disabled = true
 		collision_shape_2d_jump.disabled = false
