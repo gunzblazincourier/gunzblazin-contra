@@ -68,14 +68,14 @@ func _process(_delta: float) -> void:
 			animated_sprite_2d_bill.set_frame_and_progress(current_frame, current_progress)
 		# Look Up Right
 		elif look_direction.x != 0 and (look_direction.y < 0 and look_direction.y > -1):
-			animated_sprite_2d_bill.play("look_up_right")
+			animated_sprite_2d_bill.play("look_up_diagonal")
 			animated_sprite_2d_bill.set_frame_and_progress(current_frame, current_progress)
 		# Look Up
 		elif look_direction.x == 0 and look_direction.y == -1:
 			animated_sprite_2d_bill.play("look_up")
 		# Look Down Right
 		elif look_direction.x != 0 and (look_direction.y > 0 and look_direction.y < 1):
-			animated_sprite_2d_bill.play("look_down_right")
+			animated_sprite_2d_bill.play("look_down_diagonal")
 			animated_sprite_2d_bill.set_frame_and_progress(current_frame, current_progress)
 		# Crouch
 		elif look_direction.x == 0 and look_direction.y == 1:
