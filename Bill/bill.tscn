@@ -233,42 +233,41 @@ script = ExtResource("1_i0f5n")
 
 [node name="AnimatedSprite2D_Bill" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_vqvmi")
+animation = &"crouch"
 autoplay = "default"
 
 [node name="CollisionShape2D_Default" type="CollisionShape2D" parent="."]
 visible = false
-position = Vector2(0.75, 10)
+position = Vector2(-1, 0)
 shape = SubResource("RectangleShape2D_l3fer")
 
 [node name="CollisionShape2D_Jump" type="CollisionShape2D" parent="."]
 visible = false
-position = Vector2(-0.5, 8)
+position = Vector2(0, 1)
 shape = SubResource("RectangleShape2D_igwo4")
 disabled = true
 
 [node name="CollisionShape2D_Crouch" type="CollisionShape2D" parent="."]
 visible = false
-position = Vector2(-1, 20)
+position = Vector2(0, 2)
 shape = SubResource("RectangleShape2D_mbb21")
 disabled = true
 
 [node name="Area2D" type="Area2D" parent="."]
-visible = false
 
 [node name="CollisionShape2D_Default2" type="CollisionShape2D" parent="Area2D"]
-visible = false
-position = Vector2(0.75, 10)
+position = Vector2(-1, 0)
 shape = SubResource("RectangleShape2D_l3fer")
 
 [node name="CollisionShape2D_Jump2" type="CollisionShape2D" parent="Area2D"]
 visible = false
-position = Vector2(-1, 8)
+position = Vector2(0, 1)
 shape = SubResource("RectangleShape2D_igwo4")
 disabled = true
 
 [node name="CollisionShape2D_Crouch2" type="CollisionShape2D" parent="Area2D"]
 visible = false
-position = Vector2(-1, 20)
+position = Vector2(0, 2)
 shape = SubResource("RectangleShape2D_mbb21")
 disabled = true
 
