@@ -1,4 +1,4 @@
-[gd_scene load_steps=63 format=3 uid="uid://doa0vkc0fktkh"]
+[gd_scene load_steps=83 format=3 uid="uid://doa0vkc0fktkh"]
 
 [ext_resource type="Script" uid="uid://cybdvosm20io" path="res://Bill/bill.gd" id="1_i0f5n"]
 [ext_resource type="Texture2D" uid="uid://7v13jiiro62o" path="res://Bill/Bill_Crouch.png" id="2_hdvrd"]
@@ -2480,6 +2480,105 @@ _data = {
 &"shoot_up_right": SubResource("Animation_sviru")
 }
 
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_o60p1"]
+animation = &"crouch_left"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_0pcc1"]
+animation = &"crouch_right"
+
+[sub_resource type="AnimationNodeBlendSpace1D" id="AnimationNodeBlendSpace1D_tbtmn"]
+blend_point_0/node = SubResource("AnimationNodeAnimation_o60p1")
+blend_point_0/pos = -1.0
+blend_point_1/node = SubResource("AnimationNodeAnimation_0pcc1")
+blend_point_1/pos = 1.0
+blend_mode = 1
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ac1dp"]
+animation = &"idle_left"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_d1ok8"]
+animation = &"idle_right"
+
+[sub_resource type="AnimationNodeBlendSpace1D" id="AnimationNodeBlendSpace1D_o60p1"]
+blend_point_0/node = SubResource("AnimationNodeAnimation_ac1dp")
+blend_point_0/pos = -1.0
+blend_point_1/node = SubResource("AnimationNodeAnimation_d1ok8")
+blend_point_1/pos = 1.0
+blend_mode = 1
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_4l4ib"]
+animation = &"jump_left"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_pcrh0"]
+animation = &"jump_right"
+
+[sub_resource type="AnimationNodeBlendSpace1D" id="AnimationNodeBlendSpace1D_ftf7i"]
+blend_point_0/node = SubResource("AnimationNodeAnimation_4l4ib")
+blend_point_0/pos = -1.0
+blend_point_1/node = SubResource("AnimationNodeAnimation_pcrh0")
+blend_point_1/pos = 1.0
+blend_mode = 1
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_hmlbq"]
+animation = &"look_up_left"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_tvn1x"]
+animation = &"look_up_right"
+
+[sub_resource type="AnimationNodeBlendSpace1D" id="AnimationNodeBlendSpace1D_q8i7e"]
+blend_point_0/node = SubResource("AnimationNodeAnimation_hmlbq")
+blend_point_0/pos = -1.0
+blend_point_1/node = SubResource("AnimationNodeAnimation_tvn1x")
+blend_point_1/pos = 1.0
+blend_mode = 1
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_tbtmn"]
+animation = &"run_left"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_q8i7e"]
+animation = &"run_right"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_60lwu"]
+animation = &"look_up_diagonal_left"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_3x2ap"]
+animation = &"look_up_diagonal_right"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_liyym"]
+animation = &"look_down_diagonal_left"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_hqxeo"]
+animation = &"look_down_diagonal_right"
+
+[sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_4l4ib"]
+blend_point_0/node = SubResource("AnimationNodeAnimation_tbtmn")
+blend_point_0/pos = Vector2(-1, 0)
+blend_point_1/node = SubResource("AnimationNodeAnimation_q8i7e")
+blend_point_1/pos = Vector2(1, 0)
+blend_point_2/node = SubResource("AnimationNodeAnimation_60lwu")
+blend_point_2/pos = Vector2(-1, 1)
+blend_point_3/node = SubResource("AnimationNodeAnimation_3x2ap")
+blend_point_3/pos = Vector2(1, 1)
+blend_point_4/node = SubResource("AnimationNodeAnimation_liyym")
+blend_point_4/pos = Vector2(-1, -1)
+blend_point_5/node = SubResource("AnimationNodeAnimation_hqxeo")
+blend_point_5/pos = Vector2(1, -1)
+snap = Vector2(0.5, 0.5)
+blend_mode = 1
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_0pcc1"]
+states/Crouch/node = SubResource("AnimationNodeBlendSpace1D_tbtmn")
+states/Crouch/position = Vector2(340, 170)
+states/Idle/node = SubResource("AnimationNodeBlendSpace1D_o60p1")
+states/Idle/position = Vector2(340, 100)
+states/Jump/node = SubResource("AnimationNodeBlendSpace1D_ftf7i")
+states/Jump/position = Vector2(600, 25)
+states/LookUp/node = SubResource("AnimationNodeBlendSpace1D_q8i7e")
+states/LookUp/position = Vector2(340, 28)
+states/Run/node = SubResource("AnimationNodeBlendSpace2D_4l4ib")
+states/Run/position = Vector2(597, 121)
+graph_offset = Vector2(7, -29)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_l3fer"]
 size = Vector2(13, 32)
 
@@ -2490,6 +2589,15 @@ script = ExtResource("1_i0f5n")
 libraries = {
 &"": SubResource("AnimationLibrary_3m7i2")
 }
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource("AnimationNodeStateMachine_0pcc1")
+anim_player = NodePath("../AnimationPlayer")
+parameters/Crouch/blend_position = 0
+parameters/Idle/blend_position = 0.058296
+parameters/Jump/blend_position = 0.025411
+parameters/LookUp/blend_position = 0.324365
+parameters/Run/blend_position = Vector2(-0.00159746, 0.0134529)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("8_tbtmn")
