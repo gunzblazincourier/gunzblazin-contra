@@ -2530,14 +2530,14 @@ blend_point_0/pos = Vector2(-1, 0)
 blend_point_1/node = SubResource("AnimationNodeAnimation_q8i7e")
 blend_point_1/pos = Vector2(1, 0)
 blend_point_2/node = SubResource("AnimationNodeAnimation_60lwu")
-blend_point_2/pos = Vector2(-1, 1)
+blend_point_2/pos = Vector2(-1, -1)
 blend_point_3/node = SubResource("AnimationNodeAnimation_3x2ap")
-blend_point_3/pos = Vector2(1, 1)
+blend_point_3/pos = Vector2(1, -1)
 blend_point_4/node = SubResource("AnimationNodeAnimation_liyym")
-blend_point_4/pos = Vector2(-1, -1)
+blend_point_4/pos = Vector2(-1, 1)
 blend_point_5/node = SubResource("AnimationNodeAnimation_hqxeo")
-blend_point_5/pos = Vector2(1, -1)
-snap = Vector2(0.5, 0.5)
+blend_point_5/pos = Vector2(1, 1)
+snap = Vector2(0.2, 0.2)
 blend_mode = 1
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_d1ok8"]
@@ -2595,7 +2595,7 @@ advance_expression_base_node = NodePath("..")
 anim_player = NodePath("../AnimationPlayer")
 parameters/Idle/blend_position = 0.140508
 parameters/Jump/blend_position = 0.025411
-parameters/Run/blend_position = Vector2(-0.00159746, 0.0134529)
+parameters/Run/blend_position = Vector2(-0.955272, 0.810127)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("8_tbtmn")
