@@ -8,7 +8,6 @@
 [node name="Main" type="Node"]
 
 [node name="Bill" parent="." instance=ExtResource("1_76q5j")]
-position = Vector2(-34, 2)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
