@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 @onready var animation_tree: AnimationTree = $AnimationTree
 
-var last_facing_direction: float
+var last_facing_direction: float = 1
 var is_jumping: bool = false
 
 
