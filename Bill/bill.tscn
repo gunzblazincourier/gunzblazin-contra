@@ -2553,11 +2553,11 @@ advance_expression = "is_on_floor() and velocity.x != 0"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_0pcc1"]
 advance_mode = 2
-advance_expression = "velocity.x == 0"
+advance_expression = "velocity.x == 0 and velocity.y == 0"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_tbtmn"]
 advance_mode = 2
-advance_expression = "velocity.x == 0"
+advance_expression = "velocity.x == 0 and velocity.y == 0"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_hmlbq"]
 advance_mode = 2
@@ -2575,7 +2575,7 @@ states/Jump/position = Vector2(558, 170)
 states/Run/node = SubResource("AnimationNodeBlendSpace2D_4l4ib")
 states/Run/position = Vector2(558, 28)
 transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_d1ok8"), "Idle", "Jump", SubResource("AnimationNodeStateMachineTransition_ac1dp"), "Idle", "Run", SubResource("AnimationNodeStateMachineTransition_o60p1"), "Run", "Idle", SubResource("AnimationNodeStateMachineTransition_0pcc1"), "Jump", "Idle", SubResource("AnimationNodeStateMachineTransition_tbtmn"), "Run", "Jump", SubResource("AnimationNodeStateMachineTransition_hmlbq"), "Jump", "Run", SubResource("AnimationNodeStateMachineTransition_tvn1x")]
-graph_offset = Vector2(7, -29)
+graph_offset = Vector2(7, 3.41574)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_l3fer"]
 size = Vector2(13, 32)
@@ -2589,6 +2589,7 @@ libraries = {
 }
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
+active = false
 tree_root = SubResource("AnimationNodeStateMachine_0pcc1")
 advance_expression_base_node = NodePath("..")
 anim_player = NodePath("../AnimationPlayer")

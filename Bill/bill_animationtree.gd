@@ -3,8 +3,11 @@ extends CharacterBody2D
 @onready var animation_tree: AnimationTree = $AnimationTree
 
 var last_facing_direction: float
-var state: int
+var is_jumping: bool = false
 
+
+func _ready() -> void:
+	animation_tree.active = true
 
 func _process(_delta: float) -> void:
 	var look_direction: Vector2 = Input.get_vector("left", "right", "up", "down")
@@ -21,16 +24,10 @@ func _process(_delta: float) -> void:
 	animation_tree.set("parameters/Jump/blend_position", last_facing_direction)
 	#print(look_direction)
 	
-	print(is_on_floor)
-	if not is_on_floor():
-		state = 1
-		#print(state)
-
 
 func _physics_process(delta: float) -> void:
 	#var look_direction: Vector2 = Input.get_vector("left", "right", "up", "down")
 	var run_direction: float = Input.get_axis("left", "right")
-	var is_jumping: bool = false
 	
 	if not is_on_floor():
 		velocity.y += 666 * delta
