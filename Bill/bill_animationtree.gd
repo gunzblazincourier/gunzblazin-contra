@@ -5,6 +5,10 @@ extends CharacterBody2D
 var last_facing_direction: float = 1
 var is_jumping: bool = false
 
+const RUN_SPEED: int = 100
+const JUMP_SPEED: int = -300
+const GRAVITY: int = 666
+
 
 func _ready() -> void:
 	animation_tree.active = true
@@ -30,21 +34,21 @@ func _physics_process(delta: float) -> void:
 	var run_direction: float = Input.get_axis("left", "right")
 	
 	if not is_on_floor():
-		velocity.y += 666 * delta
+		velocity.y += GRAVITY * delta
 	else:
 		is_jumping = false
 	
 	# Jump code
 	if Input.is_action_just_pressed("jump") and is_on_floor():
 		is_jumping = true
-		velocity.y = -300
+		velocity.y = JUMP_SPEED
 	
 	# Idle if no run_direction, else player runs
 	if run_direction == 0:
 		if is_jumping == false:
 			velocity.x = 0
 	else:
-		velocity.x = run_direction * 100
+		velocity.x = run_direction * RUN_SPEED
 	
 	var mas: bool = move_and_slide()
 	print(mas)
