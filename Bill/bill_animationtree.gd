@@ -2,7 +2,10 @@ extends CharacterBody2D
 
 @onready var animation_tree: AnimationTree = $AnimationTree
 
-enum states {IDLE, RUN, JUMP}
+enum idles {I, L, C, d}
+var current_idles: idles = idles.d
+
+enum states {IDLE, LOOK_UP, CROUCH, RUN, JUMP}
 var current_state: states
 
 # Direction that sprite is currently facing; needed for blend position of states like IDLE
@@ -23,6 +26,32 @@ func _ready() -> void:
 
 
 func _process(_delta: float) -> void:
+	var look_direction: Vector2 = Input.get_vector("left", "right", "up", "down")
+	var run_direction: float = Input.get_axis("left", "right")
+	
+	if is_on_floor():
+		if look_direction == Vector2(0, 0):
+			current_idles = idles.I
+		elif look_direction == Vector2(0, -1):
+			current_idles = idles.L
+		elif look_direction == Vector2(0, 1):
+			current_idles = idles.C
+		else:
+			current_idles = idles.d
+	#print(current_idles)
+	print(is_on_floor())
+	
+	# To avoid setting sprite direction to 0, since sprite can only face left or right
+	if run_direction != 0:
+		sprite_direction = run_direction
+	
+	# Sets blend position (direction) for each state so appropriate animation can be displayed
+	animation_tree.set("parameters/Idle/blend_position", sprite_direction)
+	animation_tree.set("parameters/LookUp/blend_position", sprite_direction)
+	animation_tree.set("parameters/Crouch/blend_position", sprite_direction)
+	animation_tree.set("parameters/Run/blend_position", look_direction)
+	animation_tree.set("parameters/Jump/blend_position", sprite_direction)
+	
 	# Basically gets AnimationNodeStateMachine from AnimationTree
 	var state_machine: AnimationNodeStateMachinePlayback = animation_tree.get("parameters/playback")
 	
@@ -33,22 +62,14 @@ func _process(_delta: float) -> void:
 	match state_machine_state:
 		"Idle":
 			current_state = states.IDLE
+		"LookUp":
+			current_state = states.LOOK_UP
+		"Crouch":
+			current_state = states.CROUCH
 		"Run":
 			current_state = states.RUN
 		"Jump":
 			current_state = states.JUMP
-	
-	var look_direction: Vector2 = Input.get_vector("left", "right", "up", "down")
-	var run_direction: float = Input.get_axis("left", "right")
-	
-	# To avoid setting sprite direction to 0, since sprite can only face left or right
-	if run_direction != 0:
-		sprite_direction = run_direction
-	
-	# Sets blend position (direction) for each state so appropriate animation can be displayed
-	animation_tree.set("parameters/Idle/blend_position", sprite_direction)
-	animation_tree.set("parameters/Run/blend_position", look_direction)
-	animation_tree.set("parameters/Jump/blend_position", sprite_direction)
 
 
 func _physics_process(delta: float) -> void:
@@ -62,12 +83,16 @@ func _physics_process(delta: float) -> void:
 	# and to keep moving horizontally even when no directional key is pressed (last direction
 	# is used)
 	match current_state:
-		states.IDLE, states.RUN:
+		states.IDLE, states.RUN, states.LOOK_UP:
 			# If run_direction is 0 then velocity.x is 0, so player is IDLE
 			velocity.x = run_direction * RUN_SPEED
 			# Transition to JUMP
 			if Input.is_action_just_pressed("jump"):
 				velocity.y = JUMP_SPEED
+		# Same as above but without jump code (player cannot jump while crouched)
+		states.CROUCH:
+			# If run_direction is 0 then velocity.x is 0, so player is IDLE
+			velocity.x = run_direction * RUN_SPEED
 		# Documentation for JUMP in comments just above match statement
 		states.JUMP:
 			if run_direction != 0:
