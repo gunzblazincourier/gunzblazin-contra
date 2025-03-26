@@ -5,6 +5,7 @@ extends CharacterBody2D
 enum states {IDLE, RUN, JUMP}
 var current_state: states
 
+# Direction that sprite is currently facing; needed for blend position of states like IDLE
 var sprite_direction: float
 
 const RUN_SPEED: int = 100
@@ -13,18 +14,22 @@ const GRAVITY: int = 666
 
 
 func _ready() -> void:
+	# Slows down/speed up the game
 	#Engine.time_scale = 0.2
-	animation_tree.active = true
 	
+	animation_tree.active = true
 	current_state = states.JUMP
 	sprite_direction = 1
 
 
 func _process(_delta: float) -> void:
+	# Basically gets AnimationNodeStateMachine from AnimationTree
 	var state_machine: AnimationNodeStateMachinePlayback = animation_tree.get("parameters/playback")
-	var state_machine_state: StringName = state_machine.get_current_node()
-	print(state_machine_state)
 	
+	# Current state in AnimationNodeStateMachine
+	var state_machine_state: StringName = state_machine.get_current_node()
+	
+	# Sets state in script as per state in StateMachine (AnimationNodeStateMachine)
 	match state_machine_state:
 		"Idle":
 			current_state = states.IDLE
@@ -36,16 +41,26 @@ func _process(_delta: float) -> void:
 	var look_direction: Vector2 = Input.get_vector("left", "right", "up", "down")
 	var run_direction: float = Input.get_axis("left", "right")
 	
+	# To avoid setting sprite direction to 0, since sprite can only face left or right
 	if run_direction != 0:
 		sprite_direction = run_direction
 	
+	# Sets blend position (direction) for each state so appropriate animation can be displayed
 	animation_tree.set("parameters/Idle/blend_position", sprite_direction)
 	animation_tree.set("parameters/Run/blend_position", look_direction)
 	animation_tree.set("parameters/Jump/blend_position", sprite_direction)
-	
+
 
 func _physics_process(delta: float) -> void:
 	var run_direction: float = Input.get_axis("left", "right")
+	
+	# Build the movement side of each state using composition principles by having relevant code
+	# concerned only with that state.
+	# Eg: For the JUMP state, we do not need code to begin the jump since we are
+	# already jumping (that code is for states like IDLE and RUN to transition to JUMP).
+	# It only has instructions for applying gravity on player, for horizontal movement
+	# and to keep moving horizontally even when no directional key is pressed (last direction
+	# is used)
 	match current_state:
 		states.IDLE:
 			velocity.x = run_direction * RUN_SPEED
@@ -60,6 +75,10 @@ func _physics_process(delta: float) -> void:
 				velocity.x = run_direction * RUN_SPEED
 			velocity.y += GRAVITY * delta
 	
+	# Godot function for player movement
+	# "convenient way to implement sliding movement without writing much code." (Godot 4.4 Docs)
 	var mas: bool = move_and_slide()
+	
+	# To prevent 'return value discarded' error
 	if mas:
 		pass
