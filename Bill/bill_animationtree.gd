@@ -4,7 +4,8 @@ extends CharacterBody2D
 
 enum states {IDLE, RUN, JUMP}
 var current_state: states
-var last_facing_direction: float
+
+var sprite_direction: float
 
 const RUN_SPEED: int = 100
 const JUMP_SPEED: int = -300
@@ -16,7 +17,7 @@ func _ready() -> void:
 	animation_tree.active = true
 	
 	current_state = states.JUMP
-	last_facing_direction = 1
+	sprite_direction = 1
 
 
 func _process(_delta: float) -> void:
@@ -36,11 +37,11 @@ func _process(_delta: float) -> void:
 	var run_direction: float = Input.get_axis("left", "right")
 	
 	if run_direction != 0:
-		last_facing_direction = run_direction
+		sprite_direction = run_direction
 	
-	animation_tree.set("parameters/Idle/blend_position", last_facing_direction)
+	animation_tree.set("parameters/Idle/blend_position", sprite_direction)
 	animation_tree.set("parameters/Run/blend_position", look_direction)
-	animation_tree.set("parameters/Jump/blend_position", last_facing_direction)
+	animation_tree.set("parameters/Jump/blend_position", sprite_direction)
 	
 
 func _physics_process(delta: float) -> void:
