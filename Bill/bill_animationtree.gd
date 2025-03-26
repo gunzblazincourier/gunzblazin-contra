@@ -62,14 +62,13 @@ func _physics_process(delta: float) -> void:
 	# and to keep moving horizontally even when no directional key is pressed (last direction
 	# is used)
 	match current_state:
-		states.IDLE:
+		states.IDLE, states.RUN:
+			# If run_direction is 0 then velocity.x is 0, so player is IDLE
 			velocity.x = run_direction * RUN_SPEED
+			# Transition to JUMP
 			if Input.is_action_just_pressed("jump"):
 				velocity.y = JUMP_SPEED
-		states.RUN:
-			velocity.x = run_direction * RUN_SPEED
-			if Input.is_action_just_pressed("jump"):
-				velocity.y = JUMP_SPEED
+		# Documentation for JUMP in comments just above match statement
 		states.JUMP:
 			if run_direction != 0:
 				velocity.x = run_direction * RUN_SPEED
