@@ -6,7 +6,7 @@ enum states {IDLE, RUN, JUMP}
 var current_state: states
 
 var last_facing_direction: float
-var is_jumping: bool
+#var is_jumping: bool
 
 const RUN_SPEED: int = 100
 const JUMP_SPEED: int = -300
@@ -19,7 +19,7 @@ func _ready() -> void:
 	
 	current_state = states.IDLE
 	last_facing_direction = 1
-	is_jumping = false
+	#is_jumping = false
 
 
 func _process(_delta: float) -> void:
@@ -39,9 +39,6 @@ func _process(_delta: float) -> void:
 	
 	if run_direction != 0:
 		last_facing_direction = run_direction
-	#else:
-		#print("AAAAAAAAA")
-	#print(last_facing_direction)
 	
 	animation_tree.set("parameters/Idle/blend_position", last_facing_direction)
 	animation_tree.set("parameters/Run/blend_position", look_direction)
@@ -63,32 +60,24 @@ func _physics_process(delta: float) -> void:
 		#"Jump":
 			#current_state = states.JUMP
 	
-	if not is_on_floor():
-		velocity.y += GRAVITY * delta
-	else:
-		is_jumping = false
+	#if not is_on_floor():
+		#velocity.y += GRAVITY * delta
+	#else:
+		#is_jumping = false
 	
-	print(Input.is_action_pressed("shoot"))
-	#print(current_state)
 	match current_state:
 		states.IDLE:
 			velocity.x = run_direction * RUN_SPEED
-			if run_direction == 0:
-				if is_jumping == false:
-					velocity.x = 0
+			if Input.is_action_just_pressed("jump"):
+				velocity.y = JUMP_SPEED
 		states.RUN:
 			velocity.x = run_direction * RUN_SPEED
-			if Input.is_action_just_pressed("jump") and is_on_floor():
-				is_jumping = true
+			if Input.is_action_just_pressed("jump"):
 				velocity.y = JUMP_SPEED
 		states.JUMP:
-			velocity.x = run_direction * RUN_SPEED
-			if Input.is_action_just_pressed("jump") and is_on_floor():
-				is_jumping = true
-				velocity.y = JUMP_SPEED
-				if run_direction == 0:
-					if is_jumping == false:
-						velocity.x = 0
+			if run_direction != 0:
+				velocity.x = run_direction * RUN_SPEED
+			velocity.y += GRAVITY * delta
 	
 	## Jump code
 	#if Input.is_action_just_pressed("jump") and is_on_floor():
@@ -102,5 +91,6 @@ func _physics_process(delta: float) -> void:
 	#else:
 		#velocity.x = run_direction * RUN_SPEED
 	
+	print(velocity.x)
 	var mas: bool = move_and_slide()
 	print(mas)
