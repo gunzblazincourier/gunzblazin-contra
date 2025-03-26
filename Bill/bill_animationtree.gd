@@ -2,9 +2,6 @@ extends CharacterBody2D
 
 @onready var animation_tree: AnimationTree = $AnimationTree
 
-#var state_machine: AnimationNodeStateMachinePlayback = animation_tree.get("parameters/playback")
-#var state_machine_state: StringName
-
 enum states {IDLE, RUN, JUMP}
 var current_state: states
 
@@ -26,16 +23,16 @@ func _ready() -> void:
 
 
 func _process(_delta: float) -> void:
-	#var state_machine: AnimationNodeStateMachinePlayback = animation_tree.get("parameters/playback")
-	#var state_machine_state: StringName = state_machine.get_current_node()
-	#
-	#match state_machine_state:
-		#"Idle":
-			#current_state = states.IDLE
-		#"Run":
-			#current_state = states.RUN
-		#"Jump":
-			#current_state = states.JUMP
+	var state_machine: AnimationNodeStateMachinePlayback = animation_tree.get("parameters/playback")
+	var state_machine_state: StringName = state_machine.get_current_node()
+	
+	match state_machine_state:
+		"Idle":
+			current_state = states.IDLE
+		"Run":
+			current_state = states.RUN
+		"Jump":
+			current_state = states.JUMP
 	
 	var look_direction: Vector2 = Input.get_vector("left", "right", "up", "down")
 	var run_direction: float = Input.get_axis("left", "right")
@@ -55,16 +52,16 @@ func _process(_delta: float) -> void:
 func _physics_process(delta: float) -> void:
 	var run_direction: float = Input.get_axis("left", "right")
 	
-	var state_machine: AnimationNodeStateMachinePlayback = animation_tree.get("parameters/playback")
-	var state_machine_state: StringName = state_machine.get_current_node()
-	
-	match state_machine_state:
-		"Idle":
-			current_state = states.IDLE
-		"Run":
-			current_state = states.RUN
-		"Jump":
-			current_state = states.JUMP
+	#var state_machine: AnimationNodeStateMachinePlayback = animation_tree.get("parameters/playback")
+	#var state_machine_state: StringName = state_machine.get_current_node()
+	#
+	#match state_machine_state:
+		#"Idle":
+			#current_state = states.IDLE
+		#"Run":
+			#current_state = states.RUN
+		#"Jump":
+			#current_state = states.JUMP
 	
 	if not is_on_floor():
 		velocity.y += GRAVITY * delta
