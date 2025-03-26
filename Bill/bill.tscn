@@ -2593,7 +2593,7 @@ active = false
 tree_root = SubResource("AnimationNodeStateMachine_0pcc1")
 advance_expression_base_node = NodePath("..")
 anim_player = NodePath("../AnimationPlayer")
-parameters/Idle/blend_position = 0.140508
+parameters/Idle/blend_position = -0.998505
 parameters/Jump/blend_position = 0.025411
 parameters/Run/blend_position = Vector2(-0.955272, 0.810127)
 
