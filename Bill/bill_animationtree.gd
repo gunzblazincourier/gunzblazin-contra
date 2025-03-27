@@ -2,9 +2,6 @@ extends CharacterBody2D
 
 @onready var animation_tree: AnimationTree = $AnimationTree
 
-enum idles {I, L, C, d}
-var current_idles: idles = idles.d
-
 enum states {IDLE, LOOK_UP, CROUCH, RUN, JUMP}
 var current_state: states
 
@@ -29,25 +26,20 @@ func _process(_delta: float) -> void:
 	var look_direction: Vector2 = Input.get_vector("left", "right", "up", "down")
 	var run_direction: float = Input.get_axis("left", "right")
 	
-	if is_on_floor():
-		if look_direction == Vector2(0, 0):
-			current_idles = idles.I
-		elif look_direction == Vector2(0, -1):
-			current_idles = idles.L
-		elif look_direction == Vector2(0, 1):
-			current_idles = idles.C
-		else:
-			current_idles = idles.d
-	#print(current_idles)
-	print(is_on_floor() and look_direction.x == 0 and look_direction.y == -1)
-	
 	# To avoid setting sprite direction to 0, since sprite can only face left or right
 	if run_direction != 0:
 		sprite_direction = run_direction
 	
-	animation_tree.set("parameters/conditions/idle", is_on_floor() and look_direction.x == 0 and look_direction.y == 0)
-	animation_tree.set("parameters/conditions/look_up", is_on_floor() and look_direction.x == 0 and look_direction.y == -1)
-	animation_tree.set("parameters/conditions/crouch", is_on_floor() and look_direction.x == 0 and look_direction.y == 1)
+	# Will set the advance condition value of respective states
+	# Set after storing in variable instead of setting directly because of long statements
+	var idle: bool = is_on_floor() and look_direction.x == 0 and look_direction.y == 0
+	var look_up: bool = is_on_floor() and look_direction.x == 0 and look_direction.y == -1
+	var crouch: bool = is_on_floor() and look_direction.x == 0 and look_direction.y == 1
+	
+	# Sets advance condition true or false for each state
+	animation_tree.set("parameters/conditions/idle", idle)
+	animation_tree.set("parameters/conditions/look_up", look_up)
+	animation_tree.set("parameters/conditions/crouch", crouch)
 	
 	# Sets blend position (direction) for each state so appropriate animation can be displayed
 	animation_tree.set("parameters/Idle/blend_position", sprite_direction)
