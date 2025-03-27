@@ -2571,11 +2571,11 @@ advance_expression = "not is_on_floor()"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_0pcc1"]
 advance_mode = 2
-advance_expression = "is_on_floor() and current_idles == idles.I"
+advance_condition = &"idle"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_tbtmn"]
 advance_mode = 2
-advance_expression = "is_on_floor() and current_idles == idles.I"
+advance_condition = &"idle"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_hmlbq"]
 advance_mode = 2
@@ -2590,19 +2590,19 @@ advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_60lwu"]
 advance_mode = 2
-advance_expression = "is_on_floor() and current_idles == idles.L"
+advance_condition = &"look_up"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_3x2ap"]
 advance_mode = 2
-advance_expression = "is_on_floor() and current_idles == idles.I"
+advance_condition = &"idle"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_liyym"]
 advance_mode = 2
-advance_expression = "is_on_floor() and current_idles == idles.C"
+advance_condition = &"crouch"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_hqxeo"]
 advance_mode = 2
-advance_expression = "is_on_floor() and current_idles == idles.I"
+advance_condition = &"idle"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_4l4ib"]
 advance_mode = 2
@@ -2610,7 +2610,7 @@ advance_expression = "is_on_floor() and velocity.x != 0"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_pcrh0"]
 advance_mode = 2
-advance_expression = "is_on_floor() and current_idles == idles.L"
+advance_condition = &"look_up"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ftf7i"]
 advance_mode = 2
@@ -2618,7 +2618,7 @@ advance_expression = "not is_on_floor()"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_3m7i2"]
 advance_mode = 2
-advance_expression = "is_on_floor() and current_idles == idles.L"
+advance_condition = &"look_up"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_sviru"]
 advance_mode = 2
@@ -2626,11 +2626,11 @@ advance_expression = "is_on_floor() and velocity.x != 0"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ncwwf"]
 advance_mode = 2
-advance_expression = "is_on_floor() and current_idles == idles.C"
+advance_condition = &"crouch"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_jgk4m"]
 advance_mode = 2
-advance_expression = "is_on_floor() and current_idles == idles.C"
+advance_condition = &"crouch"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_o60p1"]
 advance_mode = 2
@@ -2667,6 +2667,9 @@ active = false
 tree_root = SubResource("AnimationNodeStateMachine_0pcc1")
 advance_expression_base_node = NodePath("..")
 anim_player = NodePath("../AnimationPlayer")
+parameters/conditions/crouch = false
+parameters/conditions/idle = false
+parameters/conditions/look_up = false
 parameters/Crouch/blend_position = 0
 parameters/Idle/blend_position = -0.998505
 parameters/Jump/blend_position = 0.025411

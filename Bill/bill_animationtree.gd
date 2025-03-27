@@ -39,11 +39,15 @@ func _process(_delta: float) -> void:
 		else:
 			current_idles = idles.d
 	#print(current_idles)
-	print(is_on_floor())
+	print(is_on_floor() and look_direction.x == 0 and look_direction.y == -1)
 	
 	# To avoid setting sprite direction to 0, since sprite can only face left or right
 	if run_direction != 0:
 		sprite_direction = run_direction
+	
+	animation_tree.set("parameters/conditions/idle", is_on_floor() and look_direction.x == 0 and look_direction.y == 0)
+	animation_tree.set("parameters/conditions/look_up", is_on_floor() and look_direction.x == 0 and look_direction.y == -1)
+	animation_tree.set("parameters/conditions/crouch", is_on_floor() and look_direction.x == 0 and look_direction.y == 1)
 	
 	# Sets blend position (direction) for each state so appropriate animation can be displayed
 	animation_tree.set("parameters/Idle/blend_position", sprite_direction)
