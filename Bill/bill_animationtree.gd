@@ -21,7 +21,7 @@ const GRAVITY: int = 666
 
 func _ready() -> void:
 	# Slows down/speed up the game
-	#Engine.time_scale = 0.2
+	Engine.time_scale = 0.2
 	
 	animation_tree.active = true
 	current_state = states.JUMP
@@ -42,9 +42,10 @@ func _process(_delta: float) -> void:
 	var idle: bool = is_on_floor() and look_direction == Vector2(0, 0)
 	var look_up: bool = is_on_floor() and look_direction == Vector2(0, -1)
 	var crouch: bool = is_on_floor() and look_direction == Vector2(0, 1)
-	var shoot_jump: bool = not is_on_floor() and look_direction.y == 0
-	var shoot_jump_up: bool = not is_on_floor() and look_direction.y == -1
-	var shoot_jump_down: bool = not is_on_floor() and look_direction.y == 1
+	var shoot_jump: bool = not is_on_floor() and look_direction != Vector2(0, -1)  \
+			and look_direction != Vector2(0, 1)
+	var shoot_jump_up: bool = not is_on_floor() and look_direction == Vector2(0, -1)
+	var shoot_jump_down: bool = not is_on_floor() and look_direction == Vector2(0, 1)
 	
 	# Sets advance condition true or false for each state
 	animation_tree.set("parameters/conditions/idle", idle)
@@ -71,6 +72,12 @@ func _process(_delta: float) -> void:
 	
 	if Input.is_action_just_pressed("shoot"):
 		shoot_timer.start()
+		var bullet_r_path: PackedScene = load("res://Bullet/bullet_r.tscn")
+		var bullet_r: Area2D = bullet_r_path.instantiate()
+		
+		owner.add_child(bullet_r)
+		bullet_r.position = muzzle.global_position
+		bullet_r.rotation = muzzle.global_rotation
 	
 	# Basically gets AnimationNodeStateMachine from AnimationTree
 	var state_machine: AnimationNodeStateMachinePlayback = animation_tree.get("parameters/playback")
@@ -105,15 +112,16 @@ func _process(_delta: float) -> void:
 		"ShootJumpDown":
 			current_state = states.SHOOT_JUMP_DOWN
 	
-	match current_state:
-		states.SHOOT_IDLE, states.SHOOT_LOOK_UP, states.SHOOT_CROUCH, states.SHOOT_RUN, \
-				states.SHOOT_JUMP, states.SHOOT_JUMP_UP, states.SHOOT_JUMP_DOWN:
-			var bullet_r_path: PackedScene = load("res://Bullet/bullet_r.tscn")
-			var bullet_r: Area2D = bullet_r_path.instantiate()
-			
-			owner.add_child(bullet_r)
-			bullet_r.position = muzzle.global_position
-			bullet_r.rotation = muzzle.global_rotation
+	#match current_state:
+		#states.SHOOT_IDLE, states.SHOOT_LOOK_UP, states.SHOOT_CROUCH, states.SHOOT_RUN, \
+				#states.SHOOT_JUMP, states.SHOOT_JUMP_UP, states.SHOOT_JUMP_DOWN:
+			#var bullet_r_path: PackedScene = load("res://Bullet/bullet_r.tscn")
+			#var bullet_r: Area2D = bullet_r_path.instantiate()
+			#
+			#owner.add_child(bullet_r)
+			#bullet_r.position = muzzle.global_position
+			#bullet_r.rotation = muzzle.global_rotation
+	print(sprite_direction)
 
 
 func _physics_process(delta: float) -> void:
