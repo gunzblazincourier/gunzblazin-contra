@@ -21,7 +21,7 @@ const GRAVITY: int = 666
 
 func _ready() -> void:
 	# Slows down/speed up the game
-	Engine.time_scale = 0.2
+	#Engine.time_scale = 0.2
 	
 	animation_tree.active = true
 	current_state = states.JUMP
@@ -121,7 +121,8 @@ func _process(_delta: float) -> void:
 			#owner.add_child(bullet_r)
 			#bullet_r.position = muzzle.global_position
 			#bullet_r.rotation = muzzle.global_rotation
-	print(sprite_direction)
+	#print(sprite_direction)
+	print(state_machine_state)
 
 
 func _physics_process(delta: float) -> void:
@@ -135,18 +136,18 @@ func _physics_process(delta: float) -> void:
 	# and to keep moving horizontally even when no directional key is pressed (last direction
 	# is used)
 	match current_state:
-		states.IDLE, states.RUN, states.LOOK_UP:
+		states.IDLE, states.RUN, states.LOOK_UP, states.SHOOT_IDLE, states.SHOOT_RUN, states.SHOOT_LOOK_UP:
 			# If run_direction is 0 then velocity.x is 0, so player is IDLE
 			velocity.x = run_direction * RUN_SPEED
 			# Transition to JUMP
 			if Input.is_action_just_pressed("jump"):
 				velocity.y = JUMP_SPEED
 		# Same as above but without jump code (player cannot jump while crouched)
-		states.CROUCH:
+		states.CROUCH, states.SHOOT_CROUCH:
 			# If run_direction is 0 then velocity.x is 0, so player is IDLE
 			velocity.x = run_direction * RUN_SPEED
 		# Documentation for JUMP in comments just above match statement
-		states.JUMP:
+		states.JUMP, states.SHOOT_JUMP, states.SHOOT_JUMP_UP, states.SHOOT_JUMP_DOWN:
 			if run_direction != 0:
 				velocity.x = run_direction * RUN_SPEED
 			velocity.y += GRAVITY * delta
