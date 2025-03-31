@@ -4,14 +4,16 @@ extends CharacterBody2D
 @onready var shoot_timer: Timer = $ShootTimer
 @onready var muzzle: Marker2D = $Muzzle
 
-enum states {IDLE, LOOK_UP, CROUCH, RUN, JUMP, JUMP_UP, JUMP_DOWN, SHOOT_IDLE, SHOOT_LOOK_UP, \
-		SHOOT_CROUCH, SHOOT_RUN, SHOOT_JUMP, SHOOT_JUMP_UP, SHOOT_JUMP_DOWN}
+enum states {IDLE, LOOK_UP, CROUCH, RUN, JUMP, JUMP_UP, JUMP_DOWN, SHOOT_IDLE, \
+		SHOOT_LOOK_UP, SHOOT_CROUCH, SHOOT_RUN, SHOOT_JUMP, SHOOT_JUMP_UP, \
+		SHOOT_JUMP_DOWN}
 var current_state: states
 
 enum bullet_id {R, M, S, F, L}
 var current_bullet_id: bullet_id
 
-# Direction that sprite is currently facing; needed for blend position of states like IDLE
+# Direction that sprite is currently facing; needed for blend position of states
+# like IDLE
 var sprite_direction: float
 
 const RUN_SPEED: int = 100
@@ -42,7 +44,8 @@ func _process(_delta: float) -> void:
 	var idle: bool = is_on_floor() and look_direction == Vector2(0, 0)
 	var look_up: bool = is_on_floor() and look_direction == Vector2(0, -1)
 	var crouch: bool = is_on_floor() and look_direction == Vector2(0, 1)
-	var jump: bool = not is_on_floor() and look_direction != Vector2(0, -1) and look_direction != Vector2(0, 1)
+	var jump: bool = not is_on_floor() and look_direction != Vector2(0, -1) and \
+			look_direction != Vector2(0, 1)
 	var jump_up: bool = not is_on_floor() and look_direction == Vector2(0, -1)
 	var jump_down: bool = not is_on_floor() and look_direction == Vector2(0, 1)
 	
@@ -55,29 +58,26 @@ func _process(_delta: float) -> void:
 	animation_tree.set("parameters/conditions/jump_down", jump_down)
 	
 	# Sets blend position (direction) for each state so appropriate animation can be displayed
-	if look_direction == Vector2.ZERO:
-		animation_tree.set("parameters/Jump/blend_position", Vector2(sprite_direction, 0))
-		animation_tree.set("parameters/ShootJump/blend_position", Vector2(sprite_direction, 0))
-		#print("A")
-	else:
-		animation_tree.set("parameters/Jump/blend_position", look_direction)
-		animation_tree.set("parameters/ShootJump/blend_position", look_direction)
-		#print("B")
-	
 	animation_tree.set("parameters/Idle/blend_position", sprite_direction)
 	animation_tree.set("parameters/LookUp/blend_position", sprite_direction)
 	animation_tree.set("parameters/Crouch/blend_position", sprite_direction)
 	animation_tree.set("parameters/Run/blend_position", look_direction)
-	#animation_tree.set("parameters/Jump/blend_position", look_direction)
 	animation_tree.set("parameters/JumpUp/blend_position", sprite_direction)
 	animation_tree.set("parameters/JumpDown/blend_position", sprite_direction)
 	animation_tree.set("parameters/ShootIdle/blend_position", sprite_direction)
 	animation_tree.set("parameters/ShootLookUp/blend_position", sprite_direction)
 	animation_tree.set("parameters/ShootCrouch/blend_position", sprite_direction)
 	animation_tree.set("parameters/ShootRun/blend_position", look_direction)
-	#animation_tree.set("parameters/ShootJump/blend_position", look_direction)
 	animation_tree.set("parameters/ShootJumpUp/blend_position", sprite_direction)
 	animation_tree.set("parameters/ShootJumpDown/blend_position", sprite_direction)
+	
+	# Different blend spaces based on different situations
+	if look_direction == Vector2.ZERO:
+		animation_tree.set("parameters/Jump/blend_position", Vector2(sprite_direction, 0))
+		animation_tree.set("parameters/ShootJump/blend_position", Vector2(sprite_direction, 0))
+	else:
+		animation_tree.set("parameters/Jump/blend_position", look_direction)
+		animation_tree.set("parameters/ShootJump/blend_position", look_direction)
 	
 	# Basically gets AnimationNodeStateMachine from AnimationTree
 	var state_machine: AnimationNodeStateMachinePlayback = animation_tree.get("parameters/playback")
@@ -124,29 +124,6 @@ func _process(_delta: float) -> void:
 		owner.add_child(bullet_r)
 		bullet_r.position = muzzle.global_position
 		bullet_r.rotation = muzzle.global_rotation
-		#match current_state:
-			#states.SHOOT_IDLE, states.SHOOT_LOOK_UP, states.SHOOT_CROUCH, states.SHOOT_RUN, \
-					#states.SHOOT_JUMP, states.SHOOT_JUMP_UP, states.SHOOT_JUMP_DOWN:
-				#var bullet_r_path: PackedScene = load("res://Bullet/bullet_r.tscn")
-				#var bullet_r: Area2D = bullet_r_path.instantiate()
-				#
-				#owner.add_child(bullet_r)
-				#bullet_r.position = muzzle.global_position
-				#bullet_r.rotation = muzzle.global_rotation
-	
-	#match current_state:
-		#states.SHOOT_IDLE, states.SHOOT_LOOK_UP, states.SHOOT_CROUCH, states.SHOOT_RUN, \
-				#states.SHOOT_JUMP, states.SHOOT_JUMP_UP, states.SHOOT_JUMP_DOWN:
-			#var bullet_r_path: PackedScene = load("res://Bullet/bullet_r.tscn")
-			#var bullet_r: Area2D = bullet_r_path.instantiate()
-			#
-			#owner.add_child(bullet_r)
-			#bullet_r.position = muzzle.global_position
-			#bullet_r.rotation = muzzle.global_rotation
-	#print(sprite_direction)
-	#print(state_machine_state)
-	#print(look_direction == Vector2.ZERO)
-	print(animation_tree.get("parameters/Jump/blend_position"))
 
 
 func _physics_process(delta: float) -> void:
@@ -171,7 +148,8 @@ func _physics_process(delta: float) -> void:
 			# If run_direction is 0 then velocity.x is 0, so player is IDLE
 			velocity.x = run_direction * RUN_SPEED
 		# Documentation for JUMP in comments just above match statement
-		states.JUMP, states.JUMP_UP, states.JUMP_DOWN, states.SHOOT_JUMP, states.SHOOT_JUMP_UP, states.SHOOT_JUMP_DOWN:
+		states.JUMP, states.JUMP_UP, states.JUMP_DOWN, states.SHOOT_JUMP, states.SHOOT_JUMP_UP, \
+				states.SHOOT_JUMP_DOWN:
 			if run_direction != 0:
 				velocity.x = run_direction * RUN_SPEED
 			velocity.y += GRAVITY * delta
