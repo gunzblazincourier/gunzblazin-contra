@@ -46,6 +46,7 @@ func _process(_delta: float) -> void:
 	var idle: bool = is_on_floor() and look_direction == Vector2(0, 0)
 	var look_up: bool = is_on_floor() and look_direction == Vector2(0, -1)
 	var crouch: bool = is_on_floor() and look_direction == Vector2(0, 1)
+	var run: bool = is_on_floor() and look_direction.x != 0
 	var jump: bool = not is_on_floor() and look_direction != Vector2(0, -1) and \
 			look_direction != Vector2(0, 1)
 	var jump_up: bool = not is_on_floor() and look_direction == Vector2(0, -1)
@@ -55,6 +56,7 @@ func _process(_delta: float) -> void:
 	animation_tree.set("parameters/conditions/idle", idle)
 	animation_tree.set("parameters/conditions/look_up", look_up)
 	animation_tree.set("parameters/conditions/crouch", crouch)
+	animation_tree.set("parameters/conditions/run", run)
 	animation_tree.set("parameters/conditions/jump", jump)
 	animation_tree.set("parameters/conditions/jump_up", jump_up)
 	animation_tree.set("parameters/conditions/jump_down", jump_down)
@@ -167,6 +169,7 @@ func _process(_delta: float) -> void:
 				bullet_s3.rotate(6.02)
 				bullet_s4.rotate(0.52)
 				bullet_s5.rotate(5.76)
+		
 		bullet_id.L:
 			if Input.is_action_just_pressed("shoot"):
 				shoot_timer.start()
@@ -176,6 +179,7 @@ func _process(_delta: float) -> void:
 				owner.add_child(bullet_l)
 				bullet_l.position = muzzle.global_position
 				bullet_l.rotation = muzzle.global_rotation
+	print(state_machine_state)
 
 
 func _physics_process(delta: float) -> void:
@@ -189,15 +193,16 @@ func _physics_process(delta: float) -> void:
 	# and to keep moving horizontally even when no directional key is pressed (last direction
 	# is used)
 	match current_state:
-		states.IDLE, states.RUN, states.LOOK_UP, states.SHOOT_IDLE, states.SHOOT_RUN, states.SHOOT_LOOK_UP:
-			# If run_direction is 0 then velocity.x is 0, so player is IDLE
+		states.IDLE, states.LOOK_UP, states.SHOOT_IDLE, states.SHOOT_LOOK_UP:
+			velocity.x = move_toward(velocity.x, 0, RUN_SPEED)
+			if Input.is_action_just_pressed("jump"):
+				velocity.y = JUMP_SPEED
+		states.RUN, states.SHOOT_RUN:
 			velocity.x = run_direction * RUN_SPEED
-			# Transition to JUMP
 			if Input.is_action_just_pressed("jump"):
 				velocity.y = JUMP_SPEED
 		# Same as above but without jump code (player cannot jump while crouched)
 		states.CROUCH, states.SHOOT_CROUCH:
-			# If run_direction is 0 then velocity.x is 0, so player is IDLE
 			velocity.x = run_direction * RUN_SPEED
 		# Documentation for JUMP in comments just above match statement
 		states.JUMP, states.JUMP_UP, states.JUMP_DOWN, states.SHOOT_JUMP, states.SHOOT_JUMP_UP, \
