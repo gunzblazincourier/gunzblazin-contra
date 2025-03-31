@@ -122,6 +122,8 @@ func _process(_delta: float) -> void:
 		current_bullet_id = bullet_id.R
 	elif Input.is_action_just_pressed("2"):
 		current_bullet_id = bullet_id.S
+	elif Input.is_action_just_pressed("3"):
+		current_bullet_id = bullet_id.L
 	
 	match(current_bullet_id):
 		bullet_id.R:
@@ -165,6 +167,15 @@ func _process(_delta: float) -> void:
 				bullet_s3.rotate(6.02)
 				bullet_s4.rotate(0.52)
 				bullet_s5.rotate(5.76)
+		bullet_id.L:
+			if Input.is_action_just_pressed("shoot"):
+				shoot_timer.start()
+				var bullet_l_path: PackedScene = load("res://Bullet/bullet_l.tscn")
+				var bullet_l: Area2D = bullet_l_path.instantiate()
+				
+				owner.add_child(bullet_l)
+				bullet_l.position = muzzle.global_position
+				bullet_l.rotation = muzzle.global_rotation
 
 
 func _physics_process(delta: float) -> void:
