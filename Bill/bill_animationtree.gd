@@ -25,7 +25,7 @@ const GRAVITY: int = 666
 
 func _ready() -> void:
 	# Slows down/speed up the game
-	#Engine.time_scale = 0.2
+	Engine.time_scale = 0.5
 	
 	animation_tree.active = true
 	current_state = states.JUMP
