@@ -25,7 +25,7 @@ const GRAVITY: int = 666
 
 func _ready() -> void:
 	# Slows down/speed up the game
-	Engine.time_scale = 0.5
+	#Engine.time_scale = 0.5
 	
 	animation_tree.active = true
 	current_state = states.JUMP
@@ -179,8 +179,16 @@ func _process(_delta: float) -> void:
 				owner.add_child(bullet_l)
 				bullet_l.position = muzzle.global_position
 				bullet_l.rotation = muzzle.global_rotation
-	print(state_machine_state)
-
+				#bullet_l.rotate(10)
+				if look_direction.x > 0 and look_direction.y < 0:
+					bullet_l.rotate(-0.26)
+				elif look_direction.x < 0 and look_direction.y < 0:
+					bullet_l.rotate(0.26)
+				elif look_direction.x > 0 and look_direction.y > 0:
+					bullet_l.rotate(0.26)
+				elif look_direction.x < 0 and look_direction.y > 0:
+					bullet_l.rotate(-0.26)
+	print(look_direction)
 
 func _physics_process(delta: float) -> void:
 	var run_direction: float = Input.get_axis("left", "right")
