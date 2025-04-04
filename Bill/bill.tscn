@@ -818,7 +818,7 @@ tracks/5/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [2.67035]
+"values": [2.35619]
 }
 tracks/6/type = "value"
 tracks/6/imported = false
@@ -908,7 +908,7 @@ tracks/5/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [3.61283]
+"values": [3.92699]
 }
 tracks/6/type = "value"
 tracks/6/imported = false
@@ -1100,7 +1100,7 @@ tracks/6/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [0.471239]
+"values": [0.785398]
 }
 
 [sub_resource type="Animation" id="Animation_jgk4m"]
@@ -1190,7 +1190,7 @@ tracks/6/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [5.81195]
+"values": [5.49779]
 }
 
 [sub_resource type="Animation" id="Animation_f7h5i"]
@@ -1460,7 +1460,7 @@ tracks/6/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [2.67035]
+"values": [2.35619]
 }
 
 [sub_resource type="Animation" id="Animation_twhkk"]
@@ -1550,7 +1550,7 @@ tracks/6/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [0.471239]
+"values": [0.785398]
 }
 
 [sub_resource type="Animation" id="Animation_3m7i2"]
@@ -1640,7 +1640,7 @@ tracks/6/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [3.61283]
+"values": [3.92699]
 }
 
 [sub_resource type="Animation" id="Animation_hmlbq"]
@@ -1730,7 +1730,7 @@ tracks/6/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [5.81195]
+"values": [5.49779]
 }
 
 [sub_resource type="Animation" id="Animation_tbtmn"]

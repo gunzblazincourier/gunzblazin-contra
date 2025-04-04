@@ -179,15 +179,6 @@ func _process(_delta: float) -> void:
 				owner.add_child(bullet_l)
 				bullet_l.position = muzzle.global_position
 				bullet_l.rotation = muzzle.global_rotation
-				#bullet_l.rotate(10)
-				if look_direction.x > 0 and look_direction.y < 0:
-					bullet_l.rotate(-0.26)
-				elif look_direction.x < 0 and look_direction.y < 0:
-					bullet_l.rotate(0.26)
-				elif look_direction.x > 0 and look_direction.y > 0:
-					bullet_l.rotate(0.26)
-				elif look_direction.x < 0 and look_direction.y > 0:
-					bullet_l.rotate(-0.26)
 	print(look_direction)
 
 func _physics_process(delta: float) -> void:
