@@ -135,58 +135,62 @@ func _process(_delta: float) -> void:
 	elif Input.is_action_just_pressed("3"):
 		current_bullet_id = bullet_id.L
 	
-	match(current_bullet_id):
-		bullet_id.R:
-			if Input.is_action_just_pressed("shoot"):
-				shoot_timer.start()
-				var bullet_r_path: PackedScene = load("res://Bullet/bullet_r.tscn")
-				var bullet_r: Area2D = bullet_r_path.instantiate()
+	match current_state:
+		states.DEATH:
+			pass
+		_:
+			match current_bullet_id:
+				bullet_id.R:
+					if Input.is_action_just_pressed("shoot"):
+						shoot_timer.start()
+						var bullet_r_path: PackedScene = load("res://Bullet/bullet_r.tscn")
+						var bullet_r: Area2D = bullet_r_path.instantiate()
+						
+						owner.add_child(bullet_r)
+						bullet_r.position = muzzle.global_position
+						bullet_r.rotation = muzzle.global_rotation
 				
-				owner.add_child(bullet_r)
-				bullet_r.position = muzzle.global_position
-				bullet_r.rotation = muzzle.global_rotation
-		
-		bullet_id.S:
-			if Input.is_action_just_pressed("shoot"):
-				shoot_timer.start()
-				var bullet_s_path: PackedScene = load("res://Bullet/bullet_s.tscn")
-				var bullet_s1: Area2D = bullet_s_path.instantiate()
-				var bullet_s2: Area2D = bullet_s_path.instantiate()
-				var bullet_s3: Area2D = bullet_s_path.instantiate()
-				var bullet_s4: Area2D = bullet_s_path.instantiate()
-				var bullet_s5: Area2D = bullet_s_path.instantiate()
+				bullet_id.S:
+					if Input.is_action_just_pressed("shoot"):
+						shoot_timer.start()
+						var bullet_s_path: PackedScene = load("res://Bullet/bullet_s.tscn")
+						var bullet_s1: Area2D = bullet_s_path.instantiate()
+						var bullet_s2: Area2D = bullet_s_path.instantiate()
+						var bullet_s3: Area2D = bullet_s_path.instantiate()
+						var bullet_s4: Area2D = bullet_s_path.instantiate()
+						var bullet_s5: Area2D = bullet_s_path.instantiate()
+						
+						owner.add_child(bullet_s1)
+						bullet_s1.position = muzzle.global_position
+						bullet_s1.rotation = muzzle.global_rotation
+						owner.add_child(bullet_s2)
+						bullet_s2.position = muzzle.global_position
+						bullet_s2.rotation = muzzle.global_rotation
+						owner.add_child(bullet_s3)
+						bullet_s3.position = muzzle.global_position
+						bullet_s3.rotation = muzzle.global_rotation
+						owner.add_child(bullet_s4)
+						bullet_s4.position = muzzle.global_position
+						bullet_s4.rotation = muzzle.global_rotation
+						owner.add_child(bullet_s5)
+						bullet_s5.position = muzzle.global_position
+						bullet_s5.rotation = muzzle.global_rotation
+						
+						# Offsets rotation to fire in spread pattern
+						bullet_s2.rotate(0.26)
+						bullet_s3.rotate(6.02)
+						bullet_s4.rotate(0.52)
+						bullet_s5.rotate(5.76)
 				
-				owner.add_child(bullet_s1)
-				bullet_s1.position = muzzle.global_position
-				bullet_s1.rotation = muzzle.global_rotation
-				owner.add_child(bullet_s2)
-				bullet_s2.position = muzzle.global_position
-				bullet_s2.rotation = muzzle.global_rotation
-				owner.add_child(bullet_s3)
-				bullet_s3.position = muzzle.global_position
-				bullet_s3.rotation = muzzle.global_rotation
-				owner.add_child(bullet_s4)
-				bullet_s4.position = muzzle.global_position
-				bullet_s4.rotation = muzzle.global_rotation
-				owner.add_child(bullet_s5)
-				bullet_s5.position = muzzle.global_position
-				bullet_s5.rotation = muzzle.global_rotation
-				
-				# Offsets rotation to fire in spread pattern
-				bullet_s2.rotate(0.26)
-				bullet_s3.rotate(6.02)
-				bullet_s4.rotate(0.52)
-				bullet_s5.rotate(5.76)
-		
-		bullet_id.L:
-			if Input.is_action_just_pressed("shoot"):
-				shoot_timer.start()
-				var bullet_l_path: PackedScene = load("res://Bullet/bullet_l.tscn")
-				var bullet_l: Area2D = bullet_l_path.instantiate()
-				
-				owner.add_child(bullet_l)
-				bullet_l.position = muzzle.global_position
-				bullet_l.rotation = muzzle.global_rotation
+				bullet_id.L:
+					if Input.is_action_just_pressed("shoot"):
+						shoot_timer.start()
+						var bullet_l_path: PackedScene = load("res://Bullet/bullet_l.tscn")
+						var bullet_l: Area2D = bullet_l_path.instantiate()
+						
+						owner.add_child(bullet_l)
+						bullet_l.position = muzzle.global_position
+						bullet_l.rotation = muzzle.global_rotation
 	print(state_machine_state)
 
 func _physics_process(delta: float) -> void:
