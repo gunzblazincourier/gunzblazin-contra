@@ -8,7 +8,7 @@ extends CharacterBody2D
 
 enum states {IDLE, LOOK_UP, CROUCH, RUN, JUMP, JUMP_UP, JUMP_DOWN, SHOOT_IDLE, \
 		SHOOT_LOOK_UP, SHOOT_CROUCH, SHOOT_RUN, SHOOT_JUMP, SHOOT_JUMP_UP, \
-		SHOOT_JUMP_DOWN}
+		SHOOT_JUMP_DOWN, DEATH}
 var current_state: states
 
 enum bullet_id {R, M, S, F, L}
@@ -27,6 +27,7 @@ func _ready() -> void:
 	# Slows down/speed up the game
 	#Engine.time_scale = 0.5
 	
+	animation_tree.set("parameters/conditions/death", false)
 	animation_tree.active = true
 	current_state = states.JUMP
 	sprite_direction = 1
@@ -74,6 +75,7 @@ func _process(_delta: float) -> void:
 	animation_tree.set("parameters/ShootRun/blend_position", look_direction)
 	animation_tree.set("parameters/ShootJumpUp/blend_position", sprite_direction)
 	animation_tree.set("parameters/ShootJumpDown/blend_position", sprite_direction)
+	animation_tree.set("parameters/Death/blend_position", sprite_direction)
 	
 	# Different blend spaces based on different situations
 	if look_direction == Vector2.ZERO:
@@ -119,6 +121,8 @@ func _process(_delta: float) -> void:
 			current_state = states.SHOOT_JUMP_UP
 		"ShootJumpDown":
 			current_state = states.SHOOT_JUMP_DOWN
+		"Death":
+			current_state = states.DEATH
 	
 	if Input.is_action_just_pressed("1"):
 		current_bullet_id = bullet_id.R
@@ -217,3 +221,8 @@ func _physics_process(delta: float) -> void:
 	# To prevent 'return value discarded' error
 	if mas:
 		pass
+
+
+func _on_area_2d_area_entered(area: Area2D) -> void:
+	if area.is_in_group("enemy"):
+		animation_tree.set("parameters/conditions/death", true)
