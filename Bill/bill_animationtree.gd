@@ -18,8 +18,12 @@ var current_bullet_id: bullet_id
 # like IDLE
 var sprite_direction: float
 
-const RUN_SPEED: int = 100
-const JUMP_SPEED: int = -300
+# 
+var death_direction: float
+
+const RUN_SPEED: int = 69
+const JUMP_SPEED: int = -321
+const DEATH_JUMP_SPEED: int = -175
 const GRAVITY: int = 666
 
 
@@ -30,7 +34,8 @@ func _ready() -> void:
 	animation_tree.set("parameters/conditions/death", false)
 	animation_tree.active = true
 	current_state = states.JUMP
-	sprite_direction = 1
+	sprite_direction = 1.0
+	death_direction = -1.0
 	current_bullet_id = bullet_id.R
 
 
@@ -75,7 +80,6 @@ func _process(_delta: float) -> void:
 	animation_tree.set("parameters/ShootRun/blend_position", look_direction)
 	animation_tree.set("parameters/ShootJumpUp/blend_position", sprite_direction)
 	animation_tree.set("parameters/ShootJumpDown/blend_position", sprite_direction)
-	animation_tree.set("parameters/Death/blend_position", sprite_direction)
 	
 	# Different blend spaces based on different situations
 	if look_direction == Vector2.ZERO:
@@ -183,7 +187,7 @@ func _process(_delta: float) -> void:
 				owner.add_child(bullet_l)
 				bullet_l.position = muzzle.global_position
 				bullet_l.rotation = muzzle.global_rotation
-	print(look_direction)
+	print(state_machine_state)
 
 func _physics_process(delta: float) -> void:
 	var run_direction: float = Input.get_axis("left", "right")
@@ -207,13 +211,20 @@ func _physics_process(delta: float) -> void:
 		# Same as above but without jump code (player cannot jump while crouched)
 		states.CROUCH, states.SHOOT_CROUCH:
 			velocity.x = run_direction * RUN_SPEED
-		# Documentation for JUMP in comments just above match statement
+		# Documentation in comments just above match statement
 		states.JUMP, states.JUMP_UP, states.JUMP_DOWN, states.SHOOT_JUMP, states.SHOOT_JUMP_UP, \
 				states.SHOOT_JUMP_DOWN:
 			if run_direction != 0:
 				velocity.x = run_direction * RUN_SPEED
 			velocity.y += GRAVITY * delta
+		states.DEATH:
+			velocity.y += GRAVITY * delta
+			if not is_on_floor():
+				velocity.x = death_direction * RUN_SPEED
+			else:
+				velocity.x = move_toward(velocity.x, 0, RUN_SPEED)
 	
+	print(velocity.x)
 	# Godot function for player movement
 	# "convenient way to implement sliding movement without writing much code." (Godot 4.4 Docs)
 	var mas: bool = move_and_slide()
@@ -226,3 +237,8 @@ func _physics_process(delta: float) -> void:
 func _on_area_2d_area_entered(area: Area2D) -> void:
 	if area.is_in_group("enemy"):
 		animation_tree.set("parameters/conditions/death", true)
+		animation_tree.set("parameters/Death/blend_position", sprite_direction)
+		velocity.y = DEATH_JUMP_SPEED
+		death_direction = sprite_direction * -1
+		#velocity.x = sprite_direction * RUN_SPEED
+		print(velocity.x)

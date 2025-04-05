@@ -19,9 +19,9 @@ position = Vector2(0, 28)
 shape = SubResource("WorldBoundaryShape2D_1jt4k")
 
 [node name="RunningSoldier" parent="." instance=ExtResource("2_0xm2m")]
-position = Vector2(-171, 11)
+position = Vector2(-291, 11)
 run_direction = 1
 
 [node name="RunningSoldier2" parent="." instance=ExtResource("2_0xm2m")]
-position = Vector2(190, 11)
+position = Vector2(294, 11)
 run_direction = -1

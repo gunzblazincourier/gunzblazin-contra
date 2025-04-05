@@ -6,7 +6,7 @@ extends Area2D
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 @onready var collision_shape_2d: CollisionShape2D = $CollisionShape2D
 
-const SPEED: int = 50
+const SPEED: int = 70
 const GRAVITY: int = 7
 
 # Enum for left and right direction, and exported variable to set direction from GUI
@@ -15,7 +15,7 @@ enum directions {LEFT = -1, RIGHT = 1}
 var is_dead: bool = false
 
 # NOTE: Further code will be added for the actual jump along with the "death jump"
-var jump_speed: int = -150
+var jump_speed: int = -123
 
 
 # Decides to flip running soldier sprite based on direction
