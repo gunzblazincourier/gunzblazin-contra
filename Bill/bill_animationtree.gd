@@ -18,7 +18,7 @@ var current_bullet_id: bullet_id
 # like IDLE
 var sprite_direction: float
 
-# 
+# Direction in which player faces and travels when dead
 var death_direction: float
 
 const RUN_SPEED: int = 69
@@ -135,6 +135,7 @@ func _process(_delta: float) -> void:
 	elif Input.is_action_just_pressed("3"):
 		current_bullet_id = bullet_id.L
 	
+	# Shoot in any state except DEATH
 	match current_state:
 		states.DEATH:
 			pass
@@ -191,7 +192,7 @@ func _process(_delta: float) -> void:
 						owner.add_child(bullet_l)
 						bullet_l.position = muzzle.global_position
 						bullet_l.rotation = muzzle.global_rotation
-	print(state_machine_state)
+
 
 func _physics_process(delta: float) -> void:
 	var run_direction: float = Input.get_axis("left", "right")
@@ -239,10 +240,9 @@ func _physics_process(delta: float) -> void:
 
 
 func _on_area_2d_area_entered(area: Area2D) -> void:
+	# Player dies if enters enemy hitbox
 	if area.is_in_group("enemy"):
 		animation_tree.set("parameters/conditions/death", true)
 		animation_tree.set("parameters/Death/blend_position", sprite_direction)
 		velocity.y = DEATH_JUMP_SPEED
 		death_direction = sprite_direction * -1
-		#velocity.x = sprite_direction * RUN_SPEED
-		print(velocity.x)
