@@ -3942,6 +3942,11 @@ tile_set = SubResource("TileSet_lquwl")
 [node name="Bill" parent="." instance=ExtResource("1_76q5j")]
 position = Vector2(81, 22)
 
+[node name="Camera2D" type="Camera2D" parent="Bill"]
+position = Vector2(-81, -22)
+position_smoothing_enabled = true
+position_smoothing_speed = 11.0
+
 [node name="RunningSoldier" parent="." instance=ExtResource("2_0xm2m")]
 position = Vector2(-133, -32)
 run_direction = 1
@@ -3949,5 +3954,3 @@ run_direction = 1
 [node name="RunningSoldier2" parent="." instance=ExtResource("2_0xm2m")]
 position = Vector2(300, -32)
 run_direction = -1
-
-[node name="Camera2D" type="Camera2D" parent="."]
