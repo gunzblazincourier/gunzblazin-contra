@@ -5,6 +5,8 @@ extends CharacterBody2D
 @onready var animation_tree: AnimationTree = $AnimationTree
 @onready var shoot_timer: Timer = $ShootTimer
 @onready var muzzle: Marker2D = $Muzzle
+@onready var collision_shape_2d: CollisionShape2D = $CollisionShape2D
+@onready var fall_through_timer: Timer = $FallThroughTimer
 
 enum states {IDLE, LOOK_UP, CROUCH, RUN, JUMP, JUMP_UP, JUMP_DOWN, SHOOT_IDLE, \
 		SHOOT_LOOK_UP, SHOOT_CROUCH, SHOOT_RUN, SHOOT_JUMP, SHOOT_JUMP_UP, \
@@ -237,6 +239,12 @@ func _physics_process(delta: float) -> void:
 	# To prevent 'return value discarded' error
 	if mas:
 		pass
+	
+	if Input.is_action_pressed("down") and Input.is_action_just_pressed("jump"):
+		collision_shape_2d.disabled = true
+		fall_through_timer.start()
+	elif Input.is_action_pressed("up") and Input.is_action_just_pressed("jump"):
+		collision_shape_2d.disabled = false
 
 
 func _on_area_2d_area_entered(area: Area2D) -> void:
@@ -246,3 +254,7 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 		animation_tree.set("parameters/Death/blend_position", sprite_direction)
 		velocity.y = DEATH_JUMP_SPEED
 		death_direction = sprite_direction * -1
+
+
+func _on_fall_through_timer_timeout() -> void:
+	collision_shape_2d.disabled = false
