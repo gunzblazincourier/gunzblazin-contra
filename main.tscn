@@ -3930,7 +3930,7 @@ texture = ExtResource("1_h2yge")
 215:14/0 = 0
 
 [sub_resource type="TileSet" id="TileSet_lquwl"]
-physics_layer_0/collision_layer = 1
+physics_layer_0/collision_layer = 8
 sources/0 = SubResource("TileSetAtlasSource_1bvp3")
 
 [node name="Main" type="Node"]
@@ -3945,12 +3945,14 @@ position = Vector2(-162, -85)
 [node name="Camera2D" type="Camera2D" parent="Bill"]
 position = Vector2(136, 70)
 zoom = Vector2(1.6, 1.6)
+process_callback = 0
+limit_smoothed = true
 position_smoothing_speed = 7.0
 drag_horizontal_enabled = true
 drag_vertical_enabled = true
 drag_left_margin = 1.0
 drag_top_margin = 1.0
-drag_right_margin = 0.55
+drag_right_margin = 0.6
 drag_bottom_margin = 1.0
 editor_draw_limits = true
 editor_draw_drag_margin = true

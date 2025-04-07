@@ -73,6 +73,8 @@ animations = [{
 size = Vector2(17, 31.5)
 
 [node name="RunningSoldier" type="Area2D" groups=["enemy"]]
+collision_layer = 4
+collision_mask = 3
 script = ExtResource("1_1cjt1")
 run_direction = 0
 

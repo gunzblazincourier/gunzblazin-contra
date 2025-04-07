@@ -95,6 +95,8 @@ _data = {
 }
 
 [node name="Bullet_S" type="Area2D" groups=["bullet"]]
+collision_layer = 2
+collision_mask = 4
 script = ExtResource("1_7vesb")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

@@ -22,9 +22,9 @@ var sprite_direction: float
 var death_direction: float
 
 const RUN_SPEED: int = 69
-const JUMP_SPEED: int = -321
+const JUMP_SPEED: int = -250
 const DEATH_JUMP_SPEED: int = -175
-const GRAVITY: int = 666
+const GRAVITY: int = 555
 
 
 func _ready() -> void:
