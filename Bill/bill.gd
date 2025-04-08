@@ -112,6 +112,8 @@ func _process(_delta: float) -> void:
 		animation_tree.set("parameters/Fall/blend_position", Vector2(sprite_direction, 0))
 		animation_tree.set("parameters/ShootFall/blend_position", Vector2(sprite_direction, 0))
 	else:
+		animation_tree.set("parameters/Jump/blend_position", look_direction)
+		animation_tree.set("parameters/ShootJump/blend_position", look_direction)
 		animation_tree.set("parameters/Fall/blend_position", look_direction)
 		animation_tree.set("parameters/ShootFall/blend_position", look_direction)
 	
