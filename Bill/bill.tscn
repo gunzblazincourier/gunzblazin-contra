@@ -1,6 +1,6 @@
 [gd_scene load_steps=260 format=3 uid="uid://doa0vkc0fktkh"]
 
-[ext_resource type="Script" uid="uid://c0ak0nhauaj7u" path="res://Bill/bill_animationtree.gd" id="1_ac1dp"]
+[ext_resource type="Script" uid="uid://c0ak0nhauaj7u" path="res://Bill/bill.gd" id="1_ac1dp"]
 [ext_resource type="Texture2D" uid="uid://7v13jiiro62o" path="res://Bill/Bill_Crouch.png" id="2_hdvrd"]
 [ext_resource type="Texture2D" uid="uid://rrs6oysprfqt" path="res://Bullet/F.png" id="3_l2ago"]
 [ext_resource type="Texture2D" uid="uid://cx1dlfanbehv" path="res://Bill/Bill_Shoot2.png" id="8_tbtmn"]

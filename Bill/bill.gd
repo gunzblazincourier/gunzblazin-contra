@@ -1,297 +1,292 @@
-# NOTE: Implementation of bullet limits pending (eg in case of Machinegun)
-# NOTE: Player death is to be written next (currently death upon physical enemy contact)
+# NOTE: Flamegun (F) incomplete
 
 extends CharacterBody2D
 
-@onready var animated_sprite_2d_bill: AnimatedSprite2D = $AnimatedSprite2D_Bill
-@onready var muzzle: Marker2D = $Muzzle
+@onready var animation_tree: AnimationTree = $AnimationTree
 @onready var shoot_timer: Timer = $ShootTimer
+@onready var muzzle: Marker2D = $Muzzle
+@onready var collision_shape_2d: CollisionShape2D = $CollisionShape2D
+@onready var fall_through_timer: Timer = $FallThroughTimer
 
-# Declaration of collision shapes
-@onready var collision_shape_2d_default: CollisionShape2D = $CollisionShape2D_Default
-@onready var collision_shape_2d_jump: CollisionShape2D = $CollisionShape2D_Jump
-@onready var collision_shape_2d_crouch: CollisionShape2D = $CollisionShape2D_Crouch
+enum states {IDLE, LOOK_UP, CROUCH, RUN, JUMP, JUMP_UP, JUMP_DOWN, FALL, FALL_UP, FALL_DOWN, SHOOT_IDLE, \
+		SHOOT_LOOK_UP, SHOOT_CROUCH, SHOOT_RUN, SHOOT_JUMP, SHOOT_JUMP_UP, \
+		SHOOT_JUMP_DOWN, SHOOT_FALL, SHOOT_FALL_UP, SHOOT_FALL_DOWN, DEATH}
+var current_state: states
 
-# Decleration of Area2D collision shapes
-@onready var collision_shape_2d_default2: CollisionShape2D = $Area2D/CollisionShape2D_Default2
-@onready var collision_shape_2d_jump2: CollisionShape2D = $Area2D/CollisionShape2D_Jump2
-@onready var collision_shape_2d_crouch2: CollisionShape2D = $Area2D/CollisionShape2D_Crouch2
+enum bullet_id {R, M, S, F, L}
+var current_bullet_id: bullet_id
 
-# Initialization of bullet paths and declaration of bullets
-var bullet_r_path: PackedScene = preload("res://Bullet/bullet_r.tscn")
-var bullet_r: Area2D
-var bullet_m_path: PackedScene = preload("res://Bullet/bullet_m.tscn")
-var bullet_m: Area2D
-var bullet_f_path: PackedScene = preload("res://Bullet/bullet_f.tscn")
-var bullet_f: Area2D
-var bullet_l_path: PackedScene = preload("res://Bullet/bullet_l.tscn")
-var bullet_l: Area2D
-var bullet_s_path: PackedScene = preload("res://Bullet/bullet_s.tscn")
-var bullet_s1: Area2D
-var bullet_s2: Area2D
-var bullet_s3: Area2D
-var bullet_s4: Area2D
-var bullet_s5: Area2D
+# Direction that sprite is currently facing; needed for blend position of states
+# like IDLE
+var sprite_direction: float
 
-const RUN_SPEED: int = 100
-const JUMP_SPEED: int = -300
-const GRAVITY: int = 666
+# Direction in which player faces and travels when dead
+var death_direction: float
 
-var bullet_id: String
-var is_jumping: bool = false
+# Helps decide whether player jumps or falls based on jump button press
+var jump_pressed: bool
+
+const RUN_SPEED: int = 69
+const JUMP_SPEED: int = -250
+const DEATH_JUMP_SPEED: int = -175
+const GRAVITY: int = 555
+
+
+func _ready() -> void:
+	# Slows down/speed up the game
+	#Engine.time_scale = 0.5
+	
+	animation_tree.set("parameters/conditions/death", false)
+	animation_tree.active = true
+	current_state = states.JUMP
+	sprite_direction = 1.0
+	death_direction = -1.0
+	jump_pressed = true
+	current_bullet_id = bullet_id.R
 
 
 func _process(_delta: float) -> void:
 	var look_direction: Vector2 = Input.get_vector("left", "right", "up", "down")
 	var run_direction: float = Input.get_axis("left", "right")
 	
-	# Emnables animations such as of running and shooting to continue to stay on same frame
-	# number while switching animations
-	var current_frame: int = animated_sprite_2d_bill.get_frame()
-	var current_progress: float = animated_sprite_2d_bill.get_frame_progress()
+	# To avoid setting sprite direction to 0, since sprite can only face left or right
+	if run_direction != 0:
+		sprite_direction = run_direction
 	
-	# Conditions for playing animations for jumping and falling respectively
-	if not is_on_floor() and shoot_timer.is_stopped():
-		if is_jumping == true:
-			animated_sprite_2d_bill.play("jump")
-		else:
-			animated_sprite_2d_bill.play("fall")
-			
-	# Animation is selected based on look_direction like idle and run
-	else:
-		# Idle
-		if look_direction.x == 0 and look_direction.y == 0:
-			animated_sprite_2d_bill.play("default")
-		# Run
-		elif look_direction.x != 0 and look_direction.y == 0 and shoot_timer.is_stopped():
-			animated_sprite_2d_bill.play("run")
-			animated_sprite_2d_bill.set_frame_and_progress(current_frame, current_progress)
-		# Look Up Right
-		elif look_direction.x != 0 and (look_direction.y < 0 and look_direction.y > -1):
-			animated_sprite_2d_bill.play("look_up_diagonal")
-			animated_sprite_2d_bill.set_frame_and_progress(current_frame, current_progress)
-		# Look Up
-		elif look_direction.x == 0 and look_direction.y == -1:
-			animated_sprite_2d_bill.play("look_up")
-		# Look Down Right
-		elif look_direction.x != 0 and (look_direction.y > 0 and look_direction.y < 1):
-			animated_sprite_2d_bill.play("look_down_diagonal")
-			animated_sprite_2d_bill.set_frame_and_progress(current_frame, current_progress)
-		# Crouch
-		elif look_direction.x == 0 and look_direction.y == 1:
-			animated_sprite_2d_bill.play("crouch")
-
-	# Decides if sprite faces left or right
-	if run_direction > 0:
-		animated_sprite_2d_bill.flip_h = false
-	elif run_direction < 0:
-		animated_sprite_2d_bill.flip_h = true
-		
-	# One collision shape is enabled and others are disabled based on state of player
-	# NOTE: Only basic implementation
-	if animated_sprite_2d_bill.animation == "jump":
-		collision_shape_2d_default.disabled = true
-		collision_shape_2d_jump.disabled = false
-		collision_shape_2d_crouch.disabled = true
-		collision_shape_2d_default2.disabled = true
-		collision_shape_2d_jump2.disabled = false
-		collision_shape_2d_crouch2.disabled = true
-	elif animated_sprite_2d_bill.animation == "crouch":
-		collision_shape_2d_default.disabled = true
-		collision_shape_2d_jump.disabled = true
-		collision_shape_2d_crouch.disabled = false
-		collision_shape_2d_default2.disabled = true
-		collision_shape_2d_jump2.disabled = true
-		collision_shape_2d_crouch2.disabled = false
-	else:
-		#if animated_sprite_2d_bill.flip_h == false:
-			#pass
-		#else:
-			#pass
-		collision_shape_2d_default.disabled = false
-		collision_shape_2d_jump.disabled = true
-		collision_shape_2d_crouch.disabled = true
-		collision_shape_2d_default2.disabled = false
-		collision_shape_2d_jump2.disabled = true
-		collision_shape_2d_crouch2.disabled = true
-	
-	# Muzzle position and rotation based on look_direction
-	if look_direction.x == 0 and look_direction.y == 0:
-		if animated_sprite_2d_bill.flip_h == false:
-			muzzle.position.x = 13
-			muzzle.position.y = 3
-			muzzle.rotation_degrees = 0
-		else:
-			muzzle.position.x = -13
-			muzzle.position.y = 3
-			muzzle.rotation_degrees = 180
-	elif look_direction.x == 1 and look_direction.y == 0:
-		muzzle.position.x = 13
-		muzzle.position.y = 3
-		muzzle.rotation_degrees = 0
-	elif look_direction.x == -1 and look_direction.y == 0:
-		muzzle.position.x = -13
-		muzzle.position.y = 3
-		muzzle.rotation_degrees = 180
-	elif look_direction.x > 0 and look_direction.y < 0:
-		muzzle.position.x = 6
-		muzzle.position.y = -5
-		muzzle.rotation_degrees = 333
-	elif look_direction.x == 0 and look_direction.y == -1:
-		if animated_sprite_2d_bill.flip_h == false:
-			muzzle.position.x = 5
-			muzzle.position.y = -10
-			muzzle.rotation_degrees = 270
-		else:
-			muzzle.position.x = -5
-			muzzle.position.y = -10
-			muzzle.rotation_degrees = 270
-	elif look_direction.x < 0 and look_direction.y < 0:
-		muzzle.position.x = -6
-		muzzle.position.y = -5
-		muzzle.rotation_degrees = 207
-	elif look_direction.x > 0 and look_direction.y > 0:
-		muzzle.position.x = 7
-		muzzle.position.y = 7
-		muzzle.rotation_degrees = 27
-	elif look_direction.x == 0 and look_direction.y == 1:
+	if jump_pressed == true:
 		if is_on_floor():
-			if animated_sprite_2d_bill.flip_h == false:
-				muzzle.position.x = 12
-				muzzle.position.y = 17
-				muzzle.rotation_degrees = 0
-			else:
-				muzzle.position.x = -12
-				muzzle.position.y = 17
-				muzzle.rotation_degrees = 180
-		else:
-			muzzle.position.x = 5
-			muzzle.position.y = 15
-			muzzle.rotation_degrees = 90
-	elif look_direction.x < 0 and look_direction.y > 0:
-		muzzle.position.x = -7
-		muzzle.position.y = 7
-		muzzle.rotation_degrees = 153
-
-	# Bullet ID assigned based on number pressed
-	if Input.is_action_just_pressed('1'):
-		bullet_id = 'R'
-	elif Input.is_action_just_pressed('2'):
-		bullet_id = 'M'
-	elif Input.is_action_just_pressed('3'):
-		bullet_id = 'F'
-	elif Input.is_action_just_pressed('4'):
-		bullet_id = 'L'
-	elif Input.is_action_just_pressed('5'):
-		bullet_id = 'S'
-
-	# Instantiating all bullets
-	bullet_r = bullet_r_path.instantiate()
-	bullet_m = bullet_m_path.instantiate()
-	bullet_f = bullet_f_path.instantiate()
-	bullet_l = bullet_l_path.instantiate()
-	bullet_s1 = bullet_s_path.instantiate()
-	bullet_s2 = bullet_s_path.instantiate()
-	bullet_s3 = bullet_s_path.instantiate()
-	bullet_s4 = bullet_s_path.instantiate()
-	bullet_s5 = bullet_s_path.instantiate()
-
-	# Performs action depending on which weapon player has (bullet ID)
-	# For Regular (R)
-	if bullet_id == 'R':
-		if Input.is_action_just_pressed("shoot"):
-			start_or_stop_shoot_timer(look_direction, run_direction)
-			play_shoot_animation(current_frame, current_progress)
-			spawn_bullet(bullet_r)
-			
-	# For Machinegun (M)
-	elif bullet_id == 'M':
-		# 'Pressed' instead of 'Just_pressed' for Machinegun
-		if Input.is_action_pressed("shoot"):
-			start_or_stop_shoot_timer(look_direction, run_direction)
-			play_shoot_animation(current_frame, current_progress)
-			spawn_bullet(bullet_m)
-
-	# For Flame Gun (F) (NOTE: INCOMPLETE)
-	elif bullet_id == 'F':
-		if Input.is_action_just_pressed("shoot"):
-			start_or_stop_shoot_timer(look_direction, run_direction)
-			play_shoot_animation(current_frame, current_progress)
-			spawn_bullet(bullet_f)
-
-	# For Laser (L)
-	elif bullet_id == 'L':
-		if Input.is_action_just_pressed("shoot"):
-			start_or_stop_shoot_timer(look_direction, run_direction)
-			play_shoot_animation(current_frame, current_progress)
-			spawn_bullet(bullet_l)
-
-	# For Spreadgun (S)
-	elif bullet_id == 'S':
-		if Input.is_action_just_pressed("shoot"):
-			start_or_stop_shoot_timer(look_direction, run_direction)
-			play_shoot_animation(current_frame, current_progress)
-			
-			spawn_bullet(bullet_s1)
-			spawn_bullet(bullet_s2)
-			spawn_bullet(bullet_s3)
-			spawn_bullet(bullet_s4)
-			spawn_bullet(bullet_s5)
-			
-			# Offsets rotation to fire in spread pattern
-			bullet_s2.rotate(0.26)
-			bullet_s3.rotate(6.02)
-			bullet_s4.rotate(0.52)
-			bullet_s5.rotate(5.76)
+			jump_pressed = false
+	else:
+		if velocity.y < 0:
+			jump_pressed = true
+	
+	# Will set the advance condition value of respective states
+	# Set after storing in variable instead of setting directly because of long statements
+	var idle: bool = is_on_floor() and look_direction == Vector2(0, 0)
+	var look_up: bool = is_on_floor() and look_direction == Vector2(0, -1)
+	var crouch: bool = is_on_floor() and look_direction == Vector2(0, 1)
+	var run: bool = is_on_floor() and look_direction.x != 0
+	var jump: bool = not is_on_floor() and jump_pressed and look_direction != Vector2(0, -1) and \
+			look_direction != Vector2(0, 1)
+	var jump_up: bool = not is_on_floor() and jump_pressed and look_direction == Vector2(0, -1)
+	var jump_down: bool = not is_on_floor() and jump_pressed and look_direction == Vector2(0, 1)
+	var fall: bool = not is_on_floor() and not jump_pressed and look_direction != Vector2(0, -1) and \
+			look_direction != Vector2(0, 1)
+	var fall_up: bool = not is_on_floor() and not jump_pressed and look_direction == Vector2(0, -1)
+	var fall_down: bool = not is_on_floor() and not jump_pressed and look_direction == Vector2(0, 1)
+	
+	# Sets advance condition true or false for each state
+	animation_tree.set("parameters/conditions/idle", idle)
+	animation_tree.set("parameters/conditions/look_up", look_up)
+	animation_tree.set("parameters/conditions/crouch", crouch)
+	animation_tree.set("parameters/conditions/run", run)
+	animation_tree.set("parameters/conditions/jump", jump)
+	animation_tree.set("parameters/conditions/jump_up", jump_up)
+	animation_tree.set("parameters/conditions/jump_down", jump_down)
+	animation_tree.set("parameters/conditions/fall", fall)
+	animation_tree.set("parameters/conditions/fall_up", fall_up)
+	animation_tree.set("parameters/conditions/fall_down", fall_down)
+	
+	# Sets blend position (direction) for each state so appropriate animation can be displayed
+	animation_tree.set("parameters/Idle/blend_position", sprite_direction)
+	animation_tree.set("parameters/LookUp/blend_position", sprite_direction)
+	animation_tree.set("parameters/Crouch/blend_position", sprite_direction)
+	animation_tree.set("parameters/Run/blend_position", look_direction)
+	animation_tree.set("parameters/JumpUp/blend_position", sprite_direction)
+	animation_tree.set("parameters/JumpDown/blend_position", sprite_direction)
+	animation_tree.set("parameters/FallUp/blend_position", sprite_direction)
+	animation_tree.set("parameters/FallDown/blend_position", sprite_direction)
+	animation_tree.set("parameters/ShootIdle/blend_position", sprite_direction)
+	animation_tree.set("parameters/ShootLookUp/blend_position", sprite_direction)
+	animation_tree.set("parameters/ShootCrouch/blend_position", sprite_direction)
+	animation_tree.set("parameters/ShootRun/blend_position", look_direction)
+	animation_tree.set("parameters/ShootJumpUp/blend_position", sprite_direction)
+	animation_tree.set("parameters/ShootJumpDown/blend_position", sprite_direction)
+	animation_tree.set("parameters/ShootFallUp/blend_position", sprite_direction)
+	animation_tree.set("parameters/ShootFallDown/blend_position", sprite_direction)
+	
+	# Different blend spaces based on different situations
+	if look_direction == Vector2.ZERO:
+		animation_tree.set("parameters/Jump/blend_position", Vector2(sprite_direction, 0))
+		animation_tree.set("parameters/ShootJump/blend_position", Vector2(sprite_direction, 0))
+		animation_tree.set("parameters/Fall/blend_position", Vector2(sprite_direction, 0))
+		animation_tree.set("parameters/ShootFall/blend_position", Vector2(sprite_direction, 0))
+	else:
+		animation_tree.set("parameters/Fall/blend_position", look_direction)
+		animation_tree.set("parameters/ShootFall/blend_position", look_direction)
+	
+	# Basically gets AnimationNodeStateMachine from AnimationTree
+	var state_machine: AnimationNodeStateMachinePlayback = animation_tree.get("parameters/playback")
+	
+	# Current state in AnimationNodeStateMachine
+	var state_machine_state: StringName = state_machine.get_current_node()
+	
+	# Sets state in script as per state in StateMachine (AnimationNodeStateMachine)
+	match state_machine_state:
+		"Idle":
+			current_state = states.IDLE
+		"LookUp":
+			current_state = states.LOOK_UP
+		"Crouch":
+			current_state = states.CROUCH
+		"Run":
+			current_state = states.RUN
+		"Jump":
+			current_state = states.JUMP
+		"JumpUp":
+			current_state = states.JUMP_UP
+		"JumpDown":
+			current_state = states.JUMP_DOWN
+		"Fall":
+			current_state = states.FALL
+		"FallUp":
+			current_state = states.FALL_UP
+		"FallDown":
+			current_state = states.FALL_DOWN
+		"ShootIdle":
+			current_state = states.SHOOT_IDLE
+		"ShootLookUp":
+			current_state = states.SHOOT_LOOK_UP
+		"ShootCrouch":
+			current_state = states.SHOOT_CROUCH
+		"ShootRun":
+			current_state = states.SHOOT_RUN
+		"ShootJump":
+			current_state = states.SHOOT_JUMP
+		"ShootJumpUp":
+			current_state = states.SHOOT_JUMP_UP
+		"ShootJumpDown":
+			current_state = states.SHOOT_JUMP_DOWN
+		"ShootFall":
+			current_state = states.SHOOT_FALL
+		"ShootFallUp":
+			current_state = states.SHOOT_FALL_UP
+		"ShootFallDown":
+			current_state = states.SHOOT_FALL_DOWN
+		"Death":
+			current_state = states.DEATH
+	
+	if Input.is_action_just_pressed("1"):
+		current_bullet_id = bullet_id.R
+	elif Input.is_action_just_pressed("2"):
+		current_bullet_id = bullet_id.S
+	elif Input.is_action_just_pressed("3"):
+		current_bullet_id = bullet_id.L
+	
+	# Shoot in any state except DEATH
+	match current_state:
+		states.DEATH:
+			pass
+		_:
+			match current_bullet_id:
+				bullet_id.R:
+					if Input.is_action_just_pressed("shoot"):
+						shoot_timer.start()
+						var bullet_r_path: PackedScene = load("res://Bullet/bullet_r.tscn")
+						var bullet_r: Area2D = bullet_r_path.instantiate()
+						
+						owner.add_child(bullet_r)
+						bullet_r.position = muzzle.global_position
+						bullet_r.rotation = muzzle.global_rotation
+				
+				bullet_id.S:
+					if Input.is_action_just_pressed("shoot"):
+						shoot_timer.start()
+						var bullet_s_path: PackedScene = load("res://Bullet/bullet_s.tscn")
+						var bullet_s1: Area2D = bullet_s_path.instantiate()
+						var bullet_s2: Area2D = bullet_s_path.instantiate()
+						var bullet_s3: Area2D = bullet_s_path.instantiate()
+						var bullet_s4: Area2D = bullet_s_path.instantiate()
+						var bullet_s5: Area2D = bullet_s_path.instantiate()
+						
+						owner.add_child(bullet_s1)
+						bullet_s1.position = muzzle.global_position
+						bullet_s1.rotation = muzzle.global_rotation
+						owner.add_child(bullet_s2)
+						bullet_s2.position = muzzle.global_position
+						bullet_s2.rotation = muzzle.global_rotation
+						owner.add_child(bullet_s3)
+						bullet_s3.position = muzzle.global_position
+						bullet_s3.rotation = muzzle.global_rotation
+						owner.add_child(bullet_s4)
+						bullet_s4.position = muzzle.global_position
+						bullet_s4.rotation = muzzle.global_rotation
+						owner.add_child(bullet_s5)
+						bullet_s5.position = muzzle.global_position
+						bullet_s5.rotation = muzzle.global_rotation
+						
+						# Offsets rotation to fire in spread pattern
+						bullet_s2.rotate(0.26)
+						bullet_s3.rotate(6.02)
+						bullet_s4.rotate(0.52)
+						bullet_s5.rotate(5.76)
+				
+				bullet_id.L:
+					if Input.is_action_just_pressed("shoot"):
+						shoot_timer.start()
+						var bullet_l_path: PackedScene = load("res://Bullet/bullet_l.tscn")
+						var bullet_l: Area2D = bullet_l_path.instantiate()
+						
+						owner.add_child(bullet_l)
+						bullet_l.position = muzzle.global_position
+						bullet_l.rotation = muzzle.global_rotation
+	print(jump_pressed)
 
 
 func _physics_process(delta: float) -> void:
-	#var look_direction: Vector2 = Input.get_vector("left", "right", "up", "down")
 	var run_direction: float = Input.get_axis("left", "right")
 	
-	# Applies gravity if in air, otherwise sets is_jumping to false
-	if not is_on_floor():
-		velocity.y += GRAVITY * delta
-	else:
-		is_jumping = false
+	# Build the movement side of each state using composition principles by having relevant code
+	# concerned only with that state.
+	# Eg: For the JUMP state, we do not need code to begin the jump since we are
+	# already jumping (that code is for states like IDLE and RUN to transition to JUMP).
+	# It only has instructions for applying gravity on player, for horizontal movement
+	# and to keep moving horizontally even when no directional key is pressed (last direction
+	# is used)
+	match current_state:
+		states.IDLE, states.LOOK_UP, states.SHOOT_IDLE, states.SHOOT_LOOK_UP:
+			velocity.x = move_toward(velocity.x, 0, RUN_SPEED)
+			if Input.is_action_just_pressed("jump"):
+				velocity.y = JUMP_SPEED
+		states.RUN, states.SHOOT_RUN:
+			velocity.x = run_direction * RUN_SPEED
+			if Input.is_action_just_pressed("jump"):
+				velocity.y = JUMP_SPEED
+		states.CROUCH, states.SHOOT_CROUCH:
+			velocity.x = run_direction * RUN_SPEED
+			if Input.is_action_just_pressed("jump"):
+				collision_shape_2d.disabled = true
+				fall_through_timer.start()
+		# Documentation in comments just above match statement
+		states.JUMP, states.JUMP_UP, states.JUMP_DOWN, states.SHOOT_JUMP, states.SHOOT_JUMP_UP, \
+				states.SHOOT_JUMP_DOWN, states.FALL, states.FALL_UP, states.FALL_DOWN, states.SHOOT_FALL, states.SHOOT_FALL_UP, states.SHOOT_FALL_DOWN:
+			if run_direction != 0:
+				velocity.x = run_direction * RUN_SPEED
+			velocity.y += GRAVITY * delta
+		states.DEATH:
+			velocity.y += GRAVITY * delta
+			if not is_on_floor():
+				velocity.x = death_direction * RUN_SPEED
+			else:
+				velocity.x = move_toward(velocity.x, 0, RUN_SPEED)
 	
-	# Jump code
-	if Input.is_action_just_pressed("jump") and is_on_floor():
-		is_jumping = true
-		velocity.y = JUMP_SPEED
-	
-	# Idle if no run_direction, else player runs
-	if run_direction == 0:
-		if is_jumping == false:
-			velocity.x = 0
-	else:
-		velocity.x = run_direction * RUN_SPEED
-		
 	# Godot function for player movement
 	# "convenient way to implement sliding movement without writing much code." (Godot 4.4 Docs)
-	#print(-velocity.x)
 	var mas: bool = move_and_slide()
-	print(mas)
-
-# Starts shoot_timer if player shoots, else stops
-func start_or_stop_shoot_timer(look_direction: Vector2, run_direction: float) -> void:
-	if is_on_floor() and look_direction.y == 0 and run_direction != 0:
-		shoot_timer.start()
-	else:
-		shoot_timer.stop()
+	
+	# To prevent 'return value discarded' error
+	if mas:
+		pass
 
 
-# Plays shoot animation in current frame while player is shooting
-func play_shoot_animation(current_frame: int, current_progress: float) -> void:
-	if not shoot_timer.is_stopped():
-		animated_sprite_2d_bill.play("shoot")
-		animated_sprite_2d_bill.set_frame_and_progress(current_frame, current_progress)
+func _on_area_2d_area_entered(area: Area2D) -> void:
+	# Player dies if enters enemy hitbox
+	if area.is_in_group("enemy"):
+		animation_tree.set("parameters/conditions/death", true)
+		animation_tree.set("parameters/Death/blend_position", sprite_direction)
+		velocity.y = DEATH_JUMP_SPEED
+		death_direction = sprite_direction * -1
 
 
-# Adds bullet to scene tree and sets bullet position, rotation and scale
-func spawn_bullet(bullet: Area2D) -> void:
-	owner.add_child(bullet)
-	bullet.position = muzzle.global_position
-	bullet.rotation = muzzle.global_rotation
-	bullet.scale.x = 1
-	bullet.scale.y = 1
+func _on_fall_through_timer_timeout() -> void:
+	collision_shape_2d.disabled = false
