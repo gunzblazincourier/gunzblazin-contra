@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://0hbphmpkfm7w"]
+[gd_scene load_steps=39 format=3 uid="uid://0hbphmpkfm7w"]
 
 [ext_resource type="Script" uid="uid://d4ba7gqx6186n" path="res://Enemies/running_soldier.gd" id="1_1cjt1"]
 [ext_resource type="Texture2D" uid="uid://3v2dhudn0fee" path="res://Enemies/RunningSoldier_Death.png" id="2_8tqai"]
@@ -402,18 +402,30 @@ blend_mode = 1
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_vqtei"]
 advance_mode = 2
 
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_gyor0"]
+advance_mode = 2
+advance_condition = &"death"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_4hcvb"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ep4ga"]
+switch_mode = 2
+advance_mode = 2
+
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_gyor0"]
 states/Death/node = SubResource("AnimationNodeBlendSpace1D_ep4ga")
-states/Death/position = Vector2(531, 265)
-states/End/position = Vector2(1019, -6)
+states/Death/position = Vector2(378, 304)
+states/End/position = Vector2(912, 304)
 states/Explode/node = SubResource("AnimationNodeBlendSpace1D_r5opi")
-states/Explode/position = Vector2(594, 424)
+states/Explode/position = Vector2(711, 304)
 states/Jump/node = SubResource("AnimationNodeBlendSpace1D_8xab2")
-states/Jump/position = Vector2(354, 319)
+states/Jump/position = Vector2(711, 100)
 states/Run/node = SubResource("AnimationNodeBlendSpace1D_7eyqg")
 states/Run/position = Vector2(378, 100)
 states/Start/position = Vector2(198, 100)
-transitions = ["Start", "Run", SubResource("AnimationNodeStateMachineTransition_vqtei")]
+transitions = ["Start", "Run", SubResource("AnimationNodeStateMachineTransition_vqtei"), "Run", "Death", SubResource("AnimationNodeStateMachineTransition_gyor0"), "Death", "Explode", SubResource("AnimationNodeStateMachineTransition_4hcvb"), "Explode", "End", SubResource("AnimationNodeStateMachineTransition_ep4ga")]
 graph_offset = Vector2(7, -158)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ep4ga"]
@@ -433,6 +445,7 @@ libraries = {
 active = false
 tree_root = SubResource("AnimationNodeStateMachine_gyor0")
 anim_player = NodePath("../AnimationPlayer")
+parameters/conditions/death = false
 parameters/Death/blend_position = 0
 parameters/Explode/blend_position = 0
 parameters/Jump/blend_position = 0
