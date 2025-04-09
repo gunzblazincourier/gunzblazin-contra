@@ -12,9 +12,10 @@ const SPEED: int = 70
 const GRAVITY: int = 7
 
 # Enum for left and right direction, and exported variable to set direction from GUI
-enum directions {LEFT, RIGHT}
-@export var run_direction: directions
-var is_dead: bool = false
+enum directions {LEFT = -1, RIGHT = 1}
+@export var run_direction: directions = directions.RIGHT
+var death: bool
+var explode: bool
 
 # NOTE: Further code will be added for the actual jump along with the "death jump"
 var jump_speed: int = -123
@@ -24,13 +25,13 @@ var jump_speed: int = -123
 func _ready() -> void:
 	animation_tree.active = true
 	current_state = states.RUN
-	run_direction = directions.RIGHT
+	death = false
+	explode = false
 
 # Plays appropriate animation for jumping and death (running is on autoplay)
-#func _process(_delta: float) -> void:
-	
-	var death: bool = false
+func _process(_delta: float) -> void:
 	animation_tree.set("parameters/conditions/death", death)
+	animation_tree.set("parameters/conditions/explode", explode)
 	animation_tree.set("parameters/Run/blend_position", run_direction)
 	animation_tree.set("parameters/Death/blend_position", run_direction)
 	animation_tree.set("parameters/Explode/blend_position", 0.0)
@@ -50,6 +51,7 @@ func _ready() -> void:
 			current_state = states.DEATH
 		"Explode":
 			current_state = states.EXPLODE
+	print(state_machine_state)
 	
 	#if Input.is_action_just_pressed("1"):
 		#run_direction = 1
@@ -69,16 +71,29 @@ func _ready() -> void:
 
 # Runs by default. Upon death, jumps in opposite direction until explosion
 func _physics_process(delta: float) -> void:
-	if jump_speed < 0:
-		if is_dead:
+	if jump_speed > 0:
+		explode = true
+		death = false
+	
+	match current_state:
+		states.RUN:
+			position.x += run_direction * SPEED * delta
+		states.DEATH:
 			position.x -= run_direction * SPEED * delta
 			position.y += jump_speed * delta
 			jump_speed += GRAVITY
-		else:
-			position.x += run_direction * SPEED * delta
+	
+	
+	#if jump_speed < 0:
+		#if is_dead:
+			#position.x -= run_direction * SPEED * delta
+			#position.y += jump_speed * delta
+			#jump_speed += GRAVITY
+		#else:
+			#position.x += run_direction * SPEED * delta
 
 
 # If hit by bullet, jumps backward amd explodes
 func _on_area_entered(area: Area2D) -> void:
 	if area.is_in_group("bullet"):
-		is_dead = true
+		death = true

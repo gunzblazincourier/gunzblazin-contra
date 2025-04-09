@@ -258,6 +258,20 @@ tracks/2/keys = {
 "update": 1,
 "values": [false]
 }
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.3),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"queue_free"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_7mc3l"]
 resource_name = "jump_right"
@@ -407,8 +421,8 @@ advance_mode = 2
 advance_condition = &"death"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_4hcvb"]
-switch_mode = 2
 advance_mode = 2
+advance_condition = &"explode"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ep4ga"]
 switch_mode = 2
@@ -426,7 +440,7 @@ states/Run/node = SubResource("AnimationNodeBlendSpace1D_7eyqg")
 states/Run/position = Vector2(378, 100)
 states/Start/position = Vector2(198, 100)
 transitions = ["Start", "Run", SubResource("AnimationNodeStateMachineTransition_vqtei"), "Run", "Death", SubResource("AnimationNodeStateMachineTransition_gyor0"), "Death", "Explode", SubResource("AnimationNodeStateMachineTransition_4hcvb"), "Explode", "End", SubResource("AnimationNodeStateMachineTransition_ep4ga")]
-graph_offset = Vector2(7, -158)
+graph_offset = Vector2(117, 191)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ep4ga"]
 size = Vector2(17, 31.5)
@@ -446,6 +460,7 @@ active = false
 tree_root = SubResource("AnimationNodeStateMachine_gyor0")
 anim_player = NodePath("../AnimationPlayer")
 parameters/conditions/death = false
+parameters/conditions/explode = false
 parameters/Death/blend_position = 0
 parameters/Explode/blend_position = 0
 parameters/Jump/blend_position = 0
