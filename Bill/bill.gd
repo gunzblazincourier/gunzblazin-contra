@@ -232,7 +232,7 @@ func _process(_delta: float) -> void:
 						owner.add_child(bullet_l)
 						bullet_l.position = muzzle.global_position
 						bullet_l.rotation = muzzle.global_rotation
-	print(jump_pressed)
+	#print(jump_pressed)
 
 
 func _physics_process(delta: float) -> void:
