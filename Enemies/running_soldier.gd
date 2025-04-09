@@ -51,7 +51,7 @@ func _process(_delta: float) -> void:
 			current_state = states.DEATH
 		"Explode":
 			current_state = states.EXPLODE
-	print(state_machine_state)
+	#print(state_machine_state)
 	
 	#if Input.is_action_just_pressed("1"):
 		#run_direction = 1

@@ -232,7 +232,7 @@ func _process(_delta: float) -> void:
 						owner.add_child(bullet_l)
 						bullet_l.position = muzzle.global_position
 						bullet_l.rotation = muzzle.global_rotation
-	#print(jump_pressed)
+	print(state_machine_state)
 
 
 func _physics_process(delta: float) -> void:
@@ -284,6 +284,7 @@ func _physics_process(delta: float) -> void:
 func _on_area_2d_area_entered(area: Area2D) -> void:
 	# Player dies if enters enemy hitbox
 	if area.is_in_group("enemy"):
+		print("dead")
 		animation_tree.set("parameters/conditions/death", true)
 		animation_tree.set("parameters/Death/blend_position", sprite_direction)
 		velocity.y = DEATH_JUMP_SPEED
