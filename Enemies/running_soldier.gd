@@ -29,7 +29,27 @@ func _ready() -> void:
 # Plays appropriate animation for jumping and death (running is on autoplay)
 #func _process(_delta: float) -> void:
 	
+	var death: bool = false
+	animation_tree.set("parameters/conditions/death", death)
+	animation_tree.set("parameters/Run/blend_position", run_direction)
+	animation_tree.set("parameters/Death/blend_position", run_direction)
+	animation_tree.set("parameters/Explode/blend_position", 0.0)
 	
+	# Basically gets AnimationNodeStateMachine from AnimationTree
+	var state_machine: AnimationNodeStateMachinePlayback = animation_tree.get("parameters/playback")
+	
+	# Current state in AnimationNodeStateMachine
+	var state_machine_state: StringName = state_machine.get_current_node()
+	
+	match state_machine_state:
+		"Run":
+			current_state = states.RUN
+		"Jump":
+			current_state = states.JUMP
+		"Death":
+			current_state = states.DEATH
+		"Explode":
+			current_state = states.EXPLODE
 	
 	#if Input.is_action_just_pressed("1"):
 		#run_direction = 1
