@@ -423,7 +423,6 @@ size = Vector2(17, 31.5)
 collision_layer = 4
 collision_mask = 3
 script = ExtResource("1_1cjt1")
-run_direction = 0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -431,6 +430,7 @@ libraries = {
 }
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
+active = false
 tree_root = SubResource("AnimationNodeStateMachine_gyor0")
 anim_player = NodePath("../AnimationPlayer")
 parameters/Death/blend_position = 0

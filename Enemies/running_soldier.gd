@@ -3,15 +3,17 @@
 
 extends Area2D
 
-@onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
-@onready var collision_shape_2d: CollisionShape2D = $CollisionShape2D
+@onready var animation_tree: AnimationTree = $AnimationTree
+
+enum states {RUN, JUMP, DEATH, EXPLODE}
+var current_state: states
 
 const SPEED: int = 70
 const GRAVITY: int = 7
 
 # Enum for left and right direction, and exported variable to set direction from GUI
-enum directions {LEFT = -1, RIGHT = 1}
-@export var run_direction: directions = directions.RIGHT
+enum directions {LEFT, RIGHT}
+@export var run_direction: directions
 var is_dead: bool = false
 
 # NOTE: Further code will be added for the actual jump along with the "death jump"
@@ -20,28 +22,29 @@ var jump_speed: int = -123
 
 # Decides to flip running soldier sprite based on direction
 func _ready() -> void:
-	if run_direction == 1:
-		animated_sprite_2d.flip_h = false
-	else:
-		animated_sprite_2d.flip_h = true
-
+	animation_tree.active = true
+	current_state = states.RUN
+	run_direction = directions.RIGHT
 
 # Plays appropriate animation for jumping and death (running is on autoplay)
-func _process(_delta: float) -> void:
+#func _process(_delta: float) -> void:
+	
+	
+	
 	#if Input.is_action_just_pressed("1"):
 		#run_direction = 1
 	#elif Input.is_action_just_pressed("2"):
 		#run_direction = -1
 	
 	# Disables collision when enemy is hit as to avoid bullets hitting a dead enemy
-	if is_dead == true:
-		collision_shape_2d.disabled = true
+	#if is_dead == true:
+		#collision_shape_2d.disabled = true
 		
 		# Plays the "death jump" animation until reaches peak height, after which it explodes
-		if jump_speed < 0:
-			animated_sprite_2d.play("death")
-		else:
-			animated_sprite_2d.play("explode")
+		#if jump_speed < 0:
+			#animated_sprite_2d.play("death")
+		#else:
+			#animated_sprite_2d.play("explode")
 
 
 # Runs by default. Upon death, jumps in opposite direction until explosion
