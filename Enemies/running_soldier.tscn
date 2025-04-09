@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://0hbphmpkfm7w"]
+[gd_scene load_steps=36 format=3 uid="uid://0hbphmpkfm7w"]
 
 [ext_resource type="Script" uid="uid://d4ba7gqx6186n" path="res://Enemies/running_soldier.gd" id="1_1cjt1"]
 [ext_resource type="Texture2D" uid="uid://3v2dhudn0fee" path="res://Enemies/RunningSoldier_Death.png" id="2_8tqai"]
@@ -353,6 +353,69 @@ _data = {
 &"run_right": SubResource("Animation_ep4ga")
 }
 
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_gyor0"]
+animation = &"death_left"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_4hcvb"]
+animation = &"death_right"
+
+[sub_resource type="AnimationNodeBlendSpace1D" id="AnimationNodeBlendSpace1D_ep4ga"]
+blend_point_0/node = SubResource("AnimationNodeAnimation_gyor0")
+blend_point_0/pos = -1.0
+blend_point_1/node = SubResource("AnimationNodeAnimation_4hcvb")
+blend_point_1/pos = 1.0
+blend_mode = 1
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ihsuw"]
+animation = &"explode"
+
+[sub_resource type="AnimationNodeBlendSpace1D" id="AnimationNodeBlendSpace1D_r5opi"]
+blend_point_0/node = SubResource("AnimationNodeAnimation_ihsuw")
+blend_point_0/pos = 0.0
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_4tgqw"]
+animation = &"jump_left"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_7mc3l"]
+animation = &"jump_right"
+
+[sub_resource type="AnimationNodeBlendSpace1D" id="AnimationNodeBlendSpace1D_8xab2"]
+blend_point_0/node = SubResource("AnimationNodeAnimation_4tgqw")
+blend_point_0/pos = -1.0
+blend_point_1/node = SubResource("AnimationNodeAnimation_7mc3l")
+blend_point_1/pos = 1.0
+blend_mode = 1
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_icxqe"]
+animation = &"run_left"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_pf4dx"]
+animation = &"run_right"
+
+[sub_resource type="AnimationNodeBlendSpace1D" id="AnimationNodeBlendSpace1D_7eyqg"]
+blend_point_0/node = SubResource("AnimationNodeAnimation_icxqe")
+blend_point_0/pos = -1.0
+blend_point_1/node = SubResource("AnimationNodeAnimation_pf4dx")
+blend_point_1/pos = 1.0
+blend_mode = 1
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_vqtei"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_gyor0"]
+states/Death/node = SubResource("AnimationNodeBlendSpace1D_ep4ga")
+states/Death/position = Vector2(531, 265)
+states/End/position = Vector2(1019, -6)
+states/Explode/node = SubResource("AnimationNodeBlendSpace1D_r5opi")
+states/Explode/position = Vector2(594, 424)
+states/Jump/node = SubResource("AnimationNodeBlendSpace1D_8xab2")
+states/Jump/position = Vector2(354, 319)
+states/Run/node = SubResource("AnimationNodeBlendSpace1D_7eyqg")
+states/Run/position = Vector2(378, 100)
+states/Start/position = Vector2(198, 100)
+transitions = ["Start", "Run", SubResource("AnimationNodeStateMachineTransition_vqtei")]
+graph_offset = Vector2(7, -158)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ep4ga"]
 size = Vector2(17, 31.5)
 
@@ -366,6 +429,14 @@ run_direction = 0
 libraries = {
 &"": SubResource("AnimationLibrary_ep4ga")
 }
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource("AnimationNodeStateMachine_gyor0")
+anim_player = NodePath("../AnimationPlayer")
+parameters/Death/blend_position = 0
+parameters/Explode/blend_position = 0
+parameters/Jump/blend_position = 0
+parameters/Run/blend_position = 0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("4_6lvey")
