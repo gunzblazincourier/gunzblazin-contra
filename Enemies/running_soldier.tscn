@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=3 uid="uid://0hbphmpkfm7w"]
+[gd_scene load_steps=42 format=3 uid="uid://0hbphmpkfm7w"]
 
 [ext_resource type="Script" uid="uid://d4ba7gqx6186n" path="res://Enemies/running_soldier.gd" id="1_1cjt1"]
 [ext_resource type="Texture2D" uid="uid://3v2dhudn0fee" path="res://Enemies/RunningSoldier_Death.png" id="2_8tqai"]
@@ -572,6 +572,18 @@ advance_condition = &"explode"
 switch_mode = 2
 advance_mode = 2
 
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ihsuw"]
+advance_mode = 2
+advance_condition = &"death"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_r5opi"]
+advance_mode = 2
+advance_expression = "ray_cast_2d.is_colliding() == false"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_4tgqw"]
+advance_mode = 2
+advance_expression = "ray_cast_2d.is_colliding() == true"
+
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_gyor0"]
 states/Death/node = SubResource("AnimationNodeBlendSpace1D_ep4ga")
 states/Death/position = Vector2(378, 304)
@@ -583,8 +595,8 @@ states/Jump/position = Vector2(711, 100)
 states/Run/node = SubResource("AnimationNodeBlendSpace1D_7eyqg")
 states/Run/position = Vector2(378, 100)
 states/Start/position = Vector2(198, 100)
-transitions = ["Start", "Run", SubResource("AnimationNodeStateMachineTransition_vqtei"), "Run", "Death", SubResource("AnimationNodeStateMachineTransition_gyor0"), "Death", "Explode", SubResource("AnimationNodeStateMachineTransition_4hcvb"), "Explode", "End", SubResource("AnimationNodeStateMachineTransition_ep4ga")]
-graph_offset = Vector2(83, 45)
+transitions = ["Start", "Run", SubResource("AnimationNodeStateMachineTransition_vqtei"), "Run", "Death", SubResource("AnimationNodeStateMachineTransition_gyor0"), "Death", "Explode", SubResource("AnimationNodeStateMachineTransition_4hcvb"), "Explode", "End", SubResource("AnimationNodeStateMachineTransition_ep4ga"), "Jump", "Death", SubResource("AnimationNodeStateMachineTransition_ihsuw"), "Run", "Jump", SubResource("AnimationNodeStateMachineTransition_r5opi"), "Jump", "Run", SubResource("AnimationNodeStateMachineTransition_4tgqw")]
+graph_offset = Vector2(175, 47)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ep4ga"]
 size = Vector2(17, 31.5)

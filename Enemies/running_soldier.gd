@@ -4,6 +4,7 @@
 extends Area2D
 
 @onready var animation_tree: AnimationTree = $AnimationTree
+@onready var ray_cast_2d: RayCast2D = $RayCast2D
 
 enum states {RUN, JUMP, DEATH, EXPLODE}
 var current_state: states
@@ -33,6 +34,7 @@ func _process(_delta: float) -> void:
 	animation_tree.set("parameters/conditions/death", death)
 	animation_tree.set("parameters/conditions/explode", explode)
 	animation_tree.set("parameters/Run/blend_position", run_direction)
+	animation_tree.set("parameters/Jump/blend_position", run_direction)
 	animation_tree.set("parameters/Death/blend_position", run_direction)
 	animation_tree.set("parameters/Explode/blend_position", 0.0)
 	
