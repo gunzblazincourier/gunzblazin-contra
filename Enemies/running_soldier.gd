@@ -71,6 +71,7 @@ func _process(_delta: float) -> void:
 
 # Runs by default. Upon death, jumps in opposite direction until explosion
 func _physics_process(delta: float) -> void:
+	#print(randi() % 3)
 	if jump_speed > 0:
 		explode = true
 		death = false
