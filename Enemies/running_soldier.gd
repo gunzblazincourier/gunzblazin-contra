@@ -81,6 +81,14 @@ func _physics_process(delta: float) -> void:
 	match current_state:
 		states.RUN:
 			position.x += run_direction * SPEED * delta
+		states.JUMP:
+			position.x += run_direction * SPEED * delta
+			var jump_value: int = randi() % 3
+			if jump_value == 1:
+				jump_speed = -123
+			elif jump_value == 2:
+				jump_speed = -200
+			jump_speed += GRAVITY
 		states.DEATH:
 			position.x -= run_direction * SPEED * delta
 			position.y += jump_speed * delta
