@@ -8,9 +8,10 @@ extends CharacterBody2D
 @onready var collision_shape_2d: CollisionShape2D = $CollisionShape2D
 @onready var fall_through_timer: Timer = $FallThroughTimer
 
-enum states {IDLE, LOOK_UP, CROUCH, RUN, JUMP, JUMP_UP, JUMP_DOWN, FALL, FALL_UP, FALL_DOWN, SHOOT_IDLE, \
-		SHOOT_LOOK_UP, SHOOT_CROUCH, SHOOT_RUN, SHOOT_JUMP, SHOOT_JUMP_UP, \
-		SHOOT_JUMP_DOWN, SHOOT_FALL, SHOOT_FALL_UP, SHOOT_FALL_DOWN, DEATH}
+enum states {IDLE, LOOK_UP, CROUCH, RUN, JUMP, JUMP_UP, JUMP_DOWN, FALL, \
+		FALL_UP, FALL_DOWN, SHOOT_IDLE, SHOOT_LOOK_UP, SHOOT_CROUCH, SHOOT_RUN, \
+		SHOOT_JUMP, SHOOT_JUMP_UP, SHOOT_JUMP_DOWN, SHOOT_FALL, SHOOT_FALL_UP, \
+		SHOOT_FALL_DOWN, DEATH}
 var current_state: states
 
 enum bullet_id {R, M, S, F, L}
@@ -260,8 +261,10 @@ func _physics_process(delta: float) -> void:
 				collision_shape_2d.disabled = true
 				fall_through_timer.start()
 		# Documentation in comments just above match statement
-		states.JUMP, states.JUMP_UP, states.JUMP_DOWN, states.SHOOT_JUMP, states.SHOOT_JUMP_UP, \
-				states.SHOOT_JUMP_DOWN, states.FALL, states.FALL_UP, states.FALL_DOWN, states.SHOOT_FALL, states.SHOOT_FALL_UP, states.SHOOT_FALL_DOWN:
+		states.JUMP, states.JUMP_UP, states.JUMP_DOWN, states.SHOOT_JUMP, \
+				states.SHOOT_JUMP_UP, states.SHOOT_JUMP_DOWN, states.FALL, \
+				states.FALL_UP, states.FALL_DOWN, states.SHOOT_FALL, \
+				states.SHOOT_FALL_UP, states.SHOOT_FALL_DOWN:
 			if run_direction != 0:
 				velocity.x = run_direction * RUN_SPEED
 			velocity.y += GRAVITY * delta
