@@ -578,11 +578,11 @@ advance_condition = &"death"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_r5opi"]
 advance_mode = 2
-advance_expression = "ray_cast_2d.is_colliding() == false"
+advance_condition = &"jump"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_4tgqw"]
 advance_mode = 2
-advance_expression = "ray_cast_2d.is_colliding() == true"
+advance_condition = &"run"
 
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_gyor0"]
 states/Death/node = SubResource("AnimationNodeBlendSpace1D_ep4ga")
@@ -617,6 +617,8 @@ tree_root = SubResource("AnimationNodeStateMachine_gyor0")
 anim_player = NodePath("../AnimationPlayer")
 parameters/conditions/death = false
 parameters/conditions/explode = false
+parameters/conditions/jump = false
+parameters/conditions/run = false
 parameters/Death/blend_position = 0
 parameters/Explode/blend_position = 0
 parameters/Jump/blend_position = 0
@@ -632,7 +634,7 @@ shape = SubResource("RectangleShape2D_ep4ga")
 [node name="RayCast2D" type="RayCast2D" parent="."]
 position = Vector2(9, 0)
 enabled = false
-target_position = Vector2(0, 22)
+target_position = Vector2(0, 16)
 collision_mask = 8
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]

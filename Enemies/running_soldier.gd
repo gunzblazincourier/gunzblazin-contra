@@ -18,8 +18,7 @@ enum directions {LEFT = -1, RIGHT = 1}
 var death: bool
 var explode: bool
 
-# NOTE: Further code will be added for the actual jump along with the "death jump"
-var jump_speed: int = -123
+var jump_speed: int
 
 
 # Decides to flip running soldier sprite based on direction
@@ -28,9 +27,15 @@ func _ready() -> void:
 	current_state = states.RUN
 	death = false
 	explode = false
+	jump_speed = -123
 
 # Plays appropriate animation for jumping and death (running is on autoplay)
 func _process(_delta: float) -> void:
+	var run: bool = ray_cast_2d.is_colliding()
+	var jump: bool = !ray_cast_2d.is_colliding()
+	
+	animation_tree.set("parameters/conditions/run", run)
+	animation_tree.set("parameters/conditions/jump", jump)
 	animation_tree.set("parameters/conditions/death", death)
 	animation_tree.set("parameters/conditions/explode", explode)
 	animation_tree.set("parameters/Run/blend_position", run_direction)
@@ -73,7 +78,6 @@ func _process(_delta: float) -> void:
 
 # Runs by default. Upon death, jumps in opposite direction until explosion
 func _physics_process(delta: float) -> void:
-	#print(randi() % 3)
 	if jump_speed > 0:
 		explode = true
 		death = false
@@ -83,16 +87,14 @@ func _physics_process(delta: float) -> void:
 			position.x += run_direction * SPEED * delta
 		states.JUMP:
 			position.x += run_direction * SPEED * delta
-			var jump_value: int = randi() % 3
-			if jump_value == 1:
-				jump_speed = -123
-			elif jump_value == 2:
-				jump_speed = -200
+			position.y += jump_speed * delta
 			jump_speed += GRAVITY
+			#print(jump_speed)
 		states.DEATH:
 			position.x -= run_direction * SPEED * delta
 			position.y += jump_speed * delta
 			jump_speed += GRAVITY
+			#print(jump_speed)
 	
 	
 	#if jump_speed < 0:
