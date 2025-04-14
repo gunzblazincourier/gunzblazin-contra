@@ -270,3 +270,8 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 
 func _on_fall_through_timer_timeout() -> void:
 	collision_shape_2d.disabled = false
+
+func spawn_bullet(bullet: Area2D) -> void:
+	owner.add_child(bullet)
+	bullet.position = muzzle.global_position
+	bullet.rotation = muzzle.global_rotation

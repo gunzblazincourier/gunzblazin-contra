@@ -65,7 +65,6 @@ func _physics_process(delta: float) -> void:
 			position.x += run_direction * SPEED * delta
 			position.y += jump_speed * delta
 			jump_speed += GRAVITY
-			#print(jump_speed)
 		states.DEATH:
 			position.x -= run_direction * SPEED * delta
 			position.y += jump_speed * delta
