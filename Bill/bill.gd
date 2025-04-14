@@ -2,31 +2,28 @@
 
 extends CharacterBody2D
 
-@onready var animation_tree: AnimationTree = $AnimationTree
-@onready var shoot_timer: Timer = $ShootTimer
-@onready var muzzle: Marker2D = $Muzzle
-@onready var collision_shape_2d: CollisionShape2D = $CollisionShape2D
-@onready var fall_through_timer: Timer = $FallThroughTimer
-
 enum states {IDLE, LOOK_UP, CROUCH, RUN, JUMP, JUMP_UP, JUMP_DOWN, FALL, \
 		FALL_UP, FALL_DOWN, SHOOT_IDLE, SHOOT_LOOK_UP, SHOOT_CROUCH, SHOOT_RUN, \
 		SHOOT_JUMP, SHOOT_JUMP_UP, SHOOT_JUMP_DOWN, SHOOT_FALL, SHOOT_FALL_UP, \
 		SHOOT_FALL_DOWN, DEATH}
-var current_state: states
-
 enum bullet_id {R, M, S, F, L}
-var current_bullet_id: bullet_id
-
-var sprite_direction: float
-
-var death_direction: float
-
-var jump_pressed: bool
 
 const RUN_SPEED: int = 69
 const JUMP_SPEED: int = -250
 const DEATH_JUMP_SPEED: int = -175
 const GRAVITY: int = 555
+
+var current_state: states
+var current_bullet_id: bullet_id
+var sprite_direction: float
+var death_direction: float
+var jump_pressed: bool
+
+@onready var animation_tree: AnimationTree = $AnimationTree
+@onready var shoot_timer: Timer = $ShootTimer
+@onready var muzzle: Marker2D = $Muzzle
+@onready var collision_shape_2d: CollisionShape2D = $CollisionShape2D
+@onready var fall_through_timer: Timer = $FallThroughTimer
 
 
 func _ready() -> void:

@@ -2,11 +2,10 @@
 
 extends Area2D
 
+const BULLET_SPEED: int = 400
 @onready var sprite_visible_timer: Timer = $SpriteVisibleTimer
 @onready var sprite_2d_2: Sprite2D = $Sprite2D2
 @onready var collision_shape_2d_2: CollisionShape2D = $CollisionShape2D2
-
-const BULLET_SPEED: int = 400
 
 
 # Timer starts when laser is fired
