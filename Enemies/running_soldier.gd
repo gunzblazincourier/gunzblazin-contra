@@ -51,13 +51,10 @@ func _process(_delta: float) -> void:
 			current_state = states.DEATH
 		"Explode":
 			current_state = states.EXPLODE
+	print(state_machine_state)
 
 
-func _physics_process(delta: float) -> void:
-	if jump_speed > 0:
-		explode = true
-		death = false
-	
+func _physics_process(delta: float) -> void:	
 	match current_state:
 		states.RUN:
 			position.x += run_direction * SPEED * delta
@@ -69,6 +66,9 @@ func _physics_process(delta: float) -> void:
 			position.x -= run_direction * SPEED * delta
 			position.y += jump_speed * delta
 			jump_speed += GRAVITY
+			if jump_speed > 0:
+				explode = true
+				death = false
 
 
 func _on_area_entered(area: Area2D) -> void:
