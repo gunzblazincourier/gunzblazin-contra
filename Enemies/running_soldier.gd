@@ -8,6 +8,8 @@ const GRAVITY: int = 7
 
 @export var run_direction: directions = directions.RIGHT
 var current_state: states
+var jump: bool
+var run_or_jump: int
 var death: bool
 var explode: bool
 var jump_speed: int
@@ -20,14 +22,28 @@ var jump_type_selected: bool
 func _ready() -> void:
 	animation_tree.active = true
 	current_state = states.RUN
+	jump = false
+	run_or_jump = 0
 	death = false
 	explode = false
 	jump_speed = -123
 	jump_type_selected = false
 
 func _process(_delta: float) -> void:
+	if ray_cast_2d.is_colliding():
+		jump = false
+	else:
+		if jump == false:
+			if randi() % 2:
+				jump = true
+			else:
+				if run_direction == directions.LEFT:
+					run_direction = directions.RIGHT
+				else:
+					run_direction = directions.LEFT
+	
 	var run: bool = ray_cast_2d.is_colliding()
-	var jump: bool = !ray_cast_2d.is_colliding()
+	#var jump: bool = !ray_cast_2d.is_colliding()
 	
 	animation_tree.set("parameters/conditions/run", run)
 	animation_tree.set("parameters/conditions/jump", jump)
