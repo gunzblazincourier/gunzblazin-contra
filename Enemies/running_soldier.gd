@@ -11,6 +11,7 @@ var current_state: states
 var death: bool
 var explode: bool
 var jump_speed: int
+var jump_type_selected: bool
 
 @onready var animation_tree: AnimationTree = $AnimationTree
 @onready var ray_cast_2d: RayCast2D = $RayCast2D
@@ -22,6 +23,7 @@ func _ready() -> void:
 	death = false
 	explode = false
 	jump_speed = -123
+	jump_type_selected = false
 
 func _process(_delta: float) -> void:
 	var run: bool = ray_cast_2d.is_colliding()
@@ -51,14 +53,24 @@ func _process(_delta: float) -> void:
 			current_state = states.DEATH
 		"Explode":
 			current_state = states.EXPLODE
-	print(state_machine_state)
+	#print(state_machine_state)
 
 
-func _physics_process(delta: float) -> void:	
+func _physics_process(delta: float) -> void:
 	match current_state:
 		states.RUN:
+			jump_speed = -123
+			jump_type_selected = false
 			position.x += run_direction * SPEED * delta
 		states.JUMP:
+			if jump_type_selected == false:
+				var jump_type: int = randi() % 3
+				print(jump_type)
+				if jump_type == 0:
+					jump_speed = 0
+				elif jump_type == 2:
+					jump_speed = -200
+				jump_type_selected = true
 			position.x += run_direction * SPEED * delta
 			position.y += jump_speed * delta
 			jump_speed += GRAVITY
