@@ -1,7 +1,61 @@
-[gd_scene format=3 uid="uid://bgedjmw5o3wam"]
+[gd_scene load_steps=9 format=3 uid="uid://bgedjmw5o3wam"]
+
+[ext_resource type="Texture2D" uid="uid://c3cowvvhl10xq" path="res://Enemies/TurretSoldier_Death.png" id="1_ctkrr"]
+[ext_resource type="Texture2D" uid="uid://b5jjyjh3xx5bi" path="res://Enemies/TurretSoldier_ShootDown_0.png" id="2_pj8v8"]
+[ext_resource type="Texture2D" uid="uid://bnivlm4tbaq4x" path="res://Enemies/TurretSoldier_ShootDown_1.png" id="3_3ai5x"]
+[ext_resource type="Texture2D" uid="uid://clreqd0vgeo4l" path="res://Enemies/TurretSoldier_ShootStraight_0.png" id="4_otblu"]
+[ext_resource type="Texture2D" uid="uid://blp5ekkva2v7" path="res://Enemies/TurretSoldier_ShootStraight_1.png" id="5_b75ll"]
+[ext_resource type="Texture2D" uid="uid://d0275rqa5ltu2" path="res://Enemies/TurretSoldier_ShootUp_0.png" id="6_ji6ej"]
+[ext_resource type="Texture2D" uid="uid://bukhq0sdvauwv" path="res://Enemies/TurretSoldier_ShootUp_1.png" id="7_kn7qq"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_c06od"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_ctkrr")
+}],
+"loop": true,
+"name": &"death",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_pj8v8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_3ai5x")
+}],
+"loop": true,
+"name": &"shoot_down",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_otblu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_b75ll")
+}],
+"loop": true,
+"name": &"shoot_straight",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_ji6ej")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_kn7qq")
+}],
+"loop": true,
+"name": &"shoot_up",
+"speed": 5.0
+}]
 
 [node name="TurretSoldier" type="Area2D"]
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_c06od")
+animation = &"death"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
