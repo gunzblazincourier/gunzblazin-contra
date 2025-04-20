@@ -14,7 +14,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("1_ctkrr")
 }],
-"loop": true,
+"loop": false,
 "name": &"death",
 "speed": 5.0
 }, {
@@ -56,6 +56,6 @@ animations = [{
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_c06od")
-animation = &"death"
+animation = &"shoot_up"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
