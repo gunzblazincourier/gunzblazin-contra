@@ -2,6 +2,8 @@
 
 extends CharacterBody2D
 
+signal send_player_global_position(player_global_position: Vector2)
+
 enum states {IDLE, LOOK_UP, CROUCH, RUN, JUMP, JUMP_UP, JUMP_DOWN, FALL, \
 		FALL_UP, FALL_DOWN, SHOOT_IDLE, SHOOT_LOOK_UP, SHOOT_CROUCH, SHOOT_RUN, \
 		SHOOT_JUMP, SHOOT_JUMP_UP, SHOOT_JUMP_DOWN, SHOOT_FALL, SHOOT_FALL_UP, \
@@ -40,6 +42,7 @@ func _ready() -> void:
 
 
 func _process(_delta: float) -> void:
+	send_player_global_position.emit(global_position)
 	var look_direction: Vector2 = Input.get_vector("left", "right", "up", "down")
 	var run_direction: float = Input.get_axis("left", "right")
 	

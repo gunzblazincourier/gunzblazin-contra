@@ -1,7 +1,5 @@
 extends Area2D
 
-signal send_player_global_position(player_global_position: Vector2)
-
 enum states {RUN, JUMP, DEATH, EXPLODE}
 enum directions {LEFT = -1, RIGHT = 1}
 
@@ -32,8 +30,6 @@ func _ready() -> void:
 	jump_type_selected = false
 
 func _process(_delta: float) -> void:
-	send_player_global_position.emit(global_position)
-	
 	if ray_cast_2d.is_colliding():
 		jump = false
 	else:
