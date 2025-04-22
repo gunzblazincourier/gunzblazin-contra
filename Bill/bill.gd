@@ -43,6 +43,7 @@ func _ready() -> void:
 
 func _process(_delta: float) -> void:
 	send_player_global_position.emit(global_position)
+	
 	var look_direction: Vector2 = Input.get_vector("left", "right", "up", "down")
 	var run_direction: float = Input.get_axis("left", "right")
 	
@@ -264,7 +265,7 @@ func _physics_process(delta: float) -> void:
 
 func _on_area_2d_area_entered(area: Area2D) -> void:
 	if area.is_in_group("enemy"):
-		print("dead")
+		#print("dead")
 		animation_tree.set("parameters/conditions/death", true)
 		animation_tree.set("parameters/Death/blend_position", sprite_direction)
 		velocity.y = DEATH_JUMP_SPEED

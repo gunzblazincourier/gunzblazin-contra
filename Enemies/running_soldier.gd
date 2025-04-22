@@ -81,7 +81,7 @@ func _physics_process(delta: float) -> void:
 		states.JUMP:
 			if jump_type_selected == false:
 				var jump_type: int = randi() % 3
-				print(jump_type)
+				#print(jump_type)
 				if jump_type == 0:
 					jump_speed = 0
 				elif jump_type == 2:
