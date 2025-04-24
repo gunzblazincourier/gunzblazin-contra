@@ -22,14 +22,26 @@ func _on_timer_timeout() -> void:
 	var angle_with_mouse: float = global_position.angle_to_point(Global.player_global_position)
 	print(angle_with_mouse)
 	
-	if angle_with_mouse < -0.79 and angle_with_mouse > -2.36:
+	#if angle_with_mouse < -0.79 and angle_with_mouse > -2.36:
+		#animated_sprite_2d.play("shoot_up")
+	#elif angle_with_mouse > 0.79 and angle_with_mouse < 2.36:
+		#animated_sprite_2d.play("shoot_down")
+	#else:
+		#animated_sprite_2d.play("shoot_straight")
+	#
+	#if angle_with_mouse > -1.57 and angle_with_mouse < 1.57:
+		#animated_sprite_2d.flip_h = false
+	#else:
+		#animated_sprite_2d.flip_h = true
+	
+	if angle_with_mouse < -PI/4 and angle_with_mouse > -3*PI/4:
 		animated_sprite_2d.play("shoot_up")
-	elif angle_with_mouse > 0.79 and angle_with_mouse < 2.36:
+	elif angle_with_mouse > PI/4 and angle_with_mouse < 3*PI*4:
 		animated_sprite_2d.play("shoot_down")
 	else:
 		animated_sprite_2d.play("shoot_straight")
 	
-	if angle_with_mouse > -1.57 and angle_with_mouse < 1.57:
+	if angle_with_mouse > -PI/2 and angle_with_mouse < PI/2:
 		animated_sprite_2d.flip_h = false
 	else:
 		animated_sprite_2d.flip_h = true
