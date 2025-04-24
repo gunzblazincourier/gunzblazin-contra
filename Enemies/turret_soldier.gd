@@ -8,7 +8,7 @@ extends Area2D
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(_delta: float) -> void:
 	#var angle_with_mouse: float = global_position.angle_to_point(get_global_mouse_position())
-	#print(angle_with_mouse)
+	#print(marker_2d.global_position)
 	#
 	#if angle_with_mouse < -0.79 and angle_with_mouse > -2.36:
 		#animated_sprite_2d.play("shoot_up")
@@ -20,8 +20,8 @@ extends Area2D
 
 func _on_timer_timeout() -> void:
 	#var angle_with_mouse: float = global_position.angle_to_point(get_global_mouse_position())
-	var angle_with_mouse: float = marker_2d.global_position.angle_to_point(Global.player_global_position)
-	print(angle_with_mouse)
+	var angle_with_mouse: float = global_position.angle_to_point(Global.player_global_position)
+	#print(angle_with_mouse)
 	
 	#if angle_with_mouse < -0.79 and angle_with_mouse > -2.36:
 		#animated_sprite_2d.play("shoot_up")
@@ -35,15 +35,12 @@ func _on_timer_timeout() -> void:
 	#else:
 		#animated_sprite_2d.flip_h = true
 	
-	if angle_with_mouse < -PI/4 and angle_with_mouse > -3*PI/4:
+	if angle_with_mouse < -PI/4 and angle_with_mouse > -3*(PI/4):
 		animated_sprite_2d.play("shoot_up")
-		marker_2d.position = Vector2(9, -21)
-	elif angle_with_mouse > PI/4 and angle_with_mouse < 3*PI*4:
+	elif angle_with_mouse > PI/4 and angle_with_mouse < 3*(PI*4):
 		animated_sprite_2d.play("shoot_down")
-		marker_2d.position = Vector2(14, 2)
 	else:
 		animated_sprite_2d.play("shoot_straight")
-		marker_2d.position = Vector2(14, -11)
 	
 	if angle_with_mouse > -PI/2 and angle_with_mouse < PI/2:
 		animated_sprite_2d.flip_h = false
