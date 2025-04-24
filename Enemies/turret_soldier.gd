@@ -27,4 +27,9 @@ func _on_timer_timeout() -> void:
 		animated_sprite_2d.play("shoot_down")
 	else:
 		animated_sprite_2d.play("shoot_straight")
+	
+	if angle_with_mouse > -1.57 and angle_with_mouse < 1.57:
+		animated_sprite_2d.flip_h = false
+	else:
+		animated_sprite_2d.flip_h = true
 	timer.start()
