@@ -29,6 +29,7 @@ var jump_pressed: bool
 func _ready() -> void:
 	# Slows down/speed up the game
 	#Engine.time_scale = 0.5
+	#Global.player_global_position = global_position
 	
 	animation_tree.set("parameters/conditions/death", false)
 	animation_tree.active = true
@@ -221,6 +222,7 @@ func _process(_delta: float) -> void:
 
 
 func _physics_process(delta: float) -> void:
+	Global.player_global_position = global_position
 	var run_direction: float = Input.get_axis("left", "right")
 	
 	match current_state:

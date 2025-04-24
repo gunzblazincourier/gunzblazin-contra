@@ -18,7 +18,8 @@ extends Area2D
 
 
 func _on_timer_timeout() -> void:
-	var angle_with_mouse: float = global_position.angle_to_point(get_global_mouse_position())
+	#var angle_with_mouse: float = global_position.angle_to_point(get_global_mouse_position())
+	var angle_with_mouse: float = global_position.angle_to_point(Global.player_global_position)
 	print(angle_with_mouse)
 	
 	if angle_with_mouse < -0.79 and angle_with_mouse > -2.36:
@@ -32,4 +33,5 @@ func _on_timer_timeout() -> void:
 		animated_sprite_2d.flip_h = false
 	else:
 		animated_sprite_2d.flip_h = true
+	
 	timer.start()

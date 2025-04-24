@@ -1,8 +1,7 @@
-[gd_scene load_steps=8 format=4 uid="uid://bornr0erfd30j"]
+[gd_scene load_steps=7 format=4 uid="uid://bornr0erfd30j"]
 
 [ext_resource type="PackedScene" uid="uid://doa0vkc0fktkh" path="res://Bill/bill.tscn" id="1_76q5j"]
 [ext_resource type="Texture2D" uid="uid://c3g4ppg5gxtix" path="res://Levels/NES - Contra - Stage 1.png" id="1_h2yge"]
-[ext_resource type="Script" uid="uid://c4p47iwxfla5w" path="res://main.gd" id="1_lquwl"]
 [ext_resource type="PackedScene" uid="uid://0hbphmpkfm7w" path="res://Enemies/running_soldier.tscn" id="2_0xm2m"]
 [ext_resource type="PackedScene" uid="uid://bgedjmw5o3wam" path="res://Enemies/turret_soldier.tscn" id="5_7mycd"]
 
@@ -3927,7 +3926,6 @@ physics_layer_0/collision_layer = 8
 sources/0 = SubResource("TileSetAtlasSource_1bvp3")
 
 [node name="Main" type="Node"]
-script = ExtResource("1_lquwl")
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
 position = Vector2(3, 0)
