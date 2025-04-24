@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://bgedjmw5o3wam"]
+[gd_scene load_steps=12 format=3 uid="uid://bgedjmw5o3wam"]
 
 [ext_resource type="Script" uid="uid://dpjnhmujie0oy" path="res://Enemies/turret_soldier.gd" id="1_hnwc0"]
 [ext_resource type="Texture2D" uid="uid://c3cowvvhl10xq" path="res://Enemies/TurretSoldier_Death.png" id="1_rsf4t"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://d0275rqa5ltu2" path="res://Enemies/TurretSoldier_ShootUp_0.png" id="4_ctkrr"]
 [ext_resource type="Texture2D" uid="uid://blp5ekkva2v7" path="res://Enemies/TurretSoldier_ShootStraight_1.png" id="6_3ai5x"]
 [ext_resource type="Texture2D" uid="uid://bukhq0sdvauwv" path="res://Enemies/TurretSoldier_ShootUp_1.png" id="6_5nkct"]
+[ext_resource type="Texture2D" uid="uid://c56x4e8shosjj" path="res://Bullet/R.png" id="9_3ai5x"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_pj8v8"]
 animations = [{
@@ -71,10 +72,20 @@ script = ExtResource("1_hnwc0")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_pj8v8")
 animation = &"shoot_straight"
+autoplay = "shoot_straight"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-1, 0)
 shape = SubResource("RectangleShape2D_5f3y1")
+
+[node name="Marker2D" type="Marker2D" parent="."]
+position = Vector2(14, -11)
+
+[node name="Sprite2D" type="Sprite2D" parent="Marker2D"]
+position = Vector2(-0.453125, -0.453125)
+scale = Vector2(0.921875, 0.921875)
+texture = ExtResource("9_3ai5x")
+offset = Vector2(3, 3)
 
 [node name="Timer" type="Timer" parent="."]
 one_shot = true
