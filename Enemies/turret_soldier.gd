@@ -20,7 +20,7 @@ extends Area2D
 
 func _on_timer_timeout() -> void:
 	#var angle_with_mouse: float = global_position.angle_to_point(get_global_mouse_position())
-	var angle_with_mouse: float = global_position.angle_to_point(Global.player_global_position)
+	var angle_with_mouse: float = marker_2d.global_position.angle_to_point(Global.player_global_position)
 	print(angle_with_mouse)
 	
 	#if angle_with_mouse < -0.79 and angle_with_mouse > -2.36:

@@ -222,7 +222,7 @@ func _process(_delta: float) -> void:
 
 
 func _physics_process(delta: float) -> void:
-	Global.player_global_position = global_position
+	Global.player_global_position = muzzle.global_position
 	var run_direction: float = Input.get_axis("left", "right")
 	
 	match current_state:

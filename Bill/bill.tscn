@@ -5757,7 +5757,6 @@ shape = SubResource("RectangleShape2D_tvn1x")
 position = Vector2(8, -6)
 
 [node name="Sprite2D" type="Sprite2D" parent="Muzzle"]
-visible = false
 texture = ExtResource("3_l2ago")
 
 [node name="ShootTimer" type="Timer" parent="."]

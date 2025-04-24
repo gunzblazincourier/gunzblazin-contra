@@ -3961,4 +3961,4 @@ position = Vector2(100, -32)
 run_direction = -1
 
 [node name="TurretSoldier" parent="." instance=ExtResource("5_7mycd")]
-position = Vector2(151, -35)
+position = Vector2(151, -32)
