@@ -1,10 +1,12 @@
-[gd_scene load_steps=9 format=3 uid="uid://bgedjmw5o3wam"]
+[gd_scene load_steps=11 format=3 uid="uid://bgedjmw5o3wam"]
 
 [ext_resource type="Script" uid="uid://dpjnhmujie0oy" path="res://Enemies/turret_soldier.gd" id="1_hnwc0"]
 [ext_resource type="Texture2D" uid="uid://c3cowvvhl10xq" path="res://Enemies/TurretSoldier_Death.png" id="1_rsf4t"]
 [ext_resource type="Texture2D" uid="uid://b5jjyjh3xx5bi" path="res://Enemies/TurretSoldier_ShootDown_0.png" id="2_hnwc0"]
 [ext_resource type="Texture2D" uid="uid://clreqd0vgeo4l" path="res://Enemies/TurretSoldier_ShootStraight_0.png" id="3_5nkct"]
+[ext_resource type="Texture2D" uid="uid://bnivlm4tbaq4x" path="res://Enemies/TurretSoldier_ShootDown_1.png" id="3_pj8v8"]
 [ext_resource type="Texture2D" uid="uid://d0275rqa5ltu2" path="res://Enemies/TurretSoldier_ShootUp_0.png" id="4_ctkrr"]
+[ext_resource type="Texture2D" uid="uid://blp5ekkva2v7" path="res://Enemies/TurretSoldier_ShootStraight_1.png" id="6_3ai5x"]
 [ext_resource type="Texture2D" uid="uid://bukhq0sdvauwv" path="res://Enemies/TurretSoldier_ShootUp_1.png" id="6_5nkct"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_pj8v8"]
@@ -19,6 +21,9 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": ExtResource("3_pj8v8")
+}, {
+"duration": 1.0,
 "texture": ExtResource("2_hnwc0")
 }],
 "loop": true,
@@ -28,6 +33,9 @@ animations = [{
 "frames": [{
 "duration": 1.0,
 "texture": ExtResource("3_5nkct")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_3ai5x")
 }],
 "loop": true,
 "name": &"shoot_straight",
@@ -35,10 +43,10 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("4_ctkrr")
+"texture": ExtResource("6_5nkct")
 }, {
 "duration": 1.0,
-"texture": ExtResource("6_5nkct")
+"texture": ExtResource("4_ctkrr")
 }],
 "loop": true,
 "name": &"shoot_up",
@@ -53,8 +61,8 @@ script = ExtResource("1_hnwc0")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_pj8v8")
-animation = &"shoot_up"
+animation = &"death"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-4, 1)
+position = Vector2(-4, 0)
 shape = SubResource("RectangleShape2D_5f3y1")
