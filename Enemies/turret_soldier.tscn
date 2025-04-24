@@ -15,7 +15,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("1_rsf4t")
 }],
-"loop": true,
+"loop": false,
 "name": &"death",
 "speed": 5.0
 }, {
@@ -25,8 +25,11 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": ExtResource("2_hnwc0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_pj8v8")
 }],
-"loop": true,
+"loop": false,
 "name": &"shoot_down",
 "speed": 5.0
 }, {
@@ -36,8 +39,11 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": ExtResource("6_3ai5x")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_5nkct")
 }],
-"loop": true,
+"loop": false,
 "name": &"shoot_straight",
 "speed": 5.0
 }, {
@@ -47,8 +53,11 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": ExtResource("4_ctkrr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_5nkct")
 }],
-"loop": true,
+"loop": false,
 "name": &"shoot_up",
 "speed": 5.0
 }]
@@ -61,7 +70,7 @@ script = ExtResource("1_hnwc0")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_pj8v8")
-animation = &"death"
+animation = &"shoot_straight"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-4, 0)

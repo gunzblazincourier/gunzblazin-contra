@@ -1,11 +1,16 @@
 extends Area2D
 
-
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
+@onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta: float) -> void:
-	#pass
+func _process(_delta: float) -> void:
+	var angle_with_mouse: float = global_position.angle_to_point(get_global_mouse_position())
+	print(angle_with_mouse)
+	
+	if angle_with_mouse < -0.79 and angle_with_mouse > -2.36:
+		animated_sprite_2d.play("shoot_up")
+	elif angle_with_mouse > 0.79 and angle_with_mouse < 2.36:
+		animated_sprite_2d.play("shoot_down")
+	else:
+		animated_sprite_2d.play("shoot_straight")
