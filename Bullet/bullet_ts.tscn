@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://by7djcd1j6r07"]
+[gd_scene load_steps=4 format=3 uid="uid://by7djcd1j6r07"]
 
 [ext_resource type="Texture2D" uid="uid://bjyhf6o7dmtk3" path="res://Bullet/TurretSoldier_Bullet.png" id="1_8fb3h"]
+[ext_resource type="Script" uid="uid://e4462dbojdgp" path="res://Bullet/bullet_ts.gd" id="1_h8pxa"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4n8gp"]
 size = Vector2(3, 3)
@@ -8,6 +9,7 @@ size = Vector2(3, 3)
 [node name="Bullet_TS" type="Area2D" groups=["enemy_bullet"]]
 collision_layer = 2
 collision_mask = 4
+script = ExtResource("1_h8pxa")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_8fb3h")

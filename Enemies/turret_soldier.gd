@@ -69,5 +69,11 @@ func _on_timer_timeout() -> void:
 			marker_2d.position = Vector2(-14, -11)
 			marker_2d.rotation = PI
 	
+	var bullet_path: PackedScene = load("res://Bullet/bullet_ts.tscn")
+	var bullet: Area2D = bullet_path.instantiate()
+	owner.add_child(bullet)
+	bullet.position = marker_2d.global_position
+	bullet.rotation = marker_2d.global_rotation
+	
 	print(marker_2d.rotation)
 	timer.start()
