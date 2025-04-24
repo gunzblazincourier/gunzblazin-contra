@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://c56x4e8shosjj" path="res://Bullet/R.png" id="1_wjol5"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4n8gp"]
-size = Vector2(2, 2)
+size = Vector2(3, 3)
 
 [node name="Bullet_R" type="Area2D" groups=["bullet"]]
 collision_layer = 2

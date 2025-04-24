@@ -50,17 +50,24 @@ func _on_timer_timeout() -> void:
 	if animated_sprite_2d.animation == "shoot_up":
 		if animated_sprite_2d.flip_h == false:
 			marker_2d.position = Vector2(9, -21)
+			marker_2d.rotation = clamp(angle_with_mouse, -PI/2, -PI/8)
 		else:
 			marker_2d.position = Vector2(-9, -21)
+			marker_2d.rotation = clamp(angle_with_mouse, -7*(PI/8), -PI/2)
 	elif animated_sprite_2d.animation == "shoot_down":
 		if animated_sprite_2d.flip_h == false:
 			marker_2d.position = Vector2(14, 2)
+			marker_2d.rotation = clamp(angle_with_mouse, PI/2, 7*(PI/8))
 		else:
 			marker_2d.position = Vector2(-14, 2)
+			marker_2d.rotation = clamp(angle_with_mouse, PI/8, PI/2)
 	else:
 		if animated_sprite_2d.flip_h == false:
 			marker_2d.position = Vector2(14, -11)
+			marker_2d.rotation = 0
 		else:
 			marker_2d.position = Vector2(-14, -11)
+			marker_2d.rotation = PI
 	
+	print(marker_2d.rotation)
 	timer.start()
