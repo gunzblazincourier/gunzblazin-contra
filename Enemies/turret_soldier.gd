@@ -21,7 +21,7 @@ extends Area2D
 func _on_timer_timeout() -> void:
 	#var angle_with_mouse: float = global_position.angle_to_point(get_global_mouse_position())
 	var angle_with_mouse: float = global_position.angle_to_point(Global.player_global_position)
-	#print(angle_with_mouse)
+	print(angle_with_mouse)
 	
 	#if angle_with_mouse < -0.79 and angle_with_mouse > -2.36:
 		#animated_sprite_2d.play("shoot_up")
@@ -57,10 +57,10 @@ func _on_timer_timeout() -> void:
 	elif animated_sprite_2d.animation == "shoot_down":
 		if animated_sprite_2d.flip_h == false:
 			marker_2d.position = Vector2(14, 2)
-			marker_2d.rotation = clamp(angle_with_mouse, PI/2, 7*(PI/8))
+			marker_2d.rotation = clamp(angle_with_mouse, PI/8, PI/2)
 		else:
 			marker_2d.position = Vector2(-14, 2)
-			marker_2d.rotation = clamp(angle_with_mouse, PI/8, PI/2)
+			marker_2d.rotation = clamp(angle_with_mouse, PI/2, 7*(PI/8))
 	else:
 		if animated_sprite_2d.flip_h == false:
 			marker_2d.position = Vector2(14, -11)
