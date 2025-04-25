@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bjyhf6o7dmtk3"
-path="res://.godot/imported/TurretSoldier_Bullet.png-87466f9f5e893a32ab134d6fa11a2980.ctex"
+path="res://.godot/imported/TS.png-b39757d570659cf5ec744ad65c0e39b7.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Bullet/TurretSoldier_Bullet.png"
-dest_files=["res://.godot/imported/TurretSoldier_Bullet.png-87466f9f5e893a32ab134d6fa11a2980.ctex"]
+source_file="res://Bullet/TS.png"
+dest_files=["res://.godot/imported/TS.png-b39757d570659cf5ec744ad65c0e39b7.ctex"]
 
 [params]
 
