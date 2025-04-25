@@ -3,9 +3,9 @@
 extends CharacterBody2D
 
 enum states {IDLE, LOOK_UP, CROUCH, RUN, JUMP, JUMP_UP, JUMP_DOWN, FALL, \
-		FALL_UP, FALL_DOWN, SHOOT_IDLE, SHOOT_LOOK_UP, SHOOT_CROUCH, SHOOT_RUN, \
+		FALL_UP, SHOOT_IDLE, SHOOT_LOOK_UP, SHOOT_CROUCH, SHOOT_RUN, \
 		SHOOT_JUMP, SHOOT_JUMP_UP, SHOOT_JUMP_DOWN, SHOOT_FALL, SHOOT_FALL_UP, \
-		SHOOT_FALL_DOWN, DEATH}
+		DEATH}
 enum bullet_id {R, M, S, F, L}
 
 const RUN_SPEED: int = 69
@@ -61,10 +61,10 @@ func _process(_delta: float) -> void:
 			look_direction != Vector2(0, 1)
 	var jump_up: bool = not is_on_floor() and jump_pressed and look_direction == Vector2(0, -1)
 	var jump_down: bool = not is_on_floor() and jump_pressed and look_direction == Vector2(0, 1)
-	var fall: bool = not is_on_floor() and not jump_pressed and look_direction != Vector2(0, -1) and \
-			look_direction != Vector2(0, 1)
+	var fall: bool = not is_on_floor() and not jump_pressed and look_direction != Vector2(0, -1)
+			#look_direction != Vector2(0, 1)
 	var fall_up: bool = not is_on_floor() and not jump_pressed and look_direction == Vector2(0, -1)
-	var fall_down: bool = not is_on_floor() and not jump_pressed and look_direction == Vector2(0, 1)
+	#var fall_down: bool = not is_on_floor() and not jump_pressed and look_direction == Vector2(0, 1)
 	
 	animation_tree.set("parameters/conditions/idle", idle)
 	animation_tree.set("parameters/conditions/look_up", look_up)
@@ -75,7 +75,7 @@ func _process(_delta: float) -> void:
 	animation_tree.set("parameters/conditions/jump_down", jump_down)
 	animation_tree.set("parameters/conditions/fall", fall)
 	animation_tree.set("parameters/conditions/fall_up", fall_up)
-	animation_tree.set("parameters/conditions/fall_down", fall_down)
+	#animation_tree.set("parameters/conditions/fall_down", fall_down)
 	
 	animation_tree.set("parameters/Idle/blend_position", sprite_direction)
 	animation_tree.set("parameters/LookUp/blend_position", sprite_direction)
@@ -84,7 +84,7 @@ func _process(_delta: float) -> void:
 	animation_tree.set("parameters/JumpUp/blend_position", sprite_direction)
 	animation_tree.set("parameters/JumpDown/blend_position", sprite_direction)
 	animation_tree.set("parameters/FallUp/blend_position", sprite_direction)
-	animation_tree.set("parameters/FallDown/blend_position", sprite_direction)
+	#animation_tree.set("parameters/FallDown/blend_position", sprite_direction)
 	animation_tree.set("parameters/ShootIdle/blend_position", sprite_direction)
 	animation_tree.set("parameters/ShootLookUp/blend_position", sprite_direction)
 	animation_tree.set("parameters/ShootCrouch/blend_position", sprite_direction)
@@ -92,7 +92,7 @@ func _process(_delta: float) -> void:
 	animation_tree.set("parameters/ShootJumpUp/blend_position", sprite_direction)
 	animation_tree.set("parameters/ShootJumpDown/blend_position", sprite_direction)
 	animation_tree.set("parameters/ShootFallUp/blend_position", sprite_direction)
-	animation_tree.set("parameters/ShootFallDown/blend_position", sprite_direction)
+	#animation_tree.set("parameters/ShootFallDown/blend_position", sprite_direction)
 	
 	if look_direction == Vector2.ZERO:
 		animation_tree.set("parameters/Jump/blend_position", Vector2(sprite_direction, 0))
@@ -102,8 +102,15 @@ func _process(_delta: float) -> void:
 	else:
 		animation_tree.set("parameters/Jump/blend_position", look_direction)
 		animation_tree.set("parameters/ShootJump/blend_position", look_direction)
-		animation_tree.set("parameters/Fall/blend_position", look_direction)
-		animation_tree.set("parameters/ShootFall/blend_position", look_direction)
+		#animation_tree.set("parameters/Fall/blend_position", look_direction)
+		#animation_tree.set("parameters/ShootFall/blend_position", look_direction)
+		
+		if look_direction == Vector2(0, 1):
+			animation_tree.set("parameters/Fall/blend_position", Vector2(sprite_direction, 0))
+			animation_tree.set("parameters/ShootFall/blend_position", Vector2(sprite_direction, 0))
+		else:
+			animation_tree.set("parameters/Fall/blend_position", look_direction)
+			animation_tree.set("parameters/ShootFall/blend_position", look_direction)
 	
 	# Basically gets AnimationNodeStateMachine from AnimationTree
 	var state_machine: AnimationNodeStateMachinePlayback = animation_tree.get("parameters/playback")
@@ -130,8 +137,8 @@ func _process(_delta: float) -> void:
 			current_state = states.FALL
 		"FallUp":
 			current_state = states.FALL_UP
-		"FallDown":
-			current_state = states.FALL_DOWN
+		#"FallDown":
+			#current_state = states.FALL_DOWN
 		"ShootIdle":
 			current_state = states.SHOOT_IDLE
 		"ShootLookUp":
@@ -150,8 +157,8 @@ func _process(_delta: float) -> void:
 			current_state = states.SHOOT_FALL
 		"ShootFallUp":
 			current_state = states.SHOOT_FALL_UP
-		"ShootFallDown":
-			current_state = states.SHOOT_FALL_DOWN
+		#"ShootFallDown":
+			#current_state = states.SHOOT_FALL_DOWN
 		"Death":
 			current_state = states.DEATH
 	
@@ -223,8 +230,8 @@ func _physics_process(delta: float) -> void:
 				fall_through_timer.start()
 		states.JUMP, states.JUMP_UP, states.JUMP_DOWN, states.SHOOT_JUMP, \
 				states.SHOOT_JUMP_UP, states.SHOOT_JUMP_DOWN, states.FALL, \
-				states.FALL_UP, states.FALL_DOWN, states.SHOOT_FALL, \
-				states.SHOOT_FALL_UP, states.SHOOT_FALL_DOWN:
+				states.FALL_UP, states.SHOOT_FALL, \
+				states.SHOOT_FALL_UP:
 			if run_direction != 0:
 				velocity.x = run_direction * RUN_SPEED
 			velocity.y += GRAVITY * delta
