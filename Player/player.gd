@@ -25,6 +25,9 @@ var jump_pressed: bool
 @onready var collision_shape_2d: CollisionShape2D = $CollisionShape2D
 @onready var fall_through_timer: Timer = $FallThroughTimer
 
+# Player cannot change direction until this timer stops; 'feature' of original game
+@onready var fall_direction_timer: Timer = $FallDirectionTimer
+
 
 func _ready() -> void:
 	# Slows down/speed up the game
@@ -43,7 +46,7 @@ func _process(_delta: float) -> void:
 	var look_direction: Vector2 = Input.get_vector("left", "right", "up", "down")
 	var run_direction: float = Input.get_axis("left", "right")
 	
-	if run_direction != 0:
+	if run_direction != 0 and fall_direction_timer.is_stopped():
 		sprite_direction = run_direction
 	
 	if jump_pressed == true:
@@ -105,7 +108,7 @@ func _process(_delta: float) -> void:
 		#animation_tree.set("parameters/Fall/blend_position", look_direction)
 		#animation_tree.set("parameters/ShootFall/blend_position", look_direction)
 		
-		if look_direction == Vector2(0, 1):
+		if look_direction == Vector2(0, 1) or not fall_direction_timer.is_stopped():
 			animation_tree.set("parameters/Fall/blend_position", Vector2(sprite_direction, 0))
 			animation_tree.set("parameters/ShootFall/blend_position", Vector2(sprite_direction, 0))
 		else:
@@ -229,11 +232,16 @@ func _physics_process(delta: float) -> void:
 				collision_shape_2d.disabled = true
 				fall_through_timer.start()
 		states.JUMP, states.JUMP_UP, states.JUMP_DOWN, states.SHOOT_JUMP, \
-				states.SHOOT_JUMP_UP, states.SHOOT_JUMP_DOWN, states.FALL, \
-				states.FALL_UP, states.SHOOT_FALL, \
-				states.SHOOT_FALL_UP:
+				states.SHOOT_JUMP_UP, states.SHOOT_JUMP_DOWN:
 			if run_direction != 0:
 				velocity.x = run_direction * RUN_SPEED
+			velocity.y += GRAVITY * delta
+		states.FALL, states.FALL_UP, states.SHOOT_FALL, states.SHOOT_FALL_UP:
+			if velocity.y < 10:
+				fall_direction_timer.start()
+			if fall_direction_timer.is_stopped():
+				if run_direction != 0:
+					velocity.x = run_direction * RUN_SPEED
 			velocity.y += GRAVITY * delta
 		states.DEATH:
 			velocity.y += GRAVITY * delta
@@ -248,6 +256,7 @@ func _physics_process(delta: float) -> void:
 	# To prevent 'return value discarded' error
 	if mas:
 		pass
+	#print(fall_direction_timer.time_left)
 
 
 func _on_area_2d_area_entered(area: Area2D) -> void:
