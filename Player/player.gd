@@ -19,6 +19,12 @@ var sprite_direction: float
 var death_direction: float
 var jump_pressed: bool
 
+# Declared and defined in beginning instead of while shooting (see in _process())
+# in order to allow previously fired laser to despawn when new is fired,
+# like in Contra
+var bullet_l_path: PackedScene = load("res://Bullet/bullet_l.tscn")
+var bullet_l: Area2D = bullet_l_path.instantiate()
+
 @onready var animation_tree: AnimationTree = $AnimationTree
 @onready var shoot_timer: Timer = $ShootTimer
 @onready var muzzle: Marker2D = $Muzzle
@@ -40,9 +46,15 @@ func _ready() -> void:
 	death_direction = -1.0
 	jump_pressed = true
 	current_bullet_id = bullet_id.R
+	
+	bullet_l_path = load("res://Bullet/bullet_l.tscn")
+	bullet_l = bullet_l_path.instantiate()
 
 
 func _process(_delta: float) -> void:
+	#if Input.is_action_just_pressed("shoot"):
+		#bullet_l.queue_free()
+	
 	var look_direction: Vector2 = Input.get_vector("left", "right", "up", "down")
 	var run_direction: float = Input.get_axis("left", "right")
 	
@@ -208,8 +220,9 @@ func _process(_delta: float) -> void:
 				bullet_id.L:
 					if Input.is_action_just_pressed("shoot"):
 						shoot_timer.start()
-						var bullet_l_path: PackedScene = load("res://Bullet/bullet_l.tscn")
-						var bullet_l: Area2D = bullet_l_path.instantiate()
+						#var bullet_l_path: PackedScene = load("res://Bullet/bullet_l.tscn")
+						#var bullet_l: Area2D = bullet_l_path.instantiate()
+						#remove_child(bullet_l)
 						spawn_bullet(bullet_l)
 
 

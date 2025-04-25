@@ -1,5 +1,3 @@
-# NOTE: Pending implementation of removing previously-fired laser upon shooting again
-
 extends Area2D
 
 const BULLET_SPEED: int = 400
