@@ -172,10 +172,7 @@ func _process(_delta: float) -> void:
 						shoot_timer.start()
 						var bullet_r_path: PackedScene = load("res://Bullet/bullet_r.tscn")
 						var bullet_r: Area2D = bullet_r_path.instantiate()
-						
-						owner.add_child(bullet_r)
-						bullet_r.position = muzzle.global_position
-						bullet_r.rotation = muzzle.global_rotation
+						spawn_bullet(bullet_r)
 				
 				bullet_id.S:
 					if Input.is_action_just_pressed("shoot"):
@@ -187,21 +184,11 @@ func _process(_delta: float) -> void:
 						var bullet_s4: Area2D = bullet_s_path.instantiate()
 						var bullet_s5: Area2D = bullet_s_path.instantiate()
 						
-						owner.add_child(bullet_s1)
-						bullet_s1.position = muzzle.global_position
-						bullet_s1.rotation = muzzle.global_rotation
-						owner.add_child(bullet_s2)
-						bullet_s2.position = muzzle.global_position
-						bullet_s2.rotation = muzzle.global_rotation
-						owner.add_child(bullet_s3)
-						bullet_s3.position = muzzle.global_position
-						bullet_s3.rotation = muzzle.global_rotation
-						owner.add_child(bullet_s4)
-						bullet_s4.position = muzzle.global_position
-						bullet_s4.rotation = muzzle.global_rotation
-						owner.add_child(bullet_s5)
-						bullet_s5.position = muzzle.global_position
-						bullet_s5.rotation = muzzle.global_rotation
+						spawn_bullet(bullet_s1)
+						spawn_bullet(bullet_s2)
+						spawn_bullet(bullet_s3)
+						spawn_bullet(bullet_s4)
+						spawn_bullet(bullet_s5)
 						
 						bullet_s2.rotate(0.26)
 						bullet_s3.rotate(6.02)
@@ -213,10 +200,7 @@ func _process(_delta: float) -> void:
 						shoot_timer.start()
 						var bullet_l_path: PackedScene = load("res://Bullet/bullet_l.tscn")
 						var bullet_l: Area2D = bullet_l_path.instantiate()
-						
-						owner.add_child(bullet_l)
-						bullet_l.position = muzzle.global_position
-						bullet_l.rotation = muzzle.global_rotation
+						spawn_bullet(bullet_l)
 
 
 func _physics_process(delta: float) -> void:
@@ -269,6 +253,7 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 
 func _on_fall_through_timer_timeout() -> void:
 	collision_shape_2d.disabled = false
+
 
 func spawn_bullet(bullet: Area2D) -> void:
 	owner.add_child(bullet)
