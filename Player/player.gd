@@ -29,7 +29,6 @@ var jump_pressed: bool
 func _ready() -> void:
 	# Slows down/speed up the game
 	#Engine.time_scale = 0.5
-	#Global.player_global_position = global_position
 	
 	animation_tree.set("parameters/conditions/death", false)
 	animation_tree.active = true
@@ -218,7 +217,6 @@ func _process(_delta: float) -> void:
 						owner.add_child(bullet_l)
 						bullet_l.position = muzzle.global_position
 						bullet_l.rotation = muzzle.global_rotation
-	#print(state_machine_state)
 
 
 func _physics_process(delta: float) -> void:
@@ -263,7 +261,6 @@ func _physics_process(delta: float) -> void:
 
 func _on_area_2d_area_entered(area: Area2D) -> void:
 	if area.is_in_group("enemy"):
-		#print("dead")
 		animation_tree.set("parameters/conditions/death", true)
 		animation_tree.set("parameters/Death/blend_position", sprite_direction)
 		velocity.y = DEATH_JUMP_SPEED

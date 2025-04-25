@@ -43,7 +43,6 @@ func _process(_delta: float) -> void:
 					run_direction = directions.LEFT
 	
 	var run: bool = ray_cast_2d.is_colliding()
-	#var jump: bool = !ray_cast_2d.is_colliding()
 	
 	animation_tree.set("parameters/conditions/run", run)
 	animation_tree.set("parameters/conditions/jump", jump)
@@ -69,7 +68,6 @@ func _process(_delta: float) -> void:
 			current_state = states.DEATH
 		"Explode":
 			current_state = states.EXPLODE
-	#print(state_machine_state)
 
 
 func _physics_process(delta: float) -> void:
@@ -81,7 +79,6 @@ func _physics_process(delta: float) -> void:
 		states.JUMP:
 			if jump_type_selected == false:
 				var jump_type: int = randi() % 3
-				#print(jump_type)
 				if jump_type == 0:
 					jump_speed = 0
 				elif jump_type == 2:
