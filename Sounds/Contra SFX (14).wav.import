@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://ds3qudgw61b1y"
+path="res://.godot/imported/Contra SFX (14).wav-fb5c210d1191280251075cded07b58df.sample"
+
+[deps]
+
+source_file="res://Sounds/Contra SFX (14).wav"
+dest_files=["res://.godot/imported/Contra SFX (14).wav-fb5c210d1191280251075cded07b58df.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2
