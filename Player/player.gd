@@ -180,6 +180,8 @@ func _process(_delta: float) -> void:
 		current_bullet_id = bullet_id.S
 	elif Input.is_action_just_pressed("3"):
 		current_bullet_id = bullet_id.L
+	elif Input.is_action_just_pressed("4"):
+		current_bullet_id = bullet_id.M
 	
 	match current_state:
 		states.DEATH:
@@ -218,6 +220,13 @@ func _process(_delta: float) -> void:
 					if Input.is_action_just_pressed("shoot"):
 						shoot_timer.start()
 						spawn_bullet(bullet_l)
+				
+				bullet_id.M:
+					if Input.is_action_pressed("shoot"):
+						shoot_timer.start()
+						var bullet_m_path: PackedScene = load("res://Bullet/bullet_m.tscn")
+						var bullet_m: Area2D = bullet_m_path.instantiate()
+						spawn_bullet(bullet_m)
 
 
 func _physics_process(delta: float) -> void:
