@@ -1,7 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://c06upcudd5y4n"]
+[gd_scene load_steps=10 format=3 uid="uid://c06upcudd5y4n"]
 
 [ext_resource type="Script" uid="uid://dseqsohjdtcgo" path="res://Bullet/bullet_s.gd" id="1_7vesb"]
 [ext_resource type="Texture2D" uid="uid://cm4wkigxwmlkg" path="res://Bullet/S1.png" id="2_7vesb"]
+[ext_resource type="AudioStream" uid="uid://c2pvy7vxc4g3a" path="res://Sounds/Contra SFX (29).wav" id="3_hx8xb"]
 [ext_resource type="Texture2D" uid="uid://bmmscue8neemr" path="res://Bullet/S2.png" id="3_qiare"]
 [ext_resource type="Texture2D" uid="uid://l1w1cihji3so" path="res://Bullet/S3.png" id="4_hx8xb"]
 
@@ -105,6 +106,9 @@ texture = ExtResource("2_7vesb")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0.5, 0.5)
 shape = SubResource("CircleShape2D_7vesb")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_hx8xb")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
