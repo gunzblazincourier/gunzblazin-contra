@@ -52,9 +52,6 @@ func _ready() -> void:
 
 
 func _process(_delta: float) -> void:
-	#if Input.is_action_just_pressed("shoot"):
-		#bullet_l.queue_free()
-	
 	var look_direction: Vector2 = Input.get_vector("left", "right", "up", "down")
 	var run_direction: float = Input.get_axis("left", "right")
 	
@@ -220,9 +217,6 @@ func _process(_delta: float) -> void:
 				bullet_id.L:
 					if Input.is_action_just_pressed("shoot"):
 						shoot_timer.start()
-						#var bullet_l_path: PackedScene = load("res://Bullet/bullet_l.tscn")
-						#var bullet_l: Area2D = bullet_l_path.instantiate()
-						#remove_child(bullet_l)
 						spawn_bullet(bullet_l)
 
 

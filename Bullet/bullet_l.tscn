@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://bxidltynkw525" path="res://Bullet/L.png" id="2_iyojj"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4n8gp"]
-size = Vector2(15, 2)
+size = Vector2(29.5, 2)
 
 [node name="Bullet_L" type="Area2D" groups=["bullet"]]
 collision_layer = 2
@@ -12,26 +12,13 @@ collision_mask = 4
 script = ExtResource("1_iyojj")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(15, 0)
 texture = ExtResource("2_iyojj")
 offset = Vector2(0.5, 0)
 
 [node name="Sprite2D2" type="Sprite2D" parent="."]
-visible = false
-position = Vector2(-15, 0)
 texture = ExtResource("2_iyojj")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0.5, 0)
+position = Vector2(8, 0)
 shape = SubResource("RectangleShape2D_4n8gp")
-
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
-visible = false
-position = Vector2(-15, 0)
-shape = SubResource("RectangleShape2D_4n8gp")
-disabled = true
-
-[node name="SpriteVisibleTimer" type="Timer" parent="."]
-wait_time = 0.112
-one_shot = true
-
-[connection signal="timeout" from="SpriteVisibleTimer" to="." method="_on_sprite_visible_timer_timeout"]

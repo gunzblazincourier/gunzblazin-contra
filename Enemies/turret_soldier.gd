@@ -7,7 +7,7 @@ extends Area2D
 
 func _on_timer_timeout() -> void:
 	var angle_with_mouse: float = global_position.angle_to_point(Global.player_global_position)
-	print(angle_with_mouse)
+	#print(angle_with_mouse)
 	
 	if angle_with_mouse < -PI/4 and angle_with_mouse > -3*(PI/4):
 		animated_sprite_2d.play("shoot_up")
@@ -49,5 +49,5 @@ func _on_timer_timeout() -> void:
 	bullet.position = marker_2d.global_position
 	bullet.rotation = marker_2d.global_rotation
 	
-	print(marker_2d.rotation)
+	#print(marker_2d.rotation)
 	timer.start()
