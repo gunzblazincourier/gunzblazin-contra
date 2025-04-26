@@ -31,6 +31,7 @@ var bullet_l: Area2D = bullet_l_path.instantiate()
 @onready var collision_shape_2d: CollisionShape2D = $CollisionShape2D
 @onready var fall_through_timer: Timer = $FallThroughTimer
 @onready var machinegun_interval_timer: Timer = $MachinegunIntervalTimer
+@onready var laser_audio_player: AudioStreamPlayer2D = $LaserAudioPlayer
 
 # Player cannot change direction until this timer stops; 'feature' of original game
 @onready var fall_direction_timer: Timer = $FallDirectionTimer
@@ -220,6 +221,7 @@ func _process(_delta: float) -> void:
 				bullet_id.L:
 					if Input.is_action_just_pressed("shoot"):
 						shoot_timer.start()
+						laser_audio_player.play()
 						spawn_bullet(bullet_l)
 				
 				bullet_id.M:

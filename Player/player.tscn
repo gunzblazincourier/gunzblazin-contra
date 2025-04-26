@@ -1,4 +1,4 @@
-[gd_scene load_steps=248 format=3 uid="uid://doa0vkc0fktkh"]
+[gd_scene load_steps=249 format=3 uid="uid://doa0vkc0fktkh"]
 
 [ext_resource type="Script" uid="uid://c0ak0nhauaj7u" path="res://Player/player.gd" id="1_ac1dp"]
 [ext_resource type="Texture2D" uid="uid://7v13jiiro62o" path="res://Player/Bill_Crouch.png" id="2_hdvrd"]
@@ -38,6 +38,7 @@
 [ext_resource type="Texture2D" uid="uid://b7lwq6g501j7j" path="res://Player/Bill_Death2.png" id="35_q8i7e"]
 [ext_resource type="Texture2D" uid="uid://l36grtyc6fnj" path="res://Player/Bill_Death3.png" id="36_60lwu"]
 [ext_resource type="Texture2D" uid="uid://271kd7v0hssl" path="res://Player/Bill_Death4.png" id="37_3x2ap"]
+[ext_resource type="AudioStream" uid="uid://bk07rmbtdk717" path="res://Sounds/laser-101soundboards.mp3" id="39_f4lon"]
 
 [sub_resource type="Animation" id="Animation_tvn1x"]
 length = 0.001
@@ -5474,6 +5475,9 @@ one_shot = true
 [node name="MachinegunIntervalTimer" type="Timer" parent="."]
 wait_time = 0.15
 one_shot = true
+
+[node name="LaserAudioPlayer" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("39_f4lon")
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
 [connection signal="timeout" from="FallThroughTimer" to="." method="_on_fall_through_timer_timeout"]
