@@ -1,6 +1,6 @@
 extends Area2D
 
-const BULLET_SPEED: int = 400
+const BULLET_SPEED: int = 300
 
 
 # Travels in constant direction

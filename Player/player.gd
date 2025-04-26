@@ -30,6 +30,7 @@ var bullet_l: Area2D = bullet_l_path.instantiate()
 @onready var muzzle: Marker2D = $Muzzle
 @onready var collision_shape_2d: CollisionShape2D = $CollisionShape2D
 @onready var fall_through_timer: Timer = $FallThroughTimer
+@onready var machinegun_interval_timer: Timer = $MachinegunIntervalTimer
 
 # Player cannot change direction until this timer stops; 'feature' of original game
 @onready var fall_direction_timer: Timer = $FallDirectionTimer
@@ -224,9 +225,11 @@ func _process(_delta: float) -> void:
 				bullet_id.M:
 					if Input.is_action_pressed("shoot"):
 						shoot_timer.start()
-						var bullet_m_path: PackedScene = load("res://Bullet/bullet_m.tscn")
-						var bullet_m: Area2D = bullet_m_path.instantiate()
-						spawn_bullet(bullet_m)
+						if machinegun_interval_timer.is_stopped():
+							var bullet_m_path: PackedScene = load("res://Bullet/bullet_m.tscn")
+							var bullet_m: Area2D = bullet_m_path.instantiate()
+							spawn_bullet(bullet_m)
+							machinegun_interval_timer.start()
 
 
 func _physics_process(delta: float) -> void:
