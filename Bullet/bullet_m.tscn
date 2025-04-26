@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://ibdtfj1pl677"]
+[gd_scene load_steps=5 format=3 uid="uid://ibdtfj1pl677"]
 
 [ext_resource type="Script" uid="uid://c8b0ytg5rgtvo" path="res://Bullet/bullet_m.gd" id="1_5dtwk"]
 [ext_resource type="Texture2D" uid="uid://dxka0pr6hhb5r" path="res://Bullet/M.png" id="2_2lnfn"]
+[ext_resource type="AudioStream" uid="uid://ds3qudgw61b1y" path="res://Sounds/Contra SFX (14).wav" id="3_2lnfn"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_5dtwk"]
 radius = 2.0
@@ -17,5 +18,8 @@ offset = Vector2(1.5, 1.5)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_5dtwk")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_2lnfn")
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
