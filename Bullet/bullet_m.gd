@@ -1,6 +1,6 @@
 extends Area2D
 
-const BULLET_SPEED: int = 300
+const BULLET_SPEED: int = 400
 @onready var audio_stream_player_2d: AudioStreamPlayer2D = $AudioStreamPlayer2D
 
 
