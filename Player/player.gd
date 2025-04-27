@@ -184,6 +184,8 @@ func _process(_delta: float) -> void:
 		current_bullet_id = bullet_id.L
 	elif Input.is_action_just_pressed("4"):
 		current_bullet_id = bullet_id.M
+	elif Input.is_action_just_pressed("5"):
+		current_bullet_id = bullet_id.F
 	
 	match current_state:
 		states.DEATH:
@@ -232,6 +234,15 @@ func _process(_delta: float) -> void:
 							var bullet_m: Area2D = bullet_m_path.instantiate()
 							spawn_bullet(bullet_m)
 							machinegun_interval_timer.start()
+				
+				bullet_id.F:
+					if Input.is_action_just_pressed("shoot"):
+						shoot_timer.start()
+						var bullet_f_path: PackedScene = load("res://Bullet/bullet_f.tscn")
+						var bullet_f: Area2D = bullet_f_path.instantiate()
+						
+						spawn_bullet(bullet_f)
+						bullet_f.rotate(-PI/4)
 
 
 func _physics_process(delta: float) -> void:

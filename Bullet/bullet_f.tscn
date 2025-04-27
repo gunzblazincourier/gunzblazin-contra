@@ -7,6 +7,8 @@
 size = Vector2(9, 8)
 
 [node name="Bullet_F" type="Area2D" groups=["bullet"]]
+collision_layer = 2
+collision_mask = 12
 script = ExtResource("1_5870f")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -16,3 +18,10 @@ offset = Vector2(0.5, 0)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0.5, 0)
 shape = SubResource("RectangleShape2D_4n8gp")
+
+[node name="RotationStopTimer" type="Timer" parent="."]
+wait_time = 0.1
+one_shot = true
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="timeout" from="RotationStopTimer" to="." method="_on_rotation_stop_timer_timeout"]

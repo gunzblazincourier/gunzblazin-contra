@@ -1,27 +1,43 @@
-# NOTE: Incomplete due to pending implementation of Flamegun's bullet spring-like trajectory
-
 extends Area2D
 
-const BULLET_SPEED: int = 2
-var i: int = 180
+const BULLET_SPEED: int = 300
+@onready var rotation_stop_timer: Timer = $RotationStopTimer
 
+
+#func _ready() -> void:
+	#rotation = PI
+
+
+# Travels in constant direction
 func _physics_process(delta: float) -> void:
-	position.x += 20 * BULLET_SPEED * delta
-	position.y += 10 * BULLET_SPEED * delta
+	position += transform.x * BULLET_SPEED * delta
+	if rotation_stop_timer.is_stopped():
+		rotate(0.1)
+	else:
+		rotation = PI
+	#print(fmod(rotation_degrees, 360))
 	
+	#if rotation == 2*PI:
+		#rotation = 0
 	
-	
-	#Engine.time_scale = 0.2
-	#if i > 360:
-		#i = 0
+	#var reset_rotation: float = fmod(rotation, 360)
+	#if reset_rotation > -PI and reset_rotation < -PI/2:
+		#rotate(0.2)
+		#print("tg")
 	#else:
-		#i += 1
-	#print(i)
-	#
-	##i += 2
-	#position.y += 30*sin(i)
-	##position.x += 30*cos(i)
-	#if i > 90 and i < 360:
-		#position.x += 30*cos(i)
-	#else:
-		#position.x += 60*cos(i)
+		#rotate(0.1)
+
+
+# Removes bullet if it enters specific hitboxes (eg an enemy's)
+func _on_area_entered(area: Area2D) -> void:
+	if area.is_in_group("enemy"):
+		queue_free()
+	#print(area)
+
+
+func _on_body_entered(_body: Node2D) -> void:
+	rotation_stop_timer.start()
+
+
+func _on_rotation_stop_timer_timeout() -> void:
+	rotation = -PI/2
