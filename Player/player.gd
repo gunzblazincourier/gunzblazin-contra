@@ -47,7 +47,7 @@ func _ready() -> void:
 	sprite_direction = 1.0
 	death_direction = -1.0
 	jump_pressed = true
-	current_bullet_id = bullet_id.R
+	current_bullet_id = bullet_id.F
 	
 	bullet_l_path = load("res://Bullet/bullet_l.tscn")
 	bullet_l = bullet_l_path.instantiate()
@@ -59,6 +59,7 @@ func _process(_delta: float) -> void:
 	
 	if run_direction != 0 and fall_direction_timer.is_stopped():
 		sprite_direction = run_direction
+	Global.player_sprite_direction = sprite_direction
 	
 	if jump_pressed == true:
 		if is_on_floor():
@@ -242,7 +243,7 @@ func _process(_delta: float) -> void:
 						var bullet_f: Area2D = bullet_f_path.instantiate()
 						
 						spawn_bullet(bullet_f)
-						bullet_f.rotate(-PI/4)
+						#bullet_f.rotate(sprite_direction * 1.75*PI)
 
 
 func _physics_process(delta: float) -> void:
