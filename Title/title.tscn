@@ -73,3 +73,8 @@ stream = ExtResource("3_7p1qe")
 [node name="Timer" type="Timer" parent="."]
 wait_time = 1.1
 one_shot = true
+
+[node name="Timer2" type="Timer" parent="."]
+wait_time = 0.2
+
+[connection signal="timeout" from="Timer2" to="." method="_on_timer_2_timeout"]
