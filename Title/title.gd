@@ -14,15 +14,15 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	print(texture_rect.position.x)
-	if texture_rect.position.x > 0:
-		texture_rect.position.x -= 64 * delta
+	if position.x > 0:
+		position.x -= 64 * delta
 	else:
-		texture_rect.position.x = 0
+		position.x = 0
 	
 	if Input.is_action_just_pressed("start") and title_appeared == false:
-		texture_rect.position.x = -0.3
+		position.x = -0.3
 	
 	if title_appeared == false:
-		if texture_rect.position.x < 0:
+		if position.x < 0:
 			audio_stream_player_2d.play()
 			title_appeared = true
