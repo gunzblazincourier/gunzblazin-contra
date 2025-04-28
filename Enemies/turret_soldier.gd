@@ -6,17 +6,17 @@ extends Area2D
 
 
 func _on_timer_timeout() -> void:
-	var angle_with_mouse: float = global_position.angle_to_point(Global.player_global_position)
-	#print(angle_with_mouse)
+	var angle_with_player: float = global_position.angle_to_point(Global.player_global_position)
+	#print(angle_with_player)
 	
-	if angle_with_mouse < -PI/4 and angle_with_mouse > -3*(PI/4):
+	if angle_with_player < -PI/4 and angle_with_player > -3*(PI/4):
 		animated_sprite_2d.play("shoot_up")
-	elif angle_with_mouse > PI/4 and angle_with_mouse < 3*(PI*4):
+	elif angle_with_player > PI/4 and angle_with_player < 3*(PI*4):
 		animated_sprite_2d.play("shoot_down")
 	else:
 		animated_sprite_2d.play("shoot_straight")
 	
-	if angle_with_mouse > -PI/2 and angle_with_mouse < PI/2:
+	if angle_with_player > -PI/2 and angle_with_player < PI/2:
 		animated_sprite_2d.flip_h = false
 	else:
 		animated_sprite_2d.flip_h = true
@@ -24,17 +24,17 @@ func _on_timer_timeout() -> void:
 	if animated_sprite_2d.animation == "shoot_up":
 		if animated_sprite_2d.flip_h == false:
 			marker_2d.position = Vector2(9, -21)
-			marker_2d.rotation = clamp(angle_with_mouse, -PI/2, -PI/8)
+			marker_2d.rotation = clamp(angle_with_player, -PI/2, -PI/8)
 		else:
 			marker_2d.position = Vector2(-9, -21)
-			marker_2d.rotation = clamp(angle_with_mouse, -7*(PI/8), -PI/2)
+			marker_2d.rotation = clamp(angle_with_player, -7*(PI/8), -PI/2)
 	elif animated_sprite_2d.animation == "shoot_down":
 		if animated_sprite_2d.flip_h == false:
 			marker_2d.position = Vector2(14, 2)
-			marker_2d.rotation = clamp(angle_with_mouse, PI/8, PI/2)
+			marker_2d.rotation = clamp(angle_with_player, PI/8, PI/2)
 		else:
 			marker_2d.position = Vector2(-14, 2)
-			marker_2d.rotation = clamp(angle_with_mouse, PI/2, 7*(PI/8))
+			marker_2d.rotation = clamp(angle_with_player, PI/2, 7*(PI/8))
 	else:
 		if animated_sprite_2d.flip_h == false:
 			marker_2d.position = Vector2(14, -11)
