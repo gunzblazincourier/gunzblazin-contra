@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://oim1a676pe5l"]
+[gd_scene load_steps=9 format=3 uid="uid://oim1a676pe5l"]
 
 [ext_resource type="Texture2D" uid="uid://l4xn0yseevjw" path="res://Title/TitleScreen.png" id="1_hvesb"]
 [ext_resource type="Script" uid="uid://x54w3nucrlox" path="res://Title/title.gd" id="1_s6sku"]
@@ -6,6 +6,8 @@
 [ext_resource type="Texture2D" uid="uid://lntpxmdrehmh" path="res://Title/BillAndLance.png" id="3_toehp"]
 [ext_resource type="Texture2D" uid="uid://b8igsuq2f16cr" path="res://Title/Cursor.png" id="4_iliki"]
 [ext_resource type="Texture2D" uid="uid://c3ko2i8d3obo" path="res://Title/TitleScreen2.png" id="5_n1pb7"]
+[ext_resource type="Texture2D" uid="uid://bp2nm7sshc4pt" path="res://Title/Player1.png" id="6_n1pb7"]
+[ext_resource type="Texture2D" uid="uid://3pp7vmdxe8ig" path="res://Title/Player2.png" id="7_gpixp"]
 
 [node name="Title" type="Control"]
 layout_mode = 3
@@ -48,6 +50,22 @@ layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
 texture = ExtResource("5_n1pb7")
+
+[node name="TextureRect5" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 57.0
+offset_top = 168.0
+offset_right = 120.0
+offset_bottom = 176.0
+texture = ExtResource("6_n1pb7")
+
+[node name="TextureRect6" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 56.0
+offset_top = 184.0
+offset_right = 128.0
+offset_bottom = 191.0
+texture = ExtResource("7_gpixp")
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("3_7p1qe")
