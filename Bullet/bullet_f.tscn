@@ -20,12 +20,23 @@ position = Vector2(0.5, 0)
 shape = SubResource("RectangleShape2D_4n8gp")
 
 [node name="RotationStopTimer" type="Timer" parent="."]
-wait_time = 0.05
+wait_time = 0.25
 one_shot = true
 
 [node name="QueueFreeTimer" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.05
+one_shot = true
+
+[node name="Timer2" type="Timer" parent="."]
+wait_time = 0.088
 one_shot = true
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="timeout" from="RotationStopTimer" to="." method="_on_rotation_stop_timer_timeout"]
 [connection signal="timeout" from="QueueFreeTimer" to="." method="_on_queue_free_timer_timeout"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="Timer2" to="." method="_on_timer_2_timeout"]

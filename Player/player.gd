@@ -244,6 +244,8 @@ func _process(_delta: float) -> void:
 						
 						spawn_bullet(bullet_f)
 						#bullet_f.rotate(sprite_direction * 1.75*PI)
+						#bullet_f.rotate(sprite_direction * -PI/2)
+						bullet_f.rotate(sprite_direction * -PI/3)
 
 
 func _physics_process(delta: float) -> void:
