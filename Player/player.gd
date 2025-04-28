@@ -1,5 +1,3 @@
-# NOTE: Flamegun (F) incomplete
-
 extends CharacterBody2D
 
 enum states {IDLE, LOOK_UP, CROUCH, RUN, JUMP, JUMP_UP, JUMP_DOWN, FALL, \
