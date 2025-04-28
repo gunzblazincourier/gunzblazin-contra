@@ -21,7 +21,8 @@ func _process(delta: float) -> void:
 	else:
 		position.x = 0
 	
-	if Input.is_action_just_pressed("start") and title_appeared == false:
+	if Input.is_action_just_pressed("start") or Input.is_action_just_pressed("select") and \
+			title_appeared == false:
 		position.x = -0.3
 	
 	if title_appeared == false:
