@@ -1,15 +1,18 @@
 extends Control
 
 var title_appeared: bool
+var timer_started: bool
 @onready var texture_rect: TextureRect = $TextureRect
 @onready var texture_rect_2: TextureRect = $TextureRect2
 @onready var texture_rect_3: TextureRect = $TextureRect3
 @onready var audio_stream_player_2d: AudioStreamPlayer2D = $AudioStreamPlayer2D
+@onready var timer: Timer = $Timer
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	title_appeared = false
+	timer_started = false
 	#pass
 
 
@@ -23,8 +26,14 @@ func _process(delta: float) -> void:
 				texture_rect_3.position = Vector2(35, 182)
 			elif texture_rect_3.position == Vector2(35, 182):
 				texture_rect_3.position = Vector2(35, 166)
+		if Input.is_action_just_pressed("start") and timer_started == false:
+			timer.start()
+			timer_started = true
+		
+		if timer_started == true:
+			if timer.is_stopped() and not audio_stream_player_2d.playing:
+				print("BEGIN")
 	
-	print(texture_rect.position.x)
 	if position.x > 0:
 		position.x -= 64 * delta
 	else:
