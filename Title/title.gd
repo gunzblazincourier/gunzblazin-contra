@@ -25,11 +25,12 @@ func _process(delta: float) -> void:
 	if title_appeared == true:
 		texture_rect_2.visible = true
 		texture_rect_3.visible = true
-		if Input.is_action_just_pressed("select"):
-			if texture_rect_3.position == Vector2(35, 166):
-				texture_rect_3.position = Vector2(35, 182)
-			elif texture_rect_3.position == Vector2(35, 182):
-				texture_rect_3.position = Vector2(35, 166)
+		if timer_started == false:
+			if Input.is_action_just_pressed("select"):
+				if texture_rect_3.position == Vector2(35, 166):
+					texture_rect_3.position = Vector2(35, 182)
+				elif texture_rect_3.position == Vector2(35, 182):
+					texture_rect_3.position = Vector2(35, 166)
 		if Input.is_action_just_pressed("start") and timer_started == false:
 			timer.start()
 			timer_2.start()
