@@ -2,6 +2,8 @@ extends Control
 
 var title_appeared: bool
 @onready var texture_rect: TextureRect = $TextureRect
+@onready var texture_rect_2: TextureRect = $TextureRect2
+@onready var texture_rect_3: TextureRect = $TextureRect3
 @onready var audio_stream_player_2d: AudioStreamPlayer2D = $AudioStreamPlayer2D
 
 
@@ -26,3 +28,7 @@ func _process(delta: float) -> void:
 		if position.x < 0:
 			audio_stream_player_2d.play()
 			title_appeared = true
+	
+	if title_appeared == true:
+		texture_rect_2.visible = true
+		texture_rect_3.visible = true
