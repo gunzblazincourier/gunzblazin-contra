@@ -45,7 +45,7 @@ func _ready() -> void:
 	sprite_direction = 1.0
 	death_direction = -1.0
 	jump_pressed = true
-	current_bullet_id = bullet_id.F
+	current_bullet_id = bullet_id.R
 	
 	bullet_l_path = load("res://Bullet/bullet_l.tscn")
 	bullet_l = bullet_l_path.instantiate()

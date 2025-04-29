@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=4 uid="uid://bornr0erfd30j"]
+[gd_scene load_steps=7 format=4 uid="uid://bornr0erfd30j"]
 
 [ext_resource type="PackedScene" uid="uid://doa0vkc0fktkh" path="res://Player/player.tscn" id="1_76q5j"]
 [ext_resource type="Texture2D" uid="uid://c3g4ppg5gxtix" path="res://Levels/NES - Contra - Stage 1.png" id="1_h2yge"]
@@ -3924,6 +3924,9 @@ texture = ExtResource("1_h2yge")
 physics_layer_0/collision_layer = 8
 sources/0 = SubResource("TileSetAtlasSource_1bvp3")
 
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_h2yge"]
+normal = Vector2(-5.60985e-08, -1)
+
 [node name="Main" type="Node"]
 script = ExtResource("1_lquwl")
 
@@ -3944,3 +3947,12 @@ drag_left_margin = 1.0
 drag_top_margin = 1.0
 drag_right_margin = 0.0
 drag_bottom_margin = 1.0
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(-186, -26)
+rotation = 1.5708
+collision_layer = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(4.00011, 31)
+shape = SubResource("WorldBoundaryShape2D_h2yge")
