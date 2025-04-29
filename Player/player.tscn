@@ -5495,5 +5495,10 @@ one_shot = true
 [node name="LaserAudioPlayer" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("39_f4lon")
 
+[node name="RayCast2D" type="RayCast2D" parent="."]
+position = Vector2(-5, 32)
+target_position = Vector2(0, 500)
+collision_mask = 8
+
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
 [connection signal="timeout" from="FallThroughTimer" to="." method="_on_fall_through_timer_timeout"]

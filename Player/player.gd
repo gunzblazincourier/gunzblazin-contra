@@ -30,6 +30,7 @@ var bullet_l: Area2D = bullet_l_path.instantiate()
 @onready var fall_through_timer: Timer = $FallThroughTimer
 @onready var machinegun_interval_timer: Timer = $MachinegunIntervalTimer
 @onready var laser_audio_player: AudioStreamPlayer2D = $LaserAudioPlayer
+@onready var ray_cast_2d: RayCast2D = $RayCast2D
 
 # Player cannot change direction until this timer stops; 'feature' of original game
 @onready var fall_direction_timer: Timer = $FallDirectionTimer
@@ -52,6 +53,7 @@ func _ready() -> void:
 
 
 func _process(_delta: float) -> void:
+	print(ray_cast_2d.is_colliding())
 	var look_direction: Vector2 = Input.get_vector("left", "right", "up", "down")
 	var run_direction: float = Input.get_axis("left", "right")
 	
