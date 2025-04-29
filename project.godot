@@ -153,6 +153,14 @@ select={
 ]
 }
 
+[layer_names]
+
+2d_physics/layer_1="Player"
+2d_physics/layer_2="Bullets"
+2d_physics/layer_3="Enemies"
+2d_physics/layer_4="Tilemap"
+2d_physics/layer_5="Boundaries"
+
 [physics]
 
 common/physics_ticks_per_second=144
