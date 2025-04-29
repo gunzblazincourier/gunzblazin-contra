@@ -263,7 +263,7 @@ func _physics_process(delta: float) -> void:
 				velocity.y = JUMP_SPEED
 		states.CROUCH, states.SHOOT_CROUCH:
 			velocity.x = run_direction * RUN_SPEED
-			if Input.is_action_just_pressed("jump"):
+			if ray_cast_2d.is_colliding() and Input.is_action_just_pressed("jump"):
 				collision_shape_2d.disabled = true
 				fall_through_timer.start()
 		states.JUMP, states.JUMP_UP, states.JUMP_DOWN, states.SHOOT_JUMP, \

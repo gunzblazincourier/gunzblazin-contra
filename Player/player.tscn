@@ -5496,7 +5496,7 @@ one_shot = true
 stream = ExtResource("39_f4lon")
 
 [node name="RayCast2D" type="RayCast2D" parent="."]
-position = Vector2(-5, 32)
+position = Vector2(0, 32)
 target_position = Vector2(0, 500)
 collision_mask = 8
 
