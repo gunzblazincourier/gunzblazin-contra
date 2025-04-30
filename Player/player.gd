@@ -1,86 +1,115 @@
 extends CharacterBody2D
+## Protagonist of Contra (named Bill)
+##
+## Handles player states, movement, and collision and hitbox detection
 
-enum states {IDLE, LOOK_UP, CROUCH, RUN, JUMP, JUMP_UP, JUMP_DOWN, FALL, \
+## All states of the player
+enum States {IDLE, LOOK_UP, CROUCH, RUN, JUMP, JUMP_UP, JUMP_DOWN, FALL, \
 		FALL_UP, SHOOT_IDLE, SHOOT_LOOK_UP, SHOOT_CROUCH, SHOOT_RUN, \
 		SHOOT_JUMP, SHOOT_JUMP_UP, SHOOT_JUMP_DOWN, SHOOT_FALL, SHOOT_FALL_UP, \
 		DEATH}
-enum bullet_id {R, M, S, F, L}
+## IDs of types of bullets that can be fired
+enum BulletIDs {R, M, S, F, L}
 
-const RUN_SPEED: int = 69
-const JUMP_SPEED: int = -250
-const DEATH_JUMP_SPEED: int = -175
-const GRAVITY: int = 555
+const RUN_SPEED: int = 69				## Fixed run speed
+const JUMP_SPEED: int = -250			## Fixed jump speed
+const DEATH_JUMP_SPEED: int = -175		## Jump speed specifically DEATH state
+const GRAVITY: int = 555				## Custom gravity for the player
 
-var current_state: states
-var current_bullet_id: bullet_id
-var sprite_direction: float
-var death_direction: float
-var jump_pressed: bool
+var state: States				## Current state from the 'States' enum
+var bullet_id: BulletIDs		## Current bullet ID, indicating equipped weapon
+var sprite_direction: float		## Current sprite direction
+var death_direction: float		## Current death direction
+var is_jump_pressed: bool		## Checks whether player has pressed 'Jump'
 
 # Declared and defined in beginning instead of while shooting (see in _process())
-# in order to allow previously fired laser to despawn when new is fired,
-# like in Contra
-var bullet_l_path: PackedScene = load("res://Bullet/bullet_l.tscn")
-var bullet_l: Area2D = bullet_l_path.instantiate()
+# in order to allow previously fired laser to despawn when new is fired
+## Path to Lasergun bullet (Type L)
+var bullet_l_path: PackedScene
+## Instance of Lasergun bullet (Type L)
+var bullet_l: Area2D
 
+## Animation tree
 @onready var animation_tree: AnimationTree = $AnimationTree
-@onready var shoot_timer: Timer = $ShootTimer
-@onready var muzzle: Marker2D = $Muzzle
+
+## CollisionShape to detect collision
 @onready var collision_shape_2d: CollisionShape2D = $CollisionShape2D
-@onready var fall_through_timer: Timer = $FallThroughTimer
-@onready var machinegun_interval_timer: Timer = $MachinegunIntervalTimer
+
+## Plays sound when Lasergun is fired; needed here unlike other guns which play
+## sound from their scenes of respective bullets since Lasergun only uses single
+## instance (see bullet_l_path and bullet_l), hence sound would only play when
+## fired for the 1st time if played from bullet's scene
 @onready var laser_audio_player: AudioStreamPlayer2D = $LaserAudioPlayer
+
+## RayCast that extends downward beyond game world to detect surface under player
 @onready var ray_cast_2d: RayCast2D = $RayCast2D
 
-# Player cannot change direction until this timer stops; 'feature' of original game
-@onready var fall_direction_timer: Timer = $FallDirectionTimer
+## Controls duration of corresponding SHOOT state
+@onready var shoot_timer: Timer = $ShootTimer
+
+## Decides how long player collision is disabled while falling through floors
+@onready var fall_through_timer: Timer = $FallThroughTimer
+
+## Movement prevented while falling until timer timeouts
+@onready var fall_movement_timer: Timer = $FallMovementTimer
+
+## Controls rate of fire of Machinegun
+@onready var machinegun_interval_timer: Timer = $MachinegunIntervalTimer
+
+## Gun muzzle
+@onready var muzzle: Marker2D = $Muzzle
 
 
 func _ready() -> void:
 	# Slows down/speed up the game
 	#Engine.time_scale = 0.5
 	
+	# Initialization of variables declared at beginning
 	animation_tree.set("parameters/conditions/death", false)
 	animation_tree.active = true
-	current_state = states.JUMP
+	state = States.JUMP
 	sprite_direction = 1.0
 	death_direction = -1.0
-	jump_pressed = true
-	current_bullet_id = bullet_id.R
-	
+	is_jump_pressed = true
+	bullet_id = BulletIDs.R
 	bullet_l_path = load("res://Bullet/bullet_l.tscn")
 	bullet_l = bullet_l_path.instantiate()
 
 
 func _process(_delta: float) -> void:
-	print(ray_cast_2d.is_colliding())
+	## Arrow key(s) currently pressed
 	var look_direction: Vector2 = Input.get_vector("left", "right", "up", "down")
+	
+	## Direction that player is running
 	var run_direction: float = Input.get_axis("left", "right")
 	
-	if run_direction != 0 and fall_direction_timer.is_stopped():
+	# Conditional sprite direction assignment
+	if run_direction != 0 and fall_movement_timer.is_stopped():
 		sprite_direction = run_direction
+	
 	Global.player_sprite_direction = sprite_direction
 	
-	if jump_pressed == true:
+	# Deciding whether 'Jump' was pressed
+	if is_jump_pressed == true:
 		if is_on_floor():
-			jump_pressed = false
+			is_jump_pressed = false
 	else:
 		if velocity.y < 0:
-			jump_pressed = true
+			is_jump_pressed = true
 	
+	# Variables for AnimationTree advance conditions
 	var idle: bool = is_on_floor() and look_direction == Vector2(0, 0)
 	var look_up: bool = is_on_floor() and look_direction == Vector2(0, -1)
 	var crouch: bool = is_on_floor() and look_direction == Vector2(0, 1)
 	var run: bool = is_on_floor() and look_direction.x != 0
-	var jump: bool = not is_on_floor() and jump_pressed and look_direction != Vector2(0, -1) and \
+	var jump: bool = not is_on_floor() and is_jump_pressed and look_direction != Vector2(0, -1) and \
 			look_direction != Vector2(0, 1)
-	var jump_up: bool = not is_on_floor() and jump_pressed and look_direction == Vector2(0, -1)
-	var jump_down: bool = not is_on_floor() and jump_pressed and look_direction == Vector2(0, 1)
-	var fall: bool = not is_on_floor() and not jump_pressed and look_direction != Vector2(0, -1)
-			#look_direction != Vector2(0, 1)
-	var fall_up: bool = not is_on_floor() and not jump_pressed and look_direction == Vector2(0, -1)
-	#var fall_down: bool = not is_on_floor() and not jump_pressed and look_direction == Vector2(0, 1)
+	var jump_up: bool = not is_on_floor() and is_jump_pressed and look_direction == Vector2(0, -1)
+	var jump_down: bool = not is_on_floor() and is_jump_pressed and look_direction == Vector2(0, 1)
+	var fall: bool = not is_on_floor() and not is_jump_pressed and look_direction != Vector2(0, -1)
+	var fall_up: bool = not is_on_floor() and not is_jump_pressed and look_direction == Vector2(0, -1)
 	
+	# Assigning values to AnimationTree variables using respective script variables
 	animation_tree.set("parameters/conditions/idle", idle)
 	animation_tree.set("parameters/conditions/look_up", look_up)
 	animation_tree.set("parameters/conditions/crouch", crouch)
@@ -90,8 +119,8 @@ func _process(_delta: float) -> void:
 	animation_tree.set("parameters/conditions/jump_down", jump_down)
 	animation_tree.set("parameters/conditions/fall", fall)
 	animation_tree.set("parameters/conditions/fall_up", fall_up)
-	#animation_tree.set("parameters/conditions/fall_down", fall_down)
 	
+	# Deciding simple blend positions
 	animation_tree.set("parameters/Idle/blend_position", sprite_direction)
 	animation_tree.set("parameters/LookUp/blend_position", sprite_direction)
 	animation_tree.set("parameters/Crouch/blend_position", sprite_direction)
@@ -99,7 +128,6 @@ func _process(_delta: float) -> void:
 	animation_tree.set("parameters/JumpUp/blend_position", sprite_direction)
 	animation_tree.set("parameters/JumpDown/blend_position", sprite_direction)
 	animation_tree.set("parameters/FallUp/blend_position", sprite_direction)
-	#animation_tree.set("parameters/FallDown/blend_position", sprite_direction)
 	animation_tree.set("parameters/ShootIdle/blend_position", sprite_direction)
 	animation_tree.set("parameters/ShootLookUp/blend_position", sprite_direction)
 	animation_tree.set("parameters/ShootCrouch/blend_position", sprite_direction)
@@ -107,8 +135,8 @@ func _process(_delta: float) -> void:
 	animation_tree.set("parameters/ShootJumpUp/blend_position", sprite_direction)
 	animation_tree.set("parameters/ShootJumpDown/blend_position", sprite_direction)
 	animation_tree.set("parameters/ShootFallUp/blend_position", sprite_direction)
-	#animation_tree.set("parameters/ShootFallDown/blend_position", sprite_direction)
 	
+	# Dynamic blend positions
 	if look_direction == Vector2.ZERO:
 		animation_tree.set("parameters/Jump/blend_position", Vector2(sprite_direction, 0))
 		animation_tree.set("parameters/ShootJump/blend_position", Vector2(sprite_direction, 0))
@@ -117,90 +145,88 @@ func _process(_delta: float) -> void:
 	else:
 		animation_tree.set("parameters/Jump/blend_position", look_direction)
 		animation_tree.set("parameters/ShootJump/blend_position", look_direction)
-		#animation_tree.set("parameters/Fall/blend_position", look_direction)
-		#animation_tree.set("parameters/ShootFall/blend_position", look_direction)
-		
-		if look_direction == Vector2(0, 1) or not fall_direction_timer.is_stopped():
+		if look_direction == Vector2(0, 1) or not fall_movement_timer.is_stopped():
 			animation_tree.set("parameters/Fall/blend_position", Vector2(sprite_direction, 0))
 			animation_tree.set("parameters/ShootFall/blend_position", Vector2(sprite_direction, 0))
 		else:
 			animation_tree.set("parameters/Fall/blend_position", look_direction)
 			animation_tree.set("parameters/ShootFall/blend_position", look_direction)
 	
-	# Basically gets AnimationNodeStateMachine from AnimationTree
+	# Gets AnimationNodeStateMachine from AnimationTree
 	var state_machine: AnimationNodeStateMachinePlayback = animation_tree.get("parameters/playback")
 	
 	# Current state in AnimationNodeStateMachine
 	var state_machine_state: StringName = state_machine.get_current_node()
 	
+	# Matching current state in script to that in AnimationTree
 	match state_machine_state:
 		"Idle":
-			current_state = states.IDLE
+			state = States.IDLE
 		"LookUp":
-			current_state = states.LOOK_UP
+			state = States.LOOK_UP
 		"Crouch":
-			current_state = states.CROUCH
+			state = States.CROUCH
 		"Run":
-			current_state = states.RUN
+			state = States.RUN
 		"Jump":
-			current_state = states.JUMP
+			state = States.JUMP
 		"JumpUp":
-			current_state = states.JUMP_UP
+			state = States.JUMP_UP
 		"JumpDown":
-			current_state = states.JUMP_DOWN
+			state = States.JUMP_DOWN
 		"Fall":
-			current_state = states.FALL
+			state = States.FALL
 		"FallUp":
-			current_state = states.FALL_UP
+			state = States.FALL_UP
 		#"FallDown":
-			#current_state = states.FALL_DOWN
+			#state = States.FALL_DOWN
 		"ShootIdle":
-			current_state = states.SHOOT_IDLE
+			state = States.SHOOT_IDLE
 		"ShootLookUp":
-			current_state = states.SHOOT_LOOK_UP
+			state = States.SHOOT_LOOK_UP
 		"ShootCrouch":
-			current_state = states.SHOOT_CROUCH
+			state = States.SHOOT_CROUCH
 		"ShootRun":
-			current_state = states.SHOOT_RUN
+			state = States.SHOOT_RUN
 		"ShootJump":
-			current_state = states.SHOOT_JUMP
+			state = States.SHOOT_JUMP
 		"ShootJumpUp":
-			current_state = states.SHOOT_JUMP_UP
+			state = States.SHOOT_JUMP_UP
 		"ShootJumpDown":
-			current_state = states.SHOOT_JUMP_DOWN
+			state = States.SHOOT_JUMP_DOWN
 		"ShootFall":
-			current_state = states.SHOOT_FALL
+			state = States.SHOOT_FALL
 		"ShootFallUp":
-			current_state = states.SHOOT_FALL_UP
-		#"ShootFallDown":
-			#current_state = states.SHOOT_FALL_DOWN
+			state = States.SHOOT_FALL_UP
 		"Death":
-			current_state = states.DEATH
+			state = States.DEATH
 	
+	# Weapon switching
 	if Input.is_action_just_pressed("1"):
-		current_bullet_id = bullet_id.R
+		bullet_id = BulletIDs.R
 	elif Input.is_action_just_pressed("2"):
-		current_bullet_id = bullet_id.S
+		bullet_id = BulletIDs.S
 	elif Input.is_action_just_pressed("3"):
-		current_bullet_id = bullet_id.L
+		bullet_id = BulletIDs.L
 	elif Input.is_action_just_pressed("4"):
-		current_bullet_id = bullet_id.M
+		bullet_id = BulletIDs.M
 	elif Input.is_action_just_pressed("5"):
-		current_bullet_id = bullet_id.F
+		bullet_id = BulletIDs.F
 	
-	match current_state:
-		states.DEATH:
+	# Weapon behaviour
+	match state:
+		States.DEATH:
 			pass
 		_:
-			match current_bullet_id:
-				bullet_id.R:
+			match bullet_id:
+				BulletIDs.R:
 					if Input.is_action_just_pressed("shoot"):
 						shoot_timer.start()
 						var bullet_r_path: PackedScene = load("res://Bullet/bullet_r.tscn")
 						var bullet_r: Area2D = bullet_r_path.instantiate()
 						spawn_bullet(bullet_r)
 				
-				bullet_id.S:
+				BulletIDs.S:
 					if Input.is_action_just_pressed("shoot"):
 						shoot_timer.start()
 						var bullet_s_path: PackedScene = load("res://Bullet/bullet_s.tscn")
@@ -221,13 +247,14 @@ func _process(_delta: float) -> void:
 						bullet_s4.rotate(0.52)
 						bullet_s5.rotate(5.76)
 				
-				bullet_id.L:
+				BulletIDs.L:
 					if Input.is_action_just_pressed("shoot"):
 						shoot_timer.start()
 						laser_audio_player.play()
 						spawn_bullet(bullet_l)
 				
-				bullet_id.M:
+				BulletIDs.M:
+					# NOTE: 'pressed' instead of 'just_pressed'
 					if Input.is_action_pressed("shoot"):
 						shoot_timer.start()
 						if machinegun_interval_timer.is_stopped():
@@ -236,7 +263,7 @@ func _process(_delta: float) -> void:
 							spawn_bullet(bullet_m)
 							machinegun_interval_timer.start()
 				
-				bullet_id.F:
+				BulletIDs.F:
 					if Input.is_action_just_pressed("shoot"):
 						shoot_timer.start()
 						var bullet_f_path: PackedScene = load("res://Bullet/bullet_f.tscn")
@@ -249,36 +276,38 @@ func _process(_delta: float) -> void:
 
 
 func _physics_process(delta: float) -> void:
-	Global.player_global_position = global_position
+	## Direction that player is running
 	var run_direction: float = Input.get_axis("left", "right")
 	
-	match current_state:
-		states.IDLE, states.LOOK_UP, states.SHOOT_IDLE, states.SHOOT_LOOK_UP:
+	Global.player_global_position = global_position
+	
+	match state:
+		States.IDLE, States.LOOK_UP, States.SHOOT_IDLE, States.SHOOT_LOOK_UP:
 			velocity.x = move_toward(velocity.x, 0, RUN_SPEED)
 			if Input.is_action_just_pressed("jump"):
 				velocity.y = JUMP_SPEED
-		states.RUN, states.SHOOT_RUN:
+		States.RUN, States.SHOOT_RUN:
 			velocity.x = run_direction * RUN_SPEED
 			if Input.is_action_just_pressed("jump"):
 				velocity.y = JUMP_SPEED
-		states.CROUCH, states.SHOOT_CROUCH:
+		States.CROUCH, States.SHOOT_CROUCH:
 			velocity.x = run_direction * RUN_SPEED
 			if ray_cast_2d.is_colliding() and Input.is_action_just_pressed("jump"):
 				collision_shape_2d.disabled = true
 				fall_through_timer.start()
-		states.JUMP, states.JUMP_UP, states.JUMP_DOWN, states.SHOOT_JUMP, \
-				states.SHOOT_JUMP_UP, states.SHOOT_JUMP_DOWN:
+		States.JUMP, States.JUMP_UP, States.JUMP_DOWN, States.SHOOT_JUMP, \
+				States.SHOOT_JUMP_UP, States.SHOOT_JUMP_DOWN:
 			if run_direction != 0:
 				velocity.x = run_direction * RUN_SPEED
 			velocity.y += GRAVITY * delta
-		states.FALL, states.FALL_UP, states.SHOOT_FALL, states.SHOOT_FALL_UP:
+		States.FALL, States.FALL_UP, States.SHOOT_FALL, States.SHOOT_FALL_UP:
 			if velocity.y < 10:
-				fall_direction_timer.start()
-			if fall_direction_timer.is_stopped():
+				fall_movement_timer.start()
+			if fall_movement_timer.is_stopped():
 				if run_direction != 0:
 					velocity.x = run_direction * RUN_SPEED
 			velocity.y += GRAVITY * delta
-		states.DEATH:
+		States.DEATH:
 			velocity.y += GRAVITY * delta
 			if not is_on_floor():
 				velocity.x = death_direction * RUN_SPEED
@@ -291,9 +320,8 @@ func _physics_process(delta: float) -> void:
 	# To prevent 'return value discarded' error
 	if mas:
 		pass
-	#print(fall_direction_timer.time_left)
 
-
+## Death when player collides with enemy or killbox
 func _on_area_2d_area_entered(area: Area2D) -> void:
 	if area.is_in_group("enemy") or area.is_in_group("killbox"):
 		animation_tree.set("parameters/conditions/death", true)
@@ -302,10 +330,11 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 		death_direction = sprite_direction * -1
 
 
+## Collision reenabled
 func _on_fall_through_timer_timeout() -> void:
 	collision_shape_2d.disabled = false
 
-
+## Child added to scene tree, position and rotation set to muzzle's
 func spawn_bullet(bullet: Area2D) -> void:
 	owner.add_child(bullet)
 	bullet.position = muzzle.global_position
