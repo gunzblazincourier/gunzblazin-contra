@@ -1,69 +1,100 @@
 extends Control
+## Title screen
+##
+## Scripting from entry of title to starting the game
 
-var title_appeared: bool
-var timer_started: bool
+## Has title screen fully appeared, with all elements visible
+var has_title_appeared: bool
 
-@onready var texture_rect: TextureRect = $TextureRect
-@onready var texture_rect_2: TextureRect = $TextureRect2
-@onready var texture_rect_3: TextureRect = $TextureRect3
-@onready var texture_rect_5: TextureRect = $TextureRect5
-@onready var texture_rect_6: TextureRect = $TextureRect6
-@onready var audio_stream_player_2d: AudioStreamPlayer2D = $AudioStreamPlayer2D
-@onready var timer: Timer = $Timer
-@onready var timer_2: Timer = $Timer2
+## Whether '1 Player' or '2 Player' has been selected
+var is_option_selected: bool
+
+## The characters of Contra, Bill and Lance
+@onready var bill_and_lance: TextureRect = $BillAndLance
+
+## Cursor to select 'Player 1' or 'Platyer 2' option
+@onready var cursor: TextureRect = $Cursor
+
+## '1 Player' text on title
+@onready var player_1_text: TextureRect = $Player1Text
+
+## '2 Player' text on title
+@onready var player_2_text: TextureRect = $Player2Text
+
+## Title music
+@onready var title_music: AudioStreamPlayer2D = $TitleMusic
+
+## How long the title screen stays after selecting option after music has
+## finished playing
+@onready var transition_duration_timer: Timer = $TransitionDurationTimer
+
+## Speed with which selected option flashes
+@onready var option_flashing_timer: Timer = $OptionFlashingTimer
 
 
-# Called when the node enters the scene tree for the first time.
+## Initialization of the boolean variables declared in beginning
 func _ready() -> void:
-	title_appeared = false
-	timer_started = false
-	#pass
+	has_title_appeared = false
+	is_option_selected = false
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	if title_appeared == true:
-		texture_rect_2.visible = true
-		texture_rect_3.visible = true
-		if timer_started == false:
+	# Cursor and BillAndLance picture appears when title screen is fully in view 
+	if has_title_appeared == true:
+		bill_and_lance.visible = true
+		cursor.visible = true
+		# Option selection allowed unless already selected
+		if is_option_selected == false:
 			if Input.is_action_just_pressed("select"):
-				if texture_rect_3.position == Vector2(35, 166):
-					texture_rect_3.position = Vector2(35, 182)
-				elif texture_rect_3.position == Vector2(35, 182):
-					texture_rect_3.position = Vector2(35, 166)
-		if Input.is_action_just_pressed("start") and timer_started == false:
-			timer.start()
-			timer_2.start()
-			timer_started = true
+				if cursor.position == Vector2(35, 166):
+					cursor.position = Vector2(35, 182)
+				elif cursor.position == Vector2(35, 182):
+					cursor.position = Vector2(35, 166)
 		
-		if timer_started == true:
-			if timer.is_stopped() and not audio_stream_player_2d.playing:
-				timer_2.one_shot = true
+		# Confirm option
+		if Input.is_action_just_pressed("start") and is_option_selected == false:
+			transition_duration_timer.start()
+			option_flashing_timer.start()
+			is_option_selected = true
+		
+		# Proceed to next scene
+		# NOTE: Not implemented; presently only prints basic message
+		if is_option_selected == true:
+			if transition_duration_timer.is_stopped() and not title_music.playing:
+				option_flashing_timer.one_shot = true
 				print("BEGIN")
 	
+	# Title screen sliding right-to-left
 	if position.x > 0:
 		position.x -= 64 * delta
 	else:
 		position.x = 0
 	
+	# Snaps screen to final position when 'Start' or 'Select' key is pressed
+	# Position is set to a small negative value here instead of 0 since a
+	# negative value is a trigger for certain actions, like playing of music.
+	# The last x-position of the screen is marginally negative even when nothing
+	# is pressed and sliding proceeds uninterrupted, before setting itself to 0.
 	if Input.is_action_just_pressed("start") or Input.is_action_just_pressed("select") and \
-			title_appeared == false:
+			has_title_appeared == false:
 		position.x = -0.3
 	
-	if title_appeared == false:
+	# Plays title music and sets related boolean variable title has appeared
+	if has_title_appeared == false:
 		if position.x < 0:
-			audio_stream_player_2d.play()
-			title_appeared = true
+			title_music.play()
+			has_title_appeared = true
 
 
+## Selected option flashes by toggling visibility of the text upon timeout
 func _on_timer_2_timeout() -> void:
-	if texture_rect_3.position == Vector2(35, 166):
-		if texture_rect_5.visible == false:
-			texture_rect_5.visible = true
+	if cursor.position == Vector2(35, 166):
+		if player_1_text.visible == false:
+			player_1_text.visible = true
 		else:
-			texture_rect_5.visible = false
-	if texture_rect_3.position == Vector2(35, 182):
-		if texture_rect_6.visible == false:
-			texture_rect_6.visible = true
+			player_1_text.visible = false
+	if cursor.position == Vector2(35, 182):
+		if player_2_text.visible == false:
+			player_2_text.visible = true
 		else:
-			texture_rect_6.visible = false
+			player_2_text.visible = false

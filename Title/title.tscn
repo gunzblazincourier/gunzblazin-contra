@@ -20,13 +20,13 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_s6sku")
 
-[node name="TextureRect" type="TextureRect" parent="."]
+[node name="Base" type="TextureRect" parent="."]
 layout_mode = 0
 offset_right = 256.0
 offset_bottom = 240.0
 texture = ExtResource("1_hvesb")
 
-[node name="TextureRect2" type="TextureRect" parent="."]
+[node name="BillAndLance" type="TextureRect" parent="."]
 visible = false
 layout_mode = 0
 offset_left = 139.0
@@ -35,7 +35,7 @@ offset_right = 227.0
 offset_bottom = 193.0
 texture = ExtResource("3_toehp")
 
-[node name="TextureRect3" type="TextureRect" parent="."]
+[node name="Cursor" type="TextureRect" parent="."]
 visible = false
 layout_mode = 0
 offset_left = 35.0
@@ -44,14 +44,14 @@ offset_right = 53.0
 offset_bottom = 178.0
 texture = ExtResource("4_iliki")
 
-[node name="TextureRect4" type="TextureRect" parent="."]
+[node name="Reference" type="TextureRect" parent="."]
 visible = false
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
 texture = ExtResource("5_n1pb7")
 
-[node name="TextureRect5" type="TextureRect" parent="."]
+[node name="Player1Text" type="TextureRect" parent="."]
 layout_mode = 0
 offset_left = 57.0
 offset_top = 168.0
@@ -59,7 +59,7 @@ offset_right = 120.0
 offset_bottom = 176.0
 texture = ExtResource("6_n1pb7")
 
-[node name="TextureRect6" type="TextureRect" parent="."]
+[node name="Player2Text" type="TextureRect" parent="."]
 layout_mode = 0
 offset_left = 56.0
 offset_top = 184.0
@@ -67,14 +67,14 @@ offset_right = 128.0
 offset_bottom = 191.0
 texture = ExtResource("7_gpixp")
 
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+[node name="TitleMusic" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("3_7p1qe")
 
-[node name="Timer" type="Timer" parent="."]
+[node name="TransitionDurationTimer" type="Timer" parent="."]
 wait_time = 1.1
 one_shot = true
 
-[node name="Timer2" type="Timer" parent="."]
+[node name="OptionFlashingTimer" type="Timer" parent="."]
 wait_time = 0.2
 
-[connection signal="timeout" from="Timer2" to="." method="_on_timer_2_timeout"]
+[connection signal="timeout" from="OptionFlashingTimer" to="." method="_on_timer_2_timeout"]
