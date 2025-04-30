@@ -3,6 +3,8 @@ extends Node
 @onready var player: CharacterBody2D = $Player
 @onready var camera_2d: Camera2D = $Camera2D
 @onready var static_body_2d: StaticBody2D = $StaticBody2D
+@onready var timer: Timer = $Timer
+@onready var tile_map_layer_2: TileMapLayer = $TileMapLayer2
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -12,3 +14,10 @@ func _process(_delta: float) -> void:
 
 func _physics_process(_delta: float) -> void:
 	static_body_2d.position.x = camera_2d.get_screen_center_position().x - 88
+
+
+func _on_timer_timeout() -> void:
+	if tile_map_layer_2.visible == true:
+		tile_map_layer_2.visible = false
+	else:
+		tile_map_layer_2.visible = true
