@@ -1,7 +1,10 @@
-zophar.net
-35, 166
-35, 182
-
-
-0 161 255 255
-00a1ff
+Godot: Engine, docs
+Brakeys: For kickstarting my Godot journey
+Spriters Resource: Sprites
+Zophar's domain: Music
+Sounds resource: SFX
+101 Soundboards: SFX
+Contra Anniversary Collection: Providing the game
+Mesen: For running the game with advanced testing and debugging features like
+rewind, slowmo and tile viewers
+All Godot forums and reddit therads on the internet for help when stuck
