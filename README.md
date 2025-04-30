@@ -1,6 +1,6 @@
 # Contra: GunzBlazin Edition
 
-This GunzBlazin edition of the 1987 Nintendo Entertainment System (NES) game Contra is a recreation of it on the Godot game engine. It aims to replicate game behaviour and visuals on a modern platform with higher framerate and momory limits, free from NES limitations
+This GunzBlazin edition of the 1987 Nintendo Entertainment System (NES) game Contra is a recreation of it on the Godot game engine. *Currently in active development*, It aims to replicate game behaviour and visuals on a modern platform with higher framerate and momory limits, free from NES limitations
 
 ## What exactly is Contra?
 **"Pitted against the galaxy's fiercest foe, you either win or the whole world loses."** - *American/European box cover tagline*
