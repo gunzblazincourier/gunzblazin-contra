@@ -5501,4 +5501,4 @@ position = Vector2(0.5, 11.5)
 shape = SubResource("RectangleShape2D_tvn1x")
 
 [connection signal="timeout" from="FallThroughTimer" to="." method="_on_fall_through_timer_timeout"]
-[connection signal="area_entered" from="Hitbox" to="." method="_on_area_2d_area_entered"]
+[connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]

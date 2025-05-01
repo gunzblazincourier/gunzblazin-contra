@@ -323,7 +323,7 @@ func _physics_process(delta: float) -> void:
 		pass
 
 ## Death when player collides with enemy or killbox
-func _on_area_2d_area_entered(area: Area2D) -> void:
+func _on_hitbox_area_entered(area: Area2D) -> void:
 	if area.is_in_group("enemy") or area.is_in_group("killbox"):
 		animation_tree.set("parameters/conditions/death", true)
 		animation_tree.set("parameters/Death/blend_position", sprite_direction)
