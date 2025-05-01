@@ -96,7 +96,7 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(129, 20)]
+"values": [Vector2(129, 16)]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
@@ -108,7 +108,7 @@ tracks/3/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(3.5, -5)]
+"values": [Vector2(3.5, 0)]
 }
 
 [sub_resource type="Animation" id="Animation_6kmhe"]
@@ -148,8 +148,8 @@ tracks/2/loop_wrap = true
 tracks/2/keys = {
 "times": PackedFloat32Array(0, 1, 2),
 "transitions": PackedFloat32Array(1, 1, 1),
-"update": 1,
-"values": [Vector2(100, 20), Vector2(68, 20), Vector2(36, 20)]
+"update": 0,
+"values": [Vector2(99, 16), Vector2(67, 16), Vector2(35, 16)]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
@@ -160,8 +160,8 @@ tracks/3/loop_wrap = true
 tracks/3/keys = {
 "times": PackedFloat32Array(0, 1, 2),
 "transitions": PackedFloat32Array(1, 1, 1),
-"update": 1,
-"values": [Vector2(18, -5), Vector2(34, -5), Vector2(50, -5)]
+"update": 0,
+"values": [Vector2(18.5, 0), Vector2(34.5, 0), Vector2(50.5, 0)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_mpsqm"]
@@ -175,6 +175,7 @@ _data = {
 size = Vector2(100, 20)
 
 [node name="ExplodingBridge" type="StaticBody2D"]
+collision_layer = 8
 script = ExtResource("1_b7thi")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

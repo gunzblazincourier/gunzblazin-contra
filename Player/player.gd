@@ -322,6 +322,7 @@ func _physics_process(delta: float) -> void:
 	if mas:
 		pass
 
+
 ## Death when player collides with enemy or killbox
 func _on_hitbox_area_entered(area: Area2D) -> void:
 	if area.is_in_group("enemy") or area.is_in_group("killbox"):
@@ -334,6 +335,7 @@ func _on_hitbox_area_entered(area: Area2D) -> void:
 ## Collision reenabled
 func _on_fall_through_timer_timeout() -> void:
 	collision_shape_2d.disabled = false
+
 
 ## Child added to scene tree, position and rotation set to muzzle's
 func spawn_bullet(bullet: Area2D) -> void:
