@@ -77,7 +77,7 @@ tracks/4/keys = {
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("Explosion2:play")
+tracks/5/path = NodePath("Explosion:play")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
@@ -238,7 +238,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Explosion2:play")
+tracks/2/path = NodePath("Explosion:play")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -675,8 +675,8 @@ position = Vector2(9, 0)
 target_position = Vector2(0, 16)
 collision_mask = 8
 
-[node name="Explosion2" parent="." instance=ExtResource("10_iixfa")]
-
 [node name="DeathExplosionSFX" type="AudioStreamPlayer2D" parent="."]
+
+[node name="Explosion" parent="." instance=ExtResource("10_iixfa")]
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
