@@ -1,4 +1,4 @@
-[gd_scene load_steps=257 format=4 uid="uid://doa0vkc0fktkh"]
+[gd_scene load_steps=258 format=4 uid="uid://doa0vkc0fktkh"]
 
 [ext_resource type="Script" uid="uid://c0ak0nhauaj7u" path="res://Player/player.gd" id="1_ac1dp"]
 [ext_resource type="Texture2D" uid="uid://7v13jiiro62o" path="res://Player/Bill_Crouch.png" id="2_hdvrd"]
@@ -38,6 +38,7 @@
 [ext_resource type="Texture2D" uid="uid://b7lwq6g501j7j" path="res://Player/Bill_Death2.png" id="35_q8i7e"]
 [ext_resource type="Texture2D" uid="uid://l36grtyc6fnj" path="res://Player/Bill_Death3.png" id="36_60lwu"]
 [ext_resource type="Texture2D" uid="uid://271kd7v0hssl" path="res://Player/Bill_Death4.png" id="37_3x2ap"]
+[ext_resource type="AudioStream" uid="uid://d00hw721o6xll" path="res://Sounds/Contra SFX (18).wav" id="38_f4lon"]
 
 [sub_resource type="Animation" id="Animation_tvn1x"]
 length = 0.001
@@ -412,7 +413,7 @@ tracks/9/keys = {
 
 [sub_resource type="Animation" id="Animation_6q8cq"]
 resource_name = "death_left"
-length = 0.5
+length = 1.4
 step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -486,10 +487,25 @@ tracks/5/keys = {
 "update": 0,
 "values": [Vector2(-0.25, 0)]
 }
+tracks/6/type = "audio"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("DeathSound")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("38_f4lon")
+}],
+"times": PackedFloat32Array(0)
+}
+tracks/6/use_blend = true
 
 [sub_resource type="Animation" id="Animation_g302k"]
 resource_name = "death_right"
-length = 0.5
+length = 1.4
 step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -563,6 +579,21 @@ tracks/5/keys = {
 "update": 0,
 "values": [Vector2(0.25, 0)]
 }
+tracks/6/type = "audio"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("DeathSound")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("38_f4lon")
+}],
+"times": PackedFloat32Array(0)
+}
+tracks/6/use_blend = true
 
 [sub_resource type="Animation" id="Animation_yliwm"]
 resource_name = "fall_down_diagonal_left"
@@ -5479,6 +5510,8 @@ offset = Vector2(0, -1)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-4.5, 1)
 shape = SubResource("RectangleShape2D_hmlbq")
+
+[node name="DeathSound" type="AudioStreamPlayer2D" parent="."]
 
 [node name="LaserAudioPlayer" type="AudioStreamPlayer2D" parent="."]
 stream = SubResource("AudioStreamMP3_iyprq")
