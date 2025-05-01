@@ -24,6 +24,9 @@ tile_set = ExtResource("2_h2yge")
 [node name="ExplodingBridge" parent="." instance=ExtResource("3_1bvp3")]
 position = Vector2(604, -8)
 
+[node name="ExplodingBridge2" parent="." instance=ExtResource("3_1bvp3")]
+position = Vector2(892, -8)
+
 [node name="Player" parent="." instance=ExtResource("1_76q5j")]
 position = Vector2(-159, -99)
 
