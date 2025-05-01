@@ -78,10 +78,10 @@ autoplay = "shoot_straight"
 position = Vector2(-1, 0)
 shape = SubResource("RectangleShape2D_5f3y1")
 
-[node name="Marker2D" type="Marker2D" parent="."]
+[node name="Muzzle" type="Marker2D" parent="."]
 position = Vector2(14, -11)
 
-[node name="Sprite2D" type="Sprite2D" parent="Marker2D"]
+[node name="Sprite2D" type="Sprite2D" parent="Muzzle"]
 visible = false
 position = Vector2(-0.453125, -0.453125)
 scale = Vector2(0.921875, 0.921875)
@@ -89,7 +89,6 @@ texture = ExtResource("9_3ai5x")
 offset = Vector2(3, 3)
 
 [node name="Timer" type="Timer" parent="."]
-one_shot = true
 autostart = true
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
