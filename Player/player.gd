@@ -35,10 +35,17 @@ var bullet_l: Area2D
 ## CollisionShape to detect collision
 @onready var collision_shape_2d: CollisionShape2D = $CollisionShape2D
 
-## Plays sound when Lasergun is fired; needed here unlike other guns which play
-## sound from their scenes of respective bullets since Lasergun only uses single
-## instance (see bullet_l_path and bullet_l), hence sound would only play when
-## fired for the 1st time if played from bullet's scene
+# Sound plays from player scene instead of respective bullet scenes since
+# SFX abruptly stop when bullet queue_frees
+## Plays the Regulargun firing sound effect
+@onready var regulargun_sfx: AudioStreamPlayer2D = $RegulargunSFX
+## Plays the Machinegun firing sound effect
+@onready var machinegun_sfx: AudioStreamPlayer2D = $MachinegunSFX
+## Plays the Spreadgun firing sound effect
+@onready var spreadgun_sfx: AudioStreamPlayer2D = $SpreadgunSFX
+
+
+## Plays the Lasergun firing sound effect
 @onready var lasergun_sfx: AudioStreamPlayer2D = $LasergunSFX
 
 ## RayCast that extends downward beyond game world to detect surface under player
@@ -102,12 +109,16 @@ func _process(_delta: float) -> void:
 	var look_up: bool = is_on_floor() and look_direction == Vector2(0, -1)
 	var crouch: bool = is_on_floor() and look_direction == Vector2(0, 1)
 	var run: bool = is_on_floor() and look_direction.x != 0
-	var jump: bool = not is_on_floor() and is_jump_pressed and look_direction != Vector2(0, -1) and \
-			look_direction != Vector2(0, 1)
-	var jump_up: bool = not is_on_floor() and is_jump_pressed and look_direction == Vector2(0, -1)
-	var jump_down: bool = not is_on_floor() and is_jump_pressed and look_direction == Vector2(0, 1)
-	var fall: bool = not is_on_floor() and not is_jump_pressed and look_direction != Vector2(0, -1)
-	var fall_up: bool = not is_on_floor() and not is_jump_pressed and look_direction == Vector2(0, -1)
+	var jump: bool = not is_on_floor() and is_jump_pressed and \
+			look_direction != Vector2(0, -1) and look_direction != Vector2(0, 1)
+	var jump_up: bool = not is_on_floor() and is_jump_pressed and \
+			look_direction == Vector2(0, -1)
+	var jump_down: bool = not is_on_floor() and is_jump_pressed and \
+			look_direction == Vector2(0, 1)
+	var fall: bool = not is_on_floor() and not is_jump_pressed and \
+			look_direction != Vector2(0, -1)
+	var fall_up: bool = not is_on_floor() and not is_jump_pressed and \
+			look_direction == Vector2(0, -1)
 	
 	# Assigning values to AnimationTree variables using respective script variables
 	animation_tree.set("parameters/conditions/idle", idle)

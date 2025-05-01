@@ -1,4 +1,4 @@
-[gd_scene load_steps=258 format=4 uid="uid://doa0vkc0fktkh"]
+[gd_scene load_steps=261 format=4 uid="uid://doa0vkc0fktkh"]
 
 [ext_resource type="Script" uid="uid://c0ak0nhauaj7u" path="res://Player/player.gd" id="1_ac1dp"]
 [ext_resource type="Texture2D" uid="uid://7v13jiiro62o" path="res://Player/Bill_Crouch.png" id="2_hdvrd"]
@@ -39,6 +39,9 @@
 [ext_resource type="Texture2D" uid="uid://l36grtyc6fnj" path="res://Player/Bill_Death3.png" id="36_60lwu"]
 [ext_resource type="Texture2D" uid="uid://271kd7v0hssl" path="res://Player/Bill_Death4.png" id="37_3x2ap"]
 [ext_resource type="AudioStream" uid="uid://d00hw721o6xll" path="res://Sounds/Contra SFX (18).wav" id="38_f4lon"]
+[ext_resource type="AudioStream" uid="uid://do2sywo5syftx" path="res://Sounds/Contra SFX (10).wav" id="39_6pogt"]
+[ext_resource type="AudioStream" uid="uid://dyyi1ktxybnva" path="res://Sounds/Contra SFX (14).wav" id="40_ie76m"]
+[ext_resource type="AudioStream" uid="uid://bshtxkjws5b4r" path="res://Sounds/Contra SFX (29).wav" id="41_dy65m"]
 
 [sub_resource type="Animation" id="Animation_tvn1x"]
 length = 0.001
@@ -5512,6 +5515,15 @@ position = Vector2(-4.5, 1)
 shape = SubResource("RectangleShape2D_hmlbq")
 
 [node name="DeathSound" type="AudioStreamPlayer2D" parent="."]
+
+[node name="RegulargunSFX" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("39_6pogt")
+
+[node name="MachinegunSFX" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("40_ie76m")
+
+[node name="SpreadgunSFX" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("41_dy65m")
 
 [node name="LasergunSFX" type="AudioStreamPlayer2D" parent="."]
 stream = SubResource("AudioStreamMP3_iyprq")
