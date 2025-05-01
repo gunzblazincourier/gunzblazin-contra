@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://dmwhot7tnyix7"]
+[gd_scene load_steps=18 format=3 uid="uid://dmwhot7tnyix7"]
 
 [ext_resource type="Script" uid="uid://85xoh0a3c016" path="res://Levels/exploding_bridge.gd" id="1_b7thi"]
 [ext_resource type="Texture2D" uid="uid://cmm0ikllrelyk" path="res://Levels/Bridge_0.png" id="1_eqe6b"]
@@ -8,6 +8,9 @@
 [ext_resource type="Texture2D" uid="uid://b60xcudv2yxx7" path="res://Levels/Bridge_4.png" id="4_0x3rl"]
 [ext_resource type="AudioStream" uid="uid://clusvsyt1wqp8" path="res://Sounds/Bakhua1.wav" id="7_rs6kr"]
 [ext_resource type="PackedScene" uid="uid://7e1nqiyolr2l" path="res://Explosions/explosion.tscn" id="8_0x3rl"]
+[ext_resource type="Texture2D" uid="uid://dmrcmom6k30s2" path="res://Levels/BridgeLight_0.png" id="8_vlpmt"]
+[ext_resource type="Texture2D" uid="uid://0wkvodvtvmkt" path="res://Levels/BridgeLight_1.png" id="9_xc77o"]
+[ext_resource type="Texture2D" uid="uid://biebf1tc0u4yv" path="res://Levels/BridgeLight_2.png" id="10_vxteg"]
 
 [sub_resource type="Animation" id="Animation_534po"]
 length = 0.001
@@ -272,7 +275,7 @@ tracks/3/keys = {
 [sub_resource type="Animation" id="Animation_6kmhe"]
 resource_name = "explosion"
 length = 4.0
-step = 0.05
+step = 1.0
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -477,6 +480,62 @@ tracks/16/keys = {
 "update": 1,
 "values": [true]
 }
+tracks/17/type = "method"
+tracks/17/imported = false
+tracks/17/enabled = true
+tracks/17/path = NodePath("Light")
+tracks/17/interp = 1
+tracks/17/loop_wrap = true
+tracks/17/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"queue_free"
+}]
+}
+tracks/18/type = "method"
+tracks/18/imported = false
+tracks/18/enabled = true
+tracks/18/path = NodePath("Light2")
+tracks/18/interp = 1
+tracks/18/loop_wrap = true
+tracks/18/keys = {
+"times": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"queue_free"
+}]
+}
+tracks/19/type = "method"
+tracks/19/imported = false
+tracks/19/enabled = true
+tracks/19/path = NodePath("Light3")
+tracks/19/interp = 1
+tracks/19/loop_wrap = true
+tracks/19/keys = {
+"times": PackedFloat32Array(2),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"queue_free"
+}]
+}
+tracks/20/type = "method"
+tracks/20/imported = false
+tracks/20/enabled = true
+tracks/20/path = NodePath("Light4")
+tracks/20/interp = 1
+tracks/20/loop_wrap = true
+tracks/20/keys = {
+"times": PackedFloat32Array(3),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"queue_free"
+}]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_mpsqm"]
 _data = {
@@ -487,6 +546,26 @@ _data = {
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kan6l"]
 size = Vector2(100, 20)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_0x3rl"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("8_vlpmt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_xc77o")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_vxteg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_xc77o")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [node name="ExplodingBridge" type="StaticBody2D"]
 collision_layer = 8
@@ -507,6 +586,34 @@ disabled = true
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("7_rs6kr")
+
+[node name="Light" type="Node2D" parent="."]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Light"]
+position = Vector2(-44, -5)
+sprite_frames = SubResource("SpriteFrames_0x3rl")
+autoplay = "default"
+
+[node name="Light2" type="Node2D" parent="."]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Light2"]
+position = Vector2(-12, -5)
+sprite_frames = SubResource("SpriteFrames_0x3rl")
+autoplay = "default"
+
+[node name="Light3" type="Node2D" parent="."]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Light3"]
+position = Vector2(20, -5)
+sprite_frames = SubResource("SpriteFrames_0x3rl")
+autoplay = "default"
+
+[node name="Light4" type="Node2D" parent="."]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Light4"]
+position = Vector2(52, -5)
+sprite_frames = SubResource("SpriteFrames_0x3rl")
+autoplay = "default"
 
 [node name="Explosion" parent="." instance=ExtResource("8_0x3rl")]
 position = Vector2(-59, 3)
