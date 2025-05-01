@@ -1,18 +1,10 @@
 extends Area2D
 ## Machinegun bullet
 ##
-## Handles speed, trajectory, sound and removal from scene
+## Handles speed, trajectory and removal from scene
 
 ## Fixed bullet speed
 const BULLET_SPEED: int = 400
-
-## Sound
-@onready var audio_stream_player_2d: AudioStreamPlayer2D = $AudioStreamPlayer2D
-
-
-## Plays sound when bullet fired
-func _ready() -> void:
-	audio_stream_player_2d.play()
 
 
 ## Bullet travels in linear direction, without changing rotation or direction
