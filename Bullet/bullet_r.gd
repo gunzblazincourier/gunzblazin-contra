@@ -20,5 +20,4 @@ func _on_area_entered(area: Area2D) -> void:
 
 ## Removes bullet once outside screen
 func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
-	print("gone")
 	queue_free()
