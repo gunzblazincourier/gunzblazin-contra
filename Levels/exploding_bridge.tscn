@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://dmwhot7tnyix7"]
+[gd_scene load_steps=13 format=3 uid="uid://dmwhot7tnyix7"]
 
 [ext_resource type="Script" uid="uid://85xoh0a3c016" path="res://Levels/exploding_bridge.gd" id="1_b7thi"]
 [ext_resource type="Texture2D" uid="uid://cmm0ikllrelyk" path="res://Levels/Bridge_0.png" id="1_eqe6b"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://cdqt7t54wvykj" path="res://Levels/Bridge_2.png" id="2_b7thi"]
 [ext_resource type="Texture2D" uid="uid://dyrqxfhhq70pw" path="res://Levels/Bridge_3.png" id="3_rs6kr"]
 [ext_resource type="Texture2D" uid="uid://b60xcudv2yxx7" path="res://Levels/Bridge_4.png" id="4_0x3rl"]
+[ext_resource type="AudioStream" uid="uid://clusvsyt1wqp8" path="res://Sounds/Bakhua1.wav" id="7_rs6kr"]
 
 [sub_resource type="Animation" id="Animation_534po"]
 length = 0.001
@@ -56,6 +57,18 @@ tracks/3/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [Vector2(18, -5)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("AudioStreamPlayer2D:playing")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
 }
 
 [sub_resource type="Animation" id="Animation_4tyx8"]
@@ -163,6 +176,18 @@ tracks/3/keys = {
 "update": 1,
 "values": [Vector2(18.5, 0), Vector2(34.5, 0), Vector2(50.5, 0)]
 }
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("AudioStreamPlayer2D:playing")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 1, 2, 3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [true, true, true, true]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_mpsqm"]
 _data = {
@@ -190,3 +215,6 @@ texture = ExtResource("1_t10w7")
 position = Vector2(18, -5)
 shape = SubResource("RectangleShape2D_kan6l")
 disabled = true
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("7_rs6kr")
