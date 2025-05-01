@@ -24,7 +24,6 @@ extends Node
 ## Locks player position to center of camera view when player reaches center
 func _process(_delta: float) -> void:
 	Global.camera_center_position = camera_2d.get_screen_center_position()
-	print(camera_2d.get_screen_center_position())
 	if player.global_position.x > camera_2d.get_screen_center_position().x:
 		camera_2d.global_position = player.global_position
 

@@ -276,7 +276,6 @@ func _process(_delta: float) -> void:
 
 
 func _physics_process(delta: float) -> void:
-	print(ray_cast_2d.get_collider())
 	## Direction that player is running
 	var run_direction: float = Input.get_axis("left", "right")
 	
