@@ -233,6 +233,7 @@ func _process(_delta: float) -> void:
 				BulletIDs.R:
 					if Input.is_action_just_pressed("shoot"):
 						shoot_timer.start()
+						regulargun_sfx.play()
 						var bullet_r_path: PackedScene = load("res://Bullet/bullet_r.tscn")
 						var bullet_r: Area2D = bullet_r_path.instantiate()
 						spawn_bullet(bullet_r)
@@ -240,6 +241,7 @@ func _process(_delta: float) -> void:
 				BulletIDs.S:
 					if Input.is_action_just_pressed("shoot"):
 						shoot_timer.start()
+						spreadgun_sfx.play()
 						var bullet_s_path: PackedScene = load("res://Bullet/bullet_s.tscn")
 						var bullet_s1: Area2D = bullet_s_path.instantiate()
 						var bullet_s2: Area2D = bullet_s_path.instantiate()
@@ -268,6 +270,7 @@ func _process(_delta: float) -> void:
 					# NOTE: 'pressed' instead of 'just_pressed'
 					if Input.is_action_pressed("shoot"):
 						shoot_timer.start()
+						machinegun_sfx.play()
 						if machinegun_interval_timer.is_stopped():
 							var bullet_m_path: PackedScene = load("res://Bullet/bullet_m.tscn")
 							var bullet_m: Area2D = bullet_m_path.instantiate()
