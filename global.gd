@@ -1,7 +1,15 @@
 extends Node
+## Global script
+##
+## Contains all global variables
 
+## Global position of player
 var player_global_position: Vector2
+
+## Direction that player is currently facing
 var player_sprite_direction: float
+
+## Center position of camera (screen)
 var camera_center_position: Vector2
 
 
