@@ -270,7 +270,8 @@ func _process(_delta: float) -> void:
 					# NOTE: 'pressed' instead of 'just_pressed'
 					if Input.is_action_pressed("shoot"):
 						shoot_timer.start()
-						machinegun_sfx.play()
+						if machinegun_interval_timer.is_stopped():
+							machinegun_sfx.play()
 						if machinegun_interval_timer.is_stopped():
 							var bullet_m_path: PackedScene = load("res://Bullet/bullet_m.tscn")
 							var bullet_m: Area2D = bullet_m_path.instantiate()
