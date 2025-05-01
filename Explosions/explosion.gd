@@ -7,6 +7,7 @@ var exploded: bool
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	play = false
 	visible = false
 	exploded = false
 
@@ -16,3 +17,4 @@ func _process(_delta: float) -> void:
 	if exploded == false:
 		if play == true:
 			animation_player.play("explode")
+			exploded = true
