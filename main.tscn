@@ -63,7 +63,15 @@ wait_time = 0.2
 autostart = true
 
 [node name="RunningSoldier" parent="." instance=ExtResource("5_lquwl")]
-position = Vector2(-55, -31)
-run_direction = -1
+position = Vector2(-96, -31)
+
+[node name="RunningSoldier2" parent="." instance=ExtResource("5_lquwl")]
+position = Vector2(-27, -31)
+
+[node name="RunningSoldier3" parent="." instance=ExtResource("5_lquwl")]
+position = Vector2(-47, -31)
+
+[node name="RunningSoldier4" parent="." instance=ExtResource("5_lquwl")]
+position = Vector2(-66, -31)
 
 [connection signal="timeout" from="LevelAnimationTimer" to="." method="_on_timer_timeout"]
