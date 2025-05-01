@@ -5513,7 +5513,7 @@ shape = SubResource("RectangleShape2D_hmlbq")
 
 [node name="DeathSound" type="AudioStreamPlayer2D" parent="."]
 
-[node name="LaserAudioPlayer" type="AudioStreamPlayer2D" parent="."]
+[node name="LasergunSFX" type="AudioStreamPlayer2D" parent="."]
 stream = SubResource("AudioStreamMP3_iyprq")
 
 [node name="RayCast2D" type="RayCast2D" parent="."]

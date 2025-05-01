@@ -39,7 +39,7 @@ var bullet_l: Area2D
 ## sound from their scenes of respective bullets since Lasergun only uses single
 ## instance (see bullet_l_path and bullet_l), hence sound would only play when
 ## fired for the 1st time if played from bullet's scene
-@onready var laser_audio_player: AudioStreamPlayer2D = $LaserAudioPlayer
+@onready var lasergun_sfx: AudioStreamPlayer2D = $LasergunSFX
 
 ## RayCast that extends downward beyond game world to detect surface under player
 @onready var ray_cast_2d: RayCast2D = $RayCast2D
@@ -250,7 +250,7 @@ func _process(_delta: float) -> void:
 				BulletIDs.L:
 					if Input.is_action_just_pressed("shoot"):
 						shoot_timer.start()
-						laser_audio_player.play()
+						lasergun_sfx.play()
 						spawn_bullet(bullet_l)
 				
 				BulletIDs.M:

@@ -63,6 +63,6 @@ wait_time = 0.2
 autostart = true
 
 [node name="RunningSoldier" parent="." instance=ExtResource("5_lquwl")]
-position = Vector2(-56, -31)
+position = Vector2(-55, -31)
 
 [connection signal="timeout" from="LevelAnimationTimer" to="." method="_on_timer_timeout"]
