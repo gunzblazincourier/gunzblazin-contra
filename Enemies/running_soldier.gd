@@ -83,7 +83,7 @@ func _physics_process(delta: float) -> void:
 				if jump_type == 0:
 					jump_speed = 0
 				elif jump_type == 2:
-					jump_speed = -300
+					jump_speed = -200
 				jump_type_selected = true
 			position.x += run_direction * SPEED * delta
 			position.y += jump_speed * delta
