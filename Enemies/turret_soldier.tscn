@@ -67,11 +67,13 @@ animations = [{
 size = Vector2(16, 30)
 
 [node name="TurretSoldier" type="Area2D" groups=["enemy"]]
+collision_layer = 4
+collision_mask = 3
 script = ExtResource("1_hnwc0")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_pj8v8")
-animation = &"shoot_up"
+animation = &"death"
 autoplay = "shoot_straight"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -91,4 +93,5 @@ offset = Vector2(3, 3)
 [node name="Timer" type="Timer" parent="."]
 autostart = true
 
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

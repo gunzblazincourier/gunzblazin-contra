@@ -4,14 +4,30 @@ extends Area2D
 ##
 ## Handles tracking the player and shooting at it, and death of enemy
 
+# Vertical speed is required to change to simulate gravity, but horizontal
+# speed can remain constant
+const GRAVITY: int = 555			## Custom gravity for the enemy
+const DEATH_SPEED_X: int = 70		## Horizontal speed during death
+var death_speed_y: float			## Vertical speed during death
+var is_dead: bool					## Whether soldier got hit
+
 ## Enemy animations
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
+
+## Collision Body
+@onready var collision_shape_2d: CollisionShape2D = $CollisionShape2D
 
 ## Basically rate of fire
 @onready var timer: Timer = $Timer
 
 ## Muzzle of gun
 @onready var muzzle: Marker2D = $Muzzle
+
+
+func _ready() -> void:
+	death_speed_y = -150
+	is_dead = false
+
 
 ## Soldier aims and fire at the player each time the repeating timer timeouts
 func _on_timer_timeout() -> void:
@@ -62,3 +78,30 @@ func _on_timer_timeout() -> void:
 	owner.add_child(bullet)
 	bullet.position = muzzle.global_position
 	bullet.rotation = muzzle.global_rotation
+	
+	if is_dead == true:
+		animated_sprite_2d.play("death")
+		collision_shape_2d.disabled = true
+
+
+## Handles movement during death
+func _physics_process(delta: float) -> void:
+	if is_dead == true:
+		# Decides which direction would the soldier travel when hit by player
+		if animated_sprite_2d.flip_h == true:
+			position.x += DEATH_SPEED_X * delta
+		else:
+			position.x += DEATH_SPEED_X * delta
+		
+		# Vertical movement with gravity
+		position.y += death_speed_y * delta
+		death_speed_y += GRAVITY * delta
+		
+		if death_speed_y > 0:
+			queue_free()
+
+
+## Enemy dies when bullet hits it
+func _on_area_entered(area: Area2D) -> void:
+	if area.is_in_group("bullet"):
+		is_dead = true
