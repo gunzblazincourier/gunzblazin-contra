@@ -1,5 +1,6 @@
-[gd_scene load_steps=11 format=3 uid="uid://dmwhot7tnyix7"]
+[gd_scene load_steps=12 format=3 uid="uid://dmwhot7tnyix7"]
 
+[ext_resource type="Script" uid="uid://85xoh0a3c016" path="res://Levels/exploding_bridge.gd" id="1_b7thi"]
 [ext_resource type="Texture2D" uid="uid://cmm0ikllrelyk" path="res://Levels/Bridge_0.png" id="1_eqe6b"]
 [ext_resource type="Texture2D" uid="uid://chmlaybfbpprr" path="res://Levels/Bridge_1.png" id="1_t10w7"]
 [ext_resource type="Texture2D" uid="uid://cdqt7t54wvykj" path="res://Levels/Bridge_2.png" id="2_b7thi"]
@@ -174,6 +175,7 @@ _data = {
 size = Vector2(100, 20)
 
 [node name="ExplodingBridge" type="StaticBody2D"]
+script = ExtResource("1_b7thi")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
