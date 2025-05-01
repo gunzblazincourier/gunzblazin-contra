@@ -4,6 +4,7 @@ extends Node
 ## Controls player position relative to camera, and toggles visibility of
 ## different nodes based on a timer
 
+
 ## Tiles for waves and stars animation
 @onready var waves_and_stars: TileMapLayer = $WavesAndStars
 
@@ -22,6 +23,8 @@ extends Node
 
 ## Locks player position to center of camera view when player reaches center
 func _process(_delta: float) -> void:
+	Global.camera_center_position = camera_2d.get_screen_center_position()
+	#print(camera_2d.get_screen_center_position())
 	if player.global_position.x > camera_2d.get_screen_center_position().x:
 		camera_2d.global_position = player.global_position
 
