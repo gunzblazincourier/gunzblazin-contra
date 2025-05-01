@@ -11,7 +11,7 @@ func _ready() -> void:
 	explosion_started = false
 
 
-func _physics_process(_delta: float) -> void:
+func _process(_delta: float) -> void:
 	if explosion_started == false:
 		if starting_camera_position == Global.camera_center_position.x:
 			animation_player.play("explosion")
