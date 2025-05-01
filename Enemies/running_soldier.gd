@@ -4,7 +4,7 @@ enum states {RUN, JUMP, DEATH, EXPLODE}
 enum directions {LEFT = -1, RIGHT = 1}
 
 const SPEED: int = 70
-const GRAVITY: int = 7
+const GRAVITY: int = 555
 
 @export var run_direction: directions = directions.RIGHT
 var current_state: states
@@ -12,7 +12,7 @@ var jump: bool
 var run_or_jump: int
 var death: bool
 var explode: bool
-var jump_speed: int
+var jump_speed: float
 var jump_type_selected: bool
 
 @onready var animation_tree: AnimationTree = $AnimationTree
@@ -26,10 +26,11 @@ func _ready() -> void:
 	run_or_jump = 0
 	death = false
 	explode = false
-	jump_speed = -123
+	jump_speed = -150
 	jump_type_selected = false
 
 func _process(_delta: float) -> void:
+	print(jump_speed)
 	if ray_cast_2d.is_colliding():
 		jump = false
 	else:
@@ -73,7 +74,7 @@ func _process(_delta: float) -> void:
 func _physics_process(delta: float) -> void:
 	match current_state:
 		states.RUN:
-			jump_speed = -123
+			jump_speed = -150
 			jump_type_selected = false
 			position.x += run_direction * SPEED * delta
 		states.JUMP:
@@ -82,15 +83,15 @@ func _physics_process(delta: float) -> void:
 				if jump_type == 0:
 					jump_speed = 0
 				elif jump_type == 2:
-					jump_speed = -200
+					jump_speed = -300
 				jump_type_selected = true
 			position.x += run_direction * SPEED * delta
 			position.y += jump_speed * delta
-			jump_speed += GRAVITY
+			jump_speed += GRAVITY * delta
 		states.DEATH:
 			position.x -= run_direction * SPEED * delta
 			position.y += jump_speed * delta
-			jump_speed += GRAVITY
+			jump_speed += GRAVITY * delta
 			if jump_speed > 0:
 				explode = true
 				death = false

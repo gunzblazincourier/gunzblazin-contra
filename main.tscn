@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=4 uid="uid://bornr0erfd30j"]
+[gd_scene load_steps=8 format=4 uid="uid://bornr0erfd30j"]
 
 [ext_resource type="PackedScene" uid="uid://doa0vkc0fktkh" path="res://Player/player.tscn" id="1_76q5j"]
 [ext_resource type="Script" uid="uid://tqrdmn3550ts" path="res://main.gd" id="1_lquwl"]
 [ext_resource type="TileSet" uid="uid://cwwx3nyrorypy" path="res://Levels/level1.tres" id="2_h2yge"]
 [ext_resource type="PackedScene" uid="uid://dmwhot7tnyix7" path="res://Levels/exploding_bridge.tscn" id="3_1bvp3"]
+[ext_resource type="PackedScene" uid="uid://0hbphmpkfm7w" path="res://Enemies/running_soldier.tscn" id="5_lquwl"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_h2yge"]
 normal = Vector2(-5.60985e-08, -1)
@@ -60,5 +61,9 @@ shape = SubResource("WorldBoundaryShape2D_1bvp3")
 [node name="LevelAnimationTimer" type="Timer" parent="."]
 wait_time = 0.2
 autostart = true
+
+[node name="RunningSoldier" parent="." instance=ExtResource("5_lquwl")]
+position = Vector2(-7, -31)
+run_direction = -1
 
 [connection signal="timeout" from="LevelAnimationTimer" to="." method="_on_timer_timeout"]
