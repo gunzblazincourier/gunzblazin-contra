@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cth1ahjfjootp"
-path="res://.godot/imported/RunningSoldier_Explode1.png-b609bbe0f3a9358e35bd56b44f951733.ctex"
+uid="uid://bsqs3c86kj65x"
+path="res://.godot/imported/Explosion2_0.png-7549a5bc0da9d984098e41b0a01c5771.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Enemies/RunningSoldier_Explode1.png"
-dest_files=["res://.godot/imported/RunningSoldier_Explode1.png-b609bbe0f3a9358e35bd56b44f951733.ctex"]
+source_file="res://Explosions/Explosion2_0.png"
+dest_files=["res://.godot/imported/Explosion2_0.png-7549a5bc0da9d984098e41b0a01c5771.ctex"]
 
 [params]
 
