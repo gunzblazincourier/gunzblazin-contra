@@ -640,7 +640,6 @@ graph_offset = Vector2(175, 124.326)
 size = Vector2(17, 28.75)
 
 [node name="RunningSoldier" type="Area2D" groups=["enemy"]]
-process_mode = 4
 collision_layer = 4
 collision_mask = 3
 script = ExtResource("1_1cjt1")

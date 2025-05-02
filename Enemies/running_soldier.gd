@@ -39,6 +39,7 @@ var is_jump_type_final: bool
 
 
 func _ready() -> void:
+	process_mode = Node.PROCESS_MODE_INHERIT
 	animation_tree.active = true
 	state = States.RUN
 	death = false

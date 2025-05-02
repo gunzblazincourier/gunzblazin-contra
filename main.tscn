@@ -64,16 +64,67 @@ wait_time = 0.2
 autostart = true
 
 [node name="RunningSoldier" parent="." instance=ExtResource("5_lquwl")]
-position = Vector2(-96, -31)
+position = Vector2(56, -33)
 
 [node name="RunningSoldier2" parent="." instance=ExtResource("5_lquwl")]
-position = Vector2(-27, -31)
+position = Vector2(54, 32)
 
 [node name="RunningSoldier3" parent="." instance=ExtResource("5_lquwl")]
-position = Vector2(-47, -31)
+position = Vector2(122, -33)
 
 [node name="RunningSoldier4" parent="." instance=ExtResource("5_lquwl")]
-position = Vector2(-66, -31)
+position = Vector2(228, -1)
+
+[node name="RunningSoldier5" parent="." instance=ExtResource("5_lquwl")]
+position = Vector2(351, -32)
+
+[node name="RunningSoldier6" parent="." instance=ExtResource("5_lquwl")]
+position = Vector2(394, -32)
+
+[node name="RunningSoldier7" parent="." instance=ExtResource("5_lquwl")]
+position = Vector2(531, -32)
+
+[node name="RunningSoldier8" parent="." instance=ExtResource("5_lquwl")]
+position = Vector2(596, -32)
+
+[node name="RunningSoldier9" parent="." instance=ExtResource("5_lquwl")]
+position = Vector2(624, -32)
+
+[node name="RunningSoldier10" parent="." instance=ExtResource("5_lquwl")]
+position = Vector2(759, -32)
+
+[node name="RunningSoldier11" parent="." instance=ExtResource("5_lquwl")]
+position = Vector2(801, -32)
+
+[node name="RunningSoldier12" parent="." instance=ExtResource("5_lquwl")]
+position = Vector2(867, -32)
+
+[node name="RunningSoldier13" parent="." instance=ExtResource("5_lquwl")]
+position = Vector2(1086, -32)
+
+[node name="RunningSoldier14" parent="." instance=ExtResource("5_lquwl")]
+position = Vector2(1197, -32)
+
+[node name="RunningSoldier15" parent="." instance=ExtResource("5_lquwl")]
+position = Vector2(1327, 16)
+
+[node name="RunningSoldier16" parent="." instance=ExtResource("5_lquwl")]
+position = Vector2(1406, -64)
+
+[node name="RunningSoldier17" parent="." instance=ExtResource("5_lquwl")]
+position = Vector2(1471, 0)
+
+[node name="RunningSoldier18" parent="." instance=ExtResource("5_lquwl")]
+position = Vector2(1492, 0)
+
+[node name="RunningSoldier19" parent="." instance=ExtResource("5_lquwl")]
+position = Vector2(1531, 0)
+
+[node name="RunningSoldier20" parent="." instance=ExtResource("5_lquwl")]
+position = Vector2(2293, -64)
+
+[node name="RunningSoldier21" parent="." instance=ExtResource("5_lquwl")]
+position = Vector2(2326, 16)
 
 [node name="TurretSoldier" parent="." instance=ExtResource("6_7mycd")]
 position = Vector2(96, 65)
