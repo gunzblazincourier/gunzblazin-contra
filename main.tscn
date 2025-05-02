@@ -76,6 +76,15 @@ position = Vector2(-47, -31)
 position = Vector2(-66, -31)
 
 [node name="TurretSoldier" parent="." instance=ExtResource("6_7mycd")]
-position = Vector2(96, 63)
+position = Vector2(96, 65)
+
+[node name="TurretSoldier2" parent="." instance=ExtResource("6_7mycd")]
+position = Vector2(416, 65)
+
+[node name="TurretSoldier3" parent="." instance=ExtResource("6_7mycd")]
+position = Vector2(1057, -31)
+
+[node name="TurretSoldier4" parent="." instance=ExtResource("6_7mycd")]
+position = Vector2(2273, 1)
 
 [connection signal="timeout" from="LevelAnimationTimer" to="." method="_on_timer_timeout"]
