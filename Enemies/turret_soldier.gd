@@ -127,6 +127,7 @@ func _on_death_explosion_sfx_finished() -> void:
 	queue_free()
 
 
+## Removes enemy once outside screen
 func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
 	print("gone")
 	queue_free()
