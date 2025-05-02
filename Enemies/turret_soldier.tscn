@@ -94,7 +94,7 @@ script = ExtResource("1_hnwc0")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_pj8v8")
-animation = &"death"
+animation = &"shoot_up"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-1, 0)
@@ -116,6 +116,11 @@ autostart = true
 [node name="DeathExplosionSFX" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("10_b75ll")
 
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(-1, 0)
+scale = Vector2(0.8, 1.5)
+
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 [connection signal="finished" from="DeathExplosionSFX" to="." method="_on_death_explosion_sfx_finished"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
