@@ -135,3 +135,8 @@ func _on_death_explosion_sfx_finished() -> void:
 func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
 	print("gone")
 	queue_free()
+
+
+## Enables enemy (or "spawns") when camera reaches the position
+func _on_visible_on_screen_notifier_2d_screen_entered() -> void:
+	process_mode = Node.PROCESS_MODE_INHERIT
