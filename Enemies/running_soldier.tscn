@@ -640,6 +640,7 @@ graph_offset = Vector2(175, 124.326)
 size = Vector2(17, 28.75)
 
 [node name="RunningSoldier" type="Area2D" groups=["enemy"]]
+process_mode = 4
 collision_layer = 4
 collision_mask = 3
 script = ExtResource("1_1cjt1")
@@ -684,4 +685,5 @@ position = Vector2(8.9407e-08, -1.5)
 scale = Vector2(0.9, 1.45)
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="screen_entered" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_entered"]
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
