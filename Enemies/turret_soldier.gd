@@ -71,9 +71,9 @@ func _on_timer_timeout() -> void:
 	var angle_with_player: float = global_position.angle_to_point(Global.player_global_position)
 	
 	# Above angle decides animation
-	if angle_with_player < -PI/4 and angle_with_player > -3*(PI/4):
+	if angle_with_player < -PI/9 and angle_with_player > -8*(PI/9):
 		animated_sprite_2d.play("shoot_up")
-	elif angle_with_player > PI/4 and angle_with_player < 3*(PI*4):
+	elif angle_with_player > PI/9 and angle_with_player < 8*(PI/9):
 		animated_sprite_2d.play("shoot_down")
 	else:
 		animated_sprite_2d.play("shoot_straight")
@@ -89,24 +89,28 @@ func _on_timer_timeout() -> void:
 	if animated_sprite_2d.animation == "shoot_up":
 		if animated_sprite_2d.flip_h == false:
 			muzzle.position = Vector2(9, -21)
-			muzzle.rotation = clamp(angle_with_player, -PI/2, -PI/8)
+			#muzzle.rotation = clamp(angle_with_player, -PI/2, -PI/8)
 		else:
 			muzzle.position = Vector2(-9, -21)
-			muzzle.rotation = clamp(angle_with_player, -7*(PI/8), -PI/2)
+			#muzzle.rotation = clamp(angle_with_player, -7*(PI/8), -PI/2)
 	elif animated_sprite_2d.animation == "shoot_down":
 		if animated_sprite_2d.flip_h == false:
 			muzzle.position = Vector2(14, 2)
-			muzzle.rotation = clamp(angle_with_player, PI/8, PI/2)
+			#muzzle.rotation = clamp(angle_with_player, PI/8, PI/2)
 		else:
 			muzzle.position = Vector2(-14, 2)
-			muzzle.rotation = clamp(angle_with_player, PI/2, 7*(PI/8))
+			#muzzle.rotation = clamp(angle_with_player, PI/2, 7*(PI/8))
 	else:
 		if animated_sprite_2d.flip_h == false:
 			muzzle.position = Vector2(14, -11)
-			muzzle.rotation = 0
+			#muzzle.rotation = 0
 		else:
 			muzzle.position = Vector2(-14, -11)
-			muzzle.rotation = PI
+			#muzzle.rotation = PI
+	
+	# Muzzle rotation will be the same as angle made with player
+	# Position has to be specific, matching the sprite
+	muzzle.rotation = angle_with_player
 	
 	# Spawn bullet
 	var bullet_path: PackedScene = load("res://Bullet/bullet_ts.tscn")
