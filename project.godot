@@ -84,6 +84,7 @@ bullet=""
 enemy=""
 enemy_bullet=""
 killbox=""
+player=""
 
 [input]
 
