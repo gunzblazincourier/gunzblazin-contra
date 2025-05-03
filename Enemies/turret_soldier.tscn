@@ -12,7 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://blp5ekkva2v7" path="res://Enemies/TurretSoldier_ShootStraight_1.png" id="6_3ai5x"]
 [ext_resource type="Texture2D" uid="uid://bukhq0sdvauwv" path="res://Enemies/TurretSoldier_ShootUp_1.png" id="6_5nkct"]
 [ext_resource type="Texture2D" uid="uid://c56x4e8shosjj" path="res://Bullet/R.png" id="9_3ai5x"]
-[ext_resource type="AudioStream" uid="uid://cdr0ngbxu1hls" path="res://Sounds/TekiOut.wav" id="10_b75ll"]
+[ext_resource type="AudioStream" uid="uid://cdr0ngbxu1hls" path="res://Levels/TekiOut.wav" id="10_b75ll"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_pj8v8"]
 animations = [{

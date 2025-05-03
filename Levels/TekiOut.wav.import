@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://cdr0ngbxu1hls"
-path="res://.godot/imported/TekiOut.wav-b3b27de28127ad7119f8a688382d22e8.sample"
+path="res://.godot/imported/TekiOut.wav-eaa737ae25e377812487985cded8a72c.sample"
 
 [deps]
 
-source_file="res://Sounds/TekiOut.wav"
-dest_files=["res://.godot/imported/TekiOut.wav-b3b27de28127ad7119f8a688382d22e8.sample"]
+source_file="res://Levels/TekiOut.wav"
+dest_files=["res://.godot/imported/TekiOut.wav-eaa737ae25e377812487985cded8a72c.sample"]
 
 [params]
 

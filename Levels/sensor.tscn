@@ -9,7 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://1aclxa8ukckt" path="res://Explosions/Explosion_0.png" id="6_1fnsn"]
 [ext_resource type="Texture2D" uid="uid://cc2xjpk2aq03j" path="res://Explosions/Explosion_1.png" id="7_fm6yq"]
 [ext_resource type="Texture2D" uid="uid://c66pml0hbev4x" path="res://Explosions/Explosion_2.png" id="8_4ymml"]
-[ext_resource type="AudioStream" uid="uid://cdr0ngbxu1hls" path="res://Sounds/TekiOut.wav" id="10_4ymml"]
+[ext_resource type="AudioStream" uid="uid://cdr0ngbxu1hls" path="res://Levels/TekiOut.wav" id="10_4ymml"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_4ymml"]
 animations = [{

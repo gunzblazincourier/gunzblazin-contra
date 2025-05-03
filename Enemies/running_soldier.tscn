@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://3v2dhudn0fee" path="res://Enemies/RunningSoldier_Death.png" id="2_8tqai"]
 [ext_resource type="Texture2D" uid="uid://ccxlb5v6ru0vv" path="res://Enemies/RunningSoldier_Jump.png" id="3_iixfa"]
 [ext_resource type="Texture2D" uid="uid://d2mqej2kjpcht" path="res://Enemies/RunningSoldier_Run_0.png" id="4_6lvey"]
-[ext_resource type="AudioStream" uid="uid://cdr0ngbxu1hls" path="res://Sounds/TekiOut.wav" id="4_gyor0"]
+[ext_resource type="AudioStream" uid="uid://cdr0ngbxu1hls" path="res://Levels/TekiOut.wav" id="4_gyor0"]
 [ext_resource type="Texture2D" uid="uid://c7uwv8pc6mhwe" path="res://Enemies/RunningSoldier_Run_1.png" id="5_gyor0"]
 [ext_resource type="Texture2D" uid="uid://dp8bgf8gw76r4" path="res://Enemies/RunningSoldier_Run_2.png" id="6_4hcvb"]
 [ext_resource type="Texture2D" uid="uid://dplvfoy4x5jut" path="res://Enemies/RunningSoldier_Run_3.png" id="7_ep4ga"]
