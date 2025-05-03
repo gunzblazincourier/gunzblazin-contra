@@ -90,6 +90,9 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": ExtResource("6_1fnsn")
+}, {
+"duration": 1.0,
+"texture": null
 }],
 "loop": false,
 "name": &"explode",
@@ -104,6 +107,7 @@ collision_mask = 2
 script = ExtResource("1_fm6yq")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(2, 0)
 sprite_frames = SubResource("SpriteFrames_4ymml")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -119,3 +123,4 @@ stream = ExtResource("10_4ymml")
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="screen_entered" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_entered"]
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
+[connection signal="finished" from="AudioStreamPlayer2D" to="." method="_on_audio_stream_player_2d_finished"]
