@@ -13,7 +13,8 @@ func _physics_process(delta: float) -> void:
 
 
 func _on_area_entered(area: Area2D) -> void:
-	print(area)
+	if area.is_in_group("player"):
+		queue_free()
 
 
 ## Removes bullet once outside screen

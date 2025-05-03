@@ -5461,7 +5461,7 @@ data = PackedByteArray("SUQzAwAAAAAea1RYWFgAAAAZAAAAeWVhcgAxMDFzb3VuZGJvYXJkcy5j
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tvn1x"]
 size = Vector2(25, 11)
 
-[node name="Player" type="CharacterBody2D" groups=["player"]]
+[node name="Player" type="CharacterBody2D"]
 collision_mask = 24
 script = ExtResource("1_ac1dp")
 
@@ -5556,7 +5556,7 @@ position = Vector2(8, -6)
 visible = false
 texture = ExtResource("3_l2ago")
 
-[node name="Hitbox" type="Area2D" parent="."]
+[node name="Hitbox" type="Area2D" parent="." groups=["player"]]
 collision_mask = 22
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
