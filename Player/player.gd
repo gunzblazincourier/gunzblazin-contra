@@ -339,7 +339,8 @@ func _physics_process(delta: float) -> void:
 
 ## Death when player collides with enemy or killbox
 func _on_hitbox_area_entered(area: Area2D) -> void:
-	if area.is_in_group("enemy") or area.is_in_group("killbox"):
+	if area.is_in_group("enemy") or area.is_in_group("killbox") or \
+			area.is_in_group("enemy_bullet"):
 		animation_tree.set("parameters/conditions/death", true)
 		animation_tree.set("parameters/Death/blend_position", sprite_direction)
 		velocity.y = DEATH_JUMP_SPEED
