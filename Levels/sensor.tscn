@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://1iy13e6vp74e"]
+[gd_scene load_steps=8 format=3 uid="uid://1iy13e6vp74e"]
 
 [ext_resource type="Texture2D" uid="uid://cahujh4blws8" path="res://Levels/Sensor_0.png" id="1_8yujn"]
 [ext_resource type="Texture2D" uid="uid://b0vo5ljlduk8a" path="res://Levels/Sensor_1.png" id="2_u0sb1"]
@@ -74,9 +74,14 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8yujn"]
+
 [node name="Sensor" type="Area2D"]
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_4ymml")
+frame = 7
+frame_progress = 0.501784
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_8yujn")
