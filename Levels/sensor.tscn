@@ -1,6 +1,7 @@
-[gd_scene load_steps=11 format=3 uid="uid://1iy13e6vp74e"]
+[gd_scene load_steps=12 format=3 uid="uid://1iy13e6vp74e"]
 
 [ext_resource type="Texture2D" uid="uid://cahujh4blws8" path="res://Levels/Sensor_0.png" id="1_8yujn"]
+[ext_resource type="Script" uid="uid://b05rdla5qsqp2" path="res://Levels/sensor.gd" id="1_fm6yq"]
 [ext_resource type="Texture2D" uid="uid://b0vo5ljlduk8a" path="res://Levels/Sensor_1.png" id="2_u0sb1"]
 [ext_resource type="Texture2D" uid="uid://rt5rroyr15cn" path="res://Levels/Sensor_2.png" id="3_3ct7p"]
 [ext_resource type="Texture2D" uid="uid://4iu1oyxxjqup" path="res://Levels/Sensor_3.png" id="4_1fnsn"]
@@ -97,10 +98,10 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8yujn"]
 
 [node name="Sensor" type="Area2D"]
+script = ExtResource("1_fm6yq")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_4ymml")
-autoplay = "default"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_8yujn")
