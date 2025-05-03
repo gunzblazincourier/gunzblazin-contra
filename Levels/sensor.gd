@@ -28,5 +28,6 @@ func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
 
 
 func _on_area_entered(area: Area2D) -> void:
-	if area.is_in_group("bullet"):
+	if area.is_in_group("bullet") and animated_sprite_2d.frame > 4 and \
+			animated_sprite_2d.frame < 14:
 		animated_sprite_2d.play("explode")
