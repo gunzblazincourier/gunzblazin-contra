@@ -53,50 +53,50 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("RayCast2D:position")
+tracks/3/path = NodePath("RayCast2D:enabled")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(9, 0)]
+"update": 1,
+"values": [true]
 }
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("RayCast2D:enabled")
+tracks/4/path = NodePath("Explosion:play")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [true]
+"values": [false]
 }
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("Explosion:play")
+tracks/5/path = NodePath("Sprite2D:visible")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [false]
+"values": [true]
 }
 tracks/6/type = "value"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("Sprite2D:visible")
+tracks/6/path = NodePath("RayCast2D:position")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
+"update": 0,
+"values": [Vector2(8, 13)]
 }
 
 [sub_resource type="Animation" id="Animation_r5opi"]
@@ -318,26 +318,26 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("RayCast2D:position")
+tracks/3/path = NodePath("RayCast2D:enabled")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(-9, 0)]
+"update": 1,
+"values": [true]
 }
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("RayCast2D:enabled")
+tracks/4/path = NodePath("RayCast2D:position")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
+"update": 0,
+"values": [Vector2(-8, 14)]
 }
 
 [sub_resource type="Animation" id="Animation_7mc3l"]
@@ -383,26 +383,26 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("RayCast2D:position")
+tracks/3/path = NodePath("RayCast2D:enabled")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(9, 0)]
+"update": 1,
+"values": [true]
 }
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("RayCast2D:enabled")
+tracks/4/path = NodePath("RayCast2D:position")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
+"update": 0,
+"values": [Vector2(8, 14)]
 }
 
 [sub_resource type="Animation" id="Animation_gyor0"]
@@ -449,26 +449,26 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("RayCast2D:position")
+tracks/3/path = NodePath("RayCast2D:enabled")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(-9, 0)]
+"update": 1,
+"values": [true]
 }
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("RayCast2D:enabled")
+tracks/4/path = NodePath("RayCast2D:position")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
+"update": 0,
+"values": [Vector2(-8, 14)]
 }
 
 [sub_resource type="Animation" id="Animation_ep4ga"]
@@ -515,26 +515,26 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("RayCast2D:position")
+tracks/3/path = NodePath("RayCast2D:enabled")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(9, 0)]
+"update": 1,
+"values": [true]
 }
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("RayCast2D:enabled")
+tracks/4/path = NodePath("RayCast2D:position")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
+"update": 0,
+"values": [Vector2(8, 14)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ep4ga"]
@@ -637,7 +637,7 @@ transitions = ["Start", "Run", SubResource("AnimationNodeStateMachineTransition_
 graph_offset = Vector2(175, 124.326)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ep4ga"]
-size = Vector2(17, 28.75)
+size = Vector2(17, 30.75)
 
 [node name="RunningSoldier" type="Area2D" groups=["enemy"]]
 collision_layer = 4
@@ -667,12 +667,12 @@ texture = ExtResource("4_6lvey")
 flip_h = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -1.375)
+position = Vector2(0, -0.375)
 shape = SubResource("RectangleShape2D_ep4ga")
 
 [node name="RayCast2D" type="RayCast2D" parent="."]
-position = Vector2(9, 0)
-target_position = Vector2(0, 16)
+position = Vector2(8, 13)
+target_position = Vector2(0, 2)
 collision_mask = 8
 
 [node name="DeathExplosionSFX" type="AudioStreamPlayer2D" parent="."]
@@ -680,6 +680,7 @@ collision_mask = 8
 [node name="Explosion" parent="." instance=ExtResource("10_iixfa")]
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+visible = false
 position = Vector2(8.9407e-08, -1.5)
 scale = Vector2(0.9, 1.45)
 
