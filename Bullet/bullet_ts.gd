@@ -10,3 +10,7 @@ const BULLET_SPEED: int = 300
 ## Bullet travels in linear direction, without changing rotation or direction
 func _physics_process(delta: float) -> void:
 	position += transform.x * BULLET_SPEED * delta
+
+
+func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
+	queue_free()
