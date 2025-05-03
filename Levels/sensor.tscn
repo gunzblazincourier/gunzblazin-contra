@@ -1,10 +1,13 @@
-[gd_scene load_steps=8 format=3 uid="uid://1iy13e6vp74e"]
+[gd_scene load_steps=11 format=3 uid="uid://1iy13e6vp74e"]
 
 [ext_resource type="Texture2D" uid="uid://cahujh4blws8" path="res://Levels/Sensor_0.png" id="1_8yujn"]
 [ext_resource type="Texture2D" uid="uid://b0vo5ljlduk8a" path="res://Levels/Sensor_1.png" id="2_u0sb1"]
 [ext_resource type="Texture2D" uid="uid://rt5rroyr15cn" path="res://Levels/Sensor_2.png" id="3_3ct7p"]
 [ext_resource type="Texture2D" uid="uid://4iu1oyxxjqup" path="res://Levels/Sensor_3.png" id="4_1fnsn"]
 [ext_resource type="Texture2D" uid="uid://bxec47th2yxhk" path="res://Levels/Sensor_4.png" id="5_fm6yq"]
+[ext_resource type="Texture2D" uid="uid://1aclxa8ukckt" path="res://Explosions/Explosion_0.png" id="6_1fnsn"]
+[ext_resource type="Texture2D" uid="uid://cc2xjpk2aq03j" path="res://Explosions/Explosion_1.png" id="7_fm6yq"]
+[ext_resource type="Texture2D" uid="uid://c66pml0hbev4x" path="res://Explosions/Explosion_2.png" id="8_4ymml"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_4ymml"]
 animations = [{
@@ -72,6 +75,23 @@ animations = [{
 "loop": true,
 "name": &"default",
 "speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_1fnsn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_fm6yq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_4ymml")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_1fnsn")
+}],
+"loop": false,
+"name": &"explode",
+"speed": 5.0
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8yujn"]
@@ -80,8 +100,7 @@ animations = [{
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_4ymml")
-frame = 7
-frame_progress = 0.501784
+autoplay = "default"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_8yujn")
