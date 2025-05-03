@@ -25,3 +25,8 @@ func _process(_delta: float) -> void:
 		if Global.camera_center_position.x > starting_camera_position:
 			animation_player.play("explosion")
 			explosion_started = true
+
+
+## Removes enemy once outside screen
+func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
+	queue_free()

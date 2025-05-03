@@ -665,3 +665,9 @@ play = true
 [node name="Explosion12" parent="." instance=ExtResource("8_0x3rl")]
 position = Vector2(58, 1)
 play = true
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(0.999996, 0.500003)
+scale = Vector2(7.2, 1.75)
+
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
