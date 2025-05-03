@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://1iy13e6vp74e"]
+[gd_scene load_steps=13 format=3 uid="uid://1iy13e6vp74e"]
 
 [ext_resource type="Texture2D" uid="uid://cahujh4blws8" path="res://Levels/Sensor_0.png" id="1_8yujn"]
 [ext_resource type="Script" uid="uid://b05rdla5qsqp2" path="res://Levels/sensor.gd" id="1_fm6yq"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://1aclxa8ukckt" path="res://Explosions/Explosion_0.png" id="6_1fnsn"]
 [ext_resource type="Texture2D" uid="uid://cc2xjpk2aq03j" path="res://Explosions/Explosion_1.png" id="7_fm6yq"]
 [ext_resource type="Texture2D" uid="uid://c66pml0hbev4x" path="res://Explosions/Explosion_2.png" id="8_4ymml"]
+[ext_resource type="AudioStream" uid="uid://cdr0ngbxu1hls" path="res://Sounds/TekiOut.wav" id="10_4ymml"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_4ymml"]
 animations = [{
@@ -111,6 +112,9 @@ shape = SubResource("RectangleShape2D_8yujn")
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
 position = Vector2(18, 0)
 scale = Vector2(0.2, 1)
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("10_4ymml")
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="screen_entered" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_entered"]
