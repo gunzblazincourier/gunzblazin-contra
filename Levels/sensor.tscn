@@ -101,7 +101,7 @@ animations = [{
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8yujn"]
 
-[node name="Sensor" type="Area2D"]
+[node name="Sensor" type="Area2D" groups=["object"]]
 collision_layer = 8
 collision_mask = 2
 script = ExtResource("1_fm6yq")
