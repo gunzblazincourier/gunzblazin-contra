@@ -20,3 +20,8 @@ func _process(_delta: float) -> void:
 ## Default animation starts when FULLY in the camera
 func _on_visible_on_screen_notifier_2d_screen_entered() -> void:
 	animated_sprite_2d.play("default")
+
+
+## Removes sensor once off-screen
+func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
+	queue_free()

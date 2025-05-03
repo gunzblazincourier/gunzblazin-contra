@@ -95,7 +95,7 @@ script = ExtResource("1_hnwc0")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_pj8v8")
-animation = &"shoot_straight"
+animation = &"explode"
 autoplay = "shoot_straight"
 flip_h = true
 
