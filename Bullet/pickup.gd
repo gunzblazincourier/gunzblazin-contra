@@ -4,7 +4,7 @@ extends Area2D
 ## Controls its speed, trajectory and the action of 'picking' by the player
 
 ## Weapons that the pickup can give
-enum PickupIDs {R, M, S, F, L}
+#enum Global.Weapons {R, M, S, F, L}
 
 ## Fixed horizontal pickup speed
 const PICKUP_SPEED_X: int = 70
@@ -13,7 +13,7 @@ const PICKUP_SPEED_X: int = 70
 const GRAVITY: int = 350
 
 ## Decides which pickup sprite is displayed and which weapon player receives
-@export var pickup_id: PickupIDs = PickupIDs.R
+@export var pickup_id: Global.Weapons = Global.Weapons.R
 
 ## Non-constant vertical speed
 var pickup_speed_y: float
@@ -30,15 +30,15 @@ var pickup_speed_y: float
 
 ## Display respective sprite based on pickup ID, and initialize vertical speed
 func _ready() -> void:
-	if pickup_id == PickupIDs.R:
+	if pickup_id == Global.Weapons.R:
 		animated_sprite_2d.animation = 'R'
-	elif pickup_id == PickupIDs.M:
+	elif pickup_id == Global.Weapons.M:
 		animated_sprite_2d.animation = 'M'
-	elif pickup_id == PickupIDs.S:
+	elif pickup_id == Global.Weapons.S:
 		animated_sprite_2d.animation = 'S'
-	elif pickup_id == PickupIDs.L:
+	elif pickup_id == Global.Weapons.L:
 		animated_sprite_2d.animation = 'L'
-	elif pickup_id == PickupIDs.F:
+	elif pickup_id == Global.Weapons.F:
 		animated_sprite_2d.animation = 'F'
 	pickup_speed_y = -175
 
@@ -54,7 +54,7 @@ func _physics_process(delta: float) -> void:
 ## Play audio and disable it when player picks it up
 func _on_area_entered(area: Area2D) -> void:
 	if area.is_in_group("player"):
-		Global.weapon = str(pickup_id)
+		Global.weapon = pickup_id
 		audio_stream_player_2d.play()
 		monitorable = false
 		monitoring = false

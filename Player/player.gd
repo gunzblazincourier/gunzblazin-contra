@@ -9,18 +9,18 @@ enum States {IDLE, LOOK_UP, CROUCH, RUN, JUMP, JUMP_UP, JUMP_DOWN, FALL, \
 		SHOOT_JUMP, SHOOT_JUMP_UP, SHOOT_JUMP_DOWN, SHOOT_FALL, SHOOT_FALL_UP, \
 		DEATH}
 ## IDs of types of bullets that can be fired
-enum BulletIDs {R, M, S, F, L}
+#enum BulletIDs {R, M, S, F, L}
 
 const RUN_SPEED: int = 69				## Fixed run speed
 const JUMP_SPEED: int = -250			## Fixed jump speed
 const DEATH_JUMP_SPEED: int = -175		## Jump speed specifically DEATH state
 const GRAVITY: int = 555				## Custom gravity for the player
 
-var state: States				## Current state from the 'States' enum
-var bullet_id: BulletIDs		## Current bullet ID, indicating equipped weapon
-var sprite_direction: float		## Current sprite direction
-var death_direction: float		## Current death direction
-var is_jump_pressed: bool		## Checks whether player has pressed 'Jump'
+var state: States					## Current state from the 'States' enum
+#var bullet_id: Global.Global.Weapons		## Current bullet ID, indicating equipped weapon
+var sprite_direction: float			## Current sprite direction
+var death_direction: float			## Current death direction
+var is_jump_pressed: bool			## Checks whether player has pressed 'Jump'
 
 # Declared and defined in beginning instead of while shooting (see in _process())
 # in order to allow previously fired laser to despawn when new is fired
@@ -78,7 +78,7 @@ func _ready() -> void:
 	sprite_direction = 1.0
 	death_direction = -1.0
 	is_jump_pressed = true
-	bullet_id = BulletIDs.R
+	#bullet_id = Global.Global.Weapons.R
 	bullet_l_path = load("res://Bullet/bullet_l.tscn")
 	bullet_l = bullet_l_path.instantiate()
 
@@ -213,24 +213,26 @@ func _process(_delta: float) -> void:
 			state = States.DEATH
 	
 	# Weapon switching
-	if Input.is_action_just_pressed("1"):
-		bullet_id = BulletIDs.R
-	elif Input.is_action_just_pressed("2"):
-		bullet_id = BulletIDs.S
-	elif Input.is_action_just_pressed("3"):
-		bullet_id = BulletIDs.L
-	elif Input.is_action_just_pressed("4"):
-		bullet_id = BulletIDs.M
-	elif Input.is_action_just_pressed("5"):
-		bullet_id = BulletIDs.F
+	#bullet_id = Global.weapon
+	#print(bullet_id)
+	#if Input.is_action_just_pressed("1"):
+		#bullet_id = BulletIDs.R
+	#elif Input.is_action_just_pressed("2"):
+		#bullet_id = BulletIDs.S
+	#elif Input.is_action_just_pressed("3"):
+		#bullet_id = BulletIDs.L
+	#elif Input.is_action_just_pressed("4"):
+		#bullet_id = BulletIDs.M
+	#elif Input.is_action_just_pressed("5"):
+		#bullet_id = BulletIDs.F
 	
 	# Weapon behaviour
 	match state:
 		States.DEATH:
 			pass
 		_:
-			match bullet_id:
-				BulletIDs.R:
+			match Global.weapon:
+				Global.Weapons.R:
 					if Input.is_action_just_pressed("shoot"):
 						shoot_timer.start()
 						regulargun_sfx.play()
@@ -238,7 +240,7 @@ func _process(_delta: float) -> void:
 						var bullet_r: Area2D = bullet_r_path.instantiate()
 						spawn_bullet(bullet_r)
 				
-				BulletIDs.S:
+				Global.Weapons.S:
 					if Input.is_action_just_pressed("shoot"):
 						shoot_timer.start()
 						spreadgun_sfx.play()
@@ -260,13 +262,13 @@ func _process(_delta: float) -> void:
 						bullet_s4.rotate(0.52)
 						bullet_s5.rotate(5.76)
 				
-				BulletIDs.L:
+				Global.Weapons.L:
 					if Input.is_action_just_pressed("shoot"):
 						shoot_timer.start()
 						lasergun_sfx.play()
 						spawn_bullet(bullet_l)
 				
-				BulletIDs.M:
+				Global.Weapons.M:
 					# NOTE: 'pressed' instead of 'just_pressed'
 					if Input.is_action_pressed("shoot"):
 						shoot_timer.start()
@@ -278,7 +280,7 @@ func _process(_delta: float) -> void:
 							spawn_bullet(bullet_m)
 							machinegun_interval_timer.start()
 				
-				BulletIDs.F:
+				Global.Weapons.F:
 					if Input.is_action_just_pressed("shoot"):
 						shoot_timer.start()
 						var bullet_f_path: PackedScene = load("res://Bullet/bullet_f.tscn")
