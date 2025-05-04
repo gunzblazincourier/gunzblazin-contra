@@ -169,11 +169,11 @@ autostart = true
 stream = ExtResource("13_i2l44")
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
-position = Vector2(-0.5, -0.5)
+position = Vector2(-10, -1)
 scale = Vector2(1.25, 1.25)
 
 [node name="VisibleOnScreenNotifier2D2" type="VisibleOnScreenNotifier2D" parent="."]
-position = Vector2(4.76837e-07, 9.53674e-07)
+position = Vector2(8, -1.13687e-13)
 scale = Vector2(2.1, 2.1)
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
