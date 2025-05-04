@@ -3,11 +3,8 @@ extends Area2D
 ##
 ## Controls its speed, trajectory and the action of 'picking' by the player
 
-## Weapons that the pickup can give
-#enum Global.Weapons {R, M, S, F, L}
-
 ## Fixed horizontal pickup speed
-const PICKUP_SPEED_X: int = 70
+const PICKUP_SPEED_X: int = 60
 
 ## Custom gravity
 const GRAVITY: int = 350
@@ -51,7 +48,7 @@ func _physics_process(delta: float) -> void:
 		pickup_speed_y += GRAVITY * delta
 
 
-## Play audio and disable it when player picks it up
+## Play audio and disable it when player picks it up and receives the weapon
 func _on_area_entered(area: Area2D) -> void:
 	if area.is_in_group("player"):
 		Global.weapon = pickup_id
