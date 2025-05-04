@@ -54,6 +54,7 @@ func _physics_process(delta: float) -> void:
 ## Play audio and disable it when player picks it up
 func _on_area_entered(area: Area2D) -> void:
 	if area.is_in_group("player"):
+		Global.weapon = str(pickup_id)
 		audio_stream_player_2d.play()
 		monitorable = false
 		monitoring = false
