@@ -1,0 +1,5 @@
+[gd_scene format=3 uid="uid://be4f8kk1a6q38"]
+
+[node name="Pickup" type="Area2D"]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
