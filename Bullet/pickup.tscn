@@ -1,5 +1,6 @@
-[gd_scene load_steps=8 format=3 uid="uid://be4f8kk1a6q38"]
+[gd_scene load_steps=9 format=3 uid="uid://be4f8kk1a6q38"]
 
+[ext_resource type="Script" uid="uid://b3v4ci3dvga3i" path="res://Bullet/pickup.gd" id="1_atifx"]
 [ext_resource type="Texture2D" uid="uid://cltvko4u0napg" path="res://Bullet/Pickup_F.png" id="1_oknc6"]
 [ext_resource type="Texture2D" uid="uid://bwqmdkbo8xk7b" path="res://Bullet/Pickup_L.png" id="2_atifx"]
 [ext_resource type="Texture2D" uid="uid://0g1omclowqi6" path="res://Bullet/Pickup_M.png" id="3_r0avi"]
@@ -53,6 +54,7 @@ animations = [{
 size = Vector2(28, 15)
 
 [node name="Pickup" type="Area2D"]
+script = ExtResource("1_atifx")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_u3hj4")

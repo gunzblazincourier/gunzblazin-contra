@@ -12,6 +12,7 @@ func _physics_process(delta: float) -> void:
 	position += transform.x * BULLET_SPEED * delta
 
 
+## Removes bullet once it hits player
 func _on_area_entered(area: Area2D) -> void:
 	if area.is_in_group("player"):
 		queue_free()
