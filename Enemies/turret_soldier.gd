@@ -29,6 +29,7 @@ var is_exploding: bool				## Whether soldier is explosing post-death
 
 
 func _ready() -> void:
+	process_mode = Node.PROCESS_MODE_DISABLED
 	death_speed_y = -150
 	is_dead = false
 	is_exploding = false
