@@ -137,7 +137,6 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5f3y1"]
-size = Vector2(16, 30)
 
 [node name="Turret" type="Area2D" groups=["enemy"]]
 collision_layer = 4
@@ -147,12 +146,10 @@ script = ExtResource("1_46ixl")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_pj8v8")
 animation = &"shoot"
-frame = 10
-frame_progress = 0.255409
+frame = 9
+frame_progress = 0.184275
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
-position = Vector2(-1, 0)
 shape = SubResource("RectangleShape2D_5f3y1")
 
 [node name="Muzzle" type="Marker2D" parent="."]
