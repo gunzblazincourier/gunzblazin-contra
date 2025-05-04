@@ -150,8 +150,7 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5f3y1"]
 
 [node name="Turret" type="Area2D" groups=["enemy"]]
-collision_layer = 4
-collision_mask = 43
+collision_layer = 32
 script = ExtResource("1_gt54p")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
