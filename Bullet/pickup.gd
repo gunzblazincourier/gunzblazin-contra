@@ -7,7 +7,7 @@ extends Area2D
 const PICKUP_SPEED_X: int = 70
 
 ## Custom gravity
-const GRAVITY: int = 555
+const GRAVITY: int = 350
 
 ## Non-constant vertical speed
 var pickup_speed_y: float
@@ -17,7 +17,7 @@ var pickup_speed_y: float
 
 
 func _ready() -> void:
-	pickup_speed_y = -150
+	pickup_speed_y = -175
 
 
 ## Pickup travels in an arc with constant horizontal speed
