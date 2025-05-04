@@ -1,0 +1,108 @@
+[gd_scene load_steps=14 format=3 uid="uid://dnkmn6kup0jlf"]
+
+[ext_resource type="Script" uid="uid://dpjnhmujie0oy" path="res://Enemies/turret_soldier.gd" id="1_46ixl"]
+[ext_resource type="Texture2D" uid="uid://c3cowvvhl10xq" path="res://Enemies/TurretSoldier_Death.png" id="2_rr48h"]
+[ext_resource type="Texture2D" uid="uid://bsqs3c86kj65x" path="res://Explosions/Explosion2_0.png" id="3_37nio"]
+[ext_resource type="Texture2D" uid="uid://4woe5otvd8vt" path="res://Explosions/Explosion2_1.png" id="4_by41c"]
+[ext_resource type="Texture2D" uid="uid://cw8xqy6wwnggt" path="res://Explosions/Explosion2_2.png" id="5_pdlt7"]
+[ext_resource type="Texture2D" uid="uid://bioofyaafyst8" path="res://Enemies/NES - Contra - Turrets.png" id="6_h8gnt"]
+[ext_resource type="Texture2D" uid="uid://c56x4e8shosjj" path="res://Bullet/R.png" id="12_fp3x4"]
+[ext_resource type="AudioStream" uid="uid://cdr0ngbxu1hls" path="res://Levels/TekiOut.wav" id="13_i2l44"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a32vy"]
+atlas = ExtResource("6_h8gnt")
+region = Rect2(0, 66, 32, 33)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_46bt7"]
+atlas = ExtResource("6_h8gnt")
+region = Rect2(33, 66, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mxlia"]
+atlas = ExtResource("6_h8gnt")
+region = Rect2(66, 165, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_pj8v8"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_rr48h")
+}],
+"loop": false,
+"name": &"death",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_37nio")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_by41c")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_pdlt7")
+}, {
+"duration": 1.0,
+"texture": null
+}],
+"loop": false,
+"name": &"explode",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a32vy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_46bt7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mxlia")
+}],
+"loop": false,
+"name": &"open",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5f3y1"]
+size = Vector2(16, 30)
+
+[node name="Turret" type="Area2D" groups=["enemy"]]
+collision_layer = 4
+collision_mask = 43
+script = ExtResource("1_46ixl")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_pj8v8")
+animation = &"open"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2(-1, 0)
+shape = SubResource("RectangleShape2D_5f3y1")
+
+[node name="Muzzle" type="Marker2D" parent="."]
+position = Vector2(14, -11)
+
+[node name="Sprite2D" type="Sprite2D" parent="Muzzle"]
+visible = false
+position = Vector2(-0.453125, -0.453125)
+scale = Vector2(0.921875, 0.921875)
+texture = ExtResource("12_fp3x4")
+offset = Vector2(3, 3)
+
+[node name="Timer" type="Timer" parent="."]
+autostart = true
+
+[node name="DeathExplosionSFX" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("13_i2l44")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+visible = false
+position = Vector2(-1, 0)
+scale = Vector2(0.8, 1.5)
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="finished" from="DeathExplosionSFX" to="." method="_on_death_explosion_sfx_finished"]
+[connection signal="screen_entered" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_entered"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
