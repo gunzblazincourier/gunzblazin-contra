@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://be4f8kk1a6q38"]
+[gd_scene load_steps=8 format=3 uid="uid://be4f8kk1a6q38"]
 
 [ext_resource type="Texture2D" uid="uid://cltvko4u0napg" path="res://Bullet/Pickup_F.png" id="1_oknc6"]
 [ext_resource type="Texture2D" uid="uid://bwqmdkbo8xk7b" path="res://Bullet/Pickup_L.png" id="2_atifx"]
@@ -49,8 +49,15 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_oknc6"]
+size = Vector2(28, 15)
+
 [node name="Pickup" type="Area2D"]
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_u3hj4")
 animation = &"F"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -0.5)
+shape = SubResource("RectangleShape2D_oknc6")
