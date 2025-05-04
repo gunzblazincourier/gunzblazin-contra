@@ -640,6 +640,8 @@ graph_offset = Vector2(175, 124.326)
 size = Vector2(17, 30.75)
 
 [node name="RunningSoldier" type="Area2D" groups=["enemy"]]
+process_mode = 4
+disable_mode = 1
 collision_layer = 4
 collision_mask = 43
 script = ExtResource("1_1cjt1")
@@ -680,7 +682,6 @@ collision_mask = 8
 [node name="Explosion" parent="." instance=ExtResource("10_iixfa")]
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
-visible = false
 position = Vector2(8.9407e-08, -1.5)
 scale = Vector2(0.9, 1.45)
 

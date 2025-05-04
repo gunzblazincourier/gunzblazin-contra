@@ -39,7 +39,7 @@ var is_jump_type_final: bool
 
 
 func _ready() -> void:
-	#process_mode = Node.PROCESS_MODE_INHERIT
+	process_mode = Node.PROCESS_MODE_DISABLED
 	animation_tree.active = true
 	state = States.RUN
 	death = false
@@ -140,5 +140,6 @@ func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
 
 
 ## Enables enemy (or "spawns") when camera reaches the position
-#func _on_visible_on_screen_notifier_2d_screen_entered() -> void:
-	#process_mode = Node.PROCESS_MODE_INHERIT
+func _on_visible_on_screen_notifier_2d_screen_entered() -> void:
+	print("enemy")
+	process_mode = Node.PROCESS_MODE_INHERIT
