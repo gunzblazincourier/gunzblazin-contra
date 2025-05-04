@@ -75,3 +75,4 @@ collision_mask = 8
 stream = ExtResource("7_r0avi")
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="finished" from="AudioStreamPlayer2D" to="." method="_on_audio_stream_player_2d_finished"]

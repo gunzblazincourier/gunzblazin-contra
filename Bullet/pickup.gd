@@ -15,6 +15,9 @@ var pickup_speed_y: float
 ## RayCast to detect landing
 @onready var ray_cast_2d: RayCast2D = $RayCast2D
 
+## Pickup sound
+@onready var audio_stream_player_2d: AudioStreamPlayer2D = $AudioStreamPlayer2D
+
 
 func _ready() -> void:
 	pickup_speed_y = -175
@@ -28,7 +31,14 @@ func _physics_process(delta: float) -> void:
 		pickup_speed_y += GRAVITY * delta
 
 
-## Remove when player picks it up
+## Play audio and disable it when player picks it up
 func _on_area_entered(area: Area2D) -> void:
 	if area.is_in_group("player"):
-		queue_free()
+		audio_stream_player_2d.play()
+		monitorable = false
+		monitoring = false
+		visible = false
+
+## Remove the pickup from level after pickup sound finishes playing
+func _on_audio_stream_player_2d_finished() -> void:
+	queue_free()
