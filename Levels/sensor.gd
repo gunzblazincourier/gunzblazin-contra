@@ -23,6 +23,11 @@ func _process(_delta: float) -> void:
 	if destroyed == true:
 		animated_sprite_2d.play("explode")
 		audio_stream_player_2d.play()
+		
+		var pickup_path: PackedScene = load("res://Bullet/pickup.tscn")
+		var pickup: Area2D = pickup_path.instantiate()
+		owner.add_child(pickup)
+		pickup.position = global_position
 		destroyed = false
 
 

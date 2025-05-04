@@ -36,6 +36,10 @@ starting_camera_position = 544.0
 position = Vector2(892, -8)
 starting_camera_position = 834.0
 
+[node name="Pickup" parent="." instance=ExtResource("8_5vw27")]
+position = Vector2(-104, -41)
+pickup_id = 2
+
 [node name="Player" parent="." instance=ExtResource("1_76q5j")]
 position = Vector2(-159, -99)
 
@@ -142,9 +146,5 @@ position = Vector2(1057, -31)
 
 [node name="TurretSoldier4" parent="." instance=ExtResource("6_7mycd")]
 position = Vector2(2145, 1)
-
-[node name="Pickup" parent="." instance=ExtResource("8_5vw27")]
-position = Vector2(-104, -41)
-pickup_id = 1
 
 [connection signal="timeout" from="LevelAnimationTimer" to="." method="_on_timer_timeout"]
