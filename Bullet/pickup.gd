@@ -26,3 +26,9 @@ func _physics_process(delta: float) -> void:
 		position.x += PICKUP_SPEED_X * delta
 		position.y += pickup_speed_y * delta
 		pickup_speed_y += GRAVITY * delta
+
+
+## Remove when player picks it up
+func _on_area_entered(area: Area2D) -> void:
+	if area.is_in_group("player"):
+		queue_free()
