@@ -3,14 +3,23 @@ extends Area2D
 ##
 ## Controls its speed, trajectory and the action of 'picking' by the player
 
+## Weapons that the pickup can give
+enum PickupIDs {R, M, S, F, L}
+
 ## Fixed horizontal pickup speed
 const PICKUP_SPEED_X: int = 70
 
 ## Custom gravity
 const GRAVITY: int = 350
 
+## Decides which pickup sprite is displayed and which weapon player receives
+@export var pickup_id: PickupIDs = PickupIDs.R
+
 ## Non-constant vertical speed
 var pickup_speed_y: float
+
+## One AnimatedSprite has different weapon pickups
+@onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 
 ## RayCast to detect landing
 @onready var ray_cast_2d: RayCast2D = $RayCast2D
@@ -19,7 +28,18 @@ var pickup_speed_y: float
 @onready var audio_stream_player_2d: AudioStreamPlayer2D = $AudioStreamPlayer2D
 
 
+## Display respective sprite based on pickup ID, and initialize vertical speed
 func _ready() -> void:
+	if pickup_id == PickupIDs.R:
+		animated_sprite_2d.animation = 'R'
+	elif pickup_id == PickupIDs.M:
+		animated_sprite_2d.animation = 'M'
+	elif pickup_id == PickupIDs.S:
+		animated_sprite_2d.animation = 'S'
+	elif pickup_id == PickupIDs.L:
+		animated_sprite_2d.animation = 'L'
+	elif pickup_id == PickupIDs.F:
+		animated_sprite_2d.animation = 'F'
 	pickup_speed_y = -175
 
 

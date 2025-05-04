@@ -145,5 +145,6 @@ position = Vector2(2145, 1)
 
 [node name="Pickup" parent="." instance=ExtResource("8_5vw27")]
 position = Vector2(-104, -41)
+pickup_id = 1
 
 [connection signal="timeout" from="LevelAnimationTimer" to="." method="_on_timer_timeout"]
