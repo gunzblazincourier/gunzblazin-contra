@@ -25,6 +25,20 @@ region = Rect2(66, 165, 32, 32)
 animations = [{
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_a32vy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_46bt7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mxlia")
+}],
+"loop": false,
+"name": &"activate",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": ExtResource("2_rr48h")
 }],
 "loop": false,
@@ -47,20 +61,6 @@ animations = [{
 "loop": false,
 "name": &"explode",
 "speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_a32vy")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_46bt7")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_mxlia")
-}],
-"loop": false,
-"name": &"open",
-"speed": 5.0
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5f3y1"]
@@ -73,7 +73,7 @@ script = ExtResource("1_46ixl")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_pj8v8")
-animation = &"open"
+animation = &"activate"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false
