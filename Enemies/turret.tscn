@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://dnkmn6kup0jlf"]
+[gd_scene load_steps=13 format=3 uid="uid://dnkmn6kup0jlf"]
 
 [ext_resource type="Script" uid="uid://dpjnhmujie0oy" path="res://Enemies/turret_soldier.gd" id="1_46ixl"]
 [ext_resource type="Texture2D" uid="uid://c3cowvvhl10xq" path="res://Enemies/TurretSoldier_Death.png" id="2_rr48h"]
@@ -17,10 +17,6 @@ region = Rect2(0, 66, 32, 33)
 atlas = ExtResource("6_h8gnt")
 region = Rect2(33, 66, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_mxlia"]
-atlas = ExtResource("6_h8gnt")
-region = Rect2(66, 165, 32, 32)
-
 [sub_resource type="SpriteFrames" id="SpriteFrames_pj8v8"]
 animations = [{
 "frames": [{
@@ -29,9 +25,6 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_46bt7")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_mxlia")
 }],
 "loop": false,
 "name": &"activate",
