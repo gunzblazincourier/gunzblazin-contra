@@ -22,6 +22,7 @@ func _ready() -> void:
 
 ## Pickup travels in an arc with constant horizontal speed
 func _physics_process(delta: float) -> void:
-	position.x += PICKUP_SPEED_X * delta
-	position.y += pickup_speed_y * delta
-	pickup_speed_y += GRAVITY * delta
+	if not ray_cast_2d.is_colliding():
+		position.x += PICKUP_SPEED_X * delta
+		position.y += pickup_speed_y * delta
+		pickup_speed_y += GRAVITY * delta
