@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=4 uid="uid://bornr0erfd30j"]
+[gd_scene load_steps=12 format=4 uid="uid://bornr0erfd30j"]
 
 [ext_resource type="PackedScene" uid="uid://doa0vkc0fktkh" path="res://Player/player.tscn" id="1_76q5j"]
 [ext_resource type="Script" uid="uid://tqrdmn3550ts" path="res://main.gd" id="1_lquwl"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://0hbphmpkfm7w" path="res://Enemies/running_soldier.tscn" id="5_lquwl"]
 [ext_resource type="PackedScene" uid="uid://bgedjmw5o3wam" path="res://Enemies/turret_soldier.tscn" id="6_7mycd"]
 [ext_resource type="PackedScene" uid="uid://be4f8kk1a6q38" path="res://Bullet/pickup.tscn" id="8_5vw27"]
+[ext_resource type="PackedScene" uid="uid://dnkmn6kup0jlf" path="res://Enemies/turret.tscn" id="9_kek77"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_h2yge"]
 normal = Vector2(-5.60985e-08, -1)
@@ -146,5 +147,8 @@ position = Vector2(1057, -31)
 
 [node name="TurretSoldier4" parent="." instance=ExtResource("6_7mycd")]
 position = Vector2(2145, 1)
+
+[node name="Turret" parent="." instance=ExtResource("9_kek77")]
+position = Vector2(162, 24)
 
 [connection signal="timeout" from="LevelAnimationTimer" to="." method="_on_timer_timeout"]
