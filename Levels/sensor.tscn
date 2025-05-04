@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://1iy13e6vp74e"]
+[gd_scene load_steps=14 format=3 uid="uid://1iy13e6vp74e"]
 
 [ext_resource type="Texture2D" uid="uid://cahujh4blws8" path="res://Levels/Sensor_0.png" id="1_8yujn"]
 [ext_resource type="Script" uid="uid://b05rdla5qsqp2" path="res://Levels/sensor.gd" id="1_fm6yq"]
@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://cc2xjpk2aq03j" path="res://Explosions/Explosion_1.png" id="7_fm6yq"]
 [ext_resource type="Texture2D" uid="uid://c66pml0hbev4x" path="res://Explosions/Explosion_2.png" id="8_4ymml"]
 [ext_resource type="AudioStream" uid="uid://cdr0ngbxu1hls" path="res://Levels/TekiOut.wav" id="10_4ymml"]
+[ext_resource type="PackedScene" uid="uid://be4f8kk1a6q38" path="res://Bullet/pickup.tscn" id="11_8iicn"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_4ymml"]
 animations = [{
@@ -119,6 +120,11 @@ scale = Vector2(0.2, 1)
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("10_4ymml")
+
+[node name="Pickup" parent="." instance=ExtResource("11_8iicn")]
+process_mode = 4
+visible = false
+pickup_id = 1
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="screen_entered" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_entered"]

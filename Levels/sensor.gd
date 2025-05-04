@@ -11,8 +11,14 @@ var destroyed: bool
 ## explosion
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 
+## Collision shape for the srea, here the inside of the sensor
+@onready var collision_shape_2d: CollisionShape2D = $CollisionShape2D
+
 ## Sound for when sensor is destroyed
 @onready var audio_stream_player_2d: AudioStreamPlayer2D = $AudioStreamPlayer2D
+
+## Pickup embedded in the sensor
+@onready var pickup: Area2D = $Pickup
 
 
 func _ready() -> void:
@@ -24,10 +30,14 @@ func _process(_delta: float) -> void:
 		animated_sprite_2d.play("explode")
 		audio_stream_player_2d.play()
 		
-		var pickup_path: PackedScene = load("res://Bullet/pickup.tscn")
-		var pickup: Area2D = pickup_path.instantiate()
-		owner.add_child(pickup)
-		pickup.position = global_position
+		#animated_sprite_2d.visible = false
+		collision_shape_2d.disabled = true
+		pickup.process_mode = Node.PROCESS_MODE_INHERIT
+		pickup.visible = true
+		#var pickup_path: PackedScene = load("res://Bullet/pickup.tscn")
+		#var pickup: Area2D = pickup_path.instantiate()
+		#owner.add_child(pickup)
+		#pickup.position = global_position
 		destroyed = false
 
 
@@ -51,4 +61,5 @@ func _on_area_entered(area: Area2D) -> void:
 ## Removes sensor after explosion (based on the sound instead of animation since
 ## sound is longer)
 func _on_audio_stream_player_2d_finished() -> void:
-	queue_free()
+	#queue_free()
+	pass
