@@ -8,8 +8,6 @@ enum States {IDLE, LOOK_UP, CROUCH, RUN, JUMP, JUMP_UP, JUMP_DOWN, FALL, \
 		FALL_UP, SHOOT_IDLE, SHOOT_LOOK_UP, SHOOT_CROUCH, SHOOT_RUN, \
 		SHOOT_JUMP, SHOOT_JUMP_UP, SHOOT_JUMP_DOWN, SHOOT_FALL, SHOOT_FALL_UP, \
 		DEATH}
-## IDs of types of bullets that can be fired
-#enum BulletIDs {R, M, S, F, L}
 
 const RUN_SPEED: int = 69				## Fixed run speed
 const JUMP_SPEED: int = -250			## Fixed jump speed
@@ -17,7 +15,6 @@ const DEATH_JUMP_SPEED: int = -175		## Jump speed specifically DEATH state
 const GRAVITY: int = 555				## Custom gravity for the player
 
 var state: States					## Current state from the 'States' enum
-#var bullet_id: Global.Global.Weapons		## Current bullet ID, indicating equipped weapon
 var sprite_direction: float			## Current sprite direction
 var death_direction: float			## Current death direction
 var is_jump_pressed: bool			## Checks whether player has pressed 'Jump'
@@ -78,7 +75,6 @@ func _ready() -> void:
 	sprite_direction = 1.0
 	death_direction = -1.0
 	is_jump_pressed = true
-	#bullet_id = Global.Global.Weapons.R
 	bullet_l_path = load("res://Bullet/bullet_l.tscn")
 	bullet_l = bullet_l_path.instantiate()
 
@@ -189,8 +185,6 @@ func _process(_delta: float) -> void:
 			state = States.FALL
 		"FallUp":
 			state = States.FALL_UP
-		#"FallDown":
-			#state = States.FALL_DOWN
 		"ShootIdle":
 			state = States.SHOOT_IDLE
 		"ShootLookUp":
@@ -211,20 +205,6 @@ func _process(_delta: float) -> void:
 			state = States.SHOOT_FALL_UP
 		"Death":
 			state = States.DEATH
-	
-	# Weapon switching
-	#bullet_id = Global.weapon
-	#print(bullet_id)
-	#if Input.is_action_just_pressed("1"):
-		#bullet_id = BulletIDs.R
-	#elif Input.is_action_just_pressed("2"):
-		#bullet_id = BulletIDs.S
-	#elif Input.is_action_just_pressed("3"):
-		#bullet_id = BulletIDs.L
-	#elif Input.is_action_just_pressed("4"):
-		#bullet_id = BulletIDs.M
-	#elif Input.is_action_just_pressed("5"):
-		#bullet_id = BulletIDs.F
 	
 	# Weapon behaviour
 	match state:
