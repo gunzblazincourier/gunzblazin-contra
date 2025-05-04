@@ -641,7 +641,7 @@ size = Vector2(17, 30.75)
 
 [node name="RunningSoldier" type="Area2D" groups=["enemy"]]
 collision_layer = 4
-collision_mask = 11
+collision_mask = 43
 script = ExtResource("1_1cjt1")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

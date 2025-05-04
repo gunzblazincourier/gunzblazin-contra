@@ -96,7 +96,7 @@ radius = 1.58114
 
 [node name="Bullet_S" type="Area2D" groups=["bullet"]]
 collision_layer = 2
-collision_mask = 12
+collision_mask = 36
 script = ExtResource("1_7vesb")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

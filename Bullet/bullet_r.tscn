@@ -8,7 +8,7 @@ size = Vector2(3, 3)
 
 [node name="Bullet_R" type="Area2D" groups=["bullet"]]
 collision_layer = 2
-collision_mask = 12
+collision_mask = 36
 script = ExtResource("1_4n8gp")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

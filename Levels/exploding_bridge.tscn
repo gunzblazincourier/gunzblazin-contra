@@ -571,7 +571,7 @@ animations = [{
 }]
 
 [node name="ExplodingBridge" type="StaticBody2D"]
-collision_layer = 8
+collision_layer = 32
 collision_mask = 5
 script = ExtResource("1_b7thi")
 
