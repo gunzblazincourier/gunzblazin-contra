@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://be4f8kk1a6q38"]
+[gd_scene load_steps=10 format=3 uid="uid://be4f8kk1a6q38"]
 
 [ext_resource type="Script" uid="uid://b3v4ci3dvga3i" path="res://Bullet/pickup.gd" id="1_atifx"]
 [ext_resource type="Texture2D" uid="uid://cltvko4u0napg" path="res://Bullet/Pickup_F.png" id="1_oknc6"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://0g1omclowqi6" path="res://Bullet/Pickup_M.png" id="3_r0avi"]
 [ext_resource type="Texture2D" uid="uid://dmoqh2ai07u0r" path="res://Bullet/Pickup_R.png" id="4_66o4b"]
 [ext_resource type="Texture2D" uid="uid://dquk5yj48psu3" path="res://Bullet/Pickup_S.png" id="5_ulrdo"]
+[ext_resource type="AudioStream" uid="uid://djdao18dmtr0s" path="res://Sounds/PowerUp.wav" id="7_r0avi"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_u3hj4"]
 animations = [{
@@ -69,5 +70,8 @@ shape = SubResource("RectangleShape2D_oknc6")
 position = Vector2(0, 6)
 target_position = Vector2(0, 2)
 collision_mask = 8
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("7_r0avi")
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
