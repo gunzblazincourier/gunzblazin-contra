@@ -9,7 +9,7 @@ enum States {RUN, JUMP, DEATH, EXPLODE}
 ## Left and right directions stored in enum
 enum Directions {LEFT = -1, RIGHT = 1}
 
-const SPEED: int = 40		## Fixed running speed
+const SPEED: int = 70		## Fixed running speed
 const GRAVITY: int = 555	## Custom gravity for the enemy
 
 ## Travel direction
