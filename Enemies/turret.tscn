@@ -79,6 +79,17 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_46bt7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a32vy")
+}],
+"loop": false,
+"name": &"deactivate",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": ExtResource("3_37nio")
 }, {
 "duration": 1.0,
@@ -145,7 +156,7 @@ script = ExtResource("1_gt54p")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_pj8v8")
-animation = &"activate"
+animation = &"deactivate"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_5f3y1")
