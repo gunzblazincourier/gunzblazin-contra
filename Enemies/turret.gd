@@ -4,6 +4,7 @@ extends Area2D
 @onready var visible_on_screen_notifier_2d: VisibleOnScreenNotifier2D = $VisibleOnScreenNotifier2D
 @onready var visible_on_screen_notifier_2d_2: VisibleOnScreenNotifier2D = $VisibleOnScreenNotifier2D2
 @onready var muzzle: Marker2D = $Muzzle
+@onready var shoot_timer: Timer = $ShootTimer
 
 
 func _process(_delta: float) -> void:
@@ -75,20 +76,33 @@ func _process(_delta: float) -> void:
 			angle_max = -9*(PI/12)
 			angle_min = -11*(PI/12)
 		
-		if animated_sprite_2d.frame != 0:
-			if angle_with_player < angle_min:
-				animated_sprite_2d.play("shoot")
-			elif angle_with_player > angle_max:
-				animated_sprite_2d.play_backwards("shoot")
+		if shoot_timer.is_stopped():
+			if animated_sprite_2d.frame != 0:
+				if angle_with_player < angle_min:
+					animated_sprite_2d.play("shoot")
+				elif angle_with_player > angle_max:
+					animated_sprite_2d.play_backwards("shoot")
+				else:
+					shoot_timer.start()
+					var bullet_path: PackedScene = load("res://Bullet/bullet_ts.tscn")
+					var bullet: Area2D = bullet_path.instantiate()
+					owner.add_child(bullet)
+					bullet.position = muzzle.global_position
+					bullet.rotation = muzzle.global_rotation
+					animated_sprite_2d.pause()
 			else:
-				animated_sprite_2d.pause()
-		else:
-			if angle_with_player < angle_min and angle_with_player > 0:
-				animated_sprite_2d.play("shoot")
-			elif angle_with_player > angle_max and angle_with_player < 0:
-				animated_sprite_2d.play_backwards("shoot")
-			else:
-				animated_sprite_2d.pause()
+				if angle_with_player < angle_min and angle_with_player > 0:
+					animated_sprite_2d.play("shoot")
+				elif angle_with_player > angle_max and angle_with_player < 0:
+					animated_sprite_2d.play_backwards("shoot")
+				else:
+					shoot_timer.start()
+					var bullet_path: PackedScene = load("res://Bullet/bullet_ts.tscn")
+					var bullet: Area2D = bullet_path.instantiate()
+					owner.add_child(bullet)
+					bullet.position = muzzle.global_position
+					bullet.rotation = muzzle.global_rotation
+					animated_sprite_2d.pause()
 		print(angle_with_player)
 		#print(angle_min)
 		#print(angle_with_player < angle_min)
