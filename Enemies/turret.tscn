@@ -180,7 +180,7 @@ stream = ExtResource("13_i2l44")
 position = Vector2(14, -1.69407e-21)
 
 [node name="VisibleOnScreenNotifier2D2" type="VisibleOnScreenNotifier2D" parent="."]
-position = Vector2(-53, 1)
+position = Vector2(-49, 1)
 scale = Vector2(0.15, 1)
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
