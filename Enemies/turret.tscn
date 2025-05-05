@@ -155,16 +155,17 @@ script = ExtResource("1_gt54p")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_pj8v8")
-animation = &"activate"
+animation = &"shoot"
+frame = 11
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 shape = SubResource("RectangleShape2D_5f3y1")
 
 [node name="Muzzle" type="Marker2D" parent="."]
-position = Vector2(14, -11)
+position = Vector2(-12, -7)
 
 [node name="Sprite2D" type="Sprite2D" parent="Muzzle"]
-visible = false
 position = Vector2(-0.453125, -0.453125)
 scale = Vector2(0.921875, 0.921875)
 texture = ExtResource("12_fp3x4")
@@ -177,9 +178,11 @@ autostart = true
 stream = ExtResource("13_i2l44")
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+visible = false
 position = Vector2(14, -1.69407e-21)
 
 [node name="VisibleOnScreenNotifier2D2" type="VisibleOnScreenNotifier2D" parent="."]
+visible = false
 position = Vector2(-49, 1)
 scale = Vector2(0.15, 1)
 

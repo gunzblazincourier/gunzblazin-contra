@@ -3,6 +3,7 @@ extends Area2D
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 @onready var visible_on_screen_notifier_2d: VisibleOnScreenNotifier2D = $VisibleOnScreenNotifier2D
 @onready var visible_on_screen_notifier_2d_2: VisibleOnScreenNotifier2D = $VisibleOnScreenNotifier2D2
+@onready var muzzle: Marker2D = $Muzzle
 
 
 func _process(_delta: float) -> void:
@@ -14,39 +15,63 @@ func _process(_delta: float) -> void:
 		if animated_sprite_2d.frame == 0:
 			#if angle_with_player < -11*(PI/12) and angle_with_player > 11*(PI/12):
 				#animated_sprite_2d.stop()
+			muzzle.position = Vector2(-14, 0)
+			muzzle.rotation = PI
 			angle_max = -11*(PI/12)
 			angle_min = 11*(PI/12)
 		elif animated_sprite_2d.frame == 1:
+			muzzle.position = Vector2(-13, 6)
+			muzzle.rotation = 5*(PI/6)
 			angle_max = 11*(PI/12)
 			angle_min = 9*(PI/12)
 		elif animated_sprite_2d.frame == 2:
+			muzzle.position = Vector2(-7, 12)
+			muzzle.rotation = 4*(PI/6)
 			angle_max = 9*(PI/12)
 			angle_min = 7*(PI/12)
 		elif animated_sprite_2d.frame == 3:
+			muzzle.position = Vector2(0, 13)
+			muzzle.rotation = 3*(PI/6)
 			angle_max = 7*(PI/12)
 			angle_min = 5*(PI/12)
 		elif animated_sprite_2d.frame == 4:
+			muzzle.position = Vector2(7, 12)
+			muzzle.rotation = 2*(PI/6)
 			angle_max = 5*(PI/12)
 			angle_min = 3*(PI/12)
 		elif animated_sprite_2d.frame == 5:
+			muzzle.position = Vector2(12, 7)
+			muzzle.rotation = PI/6
 			angle_max = 3*(PI/12)
 			angle_min = 1*(PI/12)
 		elif animated_sprite_2d.frame == 6:
+			muzzle.position = Vector2(13, 0)
+			muzzle.rotation = 0
 			angle_max = 1*(PI/12)
 			angle_min = -1*(PI/12)
 		elif animated_sprite_2d.frame == 7:
+			muzzle.position = Vector2(12, -7)
+			muzzle.rotation = -PI/6
 			angle_max = -1*(PI/12)
 			angle_min = -3*(PI/12)
 		elif animated_sprite_2d.frame == 8:
+			muzzle.position = Vector2(7, -12)
+			muzzle.rotation = -2*(PI/6)
 			angle_max = -3*(PI/12)
 			angle_min = -5*(PI/12)
 		elif animated_sprite_2d.frame == 9:
+			muzzle.position = Vector2(-1, -14)
+			muzzle.rotation = -3*(PI/6)
 			angle_max = -5*(PI/12)
 			angle_min = -7*(PI/12)
 		elif animated_sprite_2d.frame == 10:
+			muzzle.position = Vector2(-8, -13)
+			muzzle.rotation = -4*(PI/6)
 			angle_max = -7*(PI/12)
 			angle_min = -9*(PI/12)
 		elif animated_sprite_2d.frame == 11:
+			muzzle.position = Vector2(-12, -7)
+			muzzle.rotation = -5*(PI/6)
 			angle_max = -9*(PI/12)
 			angle_min = -11*(PI/12)
 		
