@@ -13,6 +13,9 @@ extends Area2D
 ## Turret shoots and does not track player for this time
 @onready var shoot_timer: Timer = $ShootTimer
 
+## Turret explosion sound
+@onready var death_explosion_sfx: AudioStreamPlayer2D = $DeathExplosionSFX
+
 
 ## Shoots when player is seen by turret, continues to track after a while and
 ## repeat
@@ -129,3 +132,17 @@ func _on_visible_on_screen_notifier_2d_2_screen_exited() -> void:
 func _on_animated_sprite_2d_animation_finished() -> void:
 	if animated_sprite_2d.animation == "activate":
 		animated_sprite_2d.play("shoot")
+
+
+## Triggers turret destruction when hit by player bullet
+func _on_area_entered(area: Area2D) -> void:
+	if area.is_in_group("bullet"):
+		monitorable = false
+		monitoring = false
+		animated_sprite_2d.play("explode")
+		death_explosion_sfx.play()
+
+
+## Remove turret after explosion
+func _on_death_explosion_sfx_finished() -> void:
+	queue_free()
