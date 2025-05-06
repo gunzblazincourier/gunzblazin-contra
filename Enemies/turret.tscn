@@ -151,6 +151,7 @@ animations = [{
 
 [node name="Turret" type="Area2D" groups=["enemy"]]
 collision_layer = 32
+collision_mask = 3
 script = ExtResource("1_gt54p")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
