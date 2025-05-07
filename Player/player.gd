@@ -350,7 +350,7 @@ func spawn_bullet(bullet: Area2D) -> void:
 ## Player won't be invincible after time's over
 func _on_invincibility_timer_timeout() -> void:
 	flashing_timer.stop()
-	#visible = true
+	visible = true
 
 
 ## Repeatedly toggles visibility of player to create invincibility flashing
