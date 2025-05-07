@@ -63,6 +63,8 @@ var bullet_l: Area2D
 ## How long the player is invincible when it spawns
 @onready var invincibility_timer: Timer = $InvincibilityTimer
 
+# Flashing intensity is less than original game since low wait time leads to
+# inconsistent behaviour between framerates
 ## Flashing intensity during invincibility phase
 @onready var flashing_timer: Timer = $FlashingTimer
 
