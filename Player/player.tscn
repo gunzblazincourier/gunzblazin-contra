@@ -5559,7 +5559,7 @@ one_shot = true
 autostart = true
 
 [node name="FlashingTimer" type="Timer" parent="."]
-wait_time = 0.06
+wait_time = 0.05
 autostart = true
 
 [node name="Muzzle" type="Marker2D" parent="."]
