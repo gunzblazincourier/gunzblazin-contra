@@ -5571,6 +5571,8 @@ texture = ExtResource("3_l2ago")
 
 [node name="Hitbox" type="Area2D" parent="." groups=["player"]]
 collision_mask = 22
+monitoring = false
+monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 position = Vector2(0.5, 11.5)

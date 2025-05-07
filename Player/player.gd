@@ -71,6 +71,9 @@ var bullet_l: Area2D
 ## Gun muzzle
 @onready var muzzle: Marker2D = $Muzzle
 
+## Hitbox area of player
+@onready var hitbox: Area2D = $Hitbox
+
 
 func _ready() -> void:
 	# Slows down/speed up the game
@@ -351,8 +354,12 @@ func spawn_bullet(bullet: Area2D) -> void:
 
 ## Player won't be invincible after time's over
 func _on_invincibility_timer_timeout() -> void:
-	flashing_timer.stop()
+	#set_deferred("monitorable", true)
+	#set_deferred("monitoring", true)
+	hitbox.set_deferred("monitorable", true)
+	hitbox.set_deferred("monitoring", true)
 	visible = true
+	flashing_timer.stop()
 
 
 ## Repeatedly toggles visibility of player to create invincibility flashing
