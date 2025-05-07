@@ -137,8 +137,8 @@ func _on_animated_sprite_2d_animation_finished() -> void:
 ## Triggers turret destruction when hit by player bullet
 func _on_area_entered(area: Area2D) -> void:
 	if area.is_in_group("bullet"):
-		monitorable = false
-		monitoring = false
+		set_deferred("monitorable", false)
+		set_deferred("monitoring", false)
 		animated_sprite_2d.play("explode")
 		death_explosion_sfx.play()
 
