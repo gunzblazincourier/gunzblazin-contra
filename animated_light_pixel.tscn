@@ -29,3 +29,4 @@ animations = [{
 
 [node name="AnimatedLightPixel" type="AnimatedSprite2D"]
 sprite_frames = SubResource("SpriteFrames_ojqys")
+autoplay = "default"
