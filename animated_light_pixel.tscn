@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://rard1hgq2q7h"]
+
+[ext_resource type="Texture2D" uid="uid://d2uln252cmol2" path="res://AnimatedLightPixel_0.png" id="1_or3l2"]
+[ext_resource type="Texture2D" uid="uid://cyg460c2x1wlp" path="res://AnimatedLightPixel_1.png" id="2_wyidm"]
+[ext_resource type="Texture2D" uid="uid://byvvgxyu11oln" path="res://AnimatedLightPixel_2.png" id="3_0ipr6"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ojqys"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_or3l2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_wyidm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_0ipr6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_wyidm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("1_or3l2")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="AnimatedLightPixel" type="AnimatedSprite2D"]
+sprite_frames = SubResource("SpriteFrames_ojqys")
