@@ -345,3 +345,17 @@ func spawn_bullet(bullet: Area2D) -> void:
 	owner.add_child(bullet)
 	bullet.position = muzzle.global_position
 	bullet.rotation = muzzle.global_rotation
+
+
+## Player won't be invincible after time's over
+func _on_invincibility_timer_timeout() -> void:
+	flashing_timer.stop()
+	#visible = true
+
+
+## Repeatedly toggles visibility of player to create invincibility flashing
+func _on_flashing_timer_timeout() -> void:
+	if visible == true:
+		visible = false
+	else:
+		visible = true
