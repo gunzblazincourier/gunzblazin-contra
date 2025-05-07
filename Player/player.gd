@@ -60,6 +60,12 @@ var bullet_l: Area2D
 ## Controls rate of fire of Machinegun
 @onready var machinegun_interval_timer: Timer = $MachinegunIntervalTimer
 
+## How long the player is invincible when it spawns
+@onready var invincibility_timer: Timer = $InvincibilityTimer
+
+## Flashing intensity during invincibility phase
+@onready var flashing_timer: Timer = $FlashingTimer
+
 ## Gun muzzle
 @onready var muzzle: Marker2D = $Muzzle
 
