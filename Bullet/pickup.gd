@@ -53,8 +53,8 @@ func _on_area_entered(area: Area2D) -> void:
 	if area.is_in_group("player"):
 		Global.weapon = pickup_id
 		audio_stream_player_2d.play()
-		monitorable = false
-		monitoring = false
+		set_deferred("monitorable", false)
+		set_deferred("monitoring", false)
 		visible = false
 
 ## Remove the pickup from level after pickup sound finishes playing
