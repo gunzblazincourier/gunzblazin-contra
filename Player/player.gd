@@ -354,8 +354,6 @@ func spawn_bullet(bullet: Area2D) -> void:
 
 ## Player won't be invincible after time's over
 func _on_invincibility_timer_timeout() -> void:
-	#set_deferred("monitorable", true)
-	#set_deferred("monitoring", true)
 	hitbox.set_deferred("monitorable", true)
 	hitbox.set_deferred("monitoring", true)
 	visible = true
