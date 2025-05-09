@@ -1,0 +1,69 @@
+[gd_scene load_steps=12 format=3 uid="uid://dwqph484it1og"]
+
+[ext_resource type="Texture2D" uid="uid://dtaqmisbjrryc" path="res://Enemies/Turret2_0_0.png" id="1_28hhv"]
+[ext_resource type="Texture2D" uid="uid://bfy557mgeouh5" path="res://Enemies/Turret2_1_0.png" id="2_fvhaf"]
+[ext_resource type="Texture2D" uid="uid://g81bd6kmg28h" path="res://Enemies/Turret2_2_0.png" id="3_mnsva"]
+[ext_resource type="Texture2D" uid="uid://1ingi25p4adu" path="res://Enemies/Turret2_0_1.png" id="4_0k1iq"]
+[ext_resource type="Texture2D" uid="uid://b82bbf0qph4vr" path="res://Enemies/Turret2_1_1.png" id="5_mefc7"]
+[ext_resource type="Texture2D" uid="uid://cbxjiyt3krvgx" path="res://Enemies/Turret2_2_1.png" id="6_2a8m2"]
+[ext_resource type="Texture2D" uid="uid://s303623tohdj" path="res://Enemies/Turret2_0_2.png" id="7_jdwic"]
+[ext_resource type="Texture2D" uid="uid://by3pqgf15s7tg" path="res://Enemies/Turret2_1_2.png" id="8_rkyl7"]
+[ext_resource type="Texture2D" uid="uid://cq6kh3ghv1cew" path="res://Enemies/Turret2_2_2.png" id="9_i25d8"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_lango"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_28hhv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_fvhaf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_mnsva")
+}],
+"loop": true,
+"name": &"shoot_0",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_0k1iq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_mefc7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_2a8m2")
+}],
+"loop": true,
+"name": &"shoot_1",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_jdwic")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_rkyl7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_i25d8")
+}],
+"loop": true,
+"name": &"shoot_2",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cruha"]
+
+[node name="Turret2" type="Area2D"]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_lango")
+animation = &"shoot_0"
+frame = 1
+frame_progress = 0.904013
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_cruha")
