@@ -1,12 +1,39 @@
-[gd_scene load_steps=24 format=3 uid="uid://dnkmn6kup0jlf"]
+[gd_scene load_steps=51 format=3 uid="uid://dnkmn6kup0jlf"]
 
 [ext_resource type="Script" uid="uid://essnqwekgh3m" path="res://Enemies/turret.gd" id="1_gt54p"]
 [ext_resource type="Texture2D" uid="uid://bsqs3c86kj65x" path="res://Explosions/Explosion2_0.png" id="3_37nio"]
+[ext_resource type="Texture2D" uid="uid://dhwqa1v53obrt" path="res://Enemies/Turret_Activate_01.png" id="3_infd2"]
 [ext_resource type="Texture2D" uid="uid://4woe5otvd8vt" path="res://Explosions/Explosion2_1.png" id="4_by41c"]
+[ext_resource type="Texture2D" uid="uid://d3keucbifttae" path="res://Enemies/Turret_Activate_11.png" id="4_uww67"]
+[ext_resource type="Texture2D" uid="uid://bc8nxyim45bbc" path="res://Enemies/Turret_Activate_02.png" id="5_n280w"]
 [ext_resource type="Texture2D" uid="uid://cw8xqy6wwnggt" path="res://Explosions/Explosion2_2.png" id="5_pdlt7"]
 [ext_resource type="Texture2D" uid="uid://bioofyaafyst8" path="res://Enemies/NES - Contra - Turrets.png" id="6_h8gnt"]
+[ext_resource type="Texture2D" uid="uid://cj7dsdheebujm" path="res://Enemies/Turret_Activate_12.png" id="6_p86iw"]
+[ext_resource type="Texture2D" uid="uid://cn447grqpb4cc" path="res://Enemies/Turret_Shoot_01.png" id="10_5n6x5"]
+[ext_resource type="Texture2D" uid="uid://7ngk68lnkwnp" path="res://Enemies/Turret_Shoot_1_1.png" id="11_v0bvf"]
+[ext_resource type="Texture2D" uid="uid://bvb1qfy58bage" path="res://Enemies/Turret_Shoot_31.png" id="12_57s3s"]
 [ext_resource type="Texture2D" uid="uid://c56x4e8shosjj" path="res://Bullet/R.png" id="12_fp3x4"]
 [ext_resource type="AudioStream" uid="uid://cdr0ngbxu1hls" path="res://Levels/TekiOut.wav" id="13_i2l44"]
+[ext_resource type="Texture2D" uid="uid://cpqwiab5mxiij" path="res://Enemies/Turret_Shoot_41.png" id="13_une1k"]
+[ext_resource type="Texture2D" uid="uid://bm00sglu3fls6" path="res://Enemies/Turret_Shoot_51.png" id="14_31xdx"]
+[ext_resource type="Texture2D" uid="uid://dgputwmjyfmh5" path="res://Enemies/Turret_Shoot_61.png" id="15_weqew"]
+[ext_resource type="Texture2D" uid="uid://ddkf08i7gmhqy" path="res://Enemies/Turret_Shoot_71.png" id="16_vf1on"]
+[ext_resource type="Texture2D" uid="uid://b6krrauh4j25y" path="res://Enemies/Turret_Shoot_81.png" id="17_5inn3"]
+[ext_resource type="Texture2D" uid="uid://c0jt54yw2rpvt" path="res://Enemies/Turret_Shoot_91.png" id="18_0twct"]
+[ext_resource type="Texture2D" uid="uid://cnjjannaig4wp" path="res://Enemies/Turret_Shoot_101.png" id="19_ac70o"]
+[ext_resource type="Texture2D" uid="uid://da1h46scratej" path="res://Enemies/Turret_Shoot_111.png" id="20_dnhbs"]
+[ext_resource type="Texture2D" uid="uid://d3q38gm8nt7ex" path="res://Enemies/Turret_Shoot_02.png" id="21_vqr4o"]
+[ext_resource type="Texture2D" uid="uid://dliiphar6ng5w" path="res://Enemies/Turret_Shoot_1_2.png" id="22_qipfl"]
+[ext_resource type="Texture2D" uid="uid://dirfa0graa01r" path="res://Enemies/Turret_Shoot_22.png" id="23_yo2bp"]
+[ext_resource type="Texture2D" uid="uid://c1cumt1m7w6vk" path="res://Enemies/Turret_Shoot_32.png" id="24_5fatd"]
+[ext_resource type="Texture2D" uid="uid://n50ongg26jdo" path="res://Enemies/Turret_Shoot_42.png" id="25_4q7jl"]
+[ext_resource type="Texture2D" uid="uid://c8sveknit4jgo" path="res://Enemies/Turret_Shoot_52.png" id="26_xms00"]
+[ext_resource type="Texture2D" uid="uid://cl44kik885yxn" path="res://Enemies/Turret_Shoot_62.png" id="27_a2ruc"]
+[ext_resource type="Texture2D" uid="uid://dobrjkfu8nm3t" path="res://Enemies/Turret_Shoot_72.png" id="28_u47dg"]
+[ext_resource type="Texture2D" uid="uid://dbfs0gxyil0ct" path="res://Enemies/Turret_Shoot_82.png" id="29_nubsn"]
+[ext_resource type="Texture2D" uid="uid://bu5vworkbdee8" path="res://Enemies/Turret_Shoot_92.png" id="30_wiw8s"]
+[ext_resource type="Texture2D" uid="uid://p8x7vi6iatd7" path="res://Enemies/Turret_Shoot_102.png" id="31_jqmud"]
+[ext_resource type="Texture2D" uid="uid://b8n47dyru53g0" path="res://Enemies/Turret_Shoot_112.png" id="32_npcxi"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_a32vy"]
 atlas = ExtResource("6_h8gnt")
@@ -79,6 +106,28 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": ExtResource("3_infd2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_uww67")
+}],
+"loop": true,
+"name": &"activate_1",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_n280w")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_p86iw")
+}],
+"loop": true,
+"name": &"activate_2",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_46bt7")
 }, {
 "duration": 1.0,
@@ -86,6 +135,28 @@ animations = [{
 }],
 "loop": false,
 "name": &"deactivate",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_uww67")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_infd2")
+}],
+"loop": true,
+"name": &"deactivate_1",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_p86iw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_n280w")
+}],
+"loop": true,
+"name": &"deactivate_2",
 "speed": 5.0
 }, {
 "frames": [{
@@ -145,6 +216,85 @@ animations = [{
 "loop": true,
 "name": &"shoot",
 "speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("10_5n6x5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_v0bvf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_57s3s")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_une1k")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_31xdx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_weqew")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_vf1on")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_5inn3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_0twct")
+}, {
+"duration": 1.0,
+"texture": ExtResource("19_ac70o")
+}, {
+"duration": 1.0,
+"texture": ExtResource("20_dnhbs")
+}],
+"loop": true,
+"name": &"shoot_1",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("21_vqr4o")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_qipfl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_yo2bp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("24_5fatd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("25_4q7jl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("26_xms00")
+}, {
+"duration": 1.0,
+"texture": ExtResource("27_a2ruc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("28_u47dg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("29_nubsn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("30_wiw8s")
+}, {
+"duration": 1.0,
+"texture": ExtResource("31_jqmud")
+}, {
+"duration": 1.0,
+"texture": ExtResource("32_npcxi")
+}],
+"loop": true,
+"name": &"shoot_2",
+"speed": 5.0
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5f3y1"]
@@ -156,7 +306,9 @@ script = ExtResource("1_gt54p")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_pj8v8")
-animation = &"activate"
+animation = &"shoot_2"
+frame = 11
+frame_progress = 0.182438
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false
