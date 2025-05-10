@@ -17,6 +17,11 @@ extends Area2D
 @onready var death_explosion_sfx: AudioStreamPlayer2D = $DeathExplosionSFX
 
 
+## Animated lights in turret's deactivated phase
+func _ready() -> void:
+	animated_sprite_2d.play("idle")
+
+
 ## Shoots when player is seen by turret, continues to track after a while and
 ## repeat
 func _process(_delta: float) -> void:
