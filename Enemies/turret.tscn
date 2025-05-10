@@ -37,13 +37,13 @@
 [ext_resource type="Texture2D" uid="uid://p8x7vi6iatd7" path="res://Enemies/Turret_Shoot_102.png" id="31_jqmud"]
 [ext_resource type="Texture2D" uid="uid://b8n47dyru53g0" path="res://Enemies/Turret_Shoot_112.png" id="32_npcxi"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_a32vy"]
-atlas = ExtResource("6_h8gnt")
-region = Rect2(0, 66, 32, 33)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_46bt7"]
 atlas = ExtResource("6_h8gnt")
 region = Rect2(33, 66, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a32vy"]
+atlas = ExtResource("6_h8gnt")
+region = Rect2(0, 66, 32, 33)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_gt54p"]
 atlas = ExtResource("6_h8gnt")
@@ -97,7 +97,7 @@ region = Rect2(33, 165, 32, 32)
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_a32vy")
+"texture": ExtResource("11_p86iw")
 }, {
 "duration": 1.0,
 "texture": ExtResource("4_uww67")
@@ -325,7 +325,7 @@ script = ExtResource("1_gt54p")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_pj8v8")
-animation = &"activate_1"
+animation = &"activate"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false
