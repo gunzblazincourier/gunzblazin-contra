@@ -1,4 +1,4 @@
-[gd_scene load_steps=53 format=3 uid="uid://dnkmn6kup0jlf"]
+[gd_scene load_steps=52 format=3 uid="uid://dnkmn6kup0jlf"]
 
 [ext_resource type="Script" uid="uid://essnqwekgh3m" path="res://Enemies/turret.gd" id="1_gt54p"]
 [ext_resource type="Texture2D" uid="uid://bsqs3c86kj65x" path="res://Explosions/Explosion2_0.png" id="3_37nio"]
@@ -40,10 +40,6 @@
 [sub_resource type="AtlasTexture" id="AtlasTexture_46bt7"]
 atlas = ExtResource("6_h8gnt")
 region = Rect2(33, 66, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_a32vy"]
-atlas = ExtResource("6_h8gnt")
-region = Rect2(0, 66, 32, 33)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_gt54p"]
 atlas = ExtResource("6_h8gnt")
@@ -133,7 +129,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_46bt7")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_a32vy")
+"texture": ExtResource("3_infd2")
 }],
 "loop": false,
 "name": &"deactivate",
@@ -144,7 +140,7 @@ animations = [{
 "texture": ExtResource("4_uww67")
 }, {
 "duration": 1.0,
-"texture": ExtResource("3_infd2")
+"texture": ExtResource("6_p86iw")
 }],
 "loop": true,
 "name": &"deactivate_1",
@@ -155,7 +151,7 @@ animations = [{
 "texture": ExtResource("6_p86iw")
 }, {
 "duration": 1.0,
-"texture": ExtResource("5_n280w")
+"texture": ExtResource("4_uww67")
 }],
 "loop": true,
 "name": &"deactivate_2",
@@ -325,7 +321,7 @@ script = ExtResource("1_gt54p")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_pj8v8")
-animation = &"activate"
+animation = &"shoot_2"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false
