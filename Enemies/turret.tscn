@@ -345,6 +345,10 @@ offset = Vector2(3, 3)
 [node name="ShootTimer" type="Timer" parent="."]
 one_shot = true
 
+[node name="ActivationTimer" type="Timer" parent="."]
+wait_time = 0.4
+one_shot = true
+
 [node name="DeathExplosionSFX" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("13_i2l44")
 

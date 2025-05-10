@@ -15,6 +15,7 @@ extends Area2D
 
 ## Turret explosion sound
 @onready var death_explosion_sfx: AudioStreamPlayer2D = $DeathExplosionSFX
+@onready var visible_on_screen_notifier_2d: VisibleOnScreenNotifier2D = $VisibleOnScreenNotifier2D
 
 
 ## Shoots when player is seen by turret, continues to track after a while and
@@ -120,8 +121,14 @@ func _process(_delta: float) -> void:
 
 ## Activate turret when fully visible
 func _on_visible_on_screen_notifier_2d_screen_entered() -> void:
-	animated_sprite_2d.play("activate")
-	
+	if animated_sprite_2d.animation == "idle":
+		if animated_sprite_2d.frame == 0:
+			animated_sprite_2d.play("activate")
+		elif animated_sprite_2d.frame == 1 or animated_sprite_2d.frame == 3:
+			animated_sprite_2d.play("activate_1")
+		else:
+			animated_sprite_2d.play("activate_2")
+	visible_on_screen_notifier_2d.visible = false
 
 ## Deactivate turret just before it reaches left edge of screen
 func _on_visible_on_screen_notifier_2d_2_screen_exited() -> void:
@@ -130,7 +137,7 @@ func _on_visible_on_screen_notifier_2d_2_screen_exited() -> void:
 
 ## Start the 'shoot' animation once turret has activated
 func _on_animated_sprite_2d_animation_finished() -> void:
-	if animated_sprite_2d.animation == "activate":
+	if animated_sprite_2d.animation == "activate" or animated_sprite_2d.animation == "activate_1" or animated_sprite_2d.animation == "activate_2":
 		animated_sprite_2d.play("shoot")
 
 
