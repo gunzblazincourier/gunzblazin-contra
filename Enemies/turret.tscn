@@ -1,4 +1,4 @@
-[gd_scene load_steps=52 format=3 uid="uid://dnkmn6kup0jlf"]
+[gd_scene load_steps=53 format=3 uid="uid://dnkmn6kup0jlf"]
 
 [ext_resource type="Script" uid="uid://essnqwekgh3m" path="res://Enemies/turret.gd" id="1_gt54p"]
 [ext_resource type="Texture2D" uid="uid://bsqs3c86kj65x" path="res://Explosions/Explosion2_0.png" id="3_37nio"]
@@ -18,6 +18,7 @@
 [ext_resource type="AudioStream" uid="uid://cdr0ngbxu1hls" path="res://Levels/TekiOut.wav" id="13_i2l44"]
 [ext_resource type="Texture2D" uid="uid://cpqwiab5mxiij" path="res://Enemies/Turret_Shoot_41.png" id="13_une1k"]
 [ext_resource type="Texture2D" uid="uid://bm00sglu3fls6" path="res://Enemies/Turret_Shoot_51.png" id="14_31xdx"]
+[ext_resource type="Texture2D" uid="uid://dv0a7foutshyn" path="res://Enemies/Turret_Shoot_21.png" id="14_p86iw"]
 [ext_resource type="Texture2D" uid="uid://dgputwmjyfmh5" path="res://Enemies/Turret_Shoot_61.png" id="15_weqew"]
 [ext_resource type="Texture2D" uid="uid://ddkf08i7gmhqy" path="res://Enemies/Turret_Shoot_71.png" id="16_vf1on"]
 [ext_resource type="Texture2D" uid="uid://b6krrauh4j25y" path="res://Enemies/Turret_Shoot_81.png" id="17_5inn3"]
@@ -240,6 +241,9 @@ animations = [{
 "texture": ExtResource("11_v0bvf")
 }, {
 "duration": 1.0,
+"texture": ExtResource("14_p86iw")
+}, {
+"duration": 1.0,
 "texture": ExtResource("12_57s3s")
 }, {
 "duration": 1.0,
@@ -321,7 +325,7 @@ script = ExtResource("1_gt54p")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_pj8v8")
-animation = &"shoot_2"
+animation = &"shoot_1"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false
