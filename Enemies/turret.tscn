@@ -325,7 +325,7 @@ script = ExtResource("1_gt54p")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_pj8v8")
-animation = &"idle"
+animation = &"activate"
 autoplay = "idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -345,9 +345,11 @@ offset = Vector2(3, 3)
 [node name="ShootTimer" type="Timer" parent="."]
 one_shot = true
 
-[node name="ActivationTimer" type="Timer" parent="."]
-wait_time = 0.4
-one_shot = true
+[node name="ClockwiseTimer" type="Timer" parent="."]
+wait_time = 0.2
+
+[node name="AnticlockwiseTimer" type="Timer" parent="."]
+wait_time = 0.2
 
 [node name="DeathExplosionSFX" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("13_i2l44")
@@ -361,6 +363,8 @@ scale = Vector2(0.15, 1)
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
+[connection signal="timeout" from="ClockwiseTimer" to="." method="_on_clockwise_timer_timeout"]
+[connection signal="timeout" from="AnticlockwiseTimer" to="." method="_on_anticlockwise_timer_timeout"]
 [connection signal="finished" from="DeathExplosionSFX" to="." method="_on_death_explosion_sfx_finished"]
 [connection signal="screen_entered" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_entered"]
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D2" to="." method="_on_visible_on_screen_notifier_2d_2_screen_exited"]

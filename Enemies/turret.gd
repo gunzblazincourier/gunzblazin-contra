@@ -16,6 +16,13 @@ extends Area2D
 ## Turret explosion sound
 @onready var death_explosion_sfx: AudioStreamPlayer2D = $DeathExplosionSFX
 @onready var visible_on_screen_notifier_2d: VisibleOnScreenNotifier2D = $VisibleOnScreenNotifier2D
+@onready var clockwise_timer: Timer = $ClockwiseTimer
+@onready var anticlockwise_timer: Timer = $AnticlockwiseTimer
+
+#var current_frame: int = animated_sprite_2d.get_frame()
+#var current_progress: float = animated_sprite_2d.get_frame_progress()
+#animated_sprite.play("walk_another_skin")
+#animated_sprite.set_frame_and_progress(current_frame, current_progress)
 
 
 ## Shoots when player is seen by turret, continues to track after a while and
@@ -31,7 +38,7 @@ func _process(_delta: float) -> void:
 	var angle_max: float
 	
 	# Assignment of the minumum and maximum sightcone angles for each frame
-	if animated_sprite_2d.animation == "shoot":
+	if animated_sprite_2d.animation == "shoot" or animated_sprite_2d.animation == "shoot_1" or animated_sprite_2d.animation == "shoot_2":
 		if animated_sprite_2d.frame == 0:
 			muzzle.position = Vector2(-14, 0)
 			muzzle.rotation = PI
@@ -106,9 +113,13 @@ func _process(_delta: float) -> void:
 		## track until player is in sightcone
 		if shoot_timer.is_stopped():
 			if angle_with_player < angle_min:
-				animated_sprite_2d.play("shoot")
+				#animated_sprite_2d.play("shoot")
+				if anticlockwise_timer.is_stopped():
+					anticlockwise_timer.start()
 			elif angle_with_player > angle_max:
-				animated_sprite_2d.play_backwards("shoot")
+				#animated_sprite_2d.play_backwards("shoot")
+				if clockwise_timer.is_stopped():
+					clockwise_timer.start()
 			else:
 				shoot_timer.start()
 				var bullet_path: PackedScene = load("res://Bullet/bullet_ts.tscn")
@@ -116,7 +127,9 @@ func _process(_delta: float) -> void:
 				owner.add_child(bullet)
 				bullet.position = muzzle.global_position
 				bullet.rotation = muzzle.global_rotation
-				animated_sprite_2d.pause()
+				#animated_sprite_2d.pause()
+				#anticlockwise_timer.stop()
+				#clockwise_timer.stop()
 
 
 ## Activate turret when fully visible
@@ -137,8 +150,16 @@ func _on_visible_on_screen_notifier_2d_2_screen_exited() -> void:
 
 ## Start the 'shoot' animation once turret has activated
 func _on_animated_sprite_2d_animation_finished() -> void:
-	if animated_sprite_2d.animation == "activate" or animated_sprite_2d.animation == "activate_1" or animated_sprite_2d.animation == "activate_2":
-		animated_sprite_2d.play("shoot")
+	if animated_sprite_2d.animation == "activate":
+		#animated_sprite_2d.play("shoot_1")
+		animated_sprite_2d.animation = "shoot_1"
+	elif animated_sprite_2d.animation == "activate_1":
+		#animated_sprite_2d.play("shoot_2")
+		animated_sprite_2d.animation = "shoot_2"
+	elif animated_sprite_2d.animation == "activate_2":
+		#animated_sprite_2d.play("shoot")
+		animated_sprite_2d.animation = "shoot"
+	animated_sprite_2d.frame = 0
 
 
 ## Triggers turret destruction when hit by player bullet
@@ -153,3 +174,31 @@ func _on_area_entered(area: Area2D) -> void:
 ## Remove turret after explosion
 func _on_death_explosion_sfx_finished() -> void:
 	queue_free()
+
+
+func _on_anticlockwise_timer_timeout() -> void:
+	var current_frame: int = animated_sprite_2d.get_frame()
+	if animated_sprite_2d.animation == "shoot":
+		animated_sprite_2d.animation = "shoot_1"
+	elif animated_sprite_2d.animation == "shoot_1":
+		animated_sprite_2d.animation = "shoot_2"
+	elif animated_sprite_2d.animation == "shoot_2":
+		animated_sprite_2d.animation = "shoot"
+	if shoot_timer.is_stopped():
+		animated_sprite_2d.set_frame_and_progress(current_frame + 1, 0.0)
+	else:
+		animated_sprite_2d.set_frame_and_progress(current_frame, 0.0)
+
+
+func _on_clockwise_timer_timeout() -> void:
+	var current_frame: int = animated_sprite_2d.get_frame()
+	if animated_sprite_2d.animation == "shoot":
+		animated_sprite_2d.animation = "shoot_1"
+	elif animated_sprite_2d.animation == "shoot_1":
+		animated_sprite_2d.animation = "shoot_2"
+	elif animated_sprite_2d.animation == "shoot_2":
+		animated_sprite_2d.animation = "shoot"
+	if shoot_timer.is_stopped():
+		animated_sprite_2d.set_frame_and_progress(current_frame + 1, 0.0)
+	else:
+		animated_sprite_2d.set_frame_and_progress(current_frame, 0.0)
