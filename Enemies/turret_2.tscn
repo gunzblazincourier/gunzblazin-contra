@@ -61,9 +61,7 @@ animations = [{
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_lango")
-animation = &"shoot_0"
-frame = 1
-frame_progress = 0.904013
+animation = &"shoot_2"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_cruha")
