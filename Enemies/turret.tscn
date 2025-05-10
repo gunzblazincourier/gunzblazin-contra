@@ -110,7 +110,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("6_p86iw")
 }],
-"loop": true,
+"loop": false,
 "name": &"activate_1",
 "speed": 5.0
 }, {
@@ -121,7 +121,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("7_n280w")
 }],
-"loop": true,
+"loop": false,
 "name": &"activate_2",
 "speed": 5.0
 }, {
@@ -143,7 +143,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("6_p86iw")
 }],
-"loop": true,
+"loop": false,
 "name": &"deactivate_1",
 "speed": 5.0
 }, {
@@ -154,7 +154,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("4_uww67")
 }],
-"loop": true,
+"loop": false,
 "name": &"deactivate_2",
 "speed": 5.0
 }, {
@@ -325,7 +325,7 @@ script = ExtResource("1_gt54p")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_pj8v8")
-animation = &"shoot_2"
+animation = &"idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false
