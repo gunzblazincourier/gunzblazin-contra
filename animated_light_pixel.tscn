@@ -28,3 +28,4 @@ animations = [{
 sprite_frames = SubResource("SpriteFrames_ojqys")
 autoplay = "default"
 frame_progress = 0.470168
+centered = false

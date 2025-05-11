@@ -81,6 +81,9 @@ position = Vector2(2768, 56)
 [node name="Turret5" parent="." instance=ExtResource("9_kek77")]
 position = Vector2(2897, 56)
 
+[node name="Turret6" parent="." instance=ExtResource("9_kek77")]
+position = Vector2(165, 19)
+
 [node name="Pickup" parent="." instance=ExtResource("8_5vw27")]
 position = Vector2(-104, -41)
 pickup_id = 2
