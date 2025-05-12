@@ -1,0 +1,174 @@
+[gd_scene load_steps=15 format=3 uid="uid://d151sv348eufw"]
+
+[ext_resource type="Script" uid="uid://essnqwekgh3m" path="res://Enemies/turret.gd" id="1_xgep0"]
+[ext_resource type="Texture2D" uid="uid://d27seh6bpqube" path="res://Enemies/Turret_Activate_0.png" id="2_q6yim"]
+[ext_resource type="Texture2D" uid="uid://ounjf4upksh1" path="res://Enemies/Turret_Activate_1.png" id="3_mcont"]
+[ext_resource type="Texture2D" uid="uid://bsqs3c86kj65x" path="res://Explosions/Explosion2_0.png" id="4_hef68"]
+[ext_resource type="Texture2D" uid="uid://4woe5otvd8vt" path="res://Explosions/Explosion2_1.png" id="5_gtq16"]
+[ext_resource type="Texture2D" uid="uid://cw8xqy6wwnggt" path="res://Explosions/Explosion2_2.png" id="6_vnwwg"]
+[ext_resource type="Texture2D" uid="uid://i2k7gltpisro" path="res://Enemies/Turret2_0.png" id="7_0k1iq"]
+[ext_resource type="Texture2D" uid="uid://coei0mtv56rrl" path="res://Enemies/Turret2_1.png" id="8_mefc7"]
+[ext_resource type="Texture2D" uid="uid://bblfcwjewafba" path="res://Enemies/Turret2_2.png" id="9_2a8m2"]
+[ext_resource type="Texture2D" uid="uid://c56x4e8shosjj" path="res://Bullet/R.png" id="19_0nffu"]
+[ext_resource type="AudioStream" uid="uid://cdr0ngbxu1hls" path="res://Levels/TekiOut.wav" id="20_cgxci"]
+[ext_resource type="PackedScene" uid="uid://rard1hgq2q7h" path="res://animated_light_pixel.tscn" id="21_gelxw"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_pj8v8"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_q6yim")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_mcont")
+}],
+"loop": false,
+"name": &"activate",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_mcont")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_q6yim")
+}],
+"loop": false,
+"name": &"deactivate",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_hef68")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_gtq16")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_vnwwg")
+}, {
+"duration": 1.0,
+"texture": null
+}],
+"loop": false,
+"name": &"explode",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_0k1iq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_mefc7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_2a8m2")
+}],
+"loop": true,
+"name": &"shoot",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5f3y1"]
+
+[node name="Turret2" type="Area2D" groups=["enemy"]]
+collision_layer = 32
+collision_mask = 3
+script = ExtResource("1_xgep0")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_pj8v8")
+animation = &"shoot"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource("RectangleShape2D_5f3y1")
+
+[node name="Muzzle" type="Marker2D" parent="."]
+position = Vector2(-12, -7)
+
+[node name="Sprite2D" type="Sprite2D" parent="Muzzle"]
+visible = false
+position = Vector2(0.546875, -0.453125)
+scale = Vector2(0.921875, 0.921875)
+texture = ExtResource("19_0nffu")
+offset = Vector2(3, 3)
+
+[node name="ShootTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="DeathExplosionSFX" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("20_cgxci")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+visible = false
+position = Vector2(14, -1.69407e-21)
+
+[node name="VisibleOnScreenNotifier2D2" type="VisibleOnScreenNotifier2D" parent="."]
+visible = false
+position = Vector2(-49, 1)
+scale = Vector2(0.15, 1)
+
+[node name="AnimatedLightPixel" parent="." instance=ExtResource("21_gelxw")]
+position = Vector2(-8, -8)
+
+[node name="AnimatedLightPixel2" parent="." instance=ExtResource("21_gelxw")]
+position = Vector2(7, -8)
+
+[node name="AnimatedLightPixel3" parent="." instance=ExtResource("21_gelxw")]
+position = Vector2(0, 1)
+
+[node name="AnimatedLightPixel4" parent="." instance=ExtResource("21_gelxw")]
+position = Vector2(-5, 2)
+
+[node name="AnimatedLightPixel5" parent="." instance=ExtResource("21_gelxw")]
+
+[node name="AnimatedLightPixel6" parent="." instance=ExtResource("21_gelxw")]
+visible = false
+position = Vector2(-8, -1)
+
+[node name="AnimatedLightPixel7" parent="." instance=ExtResource("21_gelxw")]
+visible = false
+position = Vector2(-7, 0)
+
+[node name="AnimatedLightPixel8" parent="." instance=ExtResource("21_gelxw")]
+visible = false
+position = Vector2(-8, 0)
+
+[node name="AnimatedLightPixel9" parent="." instance=ExtResource("21_gelxw")]
+visible = false
+position = Vector2(-2, -8)
+
+[node name="AnimatedLightPixel10" parent="." instance=ExtResource("21_gelxw")]
+visible = false
+position = Vector2(-1, -8)
+
+[node name="AnimatedLightPixel11" parent="." instance=ExtResource("21_gelxw")]
+visible = false
+position = Vector2(0, -8)
+
+[node name="AnimatedLightPixel12" parent="." instance=ExtResource("21_gelxw")]
+visible = false
+position = Vector2(1, -8)
+
+[node name="AnimatedLightPixel13" parent="." instance=ExtResource("21_gelxw")]
+visible = false
+position = Vector2(-2, 7)
+
+[node name="AnimatedLightPixel14" parent="." instance=ExtResource("21_gelxw")]
+visible = false
+position = Vector2(-1, 7)
+
+[node name="AnimatedLightPixel15" parent="." instance=ExtResource("21_gelxw")]
+visible = false
+position = Vector2(0, 7)
+
+[node name="AnimatedLightPixel16" parent="." instance=ExtResource("21_gelxw")]
+visible = false
+position = Vector2(1, 7)
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
+[connection signal="finished" from="DeathExplosionSFX" to="." method="_on_death_explosion_sfx_finished"]
+[connection signal="screen_entered" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_entered"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D2" to="." method="_on_visible_on_screen_notifier_2d_2_screen_exited"]
