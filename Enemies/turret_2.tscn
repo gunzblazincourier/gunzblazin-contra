@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://d151sv348eufw"]
+[gd_scene load_steps=14 format=3 uid="uid://d151sv348eufw"]
 
 [ext_resource type="Script" uid="uid://essnqwekgh3m" path="res://Enemies/turret.gd" id="1_xgep0"]
 [ext_resource type="Texture2D" uid="uid://d27seh6bpqube" path="res://Enemies/Turret_Activate_0.png" id="2_q6yim"]
@@ -11,7 +11,6 @@
 [ext_resource type="Texture2D" uid="uid://bblfcwjewafba" path="res://Enemies/Turret2_2.png" id="9_2a8m2"]
 [ext_resource type="Texture2D" uid="uid://c56x4e8shosjj" path="res://Bullet/R.png" id="19_0nffu"]
 [ext_resource type="AudioStream" uid="uid://cdr0ngbxu1hls" path="res://Levels/TekiOut.wav" id="20_cgxci"]
-[ext_resource type="PackedScene" uid="uid://rard1hgq2q7h" path="res://animated_light_pixel.tscn" id="21_gelxw"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_pj8v8"]
 animations = [{
@@ -108,64 +107,6 @@ position = Vector2(14, -1.69407e-21)
 visible = false
 position = Vector2(-49, 1)
 scale = Vector2(0.15, 1)
-
-[node name="AnimatedLightPixel" parent="." instance=ExtResource("21_gelxw")]
-position = Vector2(-8, -8)
-
-[node name="AnimatedLightPixel2" parent="." instance=ExtResource("21_gelxw")]
-position = Vector2(7, -8)
-
-[node name="AnimatedLightPixel3" parent="." instance=ExtResource("21_gelxw")]
-position = Vector2(0, 1)
-
-[node name="AnimatedLightPixel4" parent="." instance=ExtResource("21_gelxw")]
-position = Vector2(-5, 2)
-
-[node name="AnimatedLightPixel5" parent="." instance=ExtResource("21_gelxw")]
-
-[node name="AnimatedLightPixel6" parent="." instance=ExtResource("21_gelxw")]
-visible = false
-position = Vector2(-8, -1)
-
-[node name="AnimatedLightPixel7" parent="." instance=ExtResource("21_gelxw")]
-visible = false
-position = Vector2(-7, 0)
-
-[node name="AnimatedLightPixel8" parent="." instance=ExtResource("21_gelxw")]
-visible = false
-position = Vector2(-8, 0)
-
-[node name="AnimatedLightPixel9" parent="." instance=ExtResource("21_gelxw")]
-visible = false
-position = Vector2(-2, -8)
-
-[node name="AnimatedLightPixel10" parent="." instance=ExtResource("21_gelxw")]
-visible = false
-position = Vector2(-1, -8)
-
-[node name="AnimatedLightPixel11" parent="." instance=ExtResource("21_gelxw")]
-visible = false
-position = Vector2(0, -8)
-
-[node name="AnimatedLightPixel12" parent="." instance=ExtResource("21_gelxw")]
-visible = false
-position = Vector2(1, -8)
-
-[node name="AnimatedLightPixel13" parent="." instance=ExtResource("21_gelxw")]
-visible = false
-position = Vector2(-2, 7)
-
-[node name="AnimatedLightPixel14" parent="." instance=ExtResource("21_gelxw")]
-visible = false
-position = Vector2(-1, 7)
-
-[node name="AnimatedLightPixel15" parent="." instance=ExtResource("21_gelxw")]
-visible = false
-position = Vector2(0, 7)
-
-[node name="AnimatedLightPixel16" parent="." instance=ExtResource("21_gelxw")]
-visible = false
-position = Vector2(1, 7)
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
