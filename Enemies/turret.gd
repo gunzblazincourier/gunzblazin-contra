@@ -38,6 +38,23 @@ extends Area2D
 ## Shoots when player is seen by turret, continues to track after a while and
 ## repeat
 func _process(_delta: float) -> void:
+	if animated_sprite_2d.animation == "explode":
+		animated_light_pixel.visible = false
+		animated_light_pixel_2.visible = false
+		animated_light_pixel_3.visible = false
+		animated_light_pixel_4.visible = false
+		animated_light_pixel_5.visible = false
+		animated_light_pixel_6.visible = false
+		animated_light_pixel_7.visible = false
+		animated_light_pixel_8.visible = false
+		animated_light_pixel_9.visible = false
+		animated_light_pixel_10.visible = false
+		animated_light_pixel_11.visible = false
+		animated_light_pixel_12.visible = false
+		animated_light_pixel_13.visible = false
+		animated_light_pixel_14.visible = false
+		animated_light_pixel_15.visible = false
+		animated_light_pixel_16.visible = false
 	if animated_sprite_2d.animation == "activate":
 		if animated_sprite_2d.frame == 0:
 			animated_light_pixel.position = Vector2(7, 0)
