@@ -1,6 +1,7 @@
 extends Area2D
 
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
+@onready var death_explosion_sfx: AudioStreamPlayer2D = $DeathExplosionSFX
 
 
 # Called when the node enters the scene tree for the first time.
@@ -19,3 +20,11 @@ func _on_visible_on_screen_notifier_2d_screen_entered() -> void:
 	animated_sprite_2d.visible = true
 	print("tret")
 	animated_sprite_2d.play("rise")
+
+
+func _on_area_entered(area: Area2D) -> void:
+	if area.is_in_group("bullet"):
+		set_deferred("monitorable", false)
+		set_deferred("monitoring", false)
+		animated_sprite_2d.play("explode")
+		death_explosion_sfx.play()
