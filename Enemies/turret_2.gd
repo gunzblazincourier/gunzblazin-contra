@@ -2,11 +2,13 @@ extends Area2D
 
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 @onready var death_explosion_sfx: AudioStreamPlayer2D = $DeathExplosionSFX
+@onready var collision_shape_2d: CollisionShape2D = $CollisionShape2D
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	animated_sprite_2d.visible = false
+	collision_shape_2d.disabled = true
 	pass
 
 
@@ -28,3 +30,8 @@ func _on_area_entered(area: Area2D) -> void:
 		set_deferred("monitoring", false)
 		animated_sprite_2d.play("explode")
 		death_explosion_sfx.play()
+
+
+func _on_animated_sprite_2d_animation_finished() -> void:
+	animated_sprite_2d.play("shoot")
+	collision_shape_2d.disabled = false
