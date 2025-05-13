@@ -1,6 +1,6 @@
 [gd_scene load_steps=14 format=3 uid="uid://d151sv348eufw"]
 
-[ext_resource type="Script" uid="uid://essnqwekgh3m" path="res://Enemies/turret.gd" id="1_xgep0"]
+[ext_resource type="Script" uid="uid://b1omni2d0h0e8" path="res://Enemies/turret_2.gd" id="1_mnsva"]
 [ext_resource type="Texture2D" uid="uid://bsqs3c86kj65x" path="res://Explosions/Explosion2_0.png" id="4_hef68"]
 [ext_resource type="Texture2D" uid="uid://4woe5otvd8vt" path="res://Explosions/Explosion2_1.png" id="5_gtq16"]
 [ext_resource type="Texture2D" uid="uid://bqgdo8ec7sohc" path="res://Enemies/Turret2_Rise_0.png" id="5_mnsva"]
@@ -43,7 +43,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"rise",
-"speed": 2.0
+"speed": 5.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -65,7 +65,7 @@ animations = [{
 [node name="Turret2" type="Area2D" groups=["enemy"]]
 collision_layer = 32
 collision_mask = 3
-script = ExtResource("1_xgep0")
+script = ExtResource("1_mnsva")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_pj8v8")
@@ -74,7 +74,6 @@ frame = 2
 frame_progress = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
 shape = SubResource("RectangleShape2D_5f3y1")
 
 [node name="Muzzle" type="Marker2D" parent="."]
@@ -94,11 +93,9 @@ one_shot = true
 stream = ExtResource("20_cgxci")
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
-visible = false
-position = Vector2(14, -1.69407e-21)
+position = Vector2(12, 0)
 
 [node name="VisibleOnScreenNotifier2D2" type="VisibleOnScreenNotifier2D" parent="."]
-visible = false
 position = Vector2(-49, 1)
 scale = Vector2(0.15, 1)
 
@@ -106,4 +103,3 @@ scale = Vector2(0.15, 1)
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="finished" from="DeathExplosionSFX" to="." method="_on_death_explosion_sfx_finished"]
 [connection signal="screen_entered" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_entered"]
-[connection signal="screen_exited" from="VisibleOnScreenNotifier2D2" to="." method="_on_visible_on_screen_notifier_2d_2_screen_exited"]
