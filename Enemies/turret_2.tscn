@@ -69,18 +69,15 @@ script = ExtResource("1_mnsva")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_pj8v8")
-animation = &"rise"
-frame = 2
-frame_progress = 1.0
+animation = &"shoot"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_5f3y1")
 
 [node name="Muzzle" type="Marker2D" parent="."]
-position = Vector2(-12, -7)
+position = Vector2(-14, -7)
 
 [node name="Sprite2D" type="Sprite2D" parent="Muzzle"]
-visible = false
 position = Vector2(0.546875, -0.453125)
 scale = Vector2(0.921875, 0.921875)
 texture = ExtResource("19_0nffu")
