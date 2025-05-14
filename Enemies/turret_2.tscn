@@ -210,3 +210,4 @@ scale = Vector2(0.15, 1)
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="finished" from="DeathExplosionSFX" to="." method="_on_death_explosion_sfx_finished"]
 [connection signal="screen_entered" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_entered"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D2" to="." method="_on_visible_on_screen_notifier_2d_2_screen_exited"]

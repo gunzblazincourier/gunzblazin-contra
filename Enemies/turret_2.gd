@@ -129,9 +129,16 @@ func _on_area_entered(area: Area2D) -> void:
 func _on_animated_sprite_2d_animation_finished() -> void:
 	#print("yes")
 	if animated_sprite_2d.animation == "rise":
-		animated_sprite_2d.play("shoot")
-		collision_shape_2d.disabled = false
+		if animated_sprite_2d.frame == 2:
+			animated_sprite_2d.play("shoot")
+			collision_shape_2d.disabled = false
+		elif animated_sprite_2d.frame == 0:
+			queue_free()
 
 
 func _on_death_explosion_sfx_finished() -> void:
 	queue_free()
+
+
+func _on_visible_on_screen_notifier_2d_2_screen_exited() -> void:
+	animated_sprite_2d.play_backwards("rise")
