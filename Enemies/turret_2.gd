@@ -119,6 +119,7 @@ func _on_visible_on_screen_notifier_2d_screen_entered() -> void:
 
 func _on_area_entered(area: Area2D) -> void:
 	if area.is_in_group("bullet"):
+		animated_sprite_2d_2.visible = false
 		set_deferred("monitorable", false)
 		set_deferred("monitoring", false)
 		animated_sprite_2d.play("explode")
@@ -130,3 +131,7 @@ func _on_animated_sprite_2d_animation_finished() -> void:
 	if animated_sprite_2d.animation == "rise":
 		animated_sprite_2d.play("shoot")
 		collision_shape_2d.disabled = false
+
+
+func _on_death_explosion_sfx_finished() -> void:
+	queue_free()
