@@ -1,6 +1,7 @@
 extends Area2D
 
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
+@onready var animated_sprite_2d_2: AnimatedSprite2D = $AnimatedSprite2D2
 @onready var death_explosion_sfx: AudioStreamPlayer2D = $DeathExplosionSFX
 @onready var collision_shape_2d: CollisionShape2D = $CollisionShape2D
 @onready var muzzle: Marker2D = $Muzzle
@@ -10,12 +11,37 @@ extends Area2D
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	animated_sprite_2d.visible = false
+	animated_sprite_2d_2.visible = false
 	collision_shape_2d.disabled = true
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
-	print(animated_sprite_2d.animation)
+	var current_frame: int = animated_sprite_2d_2.get_frame()
+	var current_progress: float = animated_sprite_2d_2.get_frame_progress()
+	
+	if animated_sprite_2d.animation == "rise":
+		if animated_sprite_2d.frame == 0:
+			animated_sprite_2d_2.animation = "rise_0"
+			animated_sprite_2d_2.set_frame_and_progress(current_frame, current_progress)
+		elif animated_sprite_2d.frame == 1:
+			animated_sprite_2d_2.animation = "rise_1"
+			animated_sprite_2d_2.set_frame_and_progress(current_frame, current_progress)
+		elif animated_sprite_2d.frame == 2:
+			animated_sprite_2d_2.animation = "shoot_0"
+			animated_sprite_2d_2.set_frame_and_progress(current_frame, current_progress)
+	elif animated_sprite_2d.animation == "shoot":
+		if animated_sprite_2d.frame == 0:
+			animated_sprite_2d_2.animation = "shoot_0"
+			animated_sprite_2d_2.set_frame_and_progress(current_frame, current_progress)
+		elif animated_sprite_2d.frame == 1:
+			animated_sprite_2d_2.animation = "shoot_1"
+			animated_sprite_2d_2.set_frame_and_progress(current_frame, current_progress)
+		elif animated_sprite_2d.frame == 2:
+			animated_sprite_2d_2.animation = "shoot_2"
+			animated_sprite_2d_2.set_frame_and_progress(current_frame, current_progress)
+	
+	print(animated_sprite_2d_2.animation)
 	#print(animated_sprite_2d.frame)
 	## Angle between the player and turret's center relative to x-axis
 	var angle_with_player: float = global_position.angle_to_point(Global.player_global_position)
@@ -86,6 +112,7 @@ func _process(_delta: float) -> void:
 
 func _on_visible_on_screen_notifier_2d_screen_entered() -> void:
 	animated_sprite_2d.visible = true
+	animated_sprite_2d_2.visible = true
 	#print("tret")
 	animated_sprite_2d.play("rise")
 

@@ -75,8 +75,6 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_5f3y1"]
-
 [sub_resource type="SpriteFrames" id="SpriteFrames_i25d8"]
 animations = [{
 "frames": [{
@@ -165,6 +163,8 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5f3y1"]
+
 [node name="Turret2" type="Area2D" groups=["enemy"]]
 collision_layer = 32
 collision_mask = 3
@@ -172,8 +172,12 @@ script = ExtResource("1_mnsva")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_pj8v8")
-animation = &"shoot"
-frame = 2
+animation = &"rise"
+
+[node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_i25d8")
+animation = &"rise_0"
+autoplay = "rise_0"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false
@@ -196,19 +200,11 @@ one_shot = true
 stream = ExtResource("20_cgxci")
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
-visible = false
 position = Vector2(12, 0)
 
 [node name="VisibleOnScreenNotifier2D2" type="VisibleOnScreenNotifier2D" parent="."]
-visible = false
 position = Vector2(-49, 1)
 scale = Vector2(0.15, 1)
-
-[node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="."]
-sprite_frames = SubResource("SpriteFrames_i25d8")
-animation = &"shoot_2"
-frame = 2
-frame_progress = 0.903645
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
