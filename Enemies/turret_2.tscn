@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://d151sv348eufw"]
+[gd_scene load_steps=24 format=3 uid="uid://d151sv348eufw"]
 
 [ext_resource type="Script" uid="uid://b1omni2d0h0e8" path="res://Enemies/turret_2.gd" id="1_mnsva"]
 [ext_resource type="Texture2D" uid="uid://bsqs3c86kj65x" path="res://Explosions/Explosion2_0.png" id="4_hef68"]
@@ -12,8 +12,14 @@
 [ext_resource type="Texture2D" uid="uid://cs7rmrt2f6rxc" path="res://Enemies/Turret2_RiseLight_0.png" id="12_2a8m2"]
 [ext_resource type="Texture2D" uid="uid://cn4bd7t4vsuil" path="res://Enemies/Turret2_RiseLight1_0.png" id="13_jdwic"]
 [ext_resource type="Texture2D" uid="uid://cw50vptp5e3e6" path="res://Enemies/Turret2_RiseLight2_0.png" id="14_rkyl7"]
+[ext_resource type="Texture2D" uid="uid://t3ss276g8a1k" path="res://Enemies/Turret2_RiseLight_1.png" id="15_i25d8"]
+[ext_resource type="Texture2D" uid="uid://clvjehu63j473" path="res://Enemies/Turret2_RiseLight1_1.png" id="16_jtetp"]
+[ext_resource type="Texture2D" uid="uid://cci70dsopkut2" path="res://Enemies/Turret2_RiseLight2_1.png" id="17_hlh7x"]
+[ext_resource type="Texture2D" uid="uid://pa661cv0u5rx" path="res://Enemies/Turret2Light_0.png" id="18_sgke3"]
 [ext_resource type="Texture2D" uid="uid://c56x4e8shosjj" path="res://Bullet/R.png" id="19_0nffu"]
+[ext_resource type="Texture2D" uid="uid://bnbdk8krhr81n" path="res://Enemies/Turret2Light1_0.png" id="19_xgep0"]
 [ext_resource type="AudioStream" uid="uid://cdr0ngbxu1hls" path="res://Levels/TekiOut.wav" id="20_cgxci"]
+[ext_resource type="Texture2D" uid="uid://cvvt0re8xtmil" path="res://Enemies/Turret2Light2_0.png" id="20_q6yim"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_pj8v8"]
 animations = [{
@@ -81,7 +87,38 @@ animations = [{
 "texture": ExtResource("13_jdwic")
 }],
 "loop": true,
-"name": &"default",
+"name": &"rise_0",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("15_i25d8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_jtetp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_hlh7x")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_jtetp")
+}],
+"loop": true,
+"name": &"rise_1",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("18_sgke3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("19_xgep0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("20_q6yim")
+}],
+"loop": true,
+"name": &"shoot_0",
 "speed": 5.0
 }]
 
@@ -93,6 +130,8 @@ script = ExtResource("1_mnsva")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_pj8v8")
 animation = &"rise"
+frame = 2
+frame_progress = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false
@@ -124,10 +163,10 @@ position = Vector2(-49, 1)
 scale = Vector2(0.15, 1)
 
 [node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="."]
-position = Vector2(0, 12)
 sprite_frames = SubResource("SpriteFrames_i25d8")
-frame = 3
-frame_progress = 0.628192
+animation = &"shoot_0"
+frame = 1
+frame_progress = 0.149969
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
