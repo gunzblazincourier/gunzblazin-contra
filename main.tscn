@@ -82,7 +82,10 @@ position = Vector2(2768, 56)
 position = Vector2(2897, 56)
 
 [node name="Turret2_0" parent="." instance=ExtResource("6_kek77")]
-position = Vector2(176, -31)
+position = Vector2(1840, 24)
+
+[node name="Turret2_1" parent="." instance=ExtResource("6_kek77")]
+position = Vector2(1968, -72)
 
 [node name="RunningSoldier" parent="." instance=ExtResource("5_lquwl")]
 position = Vector2(56, -33)

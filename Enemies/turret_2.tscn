@@ -172,7 +172,7 @@ script = ExtResource("1_mnsva")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_pj8v8")
-animation = &"rise"
+animation = &"shoot"
 
 [node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_i25d8")
@@ -193,16 +193,18 @@ scale = Vector2(0.921875, 0.921875)
 texture = ExtResource("19_0nffu")
 offset = Vector2(3, 3)
 
-[node name="ShootTimer" type="Timer" parent="."]
+[node name="ShootTimer" type="Timer" parent="." groups=["enemy"]]
 one_shot = true
 
 [node name="DeathExplosionSFX" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("20_cgxci")
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+visible = false
 position = Vector2(12, 0)
 
 [node name="VisibleOnScreenNotifier2D2" type="VisibleOnScreenNotifier2D" parent="."]
+visible = false
 position = Vector2(-49, 1)
 scale = Vector2(0.15, 1)
 
