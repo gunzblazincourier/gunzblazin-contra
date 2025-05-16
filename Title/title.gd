@@ -87,7 +87,7 @@ func _process(delta: float) -> void:
 
 
 ## Selected option flashes by toggling visibility of the text upon timeout
-func _on_timer_2_timeout() -> void:
+func _on_option_flashing_timer_timeout() -> void:
 	if cursor.position == Vector2(35, 166):
 		if player_1_text.visible == false:
 			player_1_text.visible = true

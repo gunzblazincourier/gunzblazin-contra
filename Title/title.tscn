@@ -77,4 +77,4 @@ one_shot = true
 [node name="OptionFlashingTimer" type="Timer" parent="."]
 wait_time = 0.2
 
-[connection signal="timeout" from="OptionFlashingTimer" to="." method="_on_timer_2_timeout"]
+[connection signal="timeout" from="OptionFlashingTimer" to="." method="_on_option_flashing_timer_timeout"]
