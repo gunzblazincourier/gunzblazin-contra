@@ -5562,6 +5562,10 @@ autostart = true
 wait_time = 0.05
 autostart = true
 
+[node name="DeathTimer" type="Timer" parent="."]
+wait_time = 2.3
+one_shot = true
+
 [node name="Muzzle" type="Marker2D" parent="."]
 position = Vector2(8, -6)
 
@@ -5581,4 +5585,5 @@ shape = SubResource("RectangleShape2D_tvn1x")
 [connection signal="timeout" from="FallThroughTimer" to="." method="_on_fall_through_timer_timeout"]
 [connection signal="timeout" from="InvincibilityTimer" to="." method="_on_invincibility_timer_timeout"]
 [connection signal="timeout" from="FlashingTimer" to="." method="_on_flashing_timer_timeout"]
+[connection signal="timeout" from="DeathTimer" to="." method="_on_death_timer_timeout"]
 [connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]

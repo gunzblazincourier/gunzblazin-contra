@@ -73,6 +73,7 @@ var bullet_l: Area2D
 
 ## Hitbox area of player
 @onready var hitbox: Area2D = $Hitbox
+@onready var death_timer: Timer = $DeathTimer
 
 
 func _ready() -> void:
@@ -316,6 +317,8 @@ func _physics_process(delta: float) -> void:
 					velocity.x = run_direction * RUN_SPEED
 			velocity.y += GRAVITY * delta
 		States.DEATH:
+			if death_timer.is_stopped():
+				death_timer.start()
 			velocity.y += GRAVITY * delta
 			if not is_on_floor():
 				velocity.x = death_direction * RUN_SPEED
@@ -366,3 +369,8 @@ func _on_flashing_timer_timeout() -> void:
 		visible = false
 	else:
 		visible = true
+
+
+func _on_death_timer_timeout() -> void:
+	print("end")
+	queue_free()

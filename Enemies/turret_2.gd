@@ -41,7 +41,7 @@ func _process(_delta: float) -> void:
 			animated_sprite_2d_2.animation = "shoot_2"
 			animated_sprite_2d_2.set_frame_and_progress(current_frame, current_progress)
 	
-	print(animated_sprite_2d_2.animation)
+	#print(animated_sprite_2d_2.animation)
 	#print(animated_sprite_2d.frame)
 	## Angle between the player and turret's center relative to x-axis
 	var angle_with_player: float = global_position.angle_to_point(Global.player_global_position)
