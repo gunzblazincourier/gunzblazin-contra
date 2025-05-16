@@ -317,8 +317,6 @@ func _physics_process(delta: float) -> void:
 					velocity.x = run_direction * RUN_SPEED
 			velocity.y += GRAVITY * delta
 		States.DEATH:
-			if death_timer.is_stopped():
-				death_timer.start()
 			velocity.y += GRAVITY * delta
 			if not is_on_floor():
 				velocity.x = death_direction * RUN_SPEED
@@ -338,6 +336,7 @@ func _on_hitbox_area_entered(area: Area2D) -> void:
 	if area.is_in_group("enemy") or area.is_in_group("killbox") or \
 			area.is_in_group("enemy_bullet"):
 		animation_tree.set("parameters/conditions/death", true)
+		death_timer.start()
 		animation_tree.set("parameters/Death/blend_position", sprite_direction)
 		velocity.y = DEATH_JUMP_SPEED
 		death_direction = sprite_direction * -1
@@ -373,4 +372,4 @@ func _on_flashing_timer_timeout() -> void:
 
 func _on_death_timer_timeout() -> void:
 	print("end")
-	queue_free()
+	

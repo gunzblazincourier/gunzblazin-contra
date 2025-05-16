@@ -163,6 +163,6 @@ position = Vector2(1057, -31)
 position = Vector2(2145, 1)
 
 [node name="Player" parent="." instance=ExtResource("1_76q5j")]
-position = Vector2(-159, -99)
+position = Vector2(-172, -110)
 
 [connection signal="timeout" from="LevelAnimationTimer" to="." method="_on_timer_timeout"]
