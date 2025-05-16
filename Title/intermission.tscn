@@ -1,0 +1,45 @@
+[gd_scene load_steps=4 format=3 uid="uid://8qpao20tr3bg"]
+
+[ext_resource type="Texture2D" uid="uid://bhiujqxlfrlck" path="res://Title/StageBase.png" id="1_c6fi7"]
+[ext_resource type="Texture2D" uid="uid://d4e43wga51c7e" path="res://Title/Contra_US_intermission.png" id="2_gy4o2"]
+[ext_resource type="FontFile" uid="uid://qpqqiilsm86c" path="res://nintendo-nes-font.otf" id="3_r8s1g"]
+
+[node name="Intermission" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 256.0
+offset_right = 256.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Base" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 256.0
+offset_bottom = 240.0
+texture = ExtResource("1_c6fi7")
+
+[node name="Base2" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 256.0
+offset_bottom = 240.0
+texture = ExtResource("2_gy4o2")
+
+[node name="TransitionDurationTimer" type="Timer" parent="."]
+wait_time = 1.1
+one_shot = true
+
+[node name="OptionFlashingTimer" type="Timer" parent="."]
+wait_time = 0.2
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 19.0
+offset_top = 19.0
+offset_right = 131.0
+offset_bottom = 42.0
+theme_override_fonts/font = ExtResource("3_r8s1g")
+text = "1P    3"
+
+[connection signal="timeout" from="OptionFlashingTimer" to="." method="_on_timer_2_timeout"]
