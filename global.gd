@@ -18,9 +18,13 @@ enum Weapons {R, M, S, F, L}
 ## Current weapon of the player
 var weapon: Weapons
 
+## Player's lives
+var lives: int
+
 
 func _ready() -> void:
 	player_global_position = Vector2.ZERO
 	player_sprite_direction = 1
 	camera_center_position = Vector2(-91, -16)
 	weapon = Weapons.R
+	lives = 3
