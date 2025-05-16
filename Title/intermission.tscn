@@ -23,7 +23,6 @@ offset_bottom = 240.0
 texture = ExtResource("1_c6fi7")
 
 [node name="Base2" type="TextureRect" parent="."]
-visible = false
 layout_mode = 0
 offset_right = 256.0
 offset_bottom = 240.0
@@ -32,15 +31,25 @@ texture = ExtResource("2_gy4o2")
 [node name="LabelFlashingTimer" type="Timer" parent="."]
 wait_time = 0.3
 
-[node name="Score" type="Label" parent="."]
+[node name="1P" type="Label" parent="."]
 layout_mode = 0
 offset_left = 16.0
 offset_top = 32.0
-offset_right = 128.0
+offset_right = 32.0
 offset_bottom = 40.0
 theme_override_fonts/font = ExtResource("3_r8s1g")
 theme_override_font_sizes/font_size = 8
-text = "1P       3"
+text = "1P"
+
+[node name="Score" type="Label" parent="."]
+layout_mode = 0
+offset_left = 88.0
+offset_top = 32.0
+offset_right = 96.0
+offset_bottom = 40.0
+theme_override_fonts/font = ExtResource("3_r8s1g")
+theme_override_font_sizes/font_size = 8
+text = "0"
 
 [node name="Lives" type="Label" parent="."]
 layout_mode = 0
@@ -52,15 +61,25 @@ theme_override_fonts/font = ExtResource("3_r8s1g")
 theme_override_font_sizes/font_size = 8
 text = "REST  3"
 
-[node name="HighScore" type="Label" parent="."]
+[node name="HI" type="Label" parent="."]
 layout_mode = 0
 offset_left = 80.0
 offset_top = 72.0
-offset_right = 192.0
+offset_right = 96.0
 offset_bottom = 80.0
 theme_override_fonts/font = ExtResource("3_r8s1g")
 theme_override_font_sizes/font_size = 8
-text = "HI   20000"
+text = "HI"
+
+[node name="HighScore" type="Label" parent="."]
+layout_mode = 0
+offset_left = 120.0
+offset_top = 72.0
+offset_right = 160.0
+offset_bottom = 80.0
+theme_override_fonts/font = ExtResource("3_r8s1g")
+theme_override_font_sizes/font_size = 8
+text = "20000"
 
 [node name="StageNumber" type="Label" parent="."]
 layout_mode = 0
