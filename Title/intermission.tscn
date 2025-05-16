@@ -23,13 +23,11 @@ offset_bottom = 240.0
 texture = ExtResource("1_c6fi7")
 
 [node name="Base2" type="TextureRect" parent="."]
+visible = false
 layout_mode = 0
 offset_right = 256.0
 offset_bottom = 240.0
 texture = ExtResource("2_gy4o2")
-
-[node name="LabelFlashingTimer" type="Timer" parent="."]
-wait_time = 0.3
 
 [node name="1P" type="Label" parent="."]
 layout_mode = 0
@@ -101,4 +99,8 @@ theme_override_fonts/font = ExtResource("3_r8s1g")
 theme_override_font_sizes/font_size = 8
 text = "JUNGLE"
 
-[connection signal="timeout" from="LabelFlashingTimer" to="." method="_on_timer_2_timeout"]
+[node name="LabelFlashingTimer" type="Timer" parent="."]
+wait_time = 0.3
+autostart = true
+
+[connection signal="timeout" from="LabelFlashingTimer" to="." method="_on_label_flashing_timer_timeout"]
