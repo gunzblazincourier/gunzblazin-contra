@@ -35,11 +35,12 @@ wait_time = 0.2
 
 [node name="Label" type="Label" parent="."]
 layout_mode = 0
-offset_left = 19.0
-offset_top = 19.0
-offset_right = 131.0
-offset_bottom = 42.0
+offset_left = 16.0
+offset_top = 32.0
+offset_right = 128.0
+offset_bottom = 40.0
 theme_override_fonts/font = ExtResource("3_r8s1g")
-text = "1P    3"
+theme_override_font_sizes/font_size = 8
+text = "1P       3"
 
 [connection signal="timeout" from="OptionFlashingTimer" to="." method="_on_timer_2_timeout"]
