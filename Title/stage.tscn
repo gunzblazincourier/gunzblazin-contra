@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://8qpao20tr3bg"]
+[gd_scene load_steps=3 format=3 uid="uid://8qpao20tr3bg"]
 
 [ext_resource type="Texture2D" uid="uid://bhiujqxlfrlck" path="res://Title/StageBase.png" id="1_2gn6b"]
+[ext_resource type="FontFile" uid="uid://qpqqiilsm86c" path="res://nintendo-nes-font.otf" id="2_hxxfo"]
 
 [node name="Stage" type="Control"]
 layout_mode = 3
@@ -24,5 +25,14 @@ one_shot = true
 
 [node name="OptionFlashingTimer" type="Timer" parent="."]
 wait_time = 0.2
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 58.0
+offset_top = 85.0
+offset_right = 136.0
+offset_bottom = 108.0
+theme_override_fonts/font = ExtResource("2_hxxfo")
+text = "1P    3"
 
 [connection signal="timeout" from="OptionFlashingTimer" to="." method="_on_timer_2_timeout"]
