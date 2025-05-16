@@ -4,6 +4,8 @@ Spriters Resource: Sprites
 Zophar's domain: Music
 Sounds resource: SFX
 101 Soundboards: SFX
+FontStruction “Nintendo NES Font” (https://fontstruct.com/fontstructions/show/406653) by “Goatmeal”:
+	NES font
 Contra Anniversary Collection: Providing the game
 Mesen: For running the game with advanced testing and debugging features like
 rewind, slowmo and tile viewers
