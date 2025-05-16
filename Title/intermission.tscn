@@ -27,12 +27,8 @@ offset_right = 256.0
 offset_bottom = 240.0
 texture = ExtResource("2_gy4o2")
 
-[node name="TransitionDurationTimer" type="Timer" parent="."]
-wait_time = 1.1
-one_shot = true
-
-[node name="OptionFlashingTimer" type="Timer" parent="."]
-wait_time = 0.2
+[node name="LabelFlashingTimer" type="Timer" parent="."]
+wait_time = 0.3
 
 [node name="Score" type="Label" parent="."]
 layout_mode = 0
@@ -84,4 +80,4 @@ theme_override_fonts/font = ExtResource("3_r8s1g")
 theme_override_font_sizes/font_size = 8
 text = "JUNGLE"
 
-[connection signal="timeout" from="OptionFlashingTimer" to="." method="_on_timer_2_timeout"]
+[connection signal="timeout" from="LabelFlashingTimer" to="." method="_on_timer_2_timeout"]
