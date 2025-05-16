@@ -11,3 +11,7 @@ func _on_label_flashing_timer_timeout() -> void:
 	else:
 		score.visible = true
 		high_score.visible = true
+
+
+func _on_screen_timer_timeout() -> void:
+	print("BEGIN")
