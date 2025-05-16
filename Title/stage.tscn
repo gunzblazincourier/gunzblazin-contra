@@ -1,7 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://8qpao20tr3bg"]
+[gd_scene load_steps=2 format=3 uid="uid://8qpao20tr3bg"]
 
-[ext_resource type="Script" uid="uid://x54w3nucrlox" path="res://Title/title.gd" id="1_hxxfo"]
-[ext_resource type="Texture2D" uid="uid://l4xn0yseevjw" path="res://Title/TitleScreen.png" id="2_5bbs6"]
+[ext_resource type="Texture2D" uid="uid://bhiujqxlfrlck" path="res://Title/StageBase.png" id="1_2gn6b"]
 
 [node name="Stage" type="Control"]
 layout_mode = 3
@@ -12,13 +11,12 @@ offset_left = 256.0
 offset_right = 256.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_hxxfo")
 
 [node name="Base" type="TextureRect" parent="."]
 layout_mode = 0
 offset_right = 256.0
 offset_bottom = 240.0
-texture = ExtResource("2_5bbs6")
+texture = ExtResource("1_2gn6b")
 
 [node name="TransitionDurationTimer" type="Timer" parent="."]
 wait_time = 1.1
