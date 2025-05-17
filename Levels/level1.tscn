@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=4 uid="uid://bornr0erfd30j"]
+[gd_scene load_steps=13 format=4 uid="uid://bornr0erfd30j"]
 
 [ext_resource type="Script" uid="uid://tqrdmn3550ts" path="res://main.gd" id="1_nq5j5"]
 [ext_resource type="TileSet" uid="uid://cwwx3nyrorypy" path="res://Levels/level1.tres" id="2_utqd4"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://0hbphmpkfm7w" path="res://Enemies/running_soldier.tscn" id="7_ts5l0"]
 [ext_resource type="PackedScene" uid="uid://bgedjmw5o3wam" path="res://Enemies/turret_soldier.tscn" id="8_u2cfn"]
 [ext_resource type="PackedScene" uid="uid://doa0vkc0fktkh" path="res://Player/player.tscn" id="9_lr1ra"]
+[ext_resource type="Texture2D" uid="uid://b3dwexe7kgno2" path="res://Levels/Leve1Fade.png" id="10_utqd4"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_h2yge"]
 normal = Vector2(-5.60985e-08, -1)
@@ -164,5 +165,10 @@ position = Vector2(2145, 1)
 
 [node name="Player" parent="." instance=ExtResource("9_lr1ra")]
 position = Vector2(-172, -110)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(-80, -16)
+texture = ExtResource("10_utqd4")
 
 [connection signal="timeout" from="LevelAnimationTimer" to="." method="_on_timer_timeout"]
