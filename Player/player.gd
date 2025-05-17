@@ -118,15 +118,15 @@ func _process(_delta: float) -> void:
 	var crouch: bool = is_on_floor() and look_direction == Vector2(0, 1)
 	var run: bool = is_on_floor() and look_direction.x != 0
 	var jump: bool = not is_on_floor() and is_jump_pressed and \
-			look_direction != Vector2(0, -1) and look_direction != Vector2(0, 1)
+			look_direction != Vector2(0, -1) and look_direction != Vector2(0, 1) and death_timer.is_stopped()
 	var jump_up: bool = not is_on_floor() and is_jump_pressed and \
-			look_direction == Vector2(0, -1)
+			look_direction == Vector2(0, -1) and death_timer.is_stopped()
 	var jump_down: bool = not is_on_floor() and is_jump_pressed and \
-			look_direction == Vector2(0, 1)
+			look_direction == Vector2(0, 1) and death_timer.is_stopped()
 	var fall: bool = not is_on_floor() and not is_jump_pressed and \
-			look_direction != Vector2(0, -1)
+			look_direction != Vector2(0, -1) and death_timer.is_stopped()
 	var fall_up: bool = not is_on_floor() and not is_jump_pressed and \
-			look_direction == Vector2(0, -1)
+			look_direction == Vector2(0, -1) and death_timer.is_stopped()
 	
 	# Assigning values to AnimationTree variables using respective script variables
 	animation_tree.set("parameters/conditions/idle", idle)
@@ -217,6 +217,9 @@ func _process(_delta: float) -> void:
 			state = States.SHOOT_FALL_UP
 		"Death":
 			state = States.DEATH
+	#print(state)
+	#print(animation_tree.get("parameters/Jump/blend_position"))
+	#print(run_direction)
 	
 	# Weapon behaviour
 	match state:
@@ -337,6 +340,7 @@ func _on_hitbox_area_entered(area: Area2D) -> void:
 			area.is_in_group("enemy_bullet"):
 		animation_tree.set("parameters/conditions/death", true)
 		death_timer.start()
+		Global.lives -= 1
 		animation_tree.set("parameters/Death/blend_position", sprite_direction)
 		velocity.y = DEATH_JUMP_SPEED
 		death_direction = sprite_direction * -1
@@ -371,5 +375,12 @@ func _on_flashing_timer_timeout() -> void:
 
 
 func _on_death_timer_timeout() -> void:
+	animation_tree.set("parameters/conditions/death", false)
+	is_jump_pressed = true
 	print("end")
-	
+	global_position.x = Global.left_boundary_position.x + 14
+	global_position.y = -110
+	hitbox.set_deferred("monitorable", false)
+	hitbox.set_deferred("monitoring", false)
+	invincibility_timer.start()
+	flashing_timer.start()

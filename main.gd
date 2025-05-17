@@ -31,6 +31,7 @@ func _process(_delta: float) -> void:
 ## Keeps left boundary position to the left border during camera movement
 func _physics_process(_delta: float) -> void:
 	left_boundary.position.x = camera_2d.get_screen_center_position().x - 88
+	Global.left_boundary_position = left_boundary.position
 
 
 ## Waves and stars animation by toggling visibility of the respective

@@ -21,6 +21,9 @@ var weapon: Weapons
 ## Player's lives
 var lives: int
 
+## Left boundary's position
+var left_boundary_position: Vector2
+
 
 func _ready() -> void:
 	player_global_position = Vector2.ZERO
@@ -28,3 +31,4 @@ func _ready() -> void:
 	camera_center_position = Vector2(-91, -16)
 	weapon = Weapons.R
 	lives = 3
+	left_boundary_position = Vector2.ZERO
