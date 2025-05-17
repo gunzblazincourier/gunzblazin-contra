@@ -56,6 +56,7 @@ func _on_area_entered(area: Area2D) -> void:
 	if area.is_in_group("bullet") and animated_sprite_2d.frame > 4 and \
 			animated_sprite_2d.frame < 14:
 		destroyed = true
+		Global.score += 500
 
 
 ## Removes sensor after explosion (based on the sound instead of animation since

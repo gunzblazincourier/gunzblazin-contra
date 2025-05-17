@@ -24,6 +24,9 @@ var lives: int
 ## Left boundary's position
 var left_boundary_position: Vector2
 
+## Score
+var score: int
+
 
 func _ready() -> void:
 	player_global_position = Vector2.ZERO
@@ -32,3 +35,8 @@ func _ready() -> void:
 	weapon = Weapons.R
 	lives = 3
 	left_boundary_position = Vector2.ZERO
+	score = 0
+
+
+func _process(_delta: float) -> void:
+	print(score)
