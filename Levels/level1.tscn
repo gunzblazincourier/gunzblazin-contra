@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=4 uid="uid://bornr0erfd30j"]
+[gd_scene load_steps=17 format=4 uid="uid://bornr0erfd30j"]
 
 [ext_resource type="Script" uid="uid://tqrdmn3550ts" path="res://main.gd" id="1_nq5j5"]
 [ext_resource type="TileSet" uid="uid://cwwx3nyrorypy" path="res://Levels/level1.tres" id="2_utqd4"]
@@ -9,11 +9,58 @@
 [ext_resource type="PackedScene" uid="uid://0hbphmpkfm7w" path="res://Enemies/running_soldier.tscn" id="7_ts5l0"]
 [ext_resource type="PackedScene" uid="uid://bgedjmw5o3wam" path="res://Enemies/turret_soldier.tscn" id="8_u2cfn"]
 [ext_resource type="PackedScene" uid="uid://doa0vkc0fktkh" path="res://Player/player.tscn" id="9_lr1ra"]
+[ext_resource type="Texture2D" uid="uid://h60aouyoisr5" path="res://Player/GameOver.png" id="10_1jijn"]
+[ext_resource type="Texture2D" uid="uid://bernaol4njv6b" path="res://Player/Lives_1.png" id="11_20gr8"]
+[ext_resource type="Texture2D" uid="uid://bgeuhv81xsj35" path="res://Player/Lives_2.png" id="12_ts5l0"]
+[ext_resource type="Texture2D" uid="uid://blntbdn47c1su" path="res://Player/Lives_3.png" id="13_u2cfn"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_h2yge"]
 normal = Vector2(-5.60985e-08, -1)
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_1bvp3"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_lr1ra"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("10_1jijn")
+}],
+"loop": true,
+"name": &"game_over",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": null
+}],
+"loop": true,
+"name": &"lives_0",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("11_20gr8")
+}],
+"loop": true,
+"name": &"lives_1",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("12_ts5l0")
+}],
+"loop": true,
+"name": &"lives_2",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("13_u2cfn")
+}],
+"loop": true,
+"name": &"lives_3",
+"speed": 5.0
+}]
 
 [node name="Level1" type="Node"]
 script = ExtResource("1_nq5j5")
@@ -164,5 +211,10 @@ position = Vector2(2145, 1)
 
 [node name="Player" parent="." instance=ExtResource("9_lr1ra")]
 position = Vector2(-172, -110)
+
+[node name="Lives" type="AnimatedSprite2D" parent="."]
+position = Vector2(-195, -113)
+sprite_frames = SubResource("SpriteFrames_lr1ra")
+animation = &"lives_2"
 
 [connection signal="timeout" from="LevelAnimationTimer" to="." method="_on_timer_timeout"]

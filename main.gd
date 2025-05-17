@@ -20,10 +20,14 @@ extends Node
 ## Controls speed of animation of waves and stars
 @onready var level_animation_timer: Timer = $LevelAnimationTimer
 
+## UI for lives
+@onready var lives: AnimatedSprite2D = $Lives
+
 
 ## Locks player position to center of camera view when player reaches center
 func _process(_delta: float) -> void:
 	Global.camera_center_position = camera_2d.get_screen_center_position()
+	lives.position.x = camera_2d.get_screen_center_position().x - 90
 	if player.global_position.x > camera_2d.get_screen_center_position().x:
 		camera_2d.global_position = player.global_position
 
@@ -31,6 +35,7 @@ func _process(_delta: float) -> void:
 ## Keeps left boundary position to the left border during camera movement
 func _physics_process(_delta: float) -> void:
 	left_boundary.position.x = camera_2d.get_screen_center_position().x - 88
+	#lives.position.x = camera_2d.get_screen_center_position().x - 90
 	Global.left_boundary_position = left_boundary.position
 
 
