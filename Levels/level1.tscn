@@ -1,6 +1,6 @@
 [gd_scene load_steps=17 format=4 uid="uid://bornr0erfd30j"]
 
-[ext_resource type="Script" uid="uid://tqrdmn3550ts" path="res://main.gd" id="1_nq5j5"]
+[ext_resource type="Script" uid="uid://tqrdmn3550ts" path="res://Levels/level1.gd" id="1_nq5j5"]
 [ext_resource type="TileSet" uid="uid://cwwx3nyrorypy" path="res://Levels/level1.tres" id="2_utqd4"]
 [ext_resource type="PackedScene" uid="uid://dmwhot7tnyix7" path="res://Levels/exploding_bridge.tscn" id="3_u55on"]
 [ext_resource type="PackedScene" uid="uid://1iy13e6vp74e" path="res://Levels/sensor.tscn" id="4_pdma0"]
