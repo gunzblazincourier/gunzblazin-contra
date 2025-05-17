@@ -375,9 +375,9 @@ func _on_flashing_timer_timeout() -> void:
 
 
 func _on_death_timer_timeout() -> void:
+	death_direction = 0
 	animation_tree.set("parameters/conditions/death", false)
 	is_jump_pressed = true
-	print("end")
 	global_position.x = Global.left_boundary_position.x + 14
 	global_position.y = -110
 	hitbox.set_deferred("monitorable", false)
