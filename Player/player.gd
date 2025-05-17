@@ -92,6 +92,13 @@ func _ready() -> void:
 
 
 func _process(_delta: float) -> void:
+	## 'Vanish' player when he runs out of lives
+	if Global.lives < 0:
+		visible = false
+		process_mode = Node.PROCESS_MODE_DISABLED
+		hitbox.set_deferred("monitorable", false)
+		hitbox.set_deferred("monitoring", false)
+	
 	## Arrow key(s) currently pressed
 	var look_direction: Vector2 = Input.get_vector("left", "right", "up", "down")
 	
