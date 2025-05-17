@@ -69,6 +69,10 @@ script = ExtResource("1_nq5j5")
 wait_time = 0.2
 autostart = true
 
+[node name="GameOverTimer" type="Timer" parent="."]
+wait_time = 1.5
+one_shot = true
+
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(-91, -16)
 drag_horizontal_enabled = true
@@ -218,3 +222,4 @@ sprite_frames = SubResource("SpriteFrames_lr1ra")
 animation = &"lives_2"
 
 [connection signal="timeout" from="LevelAnimationTimer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="GameOverTimer" to="." method="_on_game_over_timer_timeout"]

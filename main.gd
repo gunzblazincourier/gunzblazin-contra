@@ -20,12 +20,17 @@ extends Node
 ## Controls speed of animation of waves and stars
 @onready var level_animation_timer: Timer = $LevelAnimationTimer
 
+## Time for which 'Game Over' text is displayed, after which it transitions to
+## game over screen
+@onready var game_over_timer: Timer = $GameOverTimer
+
 ## UI for lives
 @onready var lives: AnimatedSprite2D = $Lives
 
 
 ## Locks player position to center of camera view when player reaches center
 func _process(_delta: float) -> void:
+	print(game_over_timer.time_left)
 	if Global.lives >= 3:
 		lives.play("lives_3")
 	elif Global.lives == 2:
@@ -36,6 +41,8 @@ func _process(_delta: float) -> void:
 		lives.play("lives_0")
 	else:
 		lives.play("game_over")
+		if game_over_timer.is_stopped():
+			game_over_timer.start()
 	
 	Global.camera_center_position = camera_2d.get_screen_center_position()
 	if player.global_position.x > camera_2d.get_screen_center_position().x:
@@ -56,3 +63,9 @@ func _on_timer_timeout() -> void:
 		waves_and_stars.visible = false
 	else:
 		waves_and_stars.visible = true
+
+
+func _on_game_over_timer_timeout() -> void:
+	var er: Error = get_tree().change_scene_to_file("res://Title/intermission.tscn")
+	print(er)
+	print("BEGIN")
