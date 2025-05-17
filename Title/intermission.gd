@@ -4,6 +4,10 @@ extends Control
 @onready var high_score: Label = $HighScore
 
 
+func _ready() -> void:
+	score.text = str(Global.score)
+
+
 func _on_label_flashing_timer_timeout() -> void:
 	if score.visible == true:
 		score.visible = false
