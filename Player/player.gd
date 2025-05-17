@@ -340,7 +340,6 @@ func _on_hitbox_area_entered(area: Area2D) -> void:
 			area.is_in_group("enemy_bullet"):
 		animation_tree.set("parameters/conditions/death", true)
 		death_timer.start()
-		Global.lives -= 1
 		animation_tree.set("parameters/Death/blend_position", sprite_direction)
 		velocity.y = DEATH_JUMP_SPEED
 		death_direction = sprite_direction * -1
@@ -384,3 +383,4 @@ func _on_death_timer_timeout() -> void:
 	hitbox.set_deferred("monitoring", false)
 	invincibility_timer.start()
 	flashing_timer.start()
+	Global.lives -= 1

@@ -26,8 +26,18 @@ extends Node
 
 ## Locks player position to center of camera view when player reaches center
 func _process(_delta: float) -> void:
+	if Global.lives >= 3:
+		lives.play("lives_3")
+	elif Global.lives == 2:
+		lives.play("lives_2")
+	elif Global.lives == 1:
+		lives.play("lives_1")
+	elif Global.lives == 0:
+		lives.play("lives_0")
+	else:
+		lives.play("game_over")
+	
 	Global.camera_center_position = camera_2d.get_screen_center_position()
-	lives.position.x = camera_2d.get_screen_center_position().x - 90
 	if player.global_position.x > camera_2d.get_screen_center_position().x:
 		camera_2d.global_position = player.global_position
 
@@ -35,7 +45,7 @@ func _process(_delta: float) -> void:
 ## Keeps left boundary position to the left border during camera movement
 func _physics_process(_delta: float) -> void:
 	left_boundary.position.x = camera_2d.get_screen_center_position().x - 88
-	#lives.position.x = camera_2d.get_screen_center_position().x - 90
+	lives.position.x = camera_2d.get_screen_center_position().x - 90
 	Global.left_boundary_position = left_boundary.position
 
 
