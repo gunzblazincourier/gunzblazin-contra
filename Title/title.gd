@@ -58,11 +58,14 @@ func _process(delta: float) -> void:
 			is_option_selected = true
 		
 		# Proceed to next scene
-		# NOTE: Not implemented; presently only prints basic message
 		if is_option_selected == true:
 			if transition_duration_timer.is_stopped() and not title_music.playing:
 				option_flashing_timer.one_shot = true
-				print("BEGIN")
+				
+				# Stored in variable and printed to prevent 'return value
+				# discarded' error
+				var er: Error = get_tree().change_scene_to_file("res://Title/intermission.tscn")
+				print(er)
 	
 	# Title screen sliding right-to-left
 	if position.x > 0:
