@@ -73,6 +73,7 @@ var bullet_l: Area2D
 
 ## Hitbox area of player
 @onready var hitbox: Area2D = $Hitbox
+@onready var death_timer: Timer = $DeathTimer
 
 
 func _ready() -> void:
@@ -91,6 +92,13 @@ func _ready() -> void:
 
 
 func _process(_delta: float) -> void:
+	## 'Vanish' player when he runs out of lives
+	if Global.lives < 0:
+		visible = false
+		process_mode = Node.PROCESS_MODE_DISABLED
+		hitbox.set_deferred("monitorable", false)
+		hitbox.set_deferred("monitoring", false)
+	
 	## Arrow key(s) currently pressed
 	var look_direction: Vector2 = Input.get_vector("left", "right", "up", "down")
 	
@@ -117,15 +125,15 @@ func _process(_delta: float) -> void:
 	var crouch: bool = is_on_floor() and look_direction == Vector2(0, 1)
 	var run: bool = is_on_floor() and look_direction.x != 0
 	var jump: bool = not is_on_floor() and is_jump_pressed and \
-			look_direction != Vector2(0, -1) and look_direction != Vector2(0, 1)
+			look_direction != Vector2(0, -1) and look_direction != Vector2(0, 1) and death_timer.is_stopped()
 	var jump_up: bool = not is_on_floor() and is_jump_pressed and \
-			look_direction == Vector2(0, -1)
+			look_direction == Vector2(0, -1) and death_timer.is_stopped()
 	var jump_down: bool = not is_on_floor() and is_jump_pressed and \
-			look_direction == Vector2(0, 1)
+			look_direction == Vector2(0, 1) and death_timer.is_stopped()
 	var fall: bool = not is_on_floor() and not is_jump_pressed and \
-			look_direction != Vector2(0, -1)
+			look_direction != Vector2(0, -1) and death_timer.is_stopped()
 	var fall_up: bool = not is_on_floor() and not is_jump_pressed and \
-			look_direction == Vector2(0, -1)
+			look_direction == Vector2(0, -1) and death_timer.is_stopped()
 	
 	# Assigning values to AnimationTree variables using respective script variables
 	animation_tree.set("parameters/conditions/idle", idle)
@@ -216,6 +224,9 @@ func _process(_delta: float) -> void:
 			state = States.SHOOT_FALL_UP
 		"Death":
 			state = States.DEATH
+	#print(state)
+	#print(animation_tree.get("parameters/Jump/blend_position"))
+	#print(run_direction)
 	
 	# Weapon behaviour
 	match state:
@@ -335,6 +346,7 @@ func _on_hitbox_area_entered(area: Area2D) -> void:
 	if area.is_in_group("enemy") or area.is_in_group("killbox") or \
 			area.is_in_group("enemy_bullet"):
 		animation_tree.set("parameters/conditions/death", true)
+		death_timer.start()
 		animation_tree.set("parameters/Death/blend_position", sprite_direction)
 		velocity.y = DEATH_JUMP_SPEED
 		death_direction = sprite_direction * -1
@@ -366,3 +378,16 @@ func _on_flashing_timer_timeout() -> void:
 		visible = false
 	else:
 		visible = true
+
+
+func _on_death_timer_timeout() -> void:
+	death_direction = 0
+	animation_tree.set("parameters/conditions/death", false)
+	is_jump_pressed = true
+	global_position.x = Global.left_boundary_position.x + 14
+	global_position.y = -110
+	hitbox.set_deferred("monitorable", false)
+	hitbox.set_deferred("monitoring", false)
+	invincibility_timer.start()
+	flashing_timer.start()
+	Global.lives -= 1

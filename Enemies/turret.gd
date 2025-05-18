@@ -15,19 +15,455 @@ extends Area2D
 
 ## Turret explosion sound
 @onready var death_explosion_sfx: AudioStreamPlayer2D = $DeathExplosionSFX
-@onready var visible_on_screen_notifier_2d: VisibleOnScreenNotifier2D = $VisibleOnScreenNotifier2D
-@onready var clockwise_timer: Timer = $ClockwiseTimer
-@onready var anticlockwise_timer: Timer = $AnticlockwiseTimer
 
-#var current_frame: int = animated_sprite_2d.get_frame()
-#var current_progress: float = animated_sprite_2d.get_frame_progress()
-#animated_sprite.play("walk_another_skin")
-#animated_sprite.set_frame_and_progress(current_frame, current_progress)
+## Animated pixel lights
+@onready var animated_light_pixel: AnimatedSprite2D = $AnimatedLightPixel
+@onready var animated_light_pixel_2: AnimatedSprite2D = $AnimatedLightPixel2
+@onready var animated_light_pixel_3: AnimatedSprite2D = $AnimatedLightPixel3
+@onready var animated_light_pixel_4: AnimatedSprite2D = $AnimatedLightPixel4
+@onready var animated_light_pixel_5: AnimatedSprite2D = $AnimatedLightPixel5
+@onready var animated_light_pixel_6: AnimatedSprite2D = $AnimatedLightPixel6
+@onready var animated_light_pixel_7: AnimatedSprite2D = $AnimatedLightPixel7
+@onready var animated_light_pixel_8: AnimatedSprite2D = $AnimatedLightPixel8
+@onready var animated_light_pixel_9: AnimatedSprite2D = $AnimatedLightPixel9
+@onready var animated_light_pixel_10: AnimatedSprite2D = $AnimatedLightPixel10
+@onready var animated_light_pixel_11: AnimatedSprite2D = $AnimatedLightPixel11
+@onready var animated_light_pixel_12: AnimatedSprite2D = $AnimatedLightPixel12
+@onready var animated_light_pixel_13: AnimatedSprite2D = $AnimatedLightPixel13
+@onready var animated_light_pixel_14: AnimatedSprite2D = $AnimatedLightPixel14
+@onready var animated_light_pixel_15: AnimatedSprite2D = $AnimatedLightPixel15
+@onready var animated_light_pixel_16: AnimatedSprite2D = $AnimatedLightPixel16
 
 
 ## Shoots when player is seen by turret, continues to track after a while and
 ## repeat
 func _process(_delta: float) -> void:
+	if animated_sprite_2d.animation == "explode":
+		animated_light_pixel.visible = false
+		animated_light_pixel_2.visible = false
+		animated_light_pixel_3.visible = false
+		animated_light_pixel_4.visible = false
+		animated_light_pixel_5.visible = false
+		animated_light_pixel_6.visible = false
+		animated_light_pixel_7.visible = false
+		animated_light_pixel_8.visible = false
+		animated_light_pixel_9.visible = false
+		animated_light_pixel_10.visible = false
+		animated_light_pixel_11.visible = false
+		animated_light_pixel_12.visible = false
+		animated_light_pixel_13.visible = false
+		animated_light_pixel_14.visible = false
+		animated_light_pixel_15.visible = false
+		animated_light_pixel_16.visible = false
+	if animated_sprite_2d.animation == "activate":
+		if animated_sprite_2d.frame == 0:
+			animated_light_pixel.position = Vector2(7, 0)
+			animated_light_pixel_2.position = Vector2(6, 0)
+			animated_light_pixel_3.position = Vector2(6, -1)
+			animated_light_pixel_4.position = Vector2(7, -1)
+			animated_light_pixel_5.position = Vector2(-7, -1)
+			animated_light_pixel_6.position = Vector2(-8, -1)
+			animated_light_pixel_7.position = Vector2(-8, 0)
+			animated_light_pixel_8.position = Vector2(-7, 0)
+			animated_light_pixel_9.position = Vector2(-2, -8)
+			animated_light_pixel_10.position = Vector2(-1, -8)
+			animated_light_pixel_11.position = Vector2(0, -8)
+			animated_light_pixel_12.position = Vector2(1, -8)
+			animated_light_pixel_13.position = Vector2(-2, 7)
+			animated_light_pixel_14.position = Vector2(-1, 7)
+			animated_light_pixel_15.position = Vector2(0, 7)
+			animated_light_pixel_16.position = Vector2(1, 7)
+			animated_light_pixel.visible = true
+			animated_light_pixel_2.visible = true
+			animated_light_pixel_3.visible = true
+			animated_light_pixel_4.visible = true
+			animated_light_pixel_5.visible = true
+			animated_light_pixel_6.visible = true
+			animated_light_pixel_7.visible = true
+			animated_light_pixel_8.visible = true
+			animated_light_pixel_9.visible = true
+			animated_light_pixel_10.visible = true
+			animated_light_pixel_11.visible = true
+			animated_light_pixel_12.visible = true
+			animated_light_pixel_13.visible = true
+			animated_light_pixel_14.visible = true
+			animated_light_pixel_15.visible = true
+			animated_light_pixel_16.visible = true
+		elif animated_sprite_2d.frame == 1:
+			animated_light_pixel.position = Vector2(-8, -8)
+			animated_light_pixel_2.position = Vector2(7, -8)
+			animated_light_pixel_3.position = Vector2(7, 7)
+			animated_light_pixel_4.position = Vector2(-8, 7)
+			animated_light_pixel_5.position = Vector2(-1, -1)
+			animated_light_pixel_6.position = Vector2(0, -1)
+			animated_light_pixel_7.position = Vector2(-1, 0)
+			animated_light_pixel_8.position = Vector2(0, 0)
+			animated_light_pixel.visible = true
+			animated_light_pixel_2.visible = true
+			animated_light_pixel_3.visible = true
+			animated_light_pixel_4.visible = true
+			animated_light_pixel_5.visible = true
+			animated_light_pixel_6.visible = true
+			animated_light_pixel_7.visible = true
+			animated_light_pixel_8.visible = true
+			animated_light_pixel_9.visible = false
+			animated_light_pixel_10.visible = false
+			animated_light_pixel_11.visible = false
+			animated_light_pixel_12.visible = false
+			animated_light_pixel_13.visible = false
+			animated_light_pixel_14.visible = false
+			animated_light_pixel_15.visible = false
+			animated_light_pixel_16.visible = false
+	elif animated_sprite_2d.animation == "deactivate":
+		if animated_sprite_2d.frame == 1:
+			animated_light_pixel.position = Vector2(7, 0)
+			animated_light_pixel_2.position = Vector2(6, 0)
+			animated_light_pixel_3.position = Vector2(6, -1)
+			animated_light_pixel_4.position = Vector2(7, -1)
+			animated_light_pixel_5.position = Vector2(-7, -1)
+			animated_light_pixel_6.position = Vector2(-8, -1)
+			animated_light_pixel_7.position = Vector2(-8, 0)
+			animated_light_pixel_8.position = Vector2(-7, 0)
+			animated_light_pixel_9.position = Vector2(-2, -8)
+			animated_light_pixel_10.position = Vector2(-1, -8)
+			animated_light_pixel_11.position = Vector2(0, -8)
+			animated_light_pixel_12.position = Vector2(1, -8)
+			animated_light_pixel_13.position = Vector2(-2, 7)
+			animated_light_pixel_14.position = Vector2(-1, 7)
+			animated_light_pixel_15.position = Vector2(0, 7)
+			animated_light_pixel_16.position = Vector2(1, 7)
+			animated_light_pixel.visible = true
+			animated_light_pixel_2.visible = true
+			animated_light_pixel_3.visible = true
+			animated_light_pixel_4.visible = true
+			animated_light_pixel_5.visible = true
+			animated_light_pixel_6.visible = true
+			animated_light_pixel_7.visible = true
+			animated_light_pixel_8.visible = true
+			animated_light_pixel_9.visible = true
+			animated_light_pixel_10.visible = true
+			animated_light_pixel_11.visible = true
+			animated_light_pixel_12.visible = true
+			animated_light_pixel_13.visible = true
+			animated_light_pixel_14.visible = true
+			animated_light_pixel_15.visible = true
+			animated_light_pixel_16.visible = true
+		elif animated_sprite_2d.frame == 0:
+			animated_light_pixel.position = Vector2(-8, -8)
+			animated_light_pixel_2.position = Vector2(7, -8)
+			animated_light_pixel_3.position = Vector2(7, 7)
+			animated_light_pixel_4.position = Vector2(-8, 7)
+			animated_light_pixel_5.position = Vector2(-1, -1)
+			animated_light_pixel_6.position = Vector2(0, -1)
+			animated_light_pixel_7.position = Vector2(-1, 0)
+			animated_light_pixel_8.position = Vector2(0, 0)
+			animated_light_pixel.visible = true
+			animated_light_pixel_2.visible = true
+			animated_light_pixel_3.visible = true
+			animated_light_pixel_4.visible = true
+			animated_light_pixel_5.visible = true
+			animated_light_pixel_6.visible = true
+			animated_light_pixel_7.visible = true
+			animated_light_pixel_8.visible = true
+			animated_light_pixel_9.visible = false
+			animated_light_pixel_10.visible = false
+			animated_light_pixel_11.visible = false
+			animated_light_pixel_12.visible = false
+			animated_light_pixel_13.visible = false
+			animated_light_pixel_14.visible = false
+			animated_light_pixel_15.visible = false
+			animated_light_pixel_16.visible = false
+	elif animated_sprite_2d.animation == "shoot":
+		if animated_sprite_2d.frame == 0:
+			animated_light_pixel.position = Vector2(1, -2)
+			animated_light_pixel_2.position = Vector2(1, -1)
+			animated_light_pixel_3.position = Vector2(1, 0)
+			animated_light_pixel_4.position = Vector2(-3, -5)
+			animated_light_pixel_5.position = Vector2(-3, 3)
+			#animated_light_pixel.rotation = 0
+			#animated_light_pixel_2.rotation = 0
+			#animated_light_pixel_3.rotation = 0
+			#animated_light_pixel_4.rotation = 0
+			#animated_light_pixel_5.rotation = 0
+			animated_light_pixel.visible = true
+			animated_light_pixel_2.visible = true
+			animated_light_pixel_3.visible = true
+			animated_light_pixel_4.visible = true
+			animated_light_pixel_5.visible = true
+			animated_light_pixel_6.visible = false
+			animated_light_pixel_7.visible = false
+			animated_light_pixel_8.visible = false
+			animated_light_pixel_9.visible = false
+			animated_light_pixel_10.visible = false
+			animated_light_pixel_11.visible = false
+			animated_light_pixel_12.visible = false
+			animated_light_pixel_13.visible = false
+			animated_light_pixel_14.visible = false
+			animated_light_pixel_15.visible = false
+			animated_light_pixel_16.visible = false
+		elif animated_sprite_2d.frame == 1:
+			animated_light_pixel.position = Vector2(0, -3)
+			animated_light_pixel_2.position = Vector2(1, -2)
+			animated_light_pixel_3.position = Vector2(2, -1)
+			animated_light_pixel_4.position = Vector2(-5, -3)
+			animated_light_pixel_5.position = Vector2(-1, 4)
+			#animated_light_pixel.rotation = PI/6
+			#animated_light_pixel_2.rotation = PI/6
+			#animated_light_pixel_3.rotation = PI/6
+			#animated_light_pixel_4.rotation = PI/6
+			#animated_light_pixel_5.rotation = PI/6
+			animated_light_pixel.visible = true
+			animated_light_pixel_2.visible = true
+			animated_light_pixel_3.visible = true
+			animated_light_pixel_4.visible = true
+			animated_light_pixel_5.visible = true
+			animated_light_pixel_6.visible = false
+			animated_light_pixel_7.visible = false
+			animated_light_pixel_8.visible = false
+			animated_light_pixel_9.visible = false
+			animated_light_pixel_10.visible = false
+			animated_light_pixel_11.visible = false
+			animated_light_pixel_12.visible = false
+			animated_light_pixel_13.visible = false
+			animated_light_pixel_14.visible = false
+			animated_light_pixel_15.visible = false
+			animated_light_pixel_16.visible = false
+		elif animated_sprite_2d.frame == 2:
+			animated_light_pixel.position = Vector2(0, -3)
+			animated_light_pixel_2.position = Vector2(1, -2)
+			animated_light_pixel_3.position = Vector2(2, -2)
+			animated_light_pixel_4.position = Vector2(-5, 0)
+			animated_light_pixel_5.position = Vector2(2, 4)
+			#animated_light_pixel.rotation = PI/3
+			#animated_light_pixel_2.rotation = PI/3
+			#animated_light_pixel_3.rotation = PI/3
+			#animated_light_pixel_4.rotation = PI/3
+			#animated_light_pixel_5.rotation = PI/3
+			animated_light_pixel.visible = true
+			animated_light_pixel_2.visible = true
+			animated_light_pixel_3.visible = true
+			animated_light_pixel_4.visible = true
+			animated_light_pixel_5.visible = true
+			animated_light_pixel_6.visible = false
+			animated_light_pixel_7.visible = false
+			animated_light_pixel_8.visible = false
+			animated_light_pixel_9.visible = false
+			animated_light_pixel_10.visible = false
+			animated_light_pixel_11.visible = false
+			animated_light_pixel_12.visible = false
+			animated_light_pixel_13.visible = false
+			animated_light_pixel_14.visible = false
+			animated_light_pixel_15.visible = false
+			animated_light_pixel_16.visible = false
+		elif animated_sprite_2d.frame == 3:
+			animated_light_pixel.position = Vector2(-2, -2)
+			animated_light_pixel_2.position = Vector2(-1, -2)
+			animated_light_pixel_3.position = Vector2(0, -2)
+			animated_light_pixel_4.position = Vector2(-5, 2)
+			animated_light_pixel_5.position = Vector2(3, 2)
+			#animated_light_pixel.rotation = 0
+			#animated_light_pixel_2.rotation = 0
+			#animated_light_pixel_3.rotation = 0
+			#animated_light_pixel_4.rotation = 0
+			#animated_light_pixel_5.rotation = 0
+			animated_light_pixel.visible = true
+			animated_light_pixel_2.visible = true
+			animated_light_pixel_3.visible = true
+			animated_light_pixel_4.visible = true
+			animated_light_pixel_5.visible = true
+			animated_light_pixel_6.visible = false
+			animated_light_pixel_7.visible = false
+			animated_light_pixel_8.visible = false
+			animated_light_pixel_9.visible = false
+			animated_light_pixel_10.visible = false
+			animated_light_pixel_11.visible = false
+			animated_light_pixel_12.visible = false
+			animated_light_pixel_13.visible = false
+			animated_light_pixel_14.visible = false
+			animated_light_pixel_15.visible = false
+			animated_light_pixel_16.visible = false
+		elif animated_sprite_2d.frame == 4:
+			animated_light_pixel.position = Vector2(-3, -2)
+			animated_light_pixel_2.position = Vector2(-2, -2)
+			animated_light_pixel_3.position = Vector2(-1, -3)
+			animated_light_pixel_4.position = Vector2(-3, 4)
+			animated_light_pixel_5.position = Vector2(4, 0)
+			#animated_light_pixel.rotation = PI/6
+			#animated_light_pixel_2.rotation = PI/6
+			#animated_light_pixel_3.rotation = PI/6
+			#animated_light_pixel_4.rotation = PI/6
+			#animated_light_pixel_5.rotation = PI/6
+			animated_light_pixel.visible = true
+			animated_light_pixel_2.visible = true
+			animated_light_pixel_3.visible = true
+			animated_light_pixel_4.visible = true
+			animated_light_pixel_5.visible = true
+			animated_light_pixel_6.visible = false
+			animated_light_pixel_7.visible = false
+			animated_light_pixel_8.visible = false
+			animated_light_pixel_9.visible = false
+			animated_light_pixel_10.visible = false
+			animated_light_pixel_11.visible = false
+			animated_light_pixel_12.visible = false
+			animated_light_pixel_13.visible = false
+			animated_light_pixel_14.visible = false
+			animated_light_pixel_15.visible = false
+			animated_light_pixel_16.visible = false
+		elif animated_sprite_2d.frame == 5:
+			animated_light_pixel.position = Vector2(-2, -3)
+			animated_light_pixel_2.position = Vector2(-2, -2)
+			animated_light_pixel_3.position = Vector2(-3, -1)
+			animated_light_pixel_4.position = Vector2(0, 4)
+			animated_light_pixel_5.position = Vector2(4, -3)
+			animated_light_pixel.visible = true
+			animated_light_pixel_2.visible = true
+			animated_light_pixel_3.visible = true
+			animated_light_pixel_4.visible = true
+			animated_light_pixel_5.visible = true
+			animated_light_pixel_6.visible = false
+			animated_light_pixel_7.visible = false
+			animated_light_pixel_8.visible = false
+			animated_light_pixel_9.visible = false
+			animated_light_pixel_10.visible = false
+			animated_light_pixel_11.visible = false
+			animated_light_pixel_12.visible = false
+			animated_light_pixel_13.visible = false
+			animated_light_pixel_14.visible = false
+			animated_light_pixel_15.visible = false
+			animated_light_pixel_16.visible = false
+		elif animated_sprite_2d.frame == 6:
+			animated_light_pixel.position = Vector2(-2, 0)
+			animated_light_pixel_2.position = Vector2(-2, -1)
+			animated_light_pixel_3.position = Vector2(-2, -2)
+			animated_light_pixel_4.position = Vector2(2, 3)
+			animated_light_pixel_5.position = Vector2(2, -5)
+			animated_light_pixel.visible = true
+			animated_light_pixel_2.visible = true
+			animated_light_pixel_3.visible = true
+			animated_light_pixel_4.visible = true
+			animated_light_pixel_5.visible = true
+			animated_light_pixel_6.visible = false
+			animated_light_pixel_7.visible = false
+			animated_light_pixel_8.visible = false
+			animated_light_pixel_9.visible = false
+			animated_light_pixel_10.visible = false
+			animated_light_pixel_11.visible = false
+			animated_light_pixel_12.visible = false
+			animated_light_pixel_13.visible = false
+			animated_light_pixel_14.visible = false
+			animated_light_pixel_15.visible = false
+			animated_light_pixel_16.visible = false
+		elif animated_sprite_2d.frame == 7:
+			animated_light_pixel.position = Vector2(-3, 0)
+			animated_light_pixel_2.position = Vector2(-2, 1)
+			animated_light_pixel_3.position = Vector2(-2, 2)
+			animated_light_pixel_4.position = Vector2(4, 2)
+			animated_light_pixel_5.position = Vector2(0, -5)
+			animated_light_pixel.visible = true
+			animated_light_pixel_2.visible = true
+			animated_light_pixel_3.visible = true
+			animated_light_pixel_4.visible = true
+			animated_light_pixel_5.visible = true
+			animated_light_pixel_6.visible = false
+			animated_light_pixel_7.visible = false
+			animated_light_pixel_8.visible = false
+			animated_light_pixel_9.visible = false
+			animated_light_pixel_10.visible = false
+			animated_light_pixel_11.visible = false
+			animated_light_pixel_12.visible = false
+			animated_light_pixel_13.visible = false
+			animated_light_pixel_14.visible = false
+			animated_light_pixel_15.visible = false
+			animated_light_pixel_16.visible = false
+		elif animated_sprite_2d.frame == 8:
+			animated_light_pixel.position = Vector2(-3, 1)
+			animated_light_pixel_2.position = Vector2(-2, 1)
+			animated_light_pixel_3.position = Vector2(-1, 2)
+			animated_light_pixel_4.position = Vector2(4, -1)
+			animated_light_pixel_5.position = Vector2(-3, -5)
+			animated_light_pixel.visible = true
+			animated_light_pixel_2.visible = true
+			animated_light_pixel_3.visible = true
+			animated_light_pixel_4.visible = true
+			animated_light_pixel_5.visible = true
+			animated_light_pixel_6.visible = false
+			animated_light_pixel_7.visible = false
+			animated_light_pixel_8.visible = false
+			animated_light_pixel_9.visible = false
+			animated_light_pixel_10.visible = false
+			animated_light_pixel_11.visible = false
+			animated_light_pixel_12.visible = false
+			animated_light_pixel_13.visible = false
+			animated_light_pixel_14.visible = false
+			animated_light_pixel_15.visible = false
+			animated_light_pixel_16.visible = false
+		elif animated_sprite_2d.frame == 9:
+			animated_light_pixel.position = Vector2(-2, 1)
+			animated_light_pixel_2.position = Vector2(-1, 1)
+			animated_light_pixel_3.position = Vector2(0, 1)
+			animated_light_pixel_4.position = Vector2(3, -3)
+			animated_light_pixel_5.position = Vector2(-5, -3)
+			animated_light_pixel.visible = true
+			animated_light_pixel_2.visible = true
+			animated_light_pixel_3.visible = true
+			animated_light_pixel_4.visible = true
+			animated_light_pixel_5.visible = true
+			animated_light_pixel_6.visible = false
+			animated_light_pixel_7.visible = false
+			animated_light_pixel_8.visible = false
+			animated_light_pixel_9.visible = false
+			animated_light_pixel_10.visible = false
+			animated_light_pixel_11.visible = false
+			animated_light_pixel_12.visible = false
+			animated_light_pixel_13.visible = false
+			animated_light_pixel_14.visible = false
+			animated_light_pixel_15.visible = false
+			animated_light_pixel_16.visible = false
+		elif animated_sprite_2d.frame == 10:
+			animated_light_pixel.position = Vector2(0, 2)
+			animated_light_pixel_2.position = Vector2(1, 1)
+			animated_light_pixel_3.position = Vector2(2, 1)
+			animated_light_pixel_4.position = Vector2(2, -5)
+			animated_light_pixel_5.position = Vector2(-5, -1)
+			animated_light_pixel.visible = true
+			animated_light_pixel_2.visible = true
+			animated_light_pixel_3.visible = true
+			animated_light_pixel_4.visible = true
+			animated_light_pixel_5.visible = true
+			animated_light_pixel_6.visible = false
+			animated_light_pixel_7.visible = false
+			animated_light_pixel_8.visible = false
+			animated_light_pixel_9.visible = false
+			animated_light_pixel_10.visible = false
+			animated_light_pixel_11.visible = false
+			animated_light_pixel_12.visible = false
+			animated_light_pixel_13.visible = false
+			animated_light_pixel_14.visible = false
+			animated_light_pixel_15.visible = false
+			animated_light_pixel_16.visible = false
+		elif animated_sprite_2d.frame == 11:
+			animated_light_pixel.position = Vector2(1, 2)
+			animated_light_pixel_2.position = Vector2(1, 1)
+			animated_light_pixel_3.position = Vector2(2, 0)
+			animated_light_pixel_4.position = Vector2(-1, -5)
+			animated_light_pixel_5.position = Vector2(-5, 2)
+			animated_light_pixel.visible = true
+			animated_light_pixel_2.visible = true
+			animated_light_pixel_3.visible = true
+			animated_light_pixel_4.visible = true
+			animated_light_pixel_5.visible = true
+			animated_light_pixel_6.visible = false
+			animated_light_pixel_7.visible = false
+			animated_light_pixel_8.visible = false
+			animated_light_pixel_9.visible = false
+			animated_light_pixel_10.visible = false
+			animated_light_pixel_11.visible = false
+			animated_light_pixel_12.visible = false
+			animated_light_pixel_13.visible = false
+			animated_light_pixel_14.visible = false
+			animated_light_pixel_15.visible = false
+			animated_light_pixel_16.visible = false
+	
 	## Angle between the player and turret's center relative to x-axis
 	var angle_with_player: float = global_position.angle_to_point(Global.player_global_position)
 	
@@ -38,7 +474,7 @@ func _process(_delta: float) -> void:
 	var angle_max: float
 	
 	# Assignment of the minumum and maximum sightcone angles for each frame
-	if animated_sprite_2d.animation == "shoot" or animated_sprite_2d.animation == "shoot_1" or animated_sprite_2d.animation == "shoot_2":
+	if animated_sprite_2d.animation == "shoot":
 		if animated_sprite_2d.frame == 0:
 			muzzle.position = Vector2(-14, 0)
 			muzzle.rotation = PI
@@ -113,13 +549,9 @@ func _process(_delta: float) -> void:
 		## track until player is in sightcone
 		if shoot_timer.is_stopped():
 			if angle_with_player < angle_min:
-				#animated_sprite_2d.play("shoot")
-				if anticlockwise_timer.is_stopped():
-					anticlockwise_timer.start()
+				animated_sprite_2d.play("shoot")
 			elif angle_with_player > angle_max:
-				#animated_sprite_2d.play_backwards("shoot")
-				if clockwise_timer.is_stopped():
-					clockwise_timer.start()
+				animated_sprite_2d.play_backwards("shoot")
 			else:
 				shoot_timer.start()
 				var bullet_path: PackedScene = load("res://Bullet/bullet_ts.tscn")
@@ -127,21 +559,13 @@ func _process(_delta: float) -> void:
 				owner.add_child(bullet)
 				bullet.position = muzzle.global_position
 				bullet.rotation = muzzle.global_rotation
-				#animated_sprite_2d.pause()
-				#anticlockwise_timer.stop()
-				#clockwise_timer.stop()
+				animated_sprite_2d.pause()
 
 
 ## Activate turret when fully visible
 func _on_visible_on_screen_notifier_2d_screen_entered() -> void:
-	if animated_sprite_2d.animation == "idle":
-		if animated_sprite_2d.frame == 0:
-			animated_sprite_2d.play("activate")
-		elif animated_sprite_2d.frame == 1 or animated_sprite_2d.frame == 3:
-			animated_sprite_2d.play("activate_1")
-		else:
-			animated_sprite_2d.play("activate_2")
-	visible_on_screen_notifier_2d.visible = false
+	animated_sprite_2d.play("activate")
+	
 
 ## Deactivate turret just before it reaches left edge of screen
 func _on_visible_on_screen_notifier_2d_2_screen_exited() -> void:
@@ -151,15 +575,7 @@ func _on_visible_on_screen_notifier_2d_2_screen_exited() -> void:
 ## Start the 'shoot' animation once turret has activated
 func _on_animated_sprite_2d_animation_finished() -> void:
 	if animated_sprite_2d.animation == "activate":
-		#animated_sprite_2d.play("shoot_1")
-		animated_sprite_2d.animation = "shoot_1"
-	elif animated_sprite_2d.animation == "activate_1":
-		#animated_sprite_2d.play("shoot_2")
-		animated_sprite_2d.animation = "shoot_2"
-	elif animated_sprite_2d.animation == "activate_2":
-		#animated_sprite_2d.play("shoot")
-		animated_sprite_2d.animation = "shoot"
-	animated_sprite_2d.frame = 0
+		animated_sprite_2d.play("shoot")
 
 
 ## Triggers turret destruction when hit by player bullet
@@ -169,36 +585,9 @@ func _on_area_entered(area: Area2D) -> void:
 		set_deferred("monitoring", false)
 		animated_sprite_2d.play("explode")
 		death_explosion_sfx.play()
+		Global.score += 300
 
 
 ## Remove turret after explosion
 func _on_death_explosion_sfx_finished() -> void:
 	queue_free()
-
-
-func _on_anticlockwise_timer_timeout() -> void:
-	var current_frame: int = animated_sprite_2d.get_frame()
-	if animated_sprite_2d.animation == "shoot":
-		animated_sprite_2d.animation = "shoot_1"
-	elif animated_sprite_2d.animation == "shoot_1":
-		animated_sprite_2d.animation = "shoot_2"
-	elif animated_sprite_2d.animation == "shoot_2":
-		animated_sprite_2d.animation = "shoot"
-	if shoot_timer.is_stopped():
-		animated_sprite_2d.set_frame_and_progress(current_frame + 1, 0.0)
-	else:
-		animated_sprite_2d.set_frame_and_progress(current_frame, 0.0)
-
-
-func _on_clockwise_timer_timeout() -> void:
-	var current_frame: int = animated_sprite_2d.get_frame()
-	if animated_sprite_2d.animation == "shoot":
-		animated_sprite_2d.animation = "shoot_1"
-	elif animated_sprite_2d.animation == "shoot_1":
-		animated_sprite_2d.animation = "shoot_2"
-	elif animated_sprite_2d.animation == "shoot_2":
-		animated_sprite_2d.animation = "shoot"
-	if shoot_timer.is_stopped():
-		animated_sprite_2d.set_frame_and_progress(current_frame + 1, 0.0)
-	else:
-		animated_sprite_2d.set_frame_and_progress(current_frame, 0.0)

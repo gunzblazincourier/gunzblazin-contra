@@ -58,11 +58,14 @@ func _process(delta: float) -> void:
 			is_option_selected = true
 		
 		# Proceed to next scene
-		# NOTE: Not implemented; presently only prints basic message
 		if is_option_selected == true:
 			if transition_duration_timer.is_stopped() and not title_music.playing:
 				option_flashing_timer.one_shot = true
-				print("BEGIN")
+				
+				# Stored in variable and printed to prevent 'return value
+				# discarded' error
+				var er: Error = get_tree().change_scene_to_file("res://Title/intermission.tscn")
+				print(er)
 	
 	# Title screen sliding right-to-left
 	if position.x > 0:
@@ -87,7 +90,7 @@ func _process(delta: float) -> void:
 
 
 ## Selected option flashes by toggling visibility of the text upon timeout
-func _on_timer_2_timeout() -> void:
+func _on_option_flashing_timer_timeout() -> void:
 	if cursor.position == Vector2(35, 166):
 		if player_1_text.visible == false:
 			player_1_text.visible = true

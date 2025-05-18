@@ -1,0 +1,120 @@
+[gd_scene load_steps=5 format=3 uid="uid://8qpao20tr3bg"]
+
+[ext_resource type="Texture2D" uid="uid://bhiujqxlfrlck" path="res://Title/StageBase.png" id="1_c6fi7"]
+[ext_resource type="Script" uid="uid://cimu8hw85jcab" path="res://Title/intermission.gd" id="1_gy4o2"]
+[ext_resource type="Texture2D" uid="uid://d4e43wga51c7e" path="res://Title/Contra_US_intermission.png" id="2_gy4o2"]
+[ext_resource type="FontFile" uid="uid://qpqqiilsm86c" path="res://nintendo-nes-font.otf" id="3_r8s1g"]
+
+[node name="Intermission" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_gy4o2")
+
+[node name="Base" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 256.0
+offset_bottom = 240.0
+texture = ExtResource("1_c6fi7")
+
+[node name="Base2" type="TextureRect" parent="."]
+visible = false
+layout_mode = 0
+offset_right = 256.0
+offset_bottom = 240.0
+texture = ExtResource("2_gy4o2")
+
+[node name="1P" type="Label" parent="."]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 32.0
+offset_right = 32.0
+offset_bottom = 40.0
+theme_override_fonts/font = ExtResource("3_r8s1g")
+theme_override_font_sizes/font_size = 8
+text = "1P"
+
+[node name="Score" type="Label" parent="."]
+layout_mode = 0
+offset_left = 88.0
+offset_top = 32.0
+offset_right = 96.0
+offset_bottom = 40.0
+theme_override_fonts/font = ExtResource("3_r8s1g")
+theme_override_font_sizes/font_size = 8
+text = "0"
+
+[node name="Rest" type="Label" parent="."]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 48.0
+offset_right = 48.0
+offset_bottom = 56.0
+theme_override_fonts/font = ExtResource("3_r8s1g")
+theme_override_font_sizes/font_size = 8
+text = "REST"
+
+[node name="Life" type="Label" parent="."]
+layout_mode = 0
+offset_left = 64.0
+offset_top = 48.0
+offset_right = 72.0
+offset_bottom = 56.0
+theme_override_fonts/font = ExtResource("3_r8s1g")
+theme_override_font_sizes/font_size = 8
+text = "3"
+
+[node name="HI" type="Label" parent="."]
+layout_mode = 0
+offset_left = 80.0
+offset_top = 72.0
+offset_right = 96.0
+offset_bottom = 80.0
+theme_override_fonts/font = ExtResource("3_r8s1g")
+theme_override_font_sizes/font_size = 8
+text = "HI"
+
+[node name="HighScore" type="Label" parent="."]
+layout_mode = 0
+offset_left = 120.0
+offset_top = 72.0
+offset_right = 160.0
+offset_bottom = 80.0
+theme_override_fonts/font = ExtResource("3_r8s1g")
+theme_override_font_sizes/font_size = 8
+text = "20000"
+
+[node name="StageNumber" type="Label" parent="."]
+layout_mode = 0
+offset_left = 96.0
+offset_top = 128.0
+offset_right = 208.0
+offset_bottom = 136.0
+theme_override_fonts/font = ExtResource("3_r8s1g")
+theme_override_font_sizes/font_size = 8
+text = "STAGE 1"
+
+[node name="StageName" type="Label" parent="."]
+layout_mode = 0
+offset_left = 95.0
+offset_top = 144.0
+offset_right = 207.0
+offset_bottom = 152.0
+theme_override_fonts/font = ExtResource("3_r8s1g")
+theme_override_font_sizes/font_size = 8
+text = "JUNGLE"
+
+[node name="LabelFlashingTimer" type="Timer" parent="."]
+wait_time = 0.3
+autostart = true
+
+[node name="ScreenTimer" type="Timer" parent="."]
+wait_time = 3.5
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="LabelFlashingTimer" to="." method="_on_label_flashing_timer_timeout"]
+[connection signal="timeout" from="ScreenTimer" to="." method="_on_screen_timer_timeout"]

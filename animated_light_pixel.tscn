@@ -18,9 +18,6 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": ExtResource("2_wyidm")
-}, {
-"duration": 1.0,
-"texture": ExtResource("1_or3l2")
 }],
 "loop": true,
 "name": &"default",
@@ -30,3 +27,5 @@ animations = [{
 [node name="AnimatedLightPixel" type="AnimatedSprite2D"]
 sprite_frames = SubResource("SpriteFrames_ojqys")
 autoplay = "default"
+frame_progress = 0.470168
+centered = false

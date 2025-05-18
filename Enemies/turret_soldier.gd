@@ -125,6 +125,7 @@ func _on_timer_timeout() -> void:
 func _on_area_entered(area: Area2D) -> void:
 	if area.is_in_group("bullet"):
 		is_dead = true
+		Global.score += 500
 
 
 ## Remove soldier when explosion sound is finished playing

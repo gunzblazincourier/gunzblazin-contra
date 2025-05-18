@@ -56,6 +56,7 @@ func _on_area_entered(area: Area2D) -> void:
 		set_deferred("monitorable", false)
 		set_deferred("monitoring", false)
 		visible = false
+		Global.score += 1000
 
 ## Remove the pickup from level after pickup sound finishes playing
 func _on_audio_stream_player_2d_finished() -> void:

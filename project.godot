@@ -11,13 +11,14 @@ config_version=5
 [application]
 
 config/name="Contra"
-run/main_scene="res://main.tscn"
+run/main_scene="uid://oim1a676pe5l"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
 
 [autoload]
 
 Global="*res://global.gd"
+BackgroundMusic="*res://Levels/background_music.tscn"
 
 [debug]
 
@@ -173,6 +174,5 @@ common/physics_ticks_per_second=144
 textures/canvas_textures/default_texture_filter=3
 viewport/hdr_2d=true
 anti_aliasing/quality/msaa_2d=3
-environment/defaults/default_clear_color=Color(0, 0, 0, 1)
 textures/stretch/scale_mode="fractional"
 textures/stretch/mode="disabled"
