@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://dpbl0nsk3itn7"]
+[gd_scene load_steps=6 format=3 uid="uid://dpbl0nsk3itn7"]
 
 [ext_resource type="Script" uid="uid://cgj7lbn2skd7v" path="res://Title/game_over.gd" id="1_0tr3g"]
 [ext_resource type="Texture2D" uid="uid://bhiujqxlfrlck" path="res://Title/StageBase.png" id="2_7ab0i"]
+[ext_resource type="Texture2D" uid="uid://b8igsuq2f16cr" path="res://Title/Cursor.png" id="4_7ab0i"]
 [ext_resource type="FontFile" uid="uid://qpqqiilsm86c" path="res://nintendo-nes-font.otf" id="4_o0hqf"]
 [ext_resource type="AudioStream" uid="uid://na4mqguptnpj" path="res://Sounds/GameOver.wav" id="4_phcvx"]
 
@@ -116,12 +117,19 @@ text = "CONTINUE"
 [node name="End" type="Label" parent="."]
 layout_mode = 0
 offset_left = 96.0
-offset_top = 181.0
+offset_top = 183.0
 offset_right = 120.0
-offset_bottom = 189.0
+offset_bottom = 191.0
 theme_override_fonts/font = ExtResource("4_o0hqf")
 theme_override_font_sizes/font_size = 8
 text = "END"
+
+[node name="Cursor" type="TextureRect" parent="."]
+offset_left = 72.0
+offset_top = 166.0
+offset_right = 90.0
+offset_bottom = 178.0
+texture = ExtResource("4_7ab0i")
 
 [node name="LabelFlashingTimer" type="Timer" parent="."]
 wait_time = 0.3

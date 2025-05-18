@@ -36,7 +36,6 @@ offset_bottom = 193.0
 texture = ExtResource("3_toehp")
 
 [node name="Cursor" type="TextureRect" parent="."]
-visible = false
 layout_mode = 0
 offset_left = 35.0
 offset_top = 166.0
