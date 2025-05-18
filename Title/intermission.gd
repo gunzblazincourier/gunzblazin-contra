@@ -2,10 +2,12 @@ extends Control
 
 @onready var score: Label = $Score
 @onready var high_score: Label = $HighScore
+@onready var life: Label = $Life
 
 
 func _ready() -> void:
 	score.text = str(Global.score)
+	life.text = str(Global.lives + 1)
 
 
 func _on_label_flashing_timer_timeout() -> void:

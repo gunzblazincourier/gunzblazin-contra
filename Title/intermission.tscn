@@ -47,15 +47,25 @@ theme_override_fonts/font = ExtResource("3_r8s1g")
 theme_override_font_sizes/font_size = 8
 text = "0"
 
-[node name="Lives" type="Label" parent="."]
+[node name="Rest" type="Label" parent="."]
 layout_mode = 0
 offset_left = 16.0
 offset_top = 48.0
-offset_right = 128.0
+offset_right = 48.0
 offset_bottom = 56.0
 theme_override_fonts/font = ExtResource("3_r8s1g")
 theme_override_font_sizes/font_size = 8
-text = "REST  3"
+text = "REST"
+
+[node name="Life" type="Label" parent="."]
+layout_mode = 0
+offset_left = 64.0
+offset_top = 48.0
+offset_right = 72.0
+offset_bottom = 56.0
+theme_override_fonts/font = ExtResource("3_r8s1g")
+theme_override_font_sizes/font_size = 8
+text = "3"
 
 [node name="HI" type="Label" parent="."]
 layout_mode = 0

@@ -18,7 +18,7 @@ enum Weapons {R, M, S, F, L}
 ## Current weapon of the player
 var weapon: Weapons
 
-## Player's lives
+## Player's lives (0 lives means last life; -1 is game over)
 var lives: int
 
 ## Left boundary's position
@@ -36,7 +36,7 @@ func _ready() -> void:
 	player_sprite_direction = 1
 	camera_center_position = Vector2(-91, -16)
 	weapon = Weapons.R
-	lives = 3
+	lives = 2
 	left_boundary_position = Vector2.ZERO
 	score = 0
 

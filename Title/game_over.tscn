@@ -1,8 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://dpbl0nsk3itn7"]
+[gd_scene load_steps=4 format=3 uid="uid://dpbl0nsk3itn7"]
 
 [ext_resource type="Script" uid="uid://cimu8hw85jcab" path="res://Title/intermission.gd" id="1_phcvx"]
 [ext_resource type="Texture2D" uid="uid://bhiujqxlfrlck" path="res://Title/StageBase.png" id="2_7ab0i"]
-[ext_resource type="Texture2D" uid="uid://d4e43wga51c7e" path="res://Title/Contra_US_intermission.png" id="3_q6b5i"]
 [ext_resource type="FontFile" uid="uid://qpqqiilsm86c" path="res://nintendo-nes-font.otf" id="4_o0hqf"]
 
 [node name="Game Over" type="Control"]
@@ -19,13 +18,6 @@ layout_mode = 0
 offset_right = 256.0
 offset_bottom = 240.0
 texture = ExtResource("2_7ab0i")
-
-[node name="Base2" type="TextureRect" parent="."]
-visible = false
-layout_mode = 0
-offset_right = 256.0
-offset_bottom = 240.0
-texture = ExtResource("3_q6b5i")
 
 [node name="1P" type="Label" parent="."]
 layout_mode = 0
