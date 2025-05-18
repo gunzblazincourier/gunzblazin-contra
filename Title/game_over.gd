@@ -22,6 +22,7 @@ func _process(_delta: float) -> void:
 	var er: Error
 	if Input.is_action_just_pressed("start"):
 		if cursor.position.y == 166:
+			Global.lives = 1
 			er = get_tree().change_scene_to_file("res://Title/intermission.tscn")
 		else:
 			er = get_tree().change_scene_to_file("res://Title/title.tscn")
