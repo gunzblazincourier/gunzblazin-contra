@@ -103,6 +103,26 @@ theme_override_fonts/font = ExtResource("4_o0hqf")
 theme_override_font_sizes/font_size = 8
 text = "GAME OVER"
 
+[node name="Continue" type="Label" parent="."]
+layout_mode = 0
+offset_left = 96.0
+offset_top = 167.0
+offset_right = 168.0
+offset_bottom = 175.0
+theme_override_fonts/font = ExtResource("4_o0hqf")
+theme_override_font_sizes/font_size = 8
+text = "CONTINUE"
+
+[node name="End" type="Label" parent="."]
+layout_mode = 0
+offset_left = 96.0
+offset_top = 181.0
+offset_right = 120.0
+offset_bottom = 189.0
+theme_override_fonts/font = ExtResource("4_o0hqf")
+theme_override_font_sizes/font_size = 8
+text = "END"
+
 [node name="LabelFlashingTimer" type="Timer" parent="."]
 wait_time = 0.3
 autostart = true
