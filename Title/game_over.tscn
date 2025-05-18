@@ -106,5 +106,7 @@ wait_time = 3.5
 one_shot = true
 autostart = true
 
+[node name="Sprite2D" type="Sprite2D" parent="."]
+
 [connection signal="timeout" from="LabelFlashingTimer" to="." method="_on_label_flashing_timer_timeout"]
 [connection signal="timeout" from="ScreenTimer" to="." method="_on_screen_timer_timeout"]

@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://gcnk5s6f280x"]
+
+[ext_resource type="AudioStream" uid="uid://bq1iflp6h2b5m" path="res://Levels/2 - Jungle Hangar (Stages 1 7).mp3" id="1_oddit"]
+
+[node name="BackgroundMusic" type="AudioStreamPlayer2D"]
+stream = ExtResource("1_oddit")

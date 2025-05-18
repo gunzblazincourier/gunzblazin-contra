@@ -27,16 +27,21 @@ var left_boundary_position: Vector2
 ## Score
 var score: int
 
+## Background music for levels
+@onready var background_music: AudioStreamPlayer2D = $"/root/BackgroundMusic"
+
 
 func _ready() -> void:
 	player_global_position = Vector2.ZERO
 	player_sprite_direction = 1
 	camera_center_position = Vector2(-91, -16)
 	weapon = Weapons.R
-	lives = 0
+	lives = 3
 	left_boundary_position = Vector2.ZERO
 	score = 0
 
 
-#func _process(_delta: float) -> void:
+func _process(_delta: float) -> void:
+	if get_tree().current_scene == preload("res://Title/title.tscn"):
+		print("hi")
 	#print(score)
