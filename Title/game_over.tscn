@@ -40,6 +40,7 @@ theme_override_font_sizes/font_size = 8
 text = "0"
 
 [node name="Lives" type="Label" parent="."]
+visible = false
 layout_mode = 0
 offset_left = 16.0
 offset_top = 48.0
@@ -70,6 +71,7 @@ theme_override_font_sizes/font_size = 8
 text = "20000"
 
 [node name="StageNumber" type="Label" parent="."]
+visible = false
 layout_mode = 0
 offset_left = 96.0
 offset_top = 128.0
@@ -80,6 +82,7 @@ theme_override_font_sizes/font_size = 8
 text = "STAGE 1"
 
 [node name="StageName" type="Label" parent="."]
+visible = false
 layout_mode = 0
 offset_left = 95.0
 offset_top = 144.0
@@ -88,6 +91,16 @@ offset_bottom = 152.0
 theme_override_fonts/font = ExtResource("4_o0hqf")
 theme_override_font_sizes/font_size = 8
 text = "JUNGLE"
+
+[node name="GameOver" type="Label" parent="."]
+layout_mode = 0
+offset_left = 81.0
+offset_top = 135.0
+offset_right = 153.0
+offset_bottom = 143.0
+theme_override_fonts/font = ExtResource("4_o0hqf")
+theme_override_font_sizes/font_size = 8
+text = "GAME OVER"
 
 [node name="LabelFlashingTimer" type="Timer" parent="."]
 wait_time = 0.3
