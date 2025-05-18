@@ -3,6 +3,10 @@ extends Node
 ##
 ## Contains all global variables
 
+## Default amount of lives provided to player upon starting game or
+## continuing from game over
+const DEFAULT_LIVES: int = 2
+
 ## Global position of player
 var player_global_position: Vector2
 
