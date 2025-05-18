@@ -92,6 +92,7 @@ func _ready() -> void:
 
 
 func _process(_delta: float) -> void:
+	print(ray_cast_2d.get_collision_mask_value(4))
 	## 'Vanish' player when he runs out of lives
 	if Global.lives < 0:
 		visible = false

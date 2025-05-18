@@ -125,6 +125,7 @@ theme_override_font_sizes/font_size = 8
 text = "END"
 
 [node name="Cursor" type="TextureRect" parent="."]
+layout_mode = 0
 offset_left = 72.0
 offset_top = 166.0
 offset_right = 90.0

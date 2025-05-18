@@ -70,7 +70,6 @@ gdscript/warnings/function_used_as_property=2
 
 window/size/viewport_width=256
 window/size/viewport_height=240
-window/size/mode=4
 window/stretch/mode="viewport"
 window/stretch/scale_mode="integer"
 
@@ -164,6 +163,7 @@ select={
 2d_physics/layer_4="Tilemap"
 2d_physics/layer_5="Boundaries"
 2d_physics/layer_6="Objects"
+2d_physics/layer_7="Water"
 
 [physics]
 
