@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://dpbl0nsk3itn7"]
 
-[ext_resource type="Script" uid="uid://cimu8hw85jcab" path="res://Title/intermission.gd" id="1_phcvx"]
+[ext_resource type="Script" uid="uid://cgj7lbn2skd7v" path="res://Title/game_over.gd" id="1_0tr3g"]
 [ext_resource type="Texture2D" uid="uid://bhiujqxlfrlck" path="res://Title/StageBase.png" id="2_7ab0i"]
 [ext_resource type="FontFile" uid="uid://qpqqiilsm86c" path="res://nintendo-nes-font.otf" id="4_o0hqf"]
 
@@ -11,7 +11,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_phcvx")
+script = ExtResource("1_0tr3g")
 
 [node name="Base" type="TextureRect" parent="."]
 layout_mode = 0
@@ -106,12 +106,6 @@ text = "GAME OVER"
 wait_time = 0.3
 autostart = true
 
-[node name="ScreenTimer" type="Timer" parent="."]
-wait_time = 3.5
-one_shot = true
-autostart = true
-
 [node name="Sprite2D" type="Sprite2D" parent="."]
 
 [connection signal="timeout" from="LabelFlashingTimer" to="." method="_on_label_flashing_timer_timeout"]
-[connection signal="timeout" from="ScreenTimer" to="." method="_on_screen_timer_timeout"]

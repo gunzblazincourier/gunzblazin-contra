@@ -36,7 +36,7 @@ func _ready() -> void:
 	player_sprite_direction = 1
 	camera_center_position = Vector2(-91, -16)
 	weapon = Weapons.R
-	lives = 2
+	lives = 0
 	left_boundary_position = Vector2.ZERO
 	score = 0
 
