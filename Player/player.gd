@@ -18,6 +18,7 @@ var state: States					## Current state from the 'States' enum
 var sprite_direction: float			## Current sprite direction
 var death_direction: float			## Current death direction
 var is_jump_pressed: bool			## Checks whether player has pressed 'Jump'
+var is_above_water: bool			## Whether player is above water
 
 # Declared and defined in beginning instead of while shooting (see in _process())
 # in order to allow previously fired laser to despawn when new is fired
@@ -40,7 +41,6 @@ var bullet_l: Area2D
 @onready var machinegun_sfx: AudioStreamPlayer2D = $MachinegunSFX
 ## Plays the Spreadgun firing sound effect
 @onready var spreadgun_sfx: AudioStreamPlayer2D = $SpreadgunSFX
-
 
 ## Plays the Lasergun firing sound effect
 @onready var lasergun_sfx: AudioStreamPlayer2D = $LasergunSFX
@@ -87,12 +87,13 @@ func _ready() -> void:
 	sprite_direction = 1.0
 	death_direction = -1.0
 	is_jump_pressed = true
+	is_above_water = false
 	bullet_l_path = load("res://Bullet/bullet_l.tscn")
 	bullet_l = bullet_l_path.instantiate()
 
 
 func _process(_delta: float) -> void:
-	print(ray_cast_2d.get_collision_mask_value(4))
+	#print(ray_cast_2d.is_colliding())
 	## 'Vanish' player when he runs out of lives
 	if Global.lives < 0:
 		visible = false

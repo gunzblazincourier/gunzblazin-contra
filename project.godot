@@ -86,6 +86,7 @@ enemy_bullet=""
 killbox=""
 player=""
 object=""
+water=""
 
 [input]
 

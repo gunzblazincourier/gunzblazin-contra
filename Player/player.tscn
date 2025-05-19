@@ -5539,7 +5539,7 @@ stream = SubResource("AudioStreamMP3_iyprq")
 [node name="RayCast2D" type="RayCast2D" parent="."]
 position = Vector2(0, 32)
 target_position = Vector2(0, 500)
-collision_mask = 8
+collision_mask = 72
 
 [node name="ShootTimer" type="Timer" parent="."]
 wait_time = 0.188
@@ -5578,7 +5578,7 @@ visible = false
 texture = ExtResource("3_l2ago")
 
 [node name="Hitbox" type="Area2D" parent="." groups=["player"]]
-collision_mask = 22
+collision_mask = 86
 monitoring = false
 monitorable = false
 
