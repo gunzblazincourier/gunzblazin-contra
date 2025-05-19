@@ -41,17 +41,6 @@ theme_override_fonts/font = ExtResource("4_o0hqf")
 theme_override_font_sizes/font_size = 8
 text = "0"
 
-[node name="Lives" type="Label" parent="."]
-visible = false
-layout_mode = 0
-offset_left = 16.0
-offset_top = 48.0
-offset_right = 128.0
-offset_bottom = 56.0
-theme_override_fonts/font = ExtResource("4_o0hqf")
-theme_override_font_sizes/font_size = 8
-text = "REST  3"
-
 [node name="HI" type="Label" parent="."]
 layout_mode = 0
 offset_left = 80.0
@@ -71,28 +60,6 @@ offset_bottom = 80.0
 theme_override_fonts/font = ExtResource("4_o0hqf")
 theme_override_font_sizes/font_size = 8
 text = "20000"
-
-[node name="StageNumber" type="Label" parent="."]
-visible = false
-layout_mode = 0
-offset_left = 96.0
-offset_top = 128.0
-offset_right = 208.0
-offset_bottom = 136.0
-theme_override_fonts/font = ExtResource("4_o0hqf")
-theme_override_font_sizes/font_size = 8
-text = "STAGE 1"
-
-[node name="StageName" type="Label" parent="."]
-visible = false
-layout_mode = 0
-offset_left = 95.0
-offset_top = 144.0
-offset_right = 207.0
-offset_bottom = 152.0
-theme_override_fonts/font = ExtResource("4_o0hqf")
-theme_override_font_sizes/font_size = 8
-text = "JUNGLE"
 
 [node name="GameOver" type="Label" parent="."]
 layout_mode = 0
