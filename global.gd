@@ -45,7 +45,7 @@ func _ready() -> void:
 	score = 0
 
 
-func _process(_delta: float) -> void:
-	if get_tree().current_scene == preload("res://Title/title.tscn"):
-		print("hi")
+#func _process(_delta: float) -> void:
+	#if get_tree().current_scene == preload("res://Title/title.tscn"):
+		#print("hi")
 	#print(score)

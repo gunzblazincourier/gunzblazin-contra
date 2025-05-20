@@ -47,6 +47,7 @@ var bullet_l: Area2D
 
 ## RayCast that extends downward beyond game world to detect surface under player
 @onready var ray_cast_2d: RayCast2D = $RayCast2D
+@onready var ray_cast_2d_2: RayCast2D = $RayCast2D2
 
 ## Controls duration of corresponding SHOOT state
 @onready var shoot_timer: Timer = $ShootTimer
@@ -93,7 +94,7 @@ func _ready() -> void:
 
 
 func _process(_delta: float) -> void:
-	#print(ray_cast_2d.is_colliding())
+	print(ray_cast_2d_2.is_colliding())
 	## 'Vanish' player when he runs out of lives
 	if Global.lives < 0:
 		visible = false

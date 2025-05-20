@@ -5537,9 +5537,10 @@ stream = ExtResource("41_dy65m")
 stream = SubResource("AudioStreamMP3_iyprq")
 
 [node name="RayCast2D" type="RayCast2D" parent="."]
+visible = false
 position = Vector2(0, 32)
 target_position = Vector2(0, 500)
-collision_mask = 72
+collision_mask = 8
 
 [node name="ShootTimer" type="Timer" parent="."]
 wait_time = 0.188
@@ -5585,6 +5586,10 @@ monitorable = false
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 position = Vector2(0.5, 11.5)
 shape = SubResource("RectangleShape2D_tvn1x")
+
+[node name="RayCast2D2" type="RayCast2D" parent="."]
+target_position = Vector2(0, 21)
+collision_mask = 64
 
 [connection signal="timeout" from="FallThroughTimer" to="." method="_on_fall_through_timer_timeout"]
 [connection signal="timeout" from="InvincibilityTimer" to="." method="_on_invincibility_timer_timeout"]
