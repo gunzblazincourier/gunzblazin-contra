@@ -48,7 +48,6 @@ var bullet_l: Area2D
 ## RayCast that extends downward beyond game world to detect surface under player
 @onready var ray_cast_2d: RayCast2D = $RayCast2D
 @onready var ray_cast_2d_2: RayCast2D = $RayCast2D2
-@onready var ray_cast_2d_3: RayCast2D = $RayCast2D3
 
 ## Controls duration of corresponding SHOOT state
 @onready var shoot_timer: Timer = $ShootTimer
@@ -380,12 +379,18 @@ func _physics_process(delta: float) -> void:
 				velocity.x = run_direction * RUN_SPEED
 			else:
 				velocity.x = move_toward(velocity.x, 0, RUN_SPEED)
-		States.DIVE, States.CLIMB, States.SPLASH:
+		States.SPLASH:
+			velocity.x = move_toward(velocity.x, 0, RUN_SPEED)
+			if not is_on_floor():
+				velocity.y += (GRAVITY * 2) * delta
+		#States.CLIMB:
+			#velocity.x = move_toward(velocity.x, 0, RUN_SPEED)
+			#velocity.y -= GRAVITY * delta
+			#if not is_on_floor():
+				#velocity.y += GRAVITY * delta
+		States.DIVE, States.CLIMB:
 			velocity.x = move_toward(velocity.x, 0, RUN_SPEED)
 			#velocity.x = run_direction * RUN_SPEED
-		States.SPLASH:
-			if not is_on_floor():
-				velocity.y += GRAVITY * delta
 	
 	# Godot function for player movement
 	var mas: bool = move_and_slide()
