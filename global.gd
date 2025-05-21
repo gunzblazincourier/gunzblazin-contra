@@ -43,9 +43,3 @@ func _ready() -> void:
 	lives = 0
 	left_boundary_position = Vector2.ZERO
 	score = 0
-
-
-#func _process(_delta: float) -> void:
-	#if get_tree().current_scene == preload("res://Title/title.tscn"):
-		#print("hi")
-	#print(score)
