@@ -16,6 +16,7 @@ extends Control
 ## Update the text on screen with the global score and life values
 func _ready() -> void:
 	score.text = str(Global.score)
+	high_score.text = str(Global.high_score)
 	life.text = str(Global.lives + 1)
 
 

@@ -34,6 +34,9 @@ func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("start"):
 		# Perform respective action based on option selected
 		if cursor.position.y == 166:
+			if Global.score > Global.high_score:
+				Global.high_score = Global.score
+			Global.score = 0
 			Global.lives = Global.DEFAULT_LIVES
 			er = get_tree().change_scene_to_file("res://Title/intermission.tscn")
 		else:

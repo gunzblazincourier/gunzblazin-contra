@@ -28,8 +28,11 @@ var lives: int
 ## Left boundary's position
 var left_boundary_position: Vector2
 
-## Score
+## Player score
 var score: int
+
+## High score
+var high_score: int
 
 ## Background music for levels
 @onready var background_music: AudioStreamPlayer2D = $"/root/BackgroundMusic"
@@ -43,3 +46,4 @@ func _ready() -> void:
 	lives = 0
 	left_boundary_position = Vector2.ZERO
 	score = 0
+	high_score = 20000
