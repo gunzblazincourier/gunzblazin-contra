@@ -1,7 +1,27 @@
-[gd_scene load_steps=4 format=3 uid="uid://dm2t85c5564k8"]
+[gd_scene load_steps=6 format=3 uid="uid://dm2t85c5564k8"]
 
 [ext_resource type="Script" uid="uid://4tg8kl7eo34q" path="res://Bullet/bullet_r.gd" id="1_4n8gp"]
 [ext_resource type="Texture2D" uid="uid://c56x4e8shosjj" path="res://Bullet/R.png" id="1_wjol5"]
+[ext_resource type="Texture2D" uid="uid://6m4j15luli5t" path="res://Bullet/Hit.png" id="3_uwrhu"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_m6eqi"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_wjol5")
+}],
+"loop": false,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_uwrhu")
+}],
+"loop": false,
+"name": &"hit",
+"speed": 10.0
+}]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4n8gp"]
 size = Vector2(3, 3)
@@ -11,16 +31,18 @@ collision_layer = 2
 collision_mask = 36
 script = ExtResource("1_4n8gp")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("1_wjol5")
-offset = Vector2(2.5, 2.5)
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_m6eqi")
+animation = &"hit"
+autoplay = "default"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_4n8gp")
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
-position = Vector2(5.96046e-08, -5.96046e-08)
+position = Vector2(1.49012e-07, 1.78814e-07)
 scale = Vector2(0.3, 0.3)
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

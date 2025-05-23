@@ -1,7 +1,27 @@
-[gd_scene load_steps=4 format=3 uid="uid://ibdtfj1pl677"]
+[gd_scene load_steps=6 format=3 uid="uid://ibdtfj1pl677"]
 
 [ext_resource type="Script" uid="uid://c8b0ytg5rgtvo" path="res://Bullet/bullet_m.gd" id="1_5dtwk"]
 [ext_resource type="Texture2D" uid="uid://dxka0pr6hhb5r" path="res://Bullet/M.png" id="2_2lnfn"]
+[ext_resource type="Texture2D" uid="uid://6m4j15luli5t" path="res://Bullet/Hit.png" id="3_2lnfn"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_5dtwk"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_2lnfn")
+}],
+"loop": false,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_2lnfn")
+}],
+"loop": false,
+"name": &"hit",
+"speed": 10.0
+}]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_5dtwk"]
 radius = 2.0
@@ -11,9 +31,10 @@ collision_layer = 2
 collision_mask = 36
 script = ExtResource("1_5dtwk")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("2_2lnfn")
-offset = Vector2(1.5, 1.5)
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_5dtwk")
+animation = &"hit"
+autoplay = "default"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_5dtwk")
@@ -23,4 +44,5 @@ position = Vector2(2.38419e-07, -2.38419e-07)
 scale = Vector2(0.4, 0.4)
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
