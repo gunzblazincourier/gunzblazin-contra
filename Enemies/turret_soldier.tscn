@@ -89,7 +89,7 @@ size = Vector2(16, 30)
 
 [node name="TurretSoldier" type="Area2D" groups=["enemy"]]
 collision_layer = 4
-collision_mask = 43
+collision_mask = 3
 script = ExtResource("1_hnwc0")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
