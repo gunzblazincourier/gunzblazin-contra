@@ -1,4 +1,4 @@
-[gd_scene load_steps=330 format=4 uid="uid://doa0vkc0fktkh"]
+[gd_scene load_steps=331 format=4 uid="uid://doa0vkc0fktkh"]
 
 [ext_resource type="Script" uid="uid://c0ak0nhauaj7u" path="res://Player/player.gd" id="1_ac1dp"]
 [ext_resource type="Texture2D" uid="uid://7v13jiiro62o" path="res://Player/Bill_Crouch.png" id="2_hdvrd"]
@@ -54,6 +54,7 @@
 [ext_resource type="Texture2D" uid="uid://b4rce5mkktkrv" path="res://Player/WaterBill_ShootDiagonal1.png" id="48_c4i3b"]
 [ext_resource type="Texture2D" uid="uid://b15mlmjjouyjw" path="res://Player/WaterBill_ShootUp0.png" id="49_uvbbp"]
 [ext_resource type="Texture2D" uid="uid://quyebivcyxs4" path="res://Player/WaterBill_ShootUp1.png" id="50_7v2uk"]
+[ext_resource type="AudioStream" uid="uid://bqu6uf36g32cr" path="res://Sounds/Flamegun.wav" id="54_7v2uk"]
 
 [sub_resource type="Animation" id="Animation_tvn1x"]
 length = 0.001
@@ -7268,6 +7269,9 @@ stream = ExtResource("41_dy65m")
 
 [node name="LasergunSFX" type="AudioStreamPlayer2D" parent="."]
 stream = SubResource("AudioStreamMP3_iyprq")
+
+[node name="FlamegunSFX" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("54_7v2uk")
 
 [node name="RayCast2D" type="RayCast2D" parent="."]
 visible = false

@@ -41,9 +41,10 @@ var bullet_l: Area2D
 @onready var machinegun_sfx: AudioStreamPlayer2D = $MachinegunSFX
 ## Plays the Spreadgun firing sound effect
 @onready var spreadgun_sfx: AudioStreamPlayer2D = $SpreadgunSFX
-
 ## Plays the Lasergun firing sound effect
 @onready var lasergun_sfx: AudioStreamPlayer2D = $LasergunSFX
+## Plays the Flamegun firing sound effect
+@onready var flamegun_sfx: AudioStreamPlayer2D = $FlamegunSFX
 
 ## RayCast that extends downward beyond game world to detect surface under player
 @onready var ray_cast_2d: RayCast2D = $RayCast2D
@@ -326,7 +327,7 @@ func _process(_delta: float) -> void:
 				Global.Weapons.F:
 					if Input.is_action_just_pressed("shoot"):
 						shoot_timer.start()
-						regulargun_sfx.play()
+						flamegun_sfx.play()
 						var bullet_f_path: PackedScene = load("res://Bullet/bullet_f.tscn")
 						var bullet_f: Area2D = bullet_f_path.instantiate()
 						spawn_bullet(bullet_f)
