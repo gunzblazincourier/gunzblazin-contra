@@ -1,5 +1,5 @@
 extends Area2D
-## Regulargun bullet
+## Flamegun bullet
 ##
 ## Handles speed, trajectory and removal from scene
 
