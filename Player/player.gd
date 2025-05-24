@@ -438,6 +438,7 @@ func _on_flashing_timer_timeout() -> void:
 
 
 func _on_death_timer_timeout() -> void:
+	Global.weapon = Global.Weapons.R
 	death_direction = 0
 	animation_tree.set("parameters/conditions/death", false)
 	is_jump_pressed = true
