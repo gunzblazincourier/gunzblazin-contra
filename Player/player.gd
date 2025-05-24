@@ -326,13 +326,10 @@ func _process(_delta: float) -> void:
 				Global.Weapons.F:
 					if Input.is_action_just_pressed("shoot"):
 						shoot_timer.start()
+						regulargun_sfx.play()
 						var bullet_f_path: PackedScene = load("res://Bullet/bullet_f.tscn")
 						var bullet_f: Area2D = bullet_f_path.instantiate()
-						
 						spawn_bullet(bullet_f)
-						#bullet_f.rotate(sprite_direction * 1.75*PI)
-						#bullet_f.rotate(sprite_direction * -PI/2)
-						bullet_f.rotate(sprite_direction * -PI/3)
 
 
 func _physics_process(delta: float) -> void:

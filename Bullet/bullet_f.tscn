@@ -1,14 +1,14 @@
-[gd_scene load_steps=6 format=3 uid="uid://dm2t85c5564k8"]
+[gd_scene load_steps=6 format=3 uid="uid://dcb4mk1nuoud"]
 
-[ext_resource type="Script" uid="uid://4tg8kl7eo34q" path="res://Bullet/bullet_r.gd" id="1_4n8gp"]
-[ext_resource type="Texture2D" uid="uid://c56x4e8shosjj" path="res://Bullet/R.png" id="2_uwrhu"]
-[ext_resource type="Texture2D" uid="uid://6m4j15luli5t" path="res://Bullet/Hit.png" id="3_uwrhu"]
+[ext_resource type="Script" uid="uid://4tg8kl7eo34q" path="res://Bullet/bullet_r.gd" id="1_hml0p"]
+[ext_resource type="Texture2D" uid="uid://rrs6oysprfqt" path="res://Bullet/F.png" id="2_hml0p"]
+[ext_resource type="Texture2D" uid="uid://6m4j15luli5t" path="res://Bullet/Hit.png" id="3_i7rgq"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_m6eqi"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("2_uwrhu")
+"texture": ExtResource("2_hml0p")
 }],
 "loop": false,
 "name": &"default",
@@ -16,7 +16,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("3_uwrhu")
+"texture": ExtResource("3_i7rgq")
 }],
 "loop": false,
 "name": &"hit",
@@ -26,10 +26,10 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4n8gp"]
 size = Vector2(3, 3)
 
-[node name="Bullet_R" type="Area2D" groups=["bullet"]]
+[node name="Bullet_F" type="Area2D" groups=["bullet"]]
 collision_layer = 2
 collision_mask = 36
-script = ExtResource("1_4n8gp")
+script = ExtResource("1_hml0p")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_m6eqi")
