@@ -42,6 +42,13 @@ shape = SubResource("RectangleShape2D_4n8gp")
 position = Vector2(1.49012e-07, 1.78814e-07)
 scale = Vector2(0.3, 0.3)
 
+[node name="Timer" type="Timer" parent="."]
+process_callback = 0
+wait_time = 0.69
+one_shot = true
+autostart = true
+
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

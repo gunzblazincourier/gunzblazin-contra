@@ -262,7 +262,7 @@ func _process(_delta: float) -> void:
 			state = States.SPLASH
 	#print(state_machine_state)
 	#print(animation_tree.get("parameters/Jump/blend_position"))
-	print(dive)
+	#print(dive)
 	
 	# Weapon behaviour
 	match state:
@@ -331,6 +331,7 @@ func _process(_delta: float) -> void:
 						var bullet_f_path: PackedScene = load("res://Bullet/bullet_f.tscn")
 						var bullet_f: Area2D = bullet_f_path.instantiate()
 						spawn_bullet(bullet_f)
+						bullet_f.rotate(-PI/3)
 
 
 func _physics_process(delta: float) -> void:

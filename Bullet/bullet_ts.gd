@@ -4,7 +4,7 @@ extends Area2D
 ## Handles speed and trajectory
 
 ## Fixed bullet speed
-const BULLET_SPEED: int = 300
+const BULLET_SPEED: int = 100
 
 
 ## Bullet travels in linear direction, without changing rotation or direction

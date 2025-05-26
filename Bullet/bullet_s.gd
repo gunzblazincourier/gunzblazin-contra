@@ -4,7 +4,7 @@ extends Area2D
 ## Handles speed, trajectory and removal from scene
 
 ## Fixed bullet speed
-const BULLET_SPEED: int = 400
+const BULLET_SPEED: int = 250
 
 
 ## Bullet travels in linear direction, without changing rotation or direction

@@ -4,7 +4,7 @@ extends Area2D
 ## Handles speed, trajectory and removal from scene
 
 ## Fixed bullet speed
-const BULLET_SPEED: int = 400
+const BULLET_SPEED: int = 300
 
 ## Animated sprite
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
