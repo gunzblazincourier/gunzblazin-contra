@@ -43,9 +43,6 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("3_pj8v8")
-}, {
-"duration": 1.0,
 "texture": ExtResource("2_hnwc0")
 }, {
 "duration": 1.0,
@@ -57,9 +54,6 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("3_5nkct")
-}, {
-"duration": 1.0,
 "texture": ExtResource("6_3ai5x")
 }, {
 "duration": 1.0,
@@ -70,9 +64,6 @@ animations = [{
 "speed": 5.0
 }, {
 "frames": [{
-"duration": 1.0,
-"texture": ExtResource("6_5nkct")
-}, {
 "duration": 1.0,
 "texture": ExtResource("4_ctkrr")
 }, {
@@ -94,7 +85,7 @@ script = ExtResource("1_hnwc0")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_pj8v8")
-animation = &"explode"
+animation = &"shoot_up"
 autoplay = "shoot_straight"
 flip_h = true
 
