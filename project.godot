@@ -164,7 +164,7 @@ select={
 2d_physics/layer_3="Enemies"
 2d_physics/layer_4="Tilemap"
 2d_physics/layer_5="Boundaries"
-2d_physics/layer_6="Objects"
+2d_physics/layer_6="LevelProps"
 2d_physics/layer_7="Water"
 
 [physics]
