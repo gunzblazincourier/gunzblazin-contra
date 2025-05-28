@@ -124,7 +124,6 @@ stream = ExtResource("10_4ymml")
 [node name="Pickup" parent="." instance=ExtResource("11_8iicn")]
 process_mode = 4
 visible = false
-pickup_id = 1
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="screen_entered" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_entered"]

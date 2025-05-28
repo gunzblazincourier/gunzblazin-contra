@@ -10,7 +10,7 @@ const PICKUP_SPEED_X: int = 60
 const GRAVITY: int = 350
 
 ## Decides which pickup sprite is displayed and which weapon player receives
-@export var pickup_id: Global.Weapons = Global.Weapons.R
+@export var pickup_id: Global.Weapons = Global.Weapons.M
 
 ## Non-constant vertical speed
 var pickup_speed_y: float

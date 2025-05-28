@@ -117,6 +117,12 @@ starting_camera_position = 834.0
 [node name="Sensor" parent="." instance=ExtResource("4_pdma0")]
 position = Vector2(111, 24)
 
+[node name="Sensor2" parent="." instance=ExtResource("4_pdma0")]
+position = Vector2(1358, 24)
+
+[node name="Pickup" parent="Sensor2" index="4"]
+pickup_id = 2
+
 [node name="Turret" parent="." instance=ExtResource("5_1jijn")]
 position = Vector2(1040, 24)
 
@@ -223,3 +229,6 @@ animation = &"lives_2"
 
 [connection signal="timeout" from="LevelAnimationTimer" to="." method="_on_timer_timeout"]
 [connection signal="timeout" from="GameOverTimer" to="." method="_on_game_over_timer_timeout"]
+
+[editable path="Sensor"]
+[editable path="Sensor2"]
