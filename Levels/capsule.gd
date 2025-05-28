@@ -68,5 +68,4 @@ func _on_area_entered(area: Area2D) -> void:
 
 ## Remove capsule from game when outside camera view
 func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
-	print("gone")
 	queue_free()

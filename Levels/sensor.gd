@@ -11,9 +11,6 @@ var destroyed: bool
 ## explosion
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 
-## Collision shape for the area, here the inside of the sensor
-@onready var collision_shape_2d: CollisionShape2D = $CollisionShape2D
-
 ## Sound for when sensor is destroyed
 @onready var audio_stream_player_2d: AudioStreamPlayer2D = $AudioStreamPlayer2D
 
@@ -29,7 +26,8 @@ func _process(_delta: float) -> void:
 	if destroyed == true:
 		animated_sprite_2d.play("explode")
 		audio_stream_player_2d.play()
-		collision_shape_2d.disabled = true
+		monitorable = false
+		monitoring = false
 		pickup.process_mode = Node.PROCESS_MODE_INHERIT
 		pickup.visible = true
 		destroyed = false
@@ -38,6 +36,8 @@ func _process(_delta: float) -> void:
 ## Default animation starts when FULLY in the camera
 func _on_visible_on_screen_notifier_2d_screen_entered() -> void:
 	animated_sprite_2d.play("default")
+	monitorable = true
+	monitoring = true
 
 
 ## Removes sensor once off-screen
