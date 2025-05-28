@@ -52,7 +52,8 @@ func _physics_process(delta: float) -> void:
 	if Global.camera_center_position.x > starting_camera_position and \
 			should_move == true:
 		visible = true
-		#process_mode = Node.PROCESS_MODE_INHERIT
+		monitorable = true
+		monitoring = true
 		node_2d.rotate(5 * delta)
 		global_position.y = initial_position.y + (sin(node_2d.rotation) * 25)
 		global_position.x += 93 * delta
@@ -67,4 +68,5 @@ func _on_area_entered(area: Area2D) -> void:
 
 ## Remove capsule from game when outside camera view
 func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
+	print("gone")
 	queue_free()
