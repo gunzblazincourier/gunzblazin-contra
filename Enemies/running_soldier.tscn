@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=3 uid="uid://0hbphmpkfm7w"]
+[gd_scene load_steps=49 format=3 uid="uid://0hbphmpkfm7w"]
 
 [ext_resource type="Script" uid="uid://d4ba7gqx6186n" path="res://Enemies/running_soldier.gd" id="1_1cjt1"]
 [ext_resource type="Texture2D" uid="uid://3v2dhudn0fee" path="res://Enemies/RunningSoldier_Death.png" id="2_8tqai"]
@@ -11,6 +11,8 @@
 [ext_resource type="Texture2D" uid="uid://b4gjluxnh1acb" path="res://Enemies/RunningSoldier_Run_4.png" id="8_ihsuw"]
 [ext_resource type="Texture2D" uid="uid://bqrye7j28441" path="res://Enemies/RunningSoldier_Run_5.png" id="9_r5opi"]
 [ext_resource type="PackedScene" uid="uid://biwjlecftaipf" path="res://Explosions/explosion_2.tscn" id="10_iixfa"]
+[ext_resource type="Texture2D" uid="uid://buleicedesh20" path="res://Player/WaterBill_Splash.png" id="11_4hcvb"]
+[ext_resource type="Texture2D" uid="uid://b4nx4y1e7wgpl" path="res://Player/WaterBill_Dive0.png" id="12_ep4ga"]
 
 [sub_resource type="Animation" id="Animation_4hcvb"]
 length = 0.001
@@ -98,6 +100,30 @@ tracks/6/keys = {
 "update": 0,
 "values": [Vector2(8, 13)]
 }
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("RayCast2D2:enabled")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("RayCast2D2:position")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-8, 14)]
+}
 
 [sub_resource type="Animation" id="Animation_r5opi"]
 resource_name = "death_left"
@@ -151,6 +177,18 @@ tracks/3/keys = {
 "update": 1,
 "values": [false]
 }
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("RayCast2D2:enabled")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="Animation" id="Animation_ihsuw"]
 resource_name = "death_right"
@@ -199,6 +237,85 @@ tracks/3/path = NodePath("RayCast2D:enabled")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("RayCast2D2:enabled")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_icxqe"]
+resource_name = "drown"
+length = 0.4
+step = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [ExtResource("11_4hcvb"), ExtResource("12_ep4ga")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CollisionShape2D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("RayCast2D:enabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.4),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"queue_free"
+}]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("RayCast2D2:enabled")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
@@ -339,6 +456,30 @@ tracks/4/keys = {
 "update": 0,
 "values": [Vector2(-8, 14)]
 }
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("RayCast2D2:enabled")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("RayCast2D2:position")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-8, 14)]
+}
 
 [sub_resource type="Animation" id="Animation_7mc3l"]
 resource_name = "jump_right"
@@ -399,6 +540,30 @@ tracks/4/path = NodePath("RayCast2D:position")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(8, 14)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("RayCast2D2:enabled")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("RayCast2D2:position")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
@@ -470,6 +635,30 @@ tracks/4/keys = {
 "update": 0,
 "values": [Vector2(-8, 14)]
 }
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("RayCast2D2:enabled")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("RayCast2D2:position")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-8, 14)]
+}
 
 [sub_resource type="Animation" id="Animation_ep4ga"]
 resource_name = "run_right"
@@ -536,12 +725,37 @@ tracks/4/keys = {
 "update": 0,
 "values": [Vector2(8, 14)]
 }
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("RayCast2D2:enabled")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("RayCast2D2:position")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(8, 14)]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ep4ga"]
 _data = {
 &"RESET": SubResource("Animation_4hcvb"),
 &"death_left": SubResource("Animation_r5opi"),
 &"death_right": SubResource("Animation_ihsuw"),
+&"drown": SubResource("Animation_icxqe"),
 &"explode": SubResource("Animation_4tgqw"),
 &"jump_left": SubResource("Animation_8xab2"),
 &"jump_right": SubResource("Animation_7mc3l"),
@@ -560,6 +774,14 @@ blend_point_0/node = SubResource("AnimationNodeAnimation_gyor0")
 blend_point_0/pos = -1.0
 blend_point_1/node = SubResource("AnimationNodeAnimation_4hcvb")
 blend_point_1/pos = 1.0
+blend_mode = 1
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ep4ga"]
+animation = &"drown"
+
+[sub_resource type="AnimationNodeBlendSpace1D" id="AnimationNodeBlendSpace1D_ihsuw"]
+blend_point_0/node = SubResource("AnimationNodeAnimation_ep4ga")
+blend_point_0/pos = 0.0
 blend_mode = 1
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ihsuw"]
@@ -622,9 +844,23 @@ advance_condition = &"jump"
 advance_mode = 2
 advance_condition = &"run"
 
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_7mc3l"]
+advance_mode = 2
+advance_condition = &"drown"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_8xab2"]
+advance_mode = 2
+advance_condition = &"drown"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_icxqe"]
+switch_mode = 2
+advance_mode = 2
+
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_gyor0"]
 states/Death/node = SubResource("AnimationNodeBlendSpace1D_ep4ga")
 states/Death/position = Vector2(378, 304)
+states/Drown/node = SubResource("AnimationNodeBlendSpace1D_ihsuw")
+states/Drown/position = Vector2(912, 10)
 states/End/position = Vector2(912, 304)
 states/Explode/node = SubResource("AnimationNodeBlendSpace1D_r5opi")
 states/Explode/position = Vector2(711, 304)
@@ -633,14 +869,13 @@ states/Jump/position = Vector2(711, 100)
 states/Run/node = SubResource("AnimationNodeBlendSpace1D_7eyqg")
 states/Run/position = Vector2(378, 100)
 states/Start/position = Vector2(198, 100)
-transitions = ["Start", "Run", SubResource("AnimationNodeStateMachineTransition_vqtei"), "Run", "Death", SubResource("AnimationNodeStateMachineTransition_gyor0"), "Death", "Explode", SubResource("AnimationNodeStateMachineTransition_4hcvb"), "Explode", "End", SubResource("AnimationNodeStateMachineTransition_ep4ga"), "Jump", "Death", SubResource("AnimationNodeStateMachineTransition_ihsuw"), "Run", "Jump", SubResource("AnimationNodeStateMachineTransition_r5opi"), "Jump", "Run", SubResource("AnimationNodeStateMachineTransition_4tgqw")]
-graph_offset = Vector2(175, 124.326)
+transitions = ["Start", "Run", SubResource("AnimationNodeStateMachineTransition_vqtei"), "Run", "Death", SubResource("AnimationNodeStateMachineTransition_gyor0"), "Death", "Explode", SubResource("AnimationNodeStateMachineTransition_4hcvb"), "Explode", "End", SubResource("AnimationNodeStateMachineTransition_ep4ga"), "Jump", "Death", SubResource("AnimationNodeStateMachineTransition_ihsuw"), "Run", "Jump", SubResource("AnimationNodeStateMachineTransition_r5opi"), "Jump", "Run", SubResource("AnimationNodeStateMachineTransition_4tgqw"), "Run", "Drown", SubResource("AnimationNodeStateMachineTransition_7mc3l"), "Jump", "Drown", SubResource("AnimationNodeStateMachineTransition_8xab2"), "Drown", "End", SubResource("AnimationNodeStateMachineTransition_icxqe")]
+graph_offset = Vector2(-6.52509, -150.829)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ep4ga"]
 size = Vector2(17, 30.75)
 
 [node name="RunningSoldier" type="Area2D" groups=["enemy"]]
-process_mode = 4
 disable_mode = 1
 collision_layer = 4
 collision_mask = 43
@@ -656,10 +891,12 @@ active = false
 tree_root = SubResource("AnimationNodeStateMachine_gyor0")
 anim_player = NodePath("../AnimationPlayer")
 parameters/conditions/death = false
+parameters/conditions/drown = false
 parameters/conditions/explode = false
 parameters/conditions/jump = false
 parameters/conditions/run = false
 parameters/Death/blend_position = 0
+parameters/Drown/blend_position = 0
 parameters/Explode/blend_position = 0
 parameters/Jump/blend_position = 0
 parameters/Run/blend_position = 0
@@ -676,6 +913,12 @@ shape = SubResource("RectangleShape2D_ep4ga")
 position = Vector2(8, 13)
 target_position = Vector2(0, 2)
 collision_mask = 8
+
+[node name="RayCast2D2" type="RayCast2D" parent="."]
+position = Vector2(-8, 14)
+enabled = false
+target_position = Vector2(0, 2)
+collision_mask = 64
 
 [node name="DeathExplosionSFX" type="AudioStreamPlayer2D" parent="."]
 

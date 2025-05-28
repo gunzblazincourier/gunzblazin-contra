@@ -221,7 +221,7 @@ position = Vector2(1057, -31)
 position = Vector2(2145, 1)
 
 [node name="Player" parent="." instance=ExtResource("9_lr1ra")]
-position = Vector2(-172, -110)
+position = Vector2(-171, -110)
 
 [node name="Lives" type="AnimatedSprite2D" parent="."]
 position = Vector2(-195, -113)

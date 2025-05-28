@@ -4,7 +4,7 @@ extends Area2D
 ## Make it run, jump, die and explode
 
 ## All states of the enemy
-enum States {RUN, JUMP, DEATH, EXPLODE}
+enum States {RUN, JUMP, DEATH, EXPLODE, DROWN}
 
 ## Left and right directions stored in enum
 enum Directions {LEFT = -1, RIGHT = 1}
@@ -37,6 +37,9 @@ var is_jump_type_final: bool
 ## Detects if enemy is on the ground
 @onready var ray_cast_2d: RayCast2D = $RayCast2D
 
+## Detects if enemy is on water
+@onready var ray_cast_2d_2: RayCast2D = $RayCast2D2
+
 
 func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_DISABLED
@@ -63,17 +66,22 @@ func _process(_delta: float) -> void:
 	## Assigned to advance condition for JUMP
 	var jump: bool = not run
 	
+	## Assigned to advance condition for DROWN
+	var drown: bool = ray_cast_2d_2.is_colliding()
+	
 	# Assigning values to AnimationTree variables using respective script variables
 	animation_tree.set("parameters/conditions/run", run)
 	animation_tree.set("parameters/conditions/jump", jump)
 	animation_tree.set("parameters/conditions/death", death)
 	animation_tree.set("parameters/conditions/explode", explode)
+	animation_tree.set("parameters/conditions/drown", drown)
 	
 	# Deciding blend positions
 	animation_tree.set("parameters/Run/blend_position", run_direction)
 	animation_tree.set("parameters/Jump/blend_position", run_direction)
 	animation_tree.set("parameters/Death/blend_position", run_direction)
 	animation_tree.set("parameters/Explode/blend_position", 0.0)
+	animation_tree.set("parameters/Drown/blend_position", 0.0)
 	
 	# Basically gets AnimationNodeStateMachine from AnimationTree
 	var state_machine: AnimationNodeStateMachinePlayback = animation_tree.get("parameters/playback")
@@ -91,6 +99,8 @@ func _process(_delta: float) -> void:
 			state = States.DEATH
 		"Explode":
 			state = States.EXPLODE
+		"Drown":
+			state = States.DROWN
 
 
 func _physics_process(delta: float) -> void:
