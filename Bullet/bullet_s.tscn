@@ -104,6 +104,7 @@ libraries = {
 &"": SubResource("AnimationLibrary_6pb5f")
 }
 autoplay = "shoot"
+speed_scale = 0.5
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_7vesb")
