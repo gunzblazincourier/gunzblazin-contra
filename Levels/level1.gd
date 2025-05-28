@@ -30,6 +30,7 @@ extends Node
 
 ## Locks player position to center of camera view when player reaches center
 func _process(_delta: float) -> void:
+	print(Global.camera_center_position)
 	#print(game_over_timer.time_left)
 	if Global.lives >= 3:
 		lives.play("lives_3")

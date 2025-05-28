@@ -1,10 +1,11 @@
-[gd_scene load_steps=17 format=4 uid="uid://bornr0erfd30j"]
+[gd_scene load_steps=18 format=4 uid="uid://bornr0erfd30j"]
 
 [ext_resource type="Script" uid="uid://tqrdmn3550ts" path="res://Levels/level1.gd" id="1_nq5j5"]
 [ext_resource type="TileSet" uid="uid://cwwx3nyrorypy" path="res://Levels/level1.tres" id="2_utqd4"]
 [ext_resource type="PackedScene" uid="uid://dmwhot7tnyix7" path="res://Levels/exploding_bridge.tscn" id="3_u55on"]
 [ext_resource type="PackedScene" uid="uid://1iy13e6vp74e" path="res://Levels/sensor.tscn" id="4_pdma0"]
 [ext_resource type="PackedScene" uid="uid://dnkmn6kup0jlf" path="res://Enemies/turret.tscn" id="5_1jijn"]
+[ext_resource type="PackedScene" uid="uid://luensks50sjs" path="res://Levels/capsule.tscn" id="5_20gr8"]
 [ext_resource type="PackedScene" uid="uid://d151sv348eufw" path="res://Enemies/turret_2.tscn" id="6_20gr8"]
 [ext_resource type="PackedScene" uid="uid://0hbphmpkfm7w" path="res://Enemies/running_soldier.tscn" id="7_ts5l0"]
 [ext_resource type="PackedScene" uid="uid://bgedjmw5o3wam" path="res://Enemies/turret_soldier.tscn" id="8_u2cfn"]
@@ -226,6 +227,10 @@ position = Vector2(-172, -110)
 position = Vector2(-195, -113)
 sprite_frames = SubResource("SpriteFrames_lr1ra")
 animation = &"lives_2"
+
+[node name="Capsule" parent="." instance=ExtResource("5_20gr8")]
+position = Vector2(110, -88)
+starting_camera_position = 149.0
 
 [connection signal="timeout" from="LevelAnimationTimer" to="." method="_on_timer_timeout"]
 [connection signal="timeout" from="GameOverTimer" to="." method="_on_game_over_timer_timeout"]
