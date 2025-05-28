@@ -53,9 +53,9 @@ func _physics_process(delta: float) -> void:
 			should_move == true:
 		visible = true
 		#process_mode = Node.PROCESS_MODE_INHERIT
-		node_2d.rotate(6 * delta)
-		global_position.y = initial_position.y + (sin(node_2d.rotation) * 20)
-		global_position.x += 69 * delta
+		node_2d.rotate(5 * delta)
+		global_position.y = initial_position.y + (sin(node_2d.rotation) * 25)
+		global_position.x += 93 * delta
 
 ## Capsule is is_destroyed after shot by player
 func _on_area_entered(area: Area2D) -> void:

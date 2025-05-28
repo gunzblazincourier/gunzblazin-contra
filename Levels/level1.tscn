@@ -229,15 +229,11 @@ sprite_frames = SubResource("SpriteFrames_lr1ra")
 animation = &"lives_2"
 
 [node name="Capsule" parent="." instance=ExtResource("5_20gr8")]
-position = Vector2(4, -81)
+position = Vector2(5, -70)
 starting_camera_position = 149.0
-
-[node name="Pickup" parent="Capsule" index="5"]
-pickup_id = 2
 
 [connection signal="timeout" from="LevelAnimationTimer" to="." method="_on_timer_timeout"]
 [connection signal="timeout" from="GameOverTimer" to="." method="_on_game_over_timer_timeout"]
 
 [editable path="Sensor"]
 [editable path="Sensor2"]
-[editable path="Capsule"]
