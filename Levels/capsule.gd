@@ -10,7 +10,10 @@ extends Area2D
 var initial_position: Vector2
 
 ## Whether capsule has been destoryed
-var destroyed: bool
+var is_destroyed: bool
+
+## Toggle to make capsule move or stop
+var should_move: bool
 
 ## Animated sprite for the capsule, containing the default animation and the
 ## explosion
@@ -31,28 +34,30 @@ var destroyed: bool
 
 func _ready() -> void:
 	initial_position = global_position
-	destroyed = false
+	is_destroyed = false
+	should_move = true
 
 
 func _process(_delta: float) -> void:
-	if destroyed == true:
+	if is_destroyed == true:
 		animated_sprite_2d.play("explode")
 		audio_stream_player_2d.play()
 		collision_shape_2d.disabled = true
 		pickup.process_mode = Node.PROCESS_MODE_INHERIT
 		pickup.visible = true
-		destroyed = false
+		is_destroyed = false
 
 
 func _physics_process(delta: float) -> void:
 	if Global.camera_center_position.x > starting_camera_position and \
-			destroyed == false:
+			should_move == true:
 		node_2d.rotate(6 * delta)
 		global_position.y = initial_position.y + (sin(node_2d.rotation) * 20)
 		global_position.x += 69 * delta
 
-## Capsule is destroyed after shot by player
+## Capsule is is_destroyed after shot by player
 func _on_area_entered(area: Area2D) -> void:
 	if area.is_in_group("bullet"):
-		destroyed = true
+		is_destroyed = true
+		should_move = false
 		Global.score += 500
