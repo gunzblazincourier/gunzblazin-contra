@@ -1,0 +1,57 @@
+[gd_scene load_steps=9 format=3 uid="uid://luensks50sjs"]
+
+[ext_resource type="Texture2D" uid="uid://cpyv7hc23fl42" path="res://Bullet/Capsule.png" id="1_6c6nq"]
+[ext_resource type="Texture2D" uid="uid://1aclxa8ukckt" path="res://Explosions/Explosion_0.png" id="2_a15h6"]
+[ext_resource type="Texture2D" uid="uid://cc2xjpk2aq03j" path="res://Explosions/Explosion_1.png" id="3_xesh0"]
+[ext_resource type="Texture2D" uid="uid://c66pml0hbev4x" path="res://Explosions/Explosion_2.png" id="4_kmm5p"]
+[ext_resource type="AudioStream" uid="uid://cdr0ngbxu1hls" path="res://Levels/TekiOut.wav" id="5_kp1np"]
+[ext_resource type="PackedScene" uid="uid://be4f8kk1a6q38" path="res://Bullet/pickup.tscn" id="6_7d6ln"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_gqkpw"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_6c6nq")
+}],
+"loop": false,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_a15h6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_xesh0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_kmm5p")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_a15h6")
+}, {
+"duration": 1.0,
+"texture": null
+}],
+"loop": false,
+"name": &"explode",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_y861l"]
+size = Vector2(24, 14)
+
+[node name="Capsule" type="Area2D"]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_gqkpw")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_y861l")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_kp1np")
+
+[node name="Pickup" parent="." instance=ExtResource("6_7d6ln")]
+process_mode = 4
+visible = false
