@@ -112,11 +112,11 @@ func _on_animated_sprite_2d_animation_finished() -> void:
 		# Soldier faces left or right based on the angle with player
 		if angle_with_player > -PI/2 and angle_with_player < PI/2:
 			animated_sprite_2d.flip_h = true
-			muzzle.position = Vector2(21, 21)
+			muzzle.position = Vector2(13, 5)
 			muzzle.rotation = 0
 		else:
 			animated_sprite_2d.flip_h = false
-			muzzle.position = Vector2(11, 21)
+			muzzle.position = Vector2(-13, 5)
 			muzzle.rotation = PI
 		
 		# Spawn bullet
