@@ -1,0 +1,99 @@
+[gd_scene load_steps=12 format=3 uid="uid://beldm33y5kvum"]
+
+[ext_resource type="Texture2D" uid="uid://c3cowvvhl10xq" path="res://Enemies/TurretSoldier_Death.png" id="1_ybru3"]
+[ext_resource type="Texture2D" uid="uid://bsqs3c86kj65x" path="res://Explosions/Explosion2_0.png" id="2_7fese"]
+[ext_resource type="Texture2D" uid="uid://4woe5otvd8vt" path="res://Explosions/Explosion2_1.png" id="3_v8niy"]
+[ext_resource type="Texture2D" uid="uid://cw8xqy6wwnggt" path="res://Explosions/Explosion2_2.png" id="4_ou210"]
+[ext_resource type="Texture2D" uid="uid://sle8lmtc3te4" path="res://Enemies/BushSoldier_0.png" id="5_8l8d2"]
+[ext_resource type="Texture2D" uid="uid://ci77rfqhx40mj" path="res://Enemies/BushSoldier_1.png" id="6_jfbsl"]
+[ext_resource type="Texture2D" uid="uid://cgn4s0lbhlbp" path="res://Enemies/BushSoldier_2.png" id="7_1402i"]
+[ext_resource type="Texture2D" uid="uid://c56x4e8shosjj" path="res://Bullet/R.png" id="11_0f1ko"]
+[ext_resource type="AudioStream" uid="uid://cdr0ngbxu1hls" path="res://Levels/TekiOut.wav" id="12_a201q"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_pj8v8"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_ybru3")
+}],
+"loop": false,
+"name": &"death",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_7fese")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_v8niy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_ou210")
+}, {
+"duration": 1.0,
+"texture": null
+}],
+"loop": false,
+"name": &"explode",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_8l8d2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_jfbsl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_1402i")
+}],
+"loop": false,
+"name": &"shoot_straight",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5f3y1"]
+size = Vector2(16, 30)
+
+[node name="BushSoldier" type="Area2D" groups=["enemy"]]
+collision_layer = 4
+collision_mask = 3
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_pj8v8")
+animation = &"death"
+centered = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2(-1, 0)
+shape = SubResource("RectangleShape2D_5f3y1")
+
+[node name="Muzzle" type="Marker2D" parent="."]
+visible = false
+position = Vector2(14, -11)
+
+[node name="Sprite2D" type="Sprite2D" parent="Muzzle"]
+visible = false
+position = Vector2(-0.453125, -0.453125)
+scale = Vector2(0.921875, 0.921875)
+texture = ExtResource("11_0f1ko")
+offset = Vector2(3, 3)
+
+[node name="Timer" type="Timer" parent="."]
+autostart = true
+
+[node name="DeathExplosionSFX" type="AudioStreamPlayer2D" parent="."]
+visible = false
+stream = ExtResource("12_a201q")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+visible = false
+position = Vector2(-1, 0)
+scale = Vector2(0.8, 1.5)
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="finished" from="DeathExplosionSFX" to="." method="_on_death_explosion_sfx_finished"]
+[connection signal="screen_entered" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_entered"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
