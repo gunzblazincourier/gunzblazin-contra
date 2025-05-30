@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=4 uid="uid://bornr0erfd30j"]
+[gd_scene load_steps=19 format=4 uid="uid://bornr0erfd30j"]
 
 [ext_resource type="Script" uid="uid://tqrdmn3550ts" path="res://Levels/level1.gd" id="1_nq5j5"]
 [ext_resource type="TileSet" uid="uid://cwwx3nyrorypy" path="res://Levels/level1.tres" id="2_utqd4"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://0hbphmpkfm7w" path="res://Enemies/running_soldier.tscn" id="7_ts5l0"]
 [ext_resource type="PackedScene" uid="uid://bgedjmw5o3wam" path="res://Enemies/turret_soldier.tscn" id="8_u2cfn"]
 [ext_resource type="PackedScene" uid="uid://doa0vkc0fktkh" path="res://Player/player.tscn" id="9_lr1ra"]
+[ext_resource type="PackedScene" uid="uid://beldm33y5kvum" path="res://Enemies/bush_soldier.tscn" id="9_ts5l0"]
 [ext_resource type="Texture2D" uid="uid://h60aouyoisr5" path="res://Player/GameOver.png" id="10_1jijn"]
 [ext_resource type="Texture2D" uid="uid://bernaol4njv6b" path="res://Player/Lives_1.png" id="11_20gr8"]
 [ext_resource type="Texture2D" uid="uid://bgeuhv81xsj35" path="res://Player/Lives_2.png" id="12_ts5l0"]
@@ -219,6 +220,9 @@ position = Vector2(1057, -31)
 
 [node name="TurretSoldier4" parent="." instance=ExtResource("8_u2cfn")]
 position = Vector2(2145, 1)
+
+[node name="BushSoldier" parent="." instance=ExtResource("9_ts5l0")]
+position = Vector2(-91, -62)
 
 [node name="Player" parent="." instance=ExtResource("9_lr1ra")]
 position = Vector2(-171, -110)

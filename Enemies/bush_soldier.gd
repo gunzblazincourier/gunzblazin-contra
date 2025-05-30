@@ -19,6 +19,10 @@ var is_exploding: bool				## Whether soldier is explosing post-death
 @onready var collision_shape_2d: CollisionShape2D = $CollisionShape2D
 
 ## Pop-out on timeout
+@onready var pop_out_timer: Timer = $PopOutTimer
+
+## Pop-in on timeout
+@onready var pop_in_timer: Timer = $PopInTimer
 
 ## Muzzle of gun
 @onready var muzzle: Marker2D = $Muzzle
@@ -34,12 +38,13 @@ func _ready() -> void:
 	is_exploding = false
 
 
-## Handles death explosion
+## Handles death and following explosion
 func _process(_delta: float) -> void:
 	if is_dead == true:
 		animated_sprite_2d.play("death")
 		collision_shape_2d.disabled = true
-		timer.stop()
+		pop_out_timer.stop()
+		pop_in_timer.stop()
 	
 	if is_exploding == true:
 		animated_sprite_2d.play("explode")
@@ -65,59 +70,16 @@ func _physics_process(delta: float) -> void:
 			is_dead = false
 
 
-## Soldier aims and fire at the player each time the repeating timer timeouts
-func _on_timer_timeout() -> void:
-	## Angle between the soldier and player relative to X-axis
-	var angle_with_player: float = global_position.angle_to_point(Global.player_global_position)
-	
-	# Above angle decides animation
-	#if angle_with_player < -PI/9 and angle_with_player > -8*(PI/9):
-		#animated_sprite_2d.play("shoot_up")
-	#elif angle_with_player > PI/9 and angle_with_player < 8*(PI/9):
-		#animated_sprite_2d.play("shoot_down")
-	#else:
-		#animated_sprite_2d.play("shoot_straight")
-	
-	# Soldier faces left or right based on the angle with player
-	if angle_with_player > -PI/2 and angle_with_player < PI/2:
-		animated_sprite_2d.flip_h = false
-	else:
-		animated_sprite_2d.flip_h = true
-	
-	# Initializes muzzle position and rotation based on animation
-	# Rotation value is clamped between two angles
-	if animated_sprite_2d.animation == "shoot_up":
-		if animated_sprite_2d.flip_h == false:
-			muzzle.position = Vector2(9, -21)
-			#muzzle.rotation = clamp(angle_with_player, -PI/2, -PI/8)
-		else:
-			muzzle.position = Vector2(-9, -21)
-			#muzzle.rotation = clamp(angle_with_player, -7*(PI/8), -PI/2)
-	elif animated_sprite_2d.animation == "shoot_down":
-		if animated_sprite_2d.flip_h == false:
-			muzzle.position = Vector2(14, 2)
-			#muzzle.rotation = clamp(angle_with_player, PI/8, PI/2)
-		else:
-			muzzle.position = Vector2(-14, 2)
-			#muzzle.rotation = clamp(angle_with_player, PI/2, 7*(PI/8))
-	else:
-		if animated_sprite_2d.flip_h == false:
-			muzzle.position = Vector2(14, -11)
-			#muzzle.rotation = 0
-		else:
-			muzzle.position = Vector2(-14, -11)
-			#muzzle.rotation = PI
-	
-	# Muzzle rotation will be the same as angle made with player
-	# Position has to be specific, matching the sprite
-	muzzle.rotation = angle_with_player
-	
-	# Spawn bullet
-	var bullet_path: PackedScene = load("res://Bullet/bullet_ts.tscn")
-	var bullet: Area2D = bullet_path.instantiate()
-	owner.add_child(bullet)
-	bullet.position = muzzle.global_position
-	bullet.rotation = muzzle.global_rotation
+## Pop-out
+func _on_pop_out_timer_timeout() -> void:
+	animated_sprite_2d.play("shoot_straight")
+	pop_in_timer.start()
+
+
+## Pop-in
+func _on_pop_in_timer_timeout() -> void:
+	animated_sprite_2d.play_backwards("shoot_straight")
+	pop_out_timer.start()
 
 
 ## Enemy dies when bullet hits it
@@ -140,3 +102,26 @@ func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
 ## Enables enemy (or "spawns") when camera reaches the position
 func _on_visible_on_screen_notifier_2d_screen_entered() -> void:
 	process_mode = Node.PROCESS_MODE_INHERIT
+
+
+func _on_animated_sprite_2d_animation_finished() -> void:
+	if animated_sprite_2d.animation == "shoot_straight" and animated_sprite_2d.frame == 2:
+		## Angle between the soldier and player relative to X-axis
+		var angle_with_player: float = global_position.angle_to_point(Global.player_global_position)
+		
+		# Soldier faces left or right based on the angle with player
+		if angle_with_player > -PI/2 and angle_with_player < PI/2:
+			animated_sprite_2d.flip_h = true
+			muzzle.position = Vector2(21, 21)
+			muzzle.rotation = 0
+		else:
+			animated_sprite_2d.flip_h = false
+			muzzle.position = Vector2(11, 21)
+			muzzle.rotation = PI
+		
+		# Spawn bullet
+		var bullet_path: PackedScene = load("res://Bullet/bullet_ts.tscn")
+		var bullet: Area2D = bullet_path.instantiate()
+		owner.add_child(bullet)
+		bullet.position = muzzle.global_position
+		bullet.rotation = muzzle.global_rotation

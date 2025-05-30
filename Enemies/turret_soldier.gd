@@ -35,7 +35,7 @@ func _ready() -> void:
 	is_exploding = false
 
 
-## Handles death explosion
+## Handles death and following explosion
 func _process(_delta: float) -> void:
 	if is_dead == true:
 		animated_sprite_2d.play("death")
