@@ -55,7 +55,7 @@ func _physics_process(delta: float) -> void:
 		if animated_sprite_2d.flip_h == true:
 			position.x += DEATH_SPEED_X * delta
 		else:
-			position.x += DEATH_SPEED_X * delta
+			position.x -= DEATH_SPEED_X * delta
 		
 		# Vertical movement with gravity
 		position.y += death_speed_y * delta
