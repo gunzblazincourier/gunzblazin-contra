@@ -1,5 +1,6 @@
-[gd_scene load_steps=12 format=3 uid="uid://beldm33y5kvum"]
+[gd_scene load_steps=13 format=3 uid="uid://beldm33y5kvum"]
 
+[ext_resource type="Script" uid="uid://860uyowxe2bs" path="res://Enemies/bush_soldier.gd" id="1_jfbsl"]
 [ext_resource type="Texture2D" uid="uid://c3cowvvhl10xq" path="res://Enemies/TurretSoldier_Death.png" id="1_ybru3"]
 [ext_resource type="Texture2D" uid="uid://bsqs3c86kj65x" path="res://Explosions/Explosion2_0.png" id="2_7fese"]
 [ext_resource type="Texture2D" uid="uid://4woe5otvd8vt" path="res://Explosions/Explosion2_1.png" id="3_v8niy"]
@@ -53,25 +54,24 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5f3y1"]
-size = Vector2(16, 30)
+size = Vector2(17, 15)
 
 [node name="BushSoldier" type="Area2D" groups=["enemy"]]
 collision_layer = 4
 collision_mask = 3
+script = ExtResource("1_jfbsl")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_pj8v8")
-animation = &"death"
+animation = &"shoot_straight"
 centered = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
-position = Vector2(-1, 0)
+position = Vector2(22.5, 24.5)
 shape = SubResource("RectangleShape2D_5f3y1")
 
 [node name="Muzzle" type="Marker2D" parent="."]
-visible = false
-position = Vector2(14, -11)
+position = Vector2(11, 21)
 
 [node name="Sprite2D" type="Sprite2D" parent="Muzzle"]
 visible = false
@@ -80,20 +80,25 @@ scale = Vector2(0.921875, 0.921875)
 texture = ExtResource("11_0f1ko")
 offset = Vector2(3, 3)
 
-[node name="Timer" type="Timer" parent="."]
+[node name="PopOutTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
 autostart = true
 
+[node name="PopInTimer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+
 [node name="DeathExplosionSFX" type="AudioStreamPlayer2D" parent="."]
-visible = false
 stream = ExtResource("12_a201q")
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
-visible = false
-position = Vector2(-1, 0)
-scale = Vector2(0.8, 1.5)
+position = Vector2(22.5, 24.5)
+scale = Vector2(0.85, 0.75)
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
-[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="PopOutTimer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="PopInTimer" to="." method="_on_timer_timeout"]
 [connection signal="finished" from="DeathExplosionSFX" to="." method="_on_death_explosion_sfx_finished"]
 [connection signal="screen_entered" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_entered"]
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
