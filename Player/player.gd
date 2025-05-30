@@ -7,7 +7,8 @@ extends CharacterBody2D
 enum States {IDLE, LOOK_UP, CROUCH, RUN, JUMP, JUMP_UP, JUMP_DOWN, FALL, \
 		FALL_UP, SHOOT_IDLE, SHOOT_LOOK_UP, SHOOT_CROUCH, SHOOT_RUN, \
 		SHOOT_JUMP, SHOOT_JUMP_UP, SHOOT_JUMP_DOWN, SHOOT_FALL, SHOOT_FALL_UP, \
-		DEATH, CLIMB, DIVE, WATERIDLE, WATERIDLE_UP, WATERSHOOT, WATERSHOOT_UP, SPLASH}
+		DEATH, CLIMB, DIVE, WATERIDLE, WATERIDLE_UP, WATERSHOOT, WATERSHOOT_UP, \
+		SPLASH}
 
 const RUN_SPEED: int = 69				## Fixed run speed
 const JUMP_SPEED: int = -250			## Fixed jump speed
@@ -128,7 +129,8 @@ func _process(_delta: float) -> void:
 	var crouch: bool = is_on_floor() and look_direction == Vector2(0, 1)
 	var run: bool = is_on_floor() and look_direction.x != 0
 	var jump: bool = not is_on_floor() and is_jump_pressed and \
-			look_direction != Vector2(0, -1) and look_direction != Vector2(0, 1) and death_timer.is_stopped()
+			look_direction != Vector2(0, -1) and look_direction != Vector2(0, 1) and \
+			death_timer.is_stopped()
 	var jump_up: bool = not is_on_floor() and is_jump_pressed and \
 			look_direction == Vector2(0, -1) and death_timer.is_stopped()
 	var jump_down: bool = not is_on_floor() and is_jump_pressed and \
@@ -183,7 +185,6 @@ func _process(_delta: float) -> void:
 	animation_tree.set("parameters/Climb/blend_position", sprite_direction)
 	animation_tree.set("parameters/Dive/blend_position", sprite_direction)
 	animation_tree.set("parameters/WaterIdleUp/blend_position", sprite_direction)
-	#animation_tree.set("parameters/WaterIdle/blend_position", sprite_direction)
 	animation_tree.set("parameters/WaterShootUp/blend_position", sprite_direction)
 	animation_tree.set("parameters/Splash/blend_position", sprite_direction)
 	
@@ -202,13 +203,15 @@ func _process(_delta: float) -> void:
 		animation_tree.set("parameters/WaterShoot/blend_position", look_direction)
 		if look_direction == Vector2(0, 1) or not fall_movement_timer.is_stopped():
 			animation_tree.set("parameters/Fall/blend_position", Vector2(sprite_direction, 0))
-			animation_tree.set("parameters/ShootFall/blend_position", Vector2(sprite_direction, 0))
+			animation_tree.set("parameters/ShootFall/blend_position", \
+					Vector2(sprite_direction, 0))
 		else:
 			animation_tree.set("parameters/Fall/blend_position", look_direction)
 			animation_tree.set("parameters/ShootFall/blend_position", look_direction)
 	
 	# Gets AnimationNodeStateMachine from AnimationTree
-	var state_machine: AnimationNodeStateMachinePlayback = animation_tree.get("parameters/playback")
+	var state_machine: AnimationNodeStateMachinePlayback = \
+			animation_tree.get("parameters/playback")
 	
 	# Current state in AnimationNodeStateMachine
 	var state_machine_state: StringName = state_machine.get_current_node()
@@ -267,7 +270,7 @@ func _process(_delta: float) -> void:
 			state = States.WATERSHOOT_UP
 		"Splash":
 			state = States.SPLASH
-	print(state_machine_state)
+	#print(state_machine_state)
 	#print(animation_tree.get("parameters/Jump/blend_position"))
 	#print(dive)
 	
@@ -342,7 +345,6 @@ func _process(_delta: float) -> void:
 
 
 func _physics_process(delta: float) -> void:
-	#print(velocity.y)
 	## Direction that player is running
 	var run_direction: float = Input.get_axis("left", "right")
 	
@@ -389,14 +391,8 @@ func _physics_process(delta: float) -> void:
 			velocity.x = move_toward(velocity.x, 0, RUN_SPEED)
 			if not is_on_floor():
 				velocity.y += (GRAVITY * 2) * delta
-		#States.CLIMB:
-			#velocity.x = move_toward(velocity.x, 0, RUN_SPEED)
-			#velocity.y -= GRAVITY * delta
-			#if not is_on_floor():
-				#velocity.y += GRAVITY * delta
 		States.DIVE, States.CLIMB, States.WATERIDLE_UP, States.WATERSHOOT_UP:
 			velocity.x = move_toward(velocity.x, 0, RUN_SPEED)
-			#velocity.x = run_direction * RUN_SPEED
 	
 	# Godot function for player movement
 	var mas: bool = move_and_slide()
