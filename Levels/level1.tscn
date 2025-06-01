@@ -239,8 +239,28 @@ animation = &"lives_2"
 position = Vector2(5, -70)
 starting_camera_position = 149.0
 
+[node name="Capsule2" parent="." instance=ExtResource("5_20gr8")]
+position = Vector2(898, -70)
+starting_camera_position = 1032.0
+
+[node name="Pickup" parent="Capsule2" index="5"]
+pickup_id = 2
+
+[node name="Capsule3" parent="." instance=ExtResource("5_20gr8")]
+position = Vector2(2108, -70)
+starting_camera_position = 2233.0
+
+[node name="Capsule4" parent="." instance=ExtResource("5_20gr8")]
+position = Vector2(2107, 51)
+starting_camera_position = 2233.0
+
+[node name="Pickup" parent="Capsule4" index="5"]
+pickup_id = 4
+
 [connection signal="timeout" from="LevelAnimationTimer" to="." method="_on_timer_timeout"]
 [connection signal="timeout" from="GameOverTimer" to="." method="_on_game_over_timer_timeout"]
 
 [editable path="Sensor"]
 [editable path="Sensor2"]
+[editable path="Capsule2"]
+[editable path="Capsule4"]
