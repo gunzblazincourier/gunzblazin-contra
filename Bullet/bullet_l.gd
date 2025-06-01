@@ -39,7 +39,14 @@ extends Area2D
 @onready var visible_on_screen_notifier_2d: VisibleOnScreenNotifier2D = $VisibleOnScreenNotifier2D
 
 ## Fixed bullet speed
-const BULLET_SPEED: int = 200
+var bullet_speed: int
+
+
+func _ready() -> void:
+	if Global.increase_rof == false:
+		bullet_speed = 250
+	else:
+		bullet_speed = 350
 
 
 ## Resets laser componenets' status whenever fired again
@@ -58,7 +65,7 @@ func _process(_delta: float) -> void:
 
 ## Bullet travels in linear direction, without changing rotation or direction
 func _physics_process(delta: float) -> void:
-	position += transform.x * BULLET_SPEED * delta
+	position += transform.x * bullet_speed * delta
 
 
 # Cannot remove laser since only one instance is made to respawn laser

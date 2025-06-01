@@ -4,16 +4,23 @@ extends Area2D
 ## Handles speed, trajectory and removal from scene
 
 ## Fixed bullet speed
-const BULLET_SPEED: int = 300
+var bullet_speed: int
 
 ## Animated sprite
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 
 
+func _ready() -> void:
+	if Global.increase_rof == false:
+		bullet_speed = 250
+	else:
+		bullet_speed = 350
+
+
 ## Bullet travels in linear direction, without changing rotation or direction
 func _physics_process(delta: float) -> void:
 	if animated_sprite_2d.animation == "default":
-		position += transform.x * BULLET_SPEED * delta
+		position += transform.x * bullet_speed * delta
 
 
 ## Removes bullet if it enters specific hitboxes (eg an enemy's)

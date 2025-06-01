@@ -53,6 +53,8 @@ func _on_area_entered(area: Area2D) -> void:
 	if area.is_in_group("player"):
 		if pickup_id != Global.Weapons.R:
 			Global.weapon = pickup_id
+		else:
+			Global.increase_rof = true
 		audio_stream_player_2d.play()
 		set_deferred("monitorable", false)
 		set_deferred("monitoring", false)

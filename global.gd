@@ -37,6 +37,9 @@ var high_score: int
 ## Background music for levels
 @onready var background_music: AudioStreamPlayer2D = $"/root/BackgroundMusic"
 
+## Whether Regulargun has been picked up to increase rate-of-fire
+var increase_rof: bool
+
 
 func _ready() -> void:
 	player_global_position = Vector2.ZERO
@@ -47,3 +50,4 @@ func _ready() -> void:
 	left_boundary_position = Vector2.ZERO
 	score = 0
 	high_score = 20000
+	increase_rof = false
