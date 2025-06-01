@@ -123,6 +123,12 @@ position = Vector2(111, 24)
 position = Vector2(1358, 24)
 
 [node name="Pickup" parent="Sensor2" index="4"]
+pickup_id = 3
+
+[node name="Sensor3" parent="." instance=ExtResource("4_pdma0")]
+position = Vector2(2062, 56)
+
+[node name="Pickup" parent="Sensor3" index="4"]
 pickup_id = 2
 
 [node name="Turret" parent="." instance=ExtResource("5_1jijn")]
@@ -262,5 +268,6 @@ pickup_id = 4
 
 [editable path="Sensor"]
 [editable path="Sensor2"]
+[editable path="Sensor3"]
 [editable path="Capsule2"]
 [editable path="Capsule4"]
