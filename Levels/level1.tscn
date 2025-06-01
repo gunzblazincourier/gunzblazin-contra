@@ -222,7 +222,10 @@ position = Vector2(1057, -31)
 position = Vector2(2145, 1)
 
 [node name="BushSoldier" parent="." instance=ExtResource("9_ts5l0")]
-position = Vector2(-73, -46)
+position = Vector2(1121, -46)
+
+[node name="BushSoldier2" parent="." instance=ExtResource("9_ts5l0")]
+position = Vector2(1329, -78)
 
 [node name="Player" parent="." instance=ExtResource("9_lr1ra")]
 position = Vector2(-171, -110)
