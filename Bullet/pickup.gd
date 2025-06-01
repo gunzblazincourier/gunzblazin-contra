@@ -51,7 +51,8 @@ func _physics_process(delta: float) -> void:
 ## Play audio and disable it when player picks it up and receives the weapon
 func _on_area_entered(area: Area2D) -> void:
 	if area.is_in_group("player"):
-		Global.weapon = pickup_id
+		if pickup_id != Global.Weapons.R:
+			Global.weapon = pickup_id
 		audio_stream_player_2d.play()
 		set_deferred("monitorable", false)
 		set_deferred("monitoring", false)
