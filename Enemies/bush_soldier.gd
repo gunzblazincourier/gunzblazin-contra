@@ -40,6 +40,13 @@ func _ready() -> void:
 
 ## Handles death and following explosion
 func _process(_delta: float) -> void:
+	if animated_sprite_2d.animation == "shoot_straight":
+		if animated_sprite_2d.frame == 2:
+			monitorable = true
+			monitoring = true
+		else:
+			monitorable = false
+			monitoring = false
 	if is_dead == true:
 		animated_sprite_2d.play("death")
 		collision_shape_2d.disabled = true
