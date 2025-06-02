@@ -1,8 +1,8 @@
 [gd_scene load_steps=13 format=3 uid="uid://beldm33y5kvum"]
 
 [ext_resource type="Script" uid="uid://860uyowxe2bs" path="res://Enemies/bush_soldier.gd" id="1_jfbsl"]
-[ext_resource type="Texture2D" uid="uid://c3cowvvhl10xq" path="res://Enemies/TurretSoldier_Death.png" id="1_ybru3"]
 [ext_resource type="Texture2D" uid="uid://bsqs3c86kj65x" path="res://Explosions/Explosion2_0.png" id="2_7fese"]
+[ext_resource type="Texture2D" uid="uid://nfkp73nfl2jc" path="res://Enemies/BushSoldier_Death.png" id="2_jfbsl"]
 [ext_resource type="Texture2D" uid="uid://4woe5otvd8vt" path="res://Explosions/Explosion2_1.png" id="3_v8niy"]
 [ext_resource type="Texture2D" uid="uid://cw8xqy6wwnggt" path="res://Explosions/Explosion2_2.png" id="4_ou210"]
 [ext_resource type="Texture2D" uid="uid://sle8lmtc3te4" path="res://Enemies/BushSoldier_0.png" id="5_8l8d2"]
@@ -15,7 +15,7 @@
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("1_ybru3")
+"texture": ExtResource("2_jfbsl")
 }],
 "loop": false,
 "name": &"death",

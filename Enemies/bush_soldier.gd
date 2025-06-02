@@ -57,9 +57,9 @@ func _physics_process(delta: float) -> void:
 	if is_dead == true:
 		# Decides which direction would the soldier travel when hit by player
 		if animated_sprite_2d.flip_h == true:
-			position.x += DEATH_SPEED_X * delta
-		else:
 			position.x -= DEATH_SPEED_X * delta
+		else:
+			position.x += DEATH_SPEED_X * delta
 		
 		# Vertical movement with gravity
 		position.y += death_speed_y * delta
