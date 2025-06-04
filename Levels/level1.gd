@@ -49,7 +49,7 @@ func _process(delta: float) -> void:
 			camera_2d.get_screen_center_position().x < 2878:
 		camera_2d.global_position = player.global_position
 	elif (camera_2d.get_screen_center_position().x >= 2878) and \
-			(camera_2d.get_screen_center_position().x < 2950):
+			(camera_2d.get_screen_center_position().x < 2970):
 		camera_2d.global_position.x += 64 * delta
 
 

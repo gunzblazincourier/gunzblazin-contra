@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=4 uid="uid://bornr0erfd30j"]
+[gd_scene load_steps=20 format=4 uid="uid://bornr0erfd30j"]
 
 [ext_resource type="Script" uid="uid://tqrdmn3550ts" path="res://Levels/level1.gd" id="1_nq5j5"]
 [ext_resource type="TileSet" uid="uid://cwwx3nyrorypy" path="res://Levels/level1.tres" id="2_utqd4"]
@@ -13,6 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://beldm33y5kvum" path="res://Enemies/bush_soldier.tscn" id="9_ts5l0"]
 [ext_resource type="Texture2D" uid="uid://h60aouyoisr5" path="res://Player/GameOver.png" id="10_1jijn"]
 [ext_resource type="Texture2D" uid="uid://bernaol4njv6b" path="res://Player/Lives_1.png" id="11_20gr8"]
+[ext_resource type="PackedScene" uid="uid://hv3f2kym5lbj" path="res://Levels/Bosses/defense_wall.tscn" id="11_u2cfn"]
 [ext_resource type="Texture2D" uid="uid://bgeuhv81xsj35" path="res://Player/Lives_2.png" id="12_ts5l0"]
 [ext_resource type="Texture2D" uid="uid://blntbdn47c1su" path="res://Player/Lives_3.png" id="13_u2cfn"]
 
@@ -76,7 +77,7 @@ wait_time = 1.5
 one_shot = true
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(-91, -16)
+position = Vector2(2850, -16)
 drag_horizontal_enabled = true
 drag_vertical_enabled = true
 drag_left_margin = 1.0
@@ -233,8 +234,11 @@ position = Vector2(1121, -46)
 [node name="BushSoldier2" parent="." instance=ExtResource("9_ts5l0")]
 position = Vector2(1329, -78)
 
+[node name="DefenseWall" parent="." instance=ExtResource("11_u2cfn")]
+position = Vector2(3049, 8)
+
 [node name="Player" parent="." instance=ExtResource("9_lr1ra")]
-position = Vector2(-171, -110)
+position = Vector2(2670, -110)
 
 [node name="Lives" type="AnimatedSprite2D" parent="."]
 position = Vector2(-195, -113)

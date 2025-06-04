@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://hv3f2kym5lbj"]
+
+[ext_resource type="Texture2D" uid="uid://daf0nrlqax5ww" path="res://Levels/Bosses/DefenseWall.png" id="1_7ay0i"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_i3van"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_7ay0i")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7ay0i"]
+size = Vector2(103, 157)
+
+[node name="DefenseWall" type="Area2D"]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_i3van")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(3.5, -8.5)
+shape = SubResource("RectangleShape2D_7ay0i")
