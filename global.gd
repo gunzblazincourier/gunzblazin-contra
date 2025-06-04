@@ -40,6 +40,9 @@ var high_score: int
 ## Whether Regulargun has been picked up to increase rate-of-fire
 var increase_rof: bool
 
+## Whether level boss has been destroyed
+var is_boss_felled: bool
+
 
 func _ready() -> void:
 	player_global_position = Vector2.ZERO
@@ -51,3 +54,4 @@ func _ready() -> void:
 	score = 0
 	high_score = 20000
 	increase_rof = false
+	is_boss_felled = false

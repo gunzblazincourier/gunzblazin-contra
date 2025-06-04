@@ -4,6 +4,9 @@ extends Area2D
 ##
 ## Handles tracking, shooting and various animations
 
+## Health
+var health: int
+
 ## Contains all animations, including frames of turret positions
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 
@@ -33,6 +36,11 @@ extends Area2D
 @onready var animated_light_pixel_14: AnimatedSprite2D = $AnimatedLightPixel14
 @onready var animated_light_pixel_15: AnimatedSprite2D = $AnimatedLightPixel15
 @onready var animated_light_pixel_16: AnimatedSprite2D = $AnimatedLightPixel16
+
+
+## Set health
+func _ready() -> void:
+	health = 3
 
 
 ## Shoots when player is seen by turret, continues to track after a while and
@@ -581,11 +589,15 @@ func _on_animated_sprite_2d_animation_finished() -> void:
 ## Triggers turret destruction when hit by player bullet
 func _on_area_entered(area: Area2D) -> void:
 	if area.is_in_group("bullet"):
-		set_deferred("monitorable", false)
-		set_deferred("monitoring", false)
-		animated_sprite_2d.play("explode")
-		death_explosion_sfx.play()
-		Global.score += 300
+		if health >= 0:
+			health -= 1
+		else:
+			set_deferred("monitorable", false)
+			set_deferred("monitoring", false)
+			animated_sprite_2d.play("explode")
+			death_explosion_sfx.play()
+			Global.score += 300
+	print(health)
 
 
 ## Remove turret after explosion
