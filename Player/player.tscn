@@ -7743,7 +7743,7 @@ data = PackedByteArray("SUQzAwAAAAAea1RYWFgAAAAZAAAAeWVhcgAxMDFzb3VuZGJvYXJkcy5j
 size = Vector2(25, 11)
 
 [node name="Player" type="CharacterBody2D"]
-collision_mask = 120
+collision_mask = 248
 script = ExtResource("1_ac1dp")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

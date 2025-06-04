@@ -166,6 +166,7 @@ select={
 2d_physics/layer_5="Boundaries"
 2d_physics/layer_6="LevelProps"
 2d_physics/layer_7="Water"
+2d_physics/layer_8="Boss"
 
 [physics]
 

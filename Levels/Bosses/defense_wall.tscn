@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://hv3f2kym5lbj"]
+[gd_scene load_steps=7 format=3 uid="uid://hv3f2kym5lbj"]
 
 [ext_resource type="Texture2D" uid="uid://bq63fppgul44o" path="res://Levels/Bosses/DefenseWall_0.png" id="1_kbwwy"]
 [ext_resource type="Texture2D" uid="uid://wmk5gsqygg5b" path="res://Levels/Bosses/DefenseWall_1.png" id="2_3hm81"]
@@ -27,7 +27,11 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7ay0i"]
 size = Vector2(103, 157)
 
-[node name="DefenseWall" type="Area2D"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_kbwwy"]
+radius = 6.08276
+
+[node name="DefenseWall" type="StaticBody2D"]
+collision_layer = 128
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_i3van")
@@ -36,3 +40,11 @@ autoplay = "default"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(3.5, -8.5)
 shape = SubResource("RectangleShape2D_7ay0i")
+
+[node name="Hitbox" type="Area2D" parent="."]
+collision_layer = 128
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(-39, 32)
+shape = SubResource("CircleShape2D_kbwwy")
