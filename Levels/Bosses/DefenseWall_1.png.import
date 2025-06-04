@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://daf0nrlqax5ww"
-path="res://.godot/imported/DefenseWall.png-24176229437dda22ed72adc2010c50d6.ctex"
+uid="uid://wmk5gsqygg5b"
+path="res://.godot/imported/DefenseWall_1.png-a6b0506a3ff5931fbfdea852fdc08764.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Levels/Bosses/DefenseWall.png"
-dest_files=["res://.godot/imported/DefenseWall.png-24176229437dda22ed72adc2010c50d6.ctex"]
+source_file="res://Levels/Bosses/DefenseWall_1.png"
+dest_files=["res://.godot/imported/DefenseWall_1.png-a6b0506a3ff5931fbfdea852fdc08764.ctex"]
 
 [params]
 
