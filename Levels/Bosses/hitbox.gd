@@ -6,6 +6,9 @@ extends Area2D
 ## Health
 var health: int
 
+## Animation player
+@onready var animation_player: AnimationPlayer = $"../AnimationPlayer"
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -22,6 +25,7 @@ func _on_area_entered(area: Area2D) -> void:
 		if health >= 0:
 			health -= 1
 		else:
+			animation_player.play("explode")
 			set_deferred("monitorable", false)
 			set_deferred("monitoring", false)
 			Global.is_boss_felled = true
