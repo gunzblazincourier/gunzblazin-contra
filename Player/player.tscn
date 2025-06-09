@@ -7881,8 +7881,13 @@ shape = SubResource("RectangleShape2D_tvn1x")
 target_position = Vector2(0, 20)
 collision_mask = 64
 
+[node name="VictoryTimer" type="Timer" parent="."]
+wait_time = 4.0
+one_shot = true
+
 [connection signal="timeout" from="FallThroughTimer" to="." method="_on_fall_through_timer_timeout"]
 [connection signal="timeout" from="InvincibilityTimer" to="." method="_on_invincibility_timer_timeout"]
 [connection signal="timeout" from="FlashingTimer" to="." method="_on_flashing_timer_timeout"]
 [connection signal="timeout" from="DeathTimer" to="." method="_on_death_timer_timeout"]
 [connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]
+[connection signal="timeout" from="VictoryTimer" to="." method="_on_victory_timer_timeout"]

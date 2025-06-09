@@ -76,7 +76,13 @@ var bullet_l: Area2D
 
 ## Hitbox area of player
 @onready var hitbox: Area2D = $Hitbox
+
+## Amount of time player stays dead before respawning
 @onready var death_timer: Timer = $DeathTimer
+
+## Player watches destruction of the boss and so is unable to do anything as
+## long as this timer is running
+@onready var victory_timer: Timer = $VictoryTimer
 
 
 func _ready() -> void:
@@ -96,6 +102,10 @@ func _ready() -> void:
 
 
 func _process(_delta: float) -> void:
+	# Start timer to disable input until timer timeouts
+	if Global.is_boss_felled == true and victory_timer.is_stopped():
+		victory_timer.start()
+		
 	## 'Vanish' player when he runs out of lives
 	if Global.lives < 0:
 		visible = false
@@ -104,10 +114,18 @@ func _process(_delta: float) -> void:
 		hitbox.set_deferred("monitoring", false)
 	
 	## Arrow key(s) currently pressed
-	var look_direction: Vector2 = Input.get_vector("left", "right", "up", "down")
+	var look_direction: Vector2
+	if Global.is_boss_felled == false:
+		look_direction = Input.get_vector("left", "right", "up", "down")
+	else:
+		look_direction = Vector2.ZERO
 	
 	## Direction that player is running
-	var run_direction: float = Input.get_axis("left", "right")
+	var run_direction: float
+	if Global.is_boss_felled == false:
+		run_direction = Input.get_axis("left", "right")
+	else:
+		run_direction = 0
 	
 	# Conditional sprite direction assignment
 	if run_direction != 0 and fall_movement_timer.is_stopped():
@@ -287,7 +305,7 @@ func _process(_delta: float) -> void:
 		_:
 			match Global.weapon:
 				Global.Weapons.R:
-					if Input.is_action_just_pressed("shoot"):
+					if Input.is_action_just_pressed("shoot") and Global.is_boss_felled == false:
 						shoot_timer.start()
 						regulargun_sfx.play()
 						var bullet_r_path: PackedScene = load("res://Bullet/bullet_r.tscn")
@@ -295,7 +313,7 @@ func _process(_delta: float) -> void:
 						spawn_bullet(bullet_r)
 				
 				Global.Weapons.S:
-					if Input.is_action_just_pressed("shoot"):
+					if Input.is_action_just_pressed("shoot") and Global.is_boss_felled == false:
 						shoot_timer.start()
 						spreadgun_sfx.play()
 						var bullet_s_path: PackedScene = load("res://Bullet/bullet_s.tscn")
@@ -317,14 +335,14 @@ func _process(_delta: float) -> void:
 						bullet_s5.rotate(5.76)
 				
 				Global.Weapons.L:
-					if Input.is_action_just_pressed("shoot"):
+					if Input.is_action_just_pressed("shoot") and Global.is_boss_felled == false:
 						shoot_timer.start()
 						lasergun_sfx.play()
 						spawn_bullet(bullet_l)
 				
 				Global.Weapons.M:
 					# NOTE: 'pressed' instead of 'just_pressed'
-					if Input.is_action_pressed("shoot"):
+					if Input.is_action_just_pressed("shoot") and Global.is_boss_felled == false:
 						shoot_timer.start()
 						if machinegun_interval_timer.is_stopped():
 							machinegun_sfx.play()
@@ -335,7 +353,7 @@ func _process(_delta: float) -> void:
 							machinegun_interval_timer.start()
 				
 				Global.Weapons.F:
-					if Input.is_action_just_pressed("shoot"):
+					if Input.is_action_just_pressed("shoot") and Global.is_boss_felled == false:
 						shoot_timer.start()
 						flamegun_sfx.play()
 						var bullet_f_path: PackedScene = load("res://Bullet/bullet_f.tscn")
@@ -353,15 +371,16 @@ func _physics_process(delta: float) -> void:
 	match state:
 		States.IDLE, States.LOOK_UP, States.SHOOT_IDLE, States.SHOOT_LOOK_UP:
 			velocity.x = move_toward(velocity.x, 0, RUN_SPEED)
-			if Input.is_action_just_pressed("jump"):
+			if Input.is_action_just_pressed("jump") and Global.is_boss_felled == false:
 				velocity.y = JUMP_SPEED
 		States.RUN, States.SHOOT_RUN:
 			velocity.x = run_direction * RUN_SPEED
-			if Input.is_action_just_pressed("jump"):
+			if Input.is_action_just_pressed("jump") and Global.is_boss_felled == false:
 				velocity.y = JUMP_SPEED
 		States.CROUCH, States.SHOOT_CROUCH:
 			velocity.x = run_direction * RUN_SPEED
-			if ray_cast_2d.is_colliding() and Input.is_action_just_pressed("jump"):
+			if ray_cast_2d.is_colliding() and Input.is_action_just_pressed("jump") \
+					 and Global.is_boss_felled == false:
 				collision_shape_2d.disabled = true
 				fall_through_timer.start()
 		States.JUMP, States.JUMP_UP, States.JUMP_DOWN, States.SHOOT_JUMP, \
@@ -454,3 +473,8 @@ func _on_death_timer_timeout() -> void:
 	invincibility_timer.start()
 	flashing_timer.start()
 	Global.lives -= 1
+
+
+## 
+#func _on_victory_timer_timeout() -> void:
+	
