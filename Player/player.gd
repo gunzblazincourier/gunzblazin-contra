@@ -34,6 +34,9 @@ var bullet_l: Area2D
 ## CollisionShape to detect collision
 @onready var collision_shape_2d: CollisionShape2D = $CollisionShape2D
 
+## Jingle that plays during the "cutscene" when player is running towards exit
+@onready var victory_jingle: AudioStreamPlayer2D = $VictoryJingle
+
 # Sound plays from player scene instead of respective bullet scenes since
 # SFX abruptly stop when bullet queue_frees
 ## Plays the Regulargun firing sound effect
@@ -71,18 +74,18 @@ var bullet_l: Area2D
 ## Flashing intensity during invincibility phase
 @onready var flashing_timer: Timer = $FlashingTimer
 
-## Gun muzzle
-@onready var muzzle: Marker2D = $Muzzle
-
-## Hitbox area of player
-@onready var hitbox: Area2D = $Hitbox
-
 ## Amount of time player stays dead before respawning
 @onready var death_timer: Timer = $DeathTimer
 
 ## Player watches destruction of the boss and so is unable to do anything as
 ## long as this timer is running
 @onready var victory_timer: Timer = $VictoryTimer
+
+## Gun muzzle
+@onready var muzzle: Marker2D = $Muzzle
+
+## Hitbox area of player
+@onready var hitbox: Area2D = $Hitbox
 
 
 func _ready() -> void:
@@ -106,7 +109,7 @@ func _process(_delta: float) -> void:
 	if Global.is_boss_felled == true and victory_timer.is_stopped():
 		victory_timer.start()
 		
-	## 'Vanish' player when he runs out of lives
+	# 'Vanish' player when he runs out of lives
 	if Global.lives < 0:
 		visible = false
 		process_mode = Node.PROCESS_MODE_DISABLED
@@ -117,6 +120,8 @@ func _process(_delta: float) -> void:
 	var look_direction: Vector2
 	if Global.is_boss_felled == false:
 		look_direction = Input.get_vector("left", "right", "up", "down")
+	elif victory_jingle.playing == true:
+		look_direction = Vector2(1, 0)
 	else:
 		look_direction = Vector2.ZERO
 	
@@ -124,6 +129,8 @@ func _process(_delta: float) -> void:
 	var run_direction: float
 	if Global.is_boss_felled == false:
 		run_direction = Input.get_axis("left", "right")
+	elif victory_jingle.playing == true:
+		run_direction = 1
 	else:
 		run_direction = 0
 	
@@ -140,6 +147,12 @@ func _process(_delta: float) -> void:
 	else:
 		if velocity.y < 0:
 			is_jump_pressed = true
+	
+	if Global.is_boss_felled == true and victory_jingle.playing == true:
+		if Global.player_global_position.x > 2970 and \
+				Global.player_global_position.x < 2990 and is_on_floor():
+			is_jump_pressed = true
+			velocity.y = JUMP_SPEED
 	
 	# Variables for AnimationTree advance conditions
 	var idle: bool = is_on_floor() and look_direction == Vector2(0, 0)
@@ -364,7 +377,13 @@ func _process(_delta: float) -> void:
 
 func _physics_process(delta: float) -> void:
 	## Direction that player is running
-	var run_direction: float = Input.get_axis("left", "right")
+	var run_direction: float
+	if Global.is_boss_felled == false:
+		run_direction = Input.get_axis("left", "right")
+	elif victory_jingle.playing == true:
+		run_direction = 1
+	else:
+		run_direction = 0
 	
 	Global.player_global_position = global_position
 	
@@ -476,5 +495,5 @@ func _on_death_timer_timeout() -> void:
 
 
 ## 
-#func _on_victory_timer_timeout() -> void:
-	
+func _on_victory_timer_timeout() -> void:
+	victory_jingle.play()

@@ -1,4 +1,4 @@
-[gd_scene load_steps=344 format=4 uid="uid://doa0vkc0fktkh"]
+[gd_scene load_steps=345 format=4 uid="uid://doa0vkc0fktkh"]
 
 [ext_resource type="Script" uid="uid://c0ak0nhauaj7u" path="res://Player/player.gd" id="1_ac1dp"]
 [ext_resource type="Texture2D" uid="uid://7v13jiiro62o" path="res://Player/Bill_Crouch.png" id="2_hdvrd"]
@@ -54,6 +54,7 @@
 [ext_resource type="Texture2D" uid="uid://b4rce5mkktkrv" path="res://Player/WaterBill_ShootDiagonal1.png" id="48_c4i3b"]
 [ext_resource type="Texture2D" uid="uid://b15mlmjjouyjw" path="res://Player/WaterBill_ShootUp0.png" id="49_uvbbp"]
 [ext_resource type="Texture2D" uid="uid://quyebivcyxs4" path="res://Player/WaterBill_ShootUp1.png" id="50_7v2uk"]
+[ext_resource type="AudioStream" uid="uid://dgqig5apmije2" path="res://Sounds/Pclr.wav" id="51_m6nl3"]
 [ext_resource type="AudioStream" uid="uid://bqu6uf36g32cr" path="res://Sounds/Flamegun.wav" id="54_7v2uk"]
 
 [sub_resource type="Animation" id="Animation_tvn1x"]
@@ -7809,6 +7810,9 @@ offset = Vector2(0, -1)
 position = Vector2(-4.5, 1)
 shape = SubResource("RectangleShape2D_hmlbq")
 
+[node name="VictoryJingle" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("51_m6nl3")
+
 [node name="DeathSound" type="AudioStreamPlayer2D" parent="."]
 
 [node name="RegulargunSFX" type="AudioStreamPlayer2D" parent="."]
@@ -7861,6 +7865,10 @@ autostart = true
 wait_time = 2.3
 one_shot = true
 
+[node name="VictoryTimer" type="Timer" parent="."]
+wait_time = 4.0
+one_shot = true
+
 [node name="Muzzle" type="Marker2D" parent="."]
 position = Vector2(8, -6)
 
@@ -7881,13 +7889,9 @@ shape = SubResource("RectangleShape2D_tvn1x")
 target_position = Vector2(0, 20)
 collision_mask = 64
 
-[node name="VictoryTimer" type="Timer" parent="."]
-wait_time = 4.0
-one_shot = true
-
 [connection signal="timeout" from="FallThroughTimer" to="." method="_on_fall_through_timer_timeout"]
 [connection signal="timeout" from="InvincibilityTimer" to="." method="_on_invincibility_timer_timeout"]
 [connection signal="timeout" from="FlashingTimer" to="." method="_on_flashing_timer_timeout"]
 [connection signal="timeout" from="DeathTimer" to="." method="_on_death_timer_timeout"]
-[connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]
 [connection signal="timeout" from="VictoryTimer" to="." method="_on_victory_timer_timeout"]
+[connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]

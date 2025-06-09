@@ -234,11 +234,11 @@ position = Vector2(1121, -46)
 [node name="BushSoldier2" parent="." instance=ExtResource("9_ts5l0")]
 position = Vector2(1329, -78)
 
-[node name="DefenseWall" parent="." instance=ExtResource("11_u2cfn")]
-position = Vector2(3049, 8)
-
 [node name="Player" parent="." instance=ExtResource("9_lr1ra")]
 position = Vector2(2670, -110)
+
+[node name="DefenseWall" parent="." instance=ExtResource("11_u2cfn")]
+position = Vector2(3049, 8)
 
 [node name="Lives" type="AnimatedSprite2D" parent="."]
 position = Vector2(-195, -113)
