@@ -10,15 +10,15 @@ enum States {IDLE, LOOK_UP, CROUCH, RUN, JUMP, JUMP_UP, JUMP_DOWN, FALL, \
 		DEATH, CLIMB, DIVE, WATERIDLE, WATERIDLE_UP, WATERSHOOT, WATERSHOOT_UP, \
 		SPLASH}
 
-const RUN_SPEED: int = 69				## Fixed run speed
-const JUMP_SPEED: int = -250			## Fixed jump speed
-const DEATH_JUMP_SPEED: int = -175		## Jump speed specifically DEATH state
+const RUN_SPEED: int = 55				## Run speed
+const JUMP_SPEED: int = -250			## Jump speed
+const DEATH_JUMP_SPEED: int = -175		## Jump speed specifically for DEATH state
 const GRAVITY: int = 555				## Custom gravity for the player
 
 var state: States					## Current state from the 'States' enum
 var sprite_direction: float			## Current sprite direction
 var death_direction: float			## Current death direction
-var is_jump_pressed: bool			## Checks whether player has pressed 'Jump'
+var is_jump_pressed: bool			## Whether player has pressed 'Jump'
 var is_above_water: bool			## Whether player is above water
 
 # Declared and defined in beginning instead of while shooting (see in _process())
