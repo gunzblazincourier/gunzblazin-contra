@@ -10,7 +10,7 @@ enum States {IDLE, LOOK_UP, CROUCH, RUN, JUMP, JUMP_UP, JUMP_DOWN, FALL, \
 		DEATH, CLIMB, DIVE, WATERIDLE, WATERIDLE_UP, WATERSHOOT, WATERSHOOT_UP, \
 		SPLASH}
 
-const RUN_SPEED: int = 55				## Run speed
+const RUN_SPEED: int = 69				## Run speed
 const JUMP_SPEED: int = -250			## Jump speed
 const DEATH_JUMP_SPEED: int = -175		## Jump speed specifically for DEATH state
 const GRAVITY: int = 555				## Custom gravity for the player
@@ -30,6 +30,9 @@ var bullet_l: Area2D
 
 ## Animation tree
 @onready var animation_tree: AnimationTree = $AnimationTree
+
+## Player sprite
+@onready var sprite_2d: Sprite2D = $Sprite2D
 
 ## CollisionShape to detect collision
 @onready var collision_shape_2d: CollisionShape2D = $CollisionShape2D
@@ -86,6 +89,9 @@ var bullet_l: Area2D
 
 ## Hitbox area of player
 @onready var hitbox: Area2D = $Hitbox
+
+## On-screen notifier for player to "remove" player from level after level exit
+@onready var visible_on_screen_notifier_2d: VisibleOnScreenNotifier2D = $VisibleOnScreenNotifier2D
 
 
 func _ready() -> void:
@@ -152,7 +158,7 @@ func _process(_delta: float) -> void:
 		if Global.player_global_position.x > 2970 and \
 				Global.player_global_position.x < 2990 and is_on_floor():
 			is_jump_pressed = true
-			velocity.y = JUMP_SPEED
+			velocity.y = JUMP_SPEED + 55
 	
 	# Variables for AnimationTree advance conditions
 	var idle: bool = is_on_floor() and look_direction == Vector2(0, 0)
@@ -467,16 +473,16 @@ func spawn_bullet(bullet: Area2D) -> void:
 func _on_invincibility_timer_timeout() -> void:
 	hitbox.set_deferred("monitorable", true)
 	hitbox.set_deferred("monitoring", true)
-	visible = true
+	sprite_2d.visible = true
 	flashing_timer.stop()
 
 
 ## Repeatedly toggles visibility of player to create invincibility flashing
 func _on_flashing_timer_timeout() -> void:
-	if visible == true:
-		visible = false
+	if sprite_2d.visible == true:
+		sprite_2d.visible = false
 	else:
-		visible = true
+		sprite_2d.visible = true
 
 
 func _on_death_timer_timeout() -> void:
@@ -494,6 +500,14 @@ func _on_death_timer_timeout() -> void:
 	Global.lives -= 1
 
 
-## 
+## Play victory theme
 func _on_victory_timer_timeout() -> void:
 	victory_jingle.play()
+
+
+func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
+	process_mode = Node.PROCESS_MODE_DISABLED
+	visible = false
+	hitbox.monitorable = false
+	hitbox.monitoring = false
+	print("gone")
