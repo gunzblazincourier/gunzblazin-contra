@@ -7893,6 +7893,7 @@ collision_mask = 64
 position = Vector2(-0.5, -1)
 scale = Vector2(1.15, 2.1)
 
+[connection signal="finished" from="VictoryJingle" to="." method="_on_victory_jingle_finished"]
 [connection signal="timeout" from="FallThroughTimer" to="." method="_on_fall_through_timer_timeout"]
 [connection signal="timeout" from="InvincibilityTimer" to="." method="_on_invincibility_timer_timeout"]
 [connection signal="timeout" from="FlashingTimer" to="." method="_on_flashing_timer_timeout"]

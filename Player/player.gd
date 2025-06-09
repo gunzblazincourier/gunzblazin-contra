@@ -111,6 +111,7 @@ func _ready() -> void:
 
 
 func _process(_delta: float) -> void:
+	print(victory_jingle.get_playback_position())
 	# Start timer to disable input until timer timeouts
 	if Global.is_boss_felled == true and victory_timer.is_stopped():
 		victory_timer.start()
@@ -361,7 +362,7 @@ func _process(_delta: float) -> void:
 				
 				Global.Weapons.M:
 					# NOTE: 'pressed' instead of 'just_pressed'
-					if Input.is_action_just_pressed("shoot") and Global.is_boss_felled == false:
+					if Input.is_action_pressed("shoot") and Global.is_boss_felled == false:
 						shoot_timer.start()
 						if machinegun_interval_timer.is_stopped():
 							machinegun_sfx.play()
@@ -502,12 +503,19 @@ func _on_death_timer_timeout() -> void:
 
 ## Play victory theme
 func _on_victory_timer_timeout() -> void:
-	victory_jingle.play()
+	if velocity.x == 0:
+		victory_jingle.play()
 
 
+## Make player stop after exiting level to prevent shifting camera at wrong
+## position and similar effects
 func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
-	process_mode = Node.PROCESS_MODE_DISABLED
+	#process_mode = Node.PROCESS_MODE_DISABLED
 	visible = false
 	hitbox.monitorable = false
 	hitbox.monitoring = false
-	print("gone")
+
+
+func _on_victory_jingle_finished() -> void:
+	print("quit")
+	get_tree().quit()
