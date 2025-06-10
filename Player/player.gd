@@ -308,7 +308,7 @@ func _process(_delta: float) -> void:
 			state = States.WATERSHOOT_UP
 		"Splash":
 			state = States.SPLASH
-	#print(state_machine_state)
+	print(state_machine_state)
 	#print(animation_tree.get("parameters/Jump/blend_position"))
 	#print(dive)
 	
