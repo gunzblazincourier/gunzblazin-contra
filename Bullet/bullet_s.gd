@@ -7,6 +7,7 @@ extends Area2D
 var bullet_speed: int
 
 
+## Increase bullet speed after getting R
 func _ready() -> void:
 	if Global.increase_rof == false:
 		bullet_speed = 250

@@ -10,6 +10,7 @@ var bullet_speed: int
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 
 
+## Increase bullet speed after getting R
 func _ready() -> void:
 	if Global.increase_rof == false:
 		bullet_speed = 250

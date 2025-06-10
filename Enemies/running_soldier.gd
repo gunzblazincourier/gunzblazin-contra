@@ -151,5 +151,4 @@ func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
 
 ## Enables enemy (or "spawns") when camera reaches the position
 func _on_visible_on_screen_notifier_2d_screen_entered() -> void:
-	#print("enemy")
 	process_mode = Node.PROCESS_MODE_INHERIT

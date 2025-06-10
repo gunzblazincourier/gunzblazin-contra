@@ -42,6 +42,7 @@ extends Area2D
 var bullet_speed: int
 
 
+## Increase bullet speed after getting R
 func _ready() -> void:
 	if Global.increase_rof == false:
 		bullet_speed = 250
@@ -82,6 +83,8 @@ func _on_visible_on_screen_notifier_2d_screen_entered() -> void:
 	monitorable = true
 
 
+## Make laser visible gradually to prevent looking as if it's coming out of
+## gun all at once
 func _on_timer_timeout() -> void:
 	if sprite_2d_3.visible == true:
 		sprite_2d_4.visible = true
@@ -95,6 +98,9 @@ func _on_timer_timeout() -> void:
 		collision_shape_2d_2.disabled = false
 
 
+## 1 Laser does 4 damage, with each component doing 1. Hence, componenets
+## are "removed" accordingly
+# Not queue_freed since the once instance of laser is comtin
 func _on_area_entered(area: Area2D) -> void:
 	if area.is_in_group("enemy") or area.is_in_group("object"):
 		if sprite_2d_4.visible == true:
