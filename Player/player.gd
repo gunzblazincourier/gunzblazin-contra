@@ -111,7 +111,7 @@ func _ready() -> void:
 
 
 func _process(_delta: float) -> void:
-	print(victory_jingle.get_playback_position())
+	#print(victory_jingle.get_playback_position())
 	# Start timer to disable input until timer timeouts
 	if Global.is_boss_felled == true and victory_timer.is_stopped():
 		victory_timer.start()
@@ -308,7 +308,7 @@ func _process(_delta: float) -> void:
 			state = States.WATERSHOOT_UP
 		"Splash":
 			state = States.SPLASH
-	print(state_machine_state)
+	#print(state_machine_state)
 	#print(animation_tree.get("parameters/Jump/blend_position"))
 	#print(dive)
 	

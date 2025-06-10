@@ -55,6 +55,7 @@ animations = [{
 size = Vector2(28, 15)
 
 [node name="Pickup" type="Area2D"]
+z_index = 1
 collision_layer = 32
 script = ExtResource("1_atifx")
 

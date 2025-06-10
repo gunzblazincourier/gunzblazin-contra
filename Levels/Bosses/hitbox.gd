@@ -32,5 +32,5 @@ func _on_area_entered(area: Area2D) -> void:
 			#animated_sprite_2d.play("explode")
 			#death_explosion_sfx.play()
 			#Global.score += 300
-	print(health)
-	print(Global.is_boss_felled)
+	#print(health)
+	#print(Global.is_boss_felled)
